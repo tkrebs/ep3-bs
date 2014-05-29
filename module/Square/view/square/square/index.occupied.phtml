@@ -1,0 +1,5 @@
+<?php
+
+$squareType = $this->option('subject.square.type');
+
+echo sprintf('<p><span class="red">' . $this->t('This %s is already occupied.') . '</span></p>', $squareType);

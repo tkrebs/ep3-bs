@@ -1,0 +1,56 @@
+<td class="calendar-time-col" style="width: 96px;">
+    <?= $this->calendarTimeTable($this->timeStart, $this->timeEnd, $this->timeBlock) ?>
+</td>
+
+<?php
+
+$reservations = $this->get('reservations');
+
+/* Loop through day cols */
+
+$walkingDate = clone $this->dateStart;
+$walkingIndex = 0;
+
+while ($walkingDate <= $this->dateEnd) {
+    echo sprintf('<td class="calendar-date-col %s">',
+        ($walkingIndex > 0 ? 'responsive-pass-' . (max(1, 5 - $walkingIndex)) : ''));
+
+    echo '<table class="calendar-date-table full-width">';
+
+    echo $this->calendarDateRow($walkingDate, $this->squaresCount);
+    echo $this->calendarSquareRow($this->squares, $this->squaresCount);
+
+    /* Loop through time rows */
+
+    for ($walkingTime = $this->timeStart; $walkingTime < $this->timeEnd; $walkingTime += $this->timeBlock) {
+        echo '<tr class="calendar-core-row">';
+
+        $walkingDate->modify('+' . $walkingTime . ' sec');
+
+        $reservationsForColPlugin = $this->plugin('CalendarReservationsForCol');
+        $reservationsForCol = $reservationsForColPlugin($reservations, $walkingDate, $walkingTime, $this->timeBlock);
+
+        /* Loop through square cells */
+
+        foreach ($this->squares as $square) {
+            echo $this->calendarCellLogic($walkingDate, $walkingTime, $this->timeBlock, $this->dateNow, $square, $this->user, $reservationsForCol);
+        }
+
+        $walkingDate->setTime(0, 0, 0);
+
+        echo '</tr>';
+    }
+
+    $reservationsCleanupPlugin = $this->plugin('CalendarReservationsCleanup');
+    $reservationsCleanupPlugin($reservations, $walkingDate);
+
+    echo $this->calendarSquareRow($this->squares, $this->squaresCount, 'no-print');
+    echo $this->calendarDateRow($walkingDate, $this->squaresCount, 'no-print');
+
+    echo '</table>';
+
+    echo '</td>';
+
+    $walkingDate->modify('+1 day');
+    $walkingIndex++;
+}

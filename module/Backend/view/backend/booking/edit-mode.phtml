@@ -1,0 +1,48 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Administration',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+$reservations = $this->reservations;
+
+$reservation = current($reservations);
+$booking = $reservation->getExtra('booking');
+
+?>
+
+<div class="padded centered-text">
+    <p>Diese Buchung besteht aus mehreren Reservierungen:</p>
+
+    <div class="sandbox" style="margin-bottom: 16px;">
+        <?php
+
+        $dateStart = new \DateTime($booking->getMeta('date_start'));
+        $dateEnd = new \DateTime($booking->getMeta('date_end'));
+
+        echo sprintf('<b>%s</b> ',
+            $this->t($booking->getRepeat()));
+
+        echo sprintf($this->t('from %s to %s'),
+            '<b>' . $this->dateFormat($dateStart, IntlDateFormatter::FULL) . '</b>',
+            '<b>' . $this->dateFormat($dateEnd, IntlDateFormatter::FULL) . '</b>');
+
+        ?>
+    </div>
+
+    <p>Was möchten Sie bearbeiten?</p>
+
+    <div class="sandbox">
+        <a href="<?= $this->url('backend/booking/edit', [], ['query' => array_merge($this->query, ['em' => 'reservation'])]) ?>" class="default-button squarebox-internal-link">
+            <span class="symbolic symbolic-booking">Nur diese eine Reservierung</span>
+        </a>
+
+        &nbsp;
+
+        <a href="<?= $this->url('backend/booking/edit', [], ['query' => array_merge($this->query, ['em' => 'booking'])]) ?>" class="default-button squarebox-internal-link">
+            <span class="symbolic symbolic-booking">Die gesamte Buchung</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+    "name": "tkrebs/ep3-bs",
+    "description": "Online booking system for courts",
+    "license": "MIT",
+    "homepage": "http://bs.hbsys.de/",
+
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "2.3.*"
+    }
+}

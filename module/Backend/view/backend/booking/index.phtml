@@ -1,0 +1,41 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Administration',
+    'panel' => 'centered-panel large-sized',
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Booking-Administration') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('Here you can create, edit or delete the bookings of your system.') ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <?= $this->partial('backend/booking/index.datepicker.phtml', ['dateStart' => $this->dateStart, 'dateEnd' => $this->dateEnd, 'search' => $this->search]) ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="centered-text" style="padding: 16px 0px 16px 0px;">
+
+        <?php if ($this->reservations): ?>
+
+            <?= $this->backendBookingsFormat($this->reservations, $this->dateStart, $this->dateEnd, $this->search) ?>
+
+        <?php else: ?>
+
+            <?php if ($this->dateStart || $this->dateEnd): ?>
+                <p><span class="red"><?= sprintf($this->t('%sNo bookings found%s for this search'), '<b>', '</b>') ?></span></p>
+            <?php endif; ?>
+
+            <p><a href="<?= $this->url('backend/booking/edit') ?>" class="unlined gray"><span class="symbolic symbolic-plus"><?= $this->t('New booking') ?></span></a></p>
+
+        <?php endif; ?>
+
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Administration',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div class="padded centered-text">
+    <p><?= sprintf($this->t('This %s has multiple reservations here:'), $this->option('subject.square.type')) ?></p>
+
+    <div class="sandbox">
+        <?php foreach ($this->reservations as $rid => $reservation): ?>
+
+            <p>
+                <a href="<?= $this->url('backend/booking/edit', [], ['query' => array_merge($this->query, ['r' => $rid])]) ?>" class="default-button squarebox-internal-link">
+                    <span class="symbolic symbolic-booking">
+                        <b><?= $this->timeRange($reservation->get('time_start'), $reservation->get('time_end'), '%s to %s') ?></b>
+
+                        <?= $this->t('from') ?> <?= $reservation->getExtra('booking')->getExtra('user')->get('alias') ?>
+                    </span>
+                </a>
+            </p>
+
+        <?php endforeach; ?>
+    </div>
+</div>

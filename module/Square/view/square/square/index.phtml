@@ -1,0 +1,46 @@
+<?php
+
+$square = $this->square;
+$squareType = $this->option('subject.square.type');
+
+$this->setup(array(
+    'title' => sprintf('%s-%s', $squareType, $this->t('Details')),
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div class="padded centered-text">
+
+    <?php
+
+    if ($square->getMeta('info.pre')) {
+        echo $square->getMeta('info.pre');
+        echo '<div class="separator separator-line"></div>';
+    }
+
+    ?>
+
+    <p class="large-text"><?= $squareType . ' ' . $this->t($square->need('name')) ?></p>
+
+    <?= $this->squareDateFormat($this->dateStart, $this->dateEnd) ?>
+
+    <?php if ($this->bookingsFromUser && $this->flag != 'fb'): ?>
+        <?= $this->partial('square/square/index.own.phtml', $this->vars()) ?>
+    <?php elseif ($this->bookable): ?>
+        <?= $this->partial('square/square/index.free.phtml', $this->vars()) ?>
+    <?php else: ?>
+        <?= $this->partial('square/square/index.occupied.phtml', $this->vars()) ?>
+    <?php endif; ?>
+
+    <?php
+
+    if ($square->getMeta('info.post')) {
+        echo '<div class="separator separator-line"></div>';
+        echo $square->getMeta('info.post');
+    }
+
+    ?>
+
+</div>

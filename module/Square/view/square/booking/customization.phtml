@@ -1,0 +1,64 @@
+<?php
+
+$square = $this->square;
+$squareType = $this->option('subject.square.type');
+
+$this->setup(array(
+    'title' => sprintf('%s-%s', $squareType, $this->t('Booking')),
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+echo $this->ajaxAwareScript('js/controller/square/booking/customization.min.js');
+
+?>
+
+<div id="sb-customization-panel-warning" class="padded centered-text">
+    <p><?= sprintf($this->t('You need to activate %sJavaScript%s in your web browser to proceed. If in doubt, switch to another web browser (e.g. Mozilla Firefox).'), '<b>', '</b>', '<br>') ?></p>
+</div>
+
+<div id="sb-customization-panel" class="padded centered-text" style="display: none;">
+
+    <p class="large-text"><?= $squareType . ' ' . $this->t($square->need('name')) ?></p>
+
+    <?= $this->squareDateFormat($this->dateStart, $this->dateEnd) ?>
+
+    <?= sprintf('<p><span class="green">' . $this->t('You are going to book this %s.') . '</span></p>', $squareType) ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="sandbox">
+        <?= $this->squareQuantityChoice($square, $this->bookings) ?>
+    </div>
+
+    <div class="separator separator-line"></div>
+
+    <?php
+
+    $squareProducts = $this->squareProductChoice($square);
+
+    if ($squareProducts) {
+        echo '<p class="gray"><em>' . $this->t('Consider our additional offers:') . '</em></p>';
+        echo '<div class="sandbox">' . $squareProducts . '</div>';
+        echo '<div class="separator separator-line"></div>';
+    }
+
+    ?>
+
+    <?php
+
+    $url = $this->url('square/booking/confirmation', [], ['query' => [
+        'ds' => $this->dateStart->format('Y-m-d'),
+        'de' => $this->dateEnd->format('Y-m-d'),
+        'ts' => $this->dateStart->format('H:i'),
+        'te' => $this->dateEnd->format('H:i'),
+        's' => $square->need('sid'),
+        'q' => 1,
+        'p' => 0]]);
+
+    echo sprintf('<a href="%s" id="sb-button" class="default-button squarebox-internal-link">%s</a>',
+        $url, $this->t('Continue to summary'));
+
+    ?>
+
+</div>

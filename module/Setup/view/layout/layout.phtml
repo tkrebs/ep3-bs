@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="<?= $this->config('i18n.locale') ?>">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="image/x-icon" rel="icon" href="<?= $this->basePath('favicon.ico') ?>">
+        <link type="image/x-icon" rel="shortcut icon" href="<?= $this->basePath('favicon.ico') ?>">
+        <link type="text/css" rel="stylesheet" href="<?= $this->basePath('css/jquery-ui/jquery-ui.min.css') ?>" media="all">
+        <link type="text/css" rel="stylesheet" href="<?= $this->basePath('css/default.min.css') ?>" media="all">
+        <link type="text/css" rel="stylesheet" href="<?= $this->basePath('css-client/default.css') ?>" media="all">
+        <?= $this->headLink() ?>
+        <?= $this->headTitle('ep-3 Bookingsystem Setup')->setSeparator(' &middot; ')->setAutoEscape(false) ?>
+    </head>
+
+    <body class="centered-text">
+        <div style="margin-top: 32px;">
+            <img src="<?= $this->basePath($this->t('imgs/branding/ep3-bs-neg-en.png')) ?>" alt="<?= $this->t('ep-3 Bookingsystem') ?>" style="width: 256px;">
+        </div>
+
+        <div class="padded centered-panel <?= $this->placeholder('panel') ?> left-text" style="margin-top: 32px;">
+            <?= $this->content ?>
+        </div>
+
+        <div id="footer" style="margin-top: 32px;">
+            <?= $this->t('Created by') ?> <a href="http://bs.hbsys.de/" target="_blank"><?= $this->t('ep-3 Bookingsystem') ?></a>
+        </div>
+
+        <script type="text/javascript" src="<?= $this->basePath('js/jquery/jquery.min.js') ?>"></script>
+        <script type="text/javascript" src="<?= $this->basePath('js/jquery-ui/jquery-ui.min.js') ?>"></script>
+        <script type="text/javascript" src="<?= $this->basePath('js/default.min.js') ?>"></script>
+        <?= $this->headScript() ?>
+    </body>
+</html>

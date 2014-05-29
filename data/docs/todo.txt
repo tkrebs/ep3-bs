@@ -1,0 +1,19 @@
+Short Term:
+
+- Date range for products
+
+- Billing module (invoice/paypal)
+- Coupon module
+
+- Backend is partially unlocalized
+
+Long Term:
+
+- Introduce unit tests
+
+- Advanced statistics module
+- Social media integration
+
+- Maintenance cronjob
+
+- Business terms and privacy policy for registration

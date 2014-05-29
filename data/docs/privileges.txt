@@ -1,0 +1,14 @@
+- Admin users can always do everything
+
+- Assist users can do according to their meta values set to "true":
+  - allow.admin.user
+  - allow.admin.booking
+  - allow.admin.config
+  - allow.admin.see-menu
+
+  - allow.calendar.see-past
+  - allow.calendar.see-data
+  - allow.calendar.create-single-bookings           (requires calendar.see-data)
+  - allow.calendar.cancel-single-bookings           (requires calendar.see-data)
+  - allow.calendar.create-subscription-bookings     (requires calendar.see-data)
+  - allow.calendar.cancel-subscription-bookings     (requires calendar.see-data)

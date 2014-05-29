@@ -1,0 +1,84 @@
+<?php
+
+$square = $this->square;
+$squareType = $this->option('subject.square.type');
+
+$dateStart = $this->dateStart;
+$dateEnd = $this->dateEnd;
+
+$this->setup(array(
+    'title' => sprintf('%s-%s', $squareType, $this->t('Booking')),
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'error' => $this->message,
+    ),
+    'back' => true,
+));
+
+?>
+
+<div class="padded">
+
+    <form method="post" action="<?= $this->url ?>">
+
+        <?php
+
+        $pricingSummary = $this->squarePricingSummary($dateStart, $dateEnd, $square, $this->quantityChoosen, $this->products);
+
+        if ($pricingSummary) {
+            echo '<p class="centered-text gray"><em>' . $this->t('Summary of your booking:') . '</em></p>';
+            echo '<div class="sandbox">' . $pricingSummary . '</div>';
+            echo '<div class="separator separator-line"></div>';
+        }
+
+        ?>
+
+        <?php if ($square->getMeta('rules.document.file')): ?>
+
+            <p class="symbolic symbolic-warning"><b><?= $this->t('Please note') ?>:</b></p>
+
+            <p style="margin-left: 32px;">
+                <a href="<?= $this->basePath($square->getMeta('rules.document.file')) ?>" class="default-button" target="_blank">
+                    <span class="symbolic symbolic-attachment"><?= $square->getMeta('rules.document.name', $this->t('Rules-document')) ?></span>
+                </a>
+
+                <span class="small-text gray">(<?= $this->t('this will open in a new window') ?>)</span>
+            </p>
+
+            <div style="margin-left: 32px;">
+                <input type="checkbox" name="bf-accept-rules-document" id="bf-accept-rules-document">
+                <label for="bf-accept-rules-document"><?= sprintf($this->t('Yes, I have %1$sread and accepted%2$s the "%3$s"'), '<b>', '</b>', $square->getMeta('rules.document.name', $this->t('Rules-document'))) ?></label>
+            </div>
+
+            <div class="separator separator-line"></div>
+
+        <?php endif; ?>
+
+        <?php if ($square->getMeta('rules.text')): ?>
+
+            <p class="symbolic symbolic-warning"><b><?= $this->t('Please note') ?>:</b></p>
+
+            <div style="margin-left: 32px;"><?= $square->getMeta('rules.text') ?></div>
+
+            <div style="margin-left: 32px;">
+                <input type="checkbox" name="bf-accept-rules-text" id="bf-accept-rules-text">
+                <label for="bf-accept-rules-text"><?= sprintf($this->t('Yes, I have %sread and accepted%s these rules and notes'), '<b>', '</b>') ?></label>
+            </div>
+
+            <div class="separator separator-line"></div>
+
+        <?php endif; ?>
+
+        <div class="centered-text small-text gray" style="margin-bottom: 12px;">
+            <?= sprintf($this->t('Your booking will be binding, however, you can cancel it up to %s before it takes place.'),
+                $this->prettyTime($square->need('range_cancel'))) ?>
+        </div>
+
+        <div class="centered-text">
+            <input type="hidden" name="bf-confirm" value="<?= sha1('Quick and dirty' . floor(time() / 1800)) ?>">
+            <input type="submit" name="bf-submit" value="<?= $this->t('Complete booking') ?>" class="default-button">
+        </div>
+
+    </form>
+
+</div>

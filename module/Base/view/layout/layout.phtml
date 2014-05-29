@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="<?= $this->config('i18n.locale') ?>">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="<?= $this->option('service.branding.name') ?>">
+        <meta name="publisher" content="<?= $this->option('client.name.full') ?>">
+        <meta name="description" content="<?= $this->option('service.meta.description') ?>">
+        <meta name="keywords" content="<?= $this->option('service.meta.keywords') ?>">
+        <link type="image/x-icon" rel="icon" href="<?= $this->basePath('favicon.ico') ?>">
+        <link type="image/x-icon" rel="shortcut icon" href="<?= $this->basePath('favicon.ico') ?>">
+        <link type="text/css" rel="stylesheet" href="<?= $this->basePath('css/jquery-ui/jquery-ui.min.css') ?>" media="all">
+        <link type="text/css" rel="stylesheet" href="<?= $this->basePath('css/default.min.css') ?>" media="all">
+        <link type="text/css" rel="stylesheet" href="<?= $this->basePath('css-client/default.css') ?>" media="all">
+        <?= $this->headLink() ?>
+        <?= $this->headTitle($this->option(['client.name.short', 'service.name.full']))->setSeparator(' &middot; ')->setAutoEscape(false) ?>
+    </head>
+
+    <body>
+        <div id="header" class="no-wrap no-print" <?= $this->headerAttributes() ?>>
+            <div id="label">
+                <a href="<?= $this->basePath('/') ?>" id="logo"></a>
+
+                <div id="label-client"><?= $this->option('client.name.full') ?></div>
+                <div id="label-service"><?= $this->option('service.name.full') ?></div>
+
+                <?php if ($this->option('service.branding', 'true') == 'true'): ?>
+                    <div id="branding">&raquo; <?= sprintf($this->t('Powered by %s'), '<a href="' . $this->option('service.branding.website') .'" target="_blank">' . $this->option('service.branding.name') . '</a>') ?></div>
+                <?php else: ?>
+                    <style type="text/css"> #label-client { margin-top: 15px; } </style>
+                <?php endif; ?>
+            </div>
+
+            <div id="topbar">
+                <?= $this->headerLocaleChoice() ?>
+
+                <div id="topbar-contact" class="responsive-pass-1">
+                    <p>
+                        <span class="light-gray"><?= $this->t('Do your like our service?') ?></span><br>
+                        <span class="large-text">
+                            <a href="<?= $this->option('client.website.contact') ?>" target="_blank" class="unlined white">
+                                <?= $this->t('Contact & Feedback') ?>
+                            </a>
+                        </span>
+                    </p>
+                </div>
+
+                <div id="topbar-website" class="responsive-pass-2">
+                    <p>
+                        <span class="light-gray"><?= $this->t('Our website') ?></span><br>
+                        <span class="large-text">
+                            <a href="<?= $this->option('client.website') ?>" target="_blank" class="unlined white">
+                                <?= rtrim(str_replace('http://', '', $this->option('client.website')), '/') ?>
+                            </a>
+                        </span>
+                    </p>
+                </div>
+
+                <div id="topbar-infos" class="responsive-pass-3">
+                    <p>
+                        <span class="light-gray"><?= $this->t('Information about') ?></span><br>
+                        <span class="large-text">
+                            <a href="<?= $this->url('service/info') ?>" class="unlined white"><?= $this->option('subject.type') ?></a>
+                        </span>
+                    </p>
+                </div>
+
+                <div id="topbar-phone" class="responsive-pass-4">
+                    <p>
+                        <span class="light-gray"><?= $this->t('Book by phone') ?></span><br>
+                        <span class="large-text"><?= $this->option('client.contact.phone') ?></span>
+                    </p>
+                </div>
+
+                <div id="topbar-separator" class="responsive-pass-4"></div>
+            </div>
+        </div>
+
+        <div id="content">
+            <?= $this->messages() ?>
+
+            <?= $this->tabs() ?>
+
+            <div class="content-panel <?= $this->placeholder('panel') ?>">
+                <?= $this->content ?>
+            </div>
+
+            <?= $this->links() ?>
+        </div>
+
+        <div id="footer">
+            <div class="centered-text">
+                <span class="no-wrap">&copy; <?= date('Y') ?> <a href="<?= $this->option('client.website') ?>"><?= $this->option('client.name.full') ?></a></span>
+                (<a href="<?= $this->option('client.website.imprint') ?>"><?= $this->t('Imprint') ?></a>)
+                <span class="no-wrap">&amp; <a href="<?= $this->option('service.branding.website') ?>"><?= $this->option('service.branding.name') ?></a> (<?= $this->t('Software') ?>)</span>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="<?= $this->basePath('js/jquery/jquery.min.js') ?>"></script>
+        <script type="text/javascript" src="<?= $this->basePath('js/jquery-ui/jquery-ui.min.js') ?>"></script>
+        <script type="text/javascript" src="<?= $this->basePath('js/default.min.js') ?>"></script>
+        <?= $this->headScript() ?>
+    </body>
+</html>

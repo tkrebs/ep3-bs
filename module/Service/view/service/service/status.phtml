@@ -1,0 +1,31 @@
+<?php
+
+$this->setup(array(
+    'title' => $this->title,
+    'panel' => 'centered-panel',
+));
+
+?>
+
+<div class="padded centered-text">
+    <?php if ($this->status == 'maintenance'): ?>
+        <h2><?= $this->t('System status') ?></h2>
+        <h1><?= $this->t('The system is currently not available') ?></h1>
+        <h3><?= $this->t('System maintenance underway') ?></h3>
+
+        <div class="separator"></div>
+
+        <?php if ($this->option('service.maintenance.message')): ?>
+            <p>
+                <?= $this->option('service.maintenance.message') ?>
+            </p>
+        <?php endif; ?>
+
+        <p class="gray">
+            <?= $this->t('We are back as fast as we can. Promised!') ?>
+        </p>
+    <?php else: ?>
+        <h2><?= $this->t('System status') ?></h2>
+        <h1><?= $this->t('The system is available') ?></h1>
+    <?php endif; ?>
+</div>

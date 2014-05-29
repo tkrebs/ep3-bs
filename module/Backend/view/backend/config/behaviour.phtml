@@ -1,0 +1,29 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Behaviour',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Configuration' => $this->url('backend/config'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/config/behaviour.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('Behaviour') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('How does registration work? How many days are displayed in the calendar?') ?></p>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->behaviourForm, $this->url('backend/config/behaviour')) ?>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+<?php
+
+$this->setup(array(
+    'title' => 'My bookings',
+    'panel' => 'centered-panel',
+    'back' => true,
+    'links' => array(
+        'My account' => $this->url('user/settings'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('My bookings') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?php if (count($this->bookings) == 0): ?>
+        <p><?= sprintf($this->t('You have not booked any %s yet.'), $this->option('subject.square.type.plural')) ?></p>
+    <?php elseif (count($this->bookings) == 1): ?>
+        <p><?= sprintf($this->t('You have already booked one %s.'), $this->option('subject.square.type')) ?></p>
+    <?php else: ?>
+        <p><?= sprintf($this->t('You have already booked %s %s.'), count($this->bookings), $this->option('subject.square.type.plural')) ?></p>
+    <?php endif; ?>
+
+    <?php if (count($this->bookings) > 0): ?>
+
+        <div class="separator separator-line"></div>
+
+        <style type="text/css">
+            .default-table td { padding-right: 16px; padding-bottom: 8px; height: 24px; }
+        </style>
+
+        <table class="default-table middle-table">
+            <?php
+
+            $todayMentioned = false;
+
+            foreach ($this->bookings as $bid => $booking) {
+                $reservations = $booking->needExtra('reservations');
+
+                $bookingDateTimeStart = null;
+                $bookingDateTimeEnd = null;
+
+                foreach ($reservations as $reservation) {
+                    $tmpDateTimeStart = new DateTime($reservation->need('date') . ' ' . $reservation->need('time_start'));
+                    $tmpDateTimeEnd = new DateTime($reservation->need('date') . ' ' . $reservation->need('time_end'));
+
+                    if (is_null($bookingDateTimeStart) || $tmpDateTimeStart < $bookingDateTimeStart) {
+                        $bookingDateTimeStart = $tmpDateTimeStart;
+                    }
+
+                    if (is_null($bookingDateTimeEnd) || $tmpDateTimeEnd < $bookingDateTimeStart) {
+                        $bookingDateTimeEnd = $tmpDateTimeEnd;
+                    }
+                }
+
+                $cancellable = false;
+                $classes = array();
+
+                $square = $this->squareManager->get($booking->need('sid'));
+
+                if ($this->now > $bookingDateTimeStart) {
+                    $classes['color'] = 'gray';
+
+                    if (! $todayMentioned) {
+                        echo '<tr><td colspan="4"><div class="gray" style="position: relative;">';
+
+                        echo '<div style="position: absolute; left: 50%; top: -16px; margin-left: -23px; padding: 8px; background: #FFF;">' . $this->t('Now') . '</div>';
+                        echo '<div class="separator-small separator-line"></div>';
+
+                        echo '</div></td></tr>';
+
+                        $todayMentioned = true;
+                    }
+                } else {
+                    $cancellable = $this->squareValidator->isCancellable($booking);
+                }
+
+                $bills = $booking->getExtra('bills');
+
+                if ($bills) {
+                    $price = 0;
+
+                    foreach ($bills as $bill) {
+                        $price += $bill->need('price');
+                    }
+
+                    $pricing = '';
+                    $pricing .= '<a href="' . $this->url('user/bookings/bills', ['bid' => $bid]) . '" class="default-button mini-button" style="min-width: 80px;">';
+                    $pricing .= $this->priceFormat($price);
+                    $pricing .= '</a>';
+                } else {
+                    $pricing = '<div class="centered-text gray">&middot;</div>';
+                }
+
+                echo '<tr>';
+
+                $class = implode(' ', $classes);
+
+                echo '<td class="' . $class . (! isset($classes['color']) ? 'my-highlight' : '') . '">' . $this->option('subject.square.type') . ' ' . $this->t($square->need('name')) . '</td>';
+                echo '<td class="' . $class . '">' . $this->dateRange($bookingDateTimeStart, $bookingDateTimeEnd) . '</td>';
+                echo '<td class="' . $class . '" style="padding-left: 16px;">' . $pricing . '</td>';
+
+                if ($cancellable) {
+                    echo sprintf('<td style="padding-left: 16px;"><a href="%s" class="default-button mini-button">%s</a></td>',
+                        $this->url('square/booking/cancellation', [], ['query' => ['bid' => $booking->need('bid')]]), $this->t('Cancel booking'));
+                } else {
+                    echo '<td class="centered-text gray" style="padding-left: 16px;">&middot;</td>';
+                }
+
+                echo '</tr>';
+            }
+
+            ?>
+        </table>
+
+        <div class="separator-small"></div>
+
+    <?php endif; ?>
+
+</div>

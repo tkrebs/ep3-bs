@@ -1,0 +1,32 @@
+<div>
+    <h1>Create database tables</h1>
+
+    <div class="separator separator-line"></div>
+
+    <?= $this->message($this->importMessage, 'info') ?>
+
+    <?php if ($this->import): ?>
+        <?= $this->message('Database tables have been created', 'success') ?>
+    <?php else: ?>
+        <?= $this->message('Database tables have not been created', 'error') ?>
+
+        <p class="red">
+            But no need to be sad! Just import the entire <code>/data/db/ep3-bs.sql</code> file
+            into your database (e.g. via phpMyAdmin).
+        </p>
+    <?php endif; ?>
+
+    <div class="separator separator-line"></div>
+
+    <p>
+        In the second step, we will insert a minimum amount of records to make the system work.
+        All other configuration can be performed via the system backend itself.
+    </p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="centered-text">
+        <a href="<?= $this->url('setup/records') ?>" class="default-button"><b>2. Insert</b> database records</a>
+    </div>
+
+</div>

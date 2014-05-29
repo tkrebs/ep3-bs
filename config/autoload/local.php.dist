@@ -1,0 +1,25 @@
+<?php
+/**
+ * Local application configuration
+ *
+ * Insert your local database credentials here
+ * and provide the email address the system should use.
+ */
+
+ini_set('date.timezone', 'America/New_York');
+
+return array(
+    'mail' => array(
+        'type' => 'sendmail',
+        'address' => 'info@bookings.example.com',
+    ),
+    'db' => array(
+        'user' => '?',
+        'pass' => '?',
+        'dsn' => 'mysql:dbname=?;host=127.0.0.1',
+    ),
+    'i18n' => array(
+        'locale' => 'en-US',
+        'currency' => 'USD',
+    ),
+);

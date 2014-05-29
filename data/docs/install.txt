@@ -1,0 +1,32 @@
+--- Preparations ---
+
+Only relevant if you have cloned directly from GitHub!
+If you have downloaded a package from our website,
+continue with installation.
+
+0. Install dependencies via composer
+
+--- Installation ---
+
+1. Setup local configuration
+   - rename /config/autoload/local.php.dist to local.php
+   - edit local.php
+
+2. Setup the database via setup.php
+
+3. Enable (recursively) UNIX write permission for
+   - /data/cache/
+   - /data/log/
+   - /data/session/
+   - /public/docs-client/
+   - /public/imgs-client/
+
+4. Customize public files (optional)
+   - css-client/default.css (custom color scheme)
+   - imgs-client/icons/fav.ico
+   - imgs-client/layout/logo.png (75x75)
+
+5. Delete setup tool
+   - /public/setup.php
+
+6. Have fun! :)

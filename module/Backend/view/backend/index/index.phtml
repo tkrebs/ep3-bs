@@ -1,0 +1,44 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Administration',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1 class="no-ajax"><?= $this->t('Administration') ?></h1>
+
+    <div class="no-ajax separator-small"></div>
+
+    <div style="margin-bottom: 8px;">
+        <a href="<?= $this->url('backend/user') ?>" class="default-button" style="width: 150px; text-align: left;"><span class="symbolic symbolic-user"><?= $this->t('Users') ?></span></a>
+        <span class="no-ajax gray" style="margin-left: 16px;">
+            <?= $this->t('Create, edit or delete the users of your system') ?>
+        </span>
+    </div>
+
+    <div style="margin-left: 14px; margin-bottom: 16px;">
+        <a href="<?= $this->url('backend/user/stats') ?>" class="unlined gray"><span class="symbolic symbolic-stats"><?= $this->t('Statistic') ?></span></a>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+        <a href="<?= $this->url('backend/booking') ?>" class="default-button" style="width: 150px; text-align: left;"><span class="symbolic symbolic-booking"><?= $this->t('Bookings') ?></span></a>
+        <span class="no-ajax gray" style="margin-left: 16px;">
+            <?= $this->t('Create, edit or delete the bookings of your system') ?>
+        </span>
+    </div>
+
+    <div style="margin-left: 14px; margin-bottom: 16px;">
+        <a href="<?= $this->url('backend/booking/stats') ?>" class="unlined gray"><span class="symbolic symbolic-stats"><?= $this->t('Statistic') ?></span></a>
+    </div>
+
+    <div>
+        <a href="<?= $this->url('backend/config') ?>" class="default-button" style="width: 150px; text-align: left;"><span class="symbolic symbolic-config"><?= $this->t('Configuration') ?></span></a>
+        <span class="no-ajax gray" style="margin-left: 16px;">
+            <?= $this->t('Configure your system just as you need it') ?>
+        </span>
+    </div>
+</div>

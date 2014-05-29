@@ -1,0 +1,155 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Registration',
+    'panel' => 'centered-panel large-sized',
+    'back' => true,
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/user/registration.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('Registration') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <h2><?= sprintf($this->t('Welcome to our %s'), $this->option('service.name.full')) ?></h2>
+
+    <div class="separator-small"></div>
+
+    <p>
+        <?= sprintf(
+            $this->t('You probably guessed it: To use our service, that is to book spare %s online, you need to create your own user account first.'),
+            $this->option('subject.square.type.plural')) ?>
+
+        <?= $this->t('The registration is of course free of cost and nonbinding.') ?>
+    </p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php
+
+        if ($this->option('service.user.registration') == 'false') {
+
+            if ($this->option('service.user.registration.message')) {
+                echo '<p class="centered-text"><em>' . $this->option('service.user.registration.message') . '</em></p>';
+            } else {
+                echo '<p class="centered-text"><em>' . $this->t('We are very sorry, but the registration is currently not possible.') . '</em></p>';
+            }
+
+        } else {
+
+            $form = $this->registrationForm;
+            $form->setAttribute('method', 'post');
+            $form->setAttribute('action', $this->url('user/registration'));
+            $form->prepare();
+
+            ?>
+            <?= $this->form()->openTag($form) ?>
+
+            <div>
+                <table class="default-table half-table" style="float: left;">
+                    <tr>
+                        <td colspan="2" class="centered-text">
+                            <div class="badge">1</div> <span class="badge-label"><?= $this->t('Login data') ?></span>
+                            <div class="separator-small"></div>
+                        </td>
+                    </tr>
+
+                    <?= $this->formRowDefault($form, 'rf-email1') ?>
+                    <?= $this->formRowDefault($form, 'rf-email2') ?>
+                    <?= $this->formRowDefault($form, 'rf-pw1') ?>
+                    <?= $this->formRowDefault($form, 'rf-pw2') ?>
+                </table>
+
+                <table class="default-table half-table" style="float: right;">
+                    <tr>
+                        <td colspan="2" class="centered-text">
+                            <div class="badge">2</div> <span class="badge-label"><?= $this->t('Personal data') ?></span>
+                            <div class="separator-small"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="default-form-label-row">
+                            <?= $this->formLabel($form->get('rf-gender')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('rf-gender')) ?>
+                            <?= $this->formElementErrors($form->get('rf-gender')) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="default-form-label-row">
+                            <?= $this->formLabel($form->get('rf-firstname')) ?>
+
+                            <div id="rf-generic-label" style="display: none;"><?= $this->t('Name') ?></div>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('rf-firstname')) ?>
+                            <?= $this->formElement($form->get('rf-lastname')) ?>
+                            <?= $this->formElementErrors($form->get('rf-firstname')) ?>
+                            <?= $this->formElementErrors($form->get('rf-lastname')) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="default-form-label-row">
+                            <?= $this->formLabel($form->get('rf-street')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('rf-street')) ?>
+                            <?= $this->formElement($form->get('rf-number')) ?>
+                            <?= $this->formElementErrors($form->get('rf-street')) ?>
+                            <?= $this->formElementErrors($form->get('rf-number')) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="default-form-label-row">
+                            <?= $this->formLabel($form->get('rf-zip')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('rf-zip')) ?>
+                            <?= $this->formElement($form->get('rf-city')) ?>
+                            <?= $this->formElementErrors($form->get('rf-zip')) ?>
+                            <?= $this->formElementErrors($form->get('rf-city')) ?>
+                        </td>
+                    </tr>
+
+                    <?= $this->formRowDefault($form, 'rf-phone') ?>
+                    <?= $this->formRowDefault($form, 'rf-birthdate') ?>
+                </table>
+            </div>
+
+            <br clear="all">
+
+            <div class="separator separator-line"></div>
+
+            <div class="centered-text">
+                <?= $this->formElement($form->get('rf-nickname')) ?>
+                <?= $this->formElementErrors($form->get('rf-nickname'), array('id' => 'form-nickname-error')) ?>
+
+                <?= $this->formElement($form->get('rf-csrf')) ?>
+                <?= $this->formElementErrors($form->get('rf-csrf')) ?>
+
+                <?= $this->formElement($form->get('rf-submit')) ?>
+
+                <p class="gray small-text" style="margin-top: 12px;">
+                    <em>
+                        <strong><?= $this->t('Data privacy') ?>:</strong>
+
+                        <?= $this->t('Your data will be handled trustfully and responsible.') ?>
+                        <?= $this->t('It will only be used and processed for the purpose of our service.') ?>
+                        <?= $this->t('It will neither be shared with third parties nor displayed publicly without your permission.') ?>
+                    </em>
+                </p>
+            </div>
+
+            <?= $this->form()->closeTag() ?>
+
+        <?php } ?>
+
+    </div>
+</div>

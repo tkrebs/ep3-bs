@@ -1,0 +1,30 @@
+<?php
+
+$squareType = $this->option('subject.square.type');
+
+foreach ($this->bookingsFromUser as $bid => $booking) {
+    echo sprintf('<p><span class="green">' . $this->t('This %s has been %sbooked to you%s.') . '</span></p>',
+        $squareType, '<b>', '</b>');
+
+    if ($this->validator->isCancellable($booking)) {
+        echo sprintf('<p><a href="%s" class="default-button squarebox-internal-link"><span class="symbolic symbolic-cross">%s</span></a></p>',
+            $this->url('square/booking/cancellation', [], ['query' => ['bid' => $bid]]), $this->t('Cancel this booking'));
+    } else {
+        echo '<p><em>' . $this->t('This booking cannot be cancelled anymore online.') . '</em></p>';
+    }
+}
+
+if ($this->bookable) {
+    echo sprintf('<p><span class="green">' . $this->t('This %s is still free.') . '</span></p>', $squareType);
+
+    $url = $this->url('square', [], ['query' => [
+        'ds' => $this->dateStart->format('Y-m-d'),
+        'de' => $this->dateEnd->format('Y-m-d'),
+        'ts' => $this->dateStart->format('H:i'),
+        'te' => $this->dateEnd->format('H:i'),
+        's' => $this->square->need('sid'),
+        'f' => 'fb']]);
+
+    echo sprintf('<p><a href="%s" class="default-button squarebox-internal-link"><span class="symbolic symbolic-plus">%s</span></a></p>',
+        $url, $this->t('Book more'));
+}

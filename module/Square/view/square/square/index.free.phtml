@@ -1,0 +1,46 @@
+<?php
+
+$square = $this->square;
+$squareType = $this->option('subject.square.type');
+
+echo sprintf('<p><span class="green">' . $this->t('This %s is still free.') . '</span></p>', $squareType);
+
+echo $this->squareCapacityInfo($square, $this->quantity);
+
+if ($square->need('status') == 'readonly') {
+    if ($square->getMeta('readonly.message')) {
+        echo '<p class="gray">' . $square->getMeta('readonly.message') .'</p>';
+    } else {
+        echo '<p class="gray">' . sprintf($this->t('Bookings for this %s are currently not possible online'), $squareType) . '</p>';
+    }
+} else {
+    if ($this->user) {
+        echo '<p>';
+
+        echo $this->ajaxAwareScript('js/controller/square/index.free.min.js');
+        echo $this->squareTimeBlockChoice($this->dateStart, $this->dateEnd, $square);
+
+        if ($square->need('capacity') > 1 || $this->products) {
+            $route = 'square/booking/customization';
+        } else {
+            $route = 'square/booking/confirmation';
+        }
+
+        $url = $this->url($route, [], ['query' => [
+            'ds' => $this->dateStart->format('Y-m-d'),
+            'de' => $this->dateEnd->format('Y-m-d'),
+            'ts' => $this->dateStart->format('H:i'),
+            'te' => $this->dateEnd->format('H:i'),
+            's' => $square->need('sid')]]);
+
+        echo sprintf('<a href="%s" id="sb-button" class="default-button squarebox-internal-link"><span class="symbolic symbolic-plus">%s</span></a>',
+            $url, $this->t('Book now'));
+
+        echo '</p>';
+    } else {
+        echo '<p class="gray">' . sprintf($this->t('You can %slogin%s or %sregister%s, %s to book this %s'),
+            '<a href="' . $this->url('user/login') . '">', '</a>', '<a href="' . $this->url('user/registration') . '">', '</a>', '<br>', $squareType) . '.</p>';
+    }
+
+    echo $this->squarePricingHints($this->dateStart, $this->dateEnd, $square);
+}

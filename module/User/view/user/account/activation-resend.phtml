@@ -1,0 +1,58 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Resend activation email',
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'success' => $this->activationResendMessage,
+    ),
+    'back' => true,
+    'links' => array(
+        'Login' => $this->url('user/login'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Resend activation email') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p>
+        <?= $this->t('If you did not receive an activation email from us after registration, you can request a new one here.') ?>
+        <?= $this->t('Therefore, please type the email adress you used for registration.') ?>
+    </p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php
+
+        $form = $this->activationResendForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('user/activation-resend'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('arf-email')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('arf-email')) ?>
+                </td>
+            </tr>
+
+            <?= $this->formRowSubmit($form, 'arf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+
+    </div>
+</div>

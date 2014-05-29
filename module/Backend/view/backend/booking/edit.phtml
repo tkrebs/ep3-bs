@@ -1,0 +1,140 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Administration',
+    'panel' => 'centered-panel giant-sized',
+    'back' => true,
+));
+
+?>
+
+<div class="padded centered-text">
+    <?php
+
+    $form = $this->editForm;
+    $form->setAttribute('method', 'post');
+    $form->setAttribute('action', $this->url('backend/booking/edit'));
+    $form->prepare();
+
+    ?>
+
+    <?= $this->form()->openTag($form) ?>
+
+    <table class="default-table middle-table">
+        <tr>
+            <td>
+                <div class="sandbox">
+                    <?= $this->formElement($form->get('bf-rid')) ?>
+
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-user') ?>
+                    </table>
+
+                    <?php if ($this->booking && $this->booking->getExtra('user')): ?>
+                        <?php $user = $this->booking->getExtra('user') ?>
+
+                        <div class="default-form-notes">
+                            <div><?= $this->t('Status') ?>: <?= $this->t($user->getStatus()) ?></div>
+
+                            <?php if ($user->get('email')): ?>
+                                <div><?= $this->t('Email') ?>: <?= $user->get('email') ?></div>
+                            <?php endif; ?>
+
+                            <div style="margin-top: 8px;">
+                                <a href="<?= $this->url('backend/user/edit', ['uid' => $user->need('uid')]) ?>" class="gray">
+                                    <span class="symbolic symbolic-edit"><?= $this->t('Edit user') ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </td>
+
+            <td>
+                <div class="sandbox">
+                    <table class="default-table">
+                        <tr>
+                            <td>
+                                <table class="default-table">
+                                    <?= $this->formRowCompact($form, 'bf-time-start') ?>
+                                    <?= $this->formRowCompact($form, 'bf-date-start') ?>
+                                </table>
+                            </td>
+
+                            <td>
+                                <table class="default-table">
+                                    <?= $this->formRowCompact($form, 'bf-time-end') ?>
+                                    <?= $this->formRowCompact($form, 'bf-date-end') ?>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <table class="default-table">
+                                    <?= $this->formRowCompact($form, 'bf-repeat') ?>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+
+            <td>
+                <div class="sandbox">
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-sid') ?>
+                        <?= $this->formRowCompact($form, 'bf-status-billing') ?>
+                        <?= $this->formRowCompact($form, 'bf-quantity') ?>
+                    </table>
+                </div>
+            </td>
+
+            <td>
+                <div class="sandbox">
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-notes') ?>
+                    </table>
+
+                    <?php if ($this->booking): ?>
+                        <div class="default-form-notes">
+                            <div class="separator-small separator-line"></div>
+
+                            <a href="<?= $this->url('user/bookings/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-edit unlined gray"><?= $this->t('Go to booking bills') ?></a>
+                        </div>
+
+                        <div class="default-form-notes">
+                            <div class="separator-small separator-line"></div>
+
+                            <?= $this->t('Booking created') ?>:<br><?= $this->prettyDate(new \DateTime($this->booking->get('created'))) ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4" class="centered-text" style="padding-top: 16px; border-top: solid 1px #CCC;">
+                <?= $this->formElement($form->get('bf-submit')) ?>
+
+                <?php if ($this->reservation): ?>
+                    <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+
+                    <a href="<?= $this->url('backend/booking/delete', ['rid' => $this->reservation->get('rid')], ['query' => ['edit-mode' => $this->editMode]]) ?>" class="default-button squarebox-internal-link">
+                        <span class="symbolic symbolic-cross"><?= $this->t('Delete') ?></span>
+                    </a>
+                <?php endif; ?>
+            </td>
+        </tr>
+    </table>
+
+    <?= $this->form()->closeTag() ?>
+
+    <div id="bf-url-provider"
+         data-user-autocomplete-url="<?= $this->url('backend/user/interpret') ?>"></div>
+
+    <div id="bf-tag-provider"
+        data-edit-mode-tag="<?= $this->editMode ?>"></div>
+</div>
+
+<?= $this->ajaxAwareScript('js/controller/backend/booking/edit.min.js') ?>

@@ -1,0 +1,57 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Statistic',
+    'panel' => 'centered-panel',
+    'back' => true,
+    'links' => array(
+        'User-Statistic' => $this->url('backend/user/stats'),
+    ),
+));
+
+$single = $subscription = $cancelled = 0;
+
+foreach ($this->stats as $stat) {
+    $var = $stat['status'];
+    $$var += $stat['count'];
+}
+
+$total = $single + $subscription;
+
+?>
+
+<div>
+    <h1><?= $this->t('Booking-Statistic') ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <table class="bordered-table">
+        <tr>
+            <td><b><?= $this->t('Bookings') ?></b></td>
+            <td class="right-text"><b><code><?= $this->numberFormat($total) ?></code></b></td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Single') ?></td>
+            <td class="right-text">
+                <code>
+                    <?= $this->numberFormat($single) ?>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Subscription') ?></td>
+            <td class="right-text">
+                <code>
+                    <?= $this->numberFormat($subscription) ?>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b><?= $this->t('Cancelled') ?></b></td>
+            <td class="right-text"><b><code><?= $this->numberFormat($cancelled) ?></code></b></td>
+        </tr>
+    </table>
+</div>

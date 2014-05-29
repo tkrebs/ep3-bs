@@ -1,0 +1,21 @@
+<?php
+
+$this->headScript()->appendFile($this->basePath('js/controller/frontend/index.min.js'));
+
+?>
+
+<div id="calendar-toolbar" class="no-print">
+    <div id="calendar-toolbar-datepicker" class="panel">
+        <?= $this->partial('frontend/index/datepicker.phtml', ['dateStart' => $this->dateStart, 'dateNow' => $this->dateNow]) ?>
+    </div>
+
+    <div id="calendar-toolbar-userpanel" class="panel">
+        <?php if ($this->user): ?>
+            <?= $this->partial('frontend/index/userpanel.online.phtml', ['user' => $this->user]) ?>
+        <?php else: ?>
+            <?= $this->partial('frontend/index/userpanel.offline.phtml') ?>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?= $this->calendar ?>

@@ -1,0 +1,67 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Login',
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'error' => sprintf($this->loginMessage, $this->loginDetent ? $this->timeFormat($this->loginDetent) : null),
+    ),
+    'back' => true,
+    'links' => array(
+        'Register now' => $this->url('user/registration'),
+        'Forgot password?' => $this->url('user/password'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Login') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p>
+        <?= sprintf($this->t('If you have already registered, you can login here with your email address and start booking %s.'),
+            $this->option('subject.square.type.plural')) ?>
+    </p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php
+
+        $form = $this->loginForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('user/login'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('lf-email')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('lf-email')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('lf-pw')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('lf-pw')) ?>
+                </td>
+            </tr>
+
+            <?= $this->formRowSubmit($form, 'lf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+
+    </div>
+</div>

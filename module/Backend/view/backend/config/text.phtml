@@ -1,0 +1,57 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Names and text',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Configuration' => $this->url('backend/config'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Names and text') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('What is the name of your service? What is your name?') ?></p>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->textForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/config/text'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?php foreach (\Backend\Form\Config\TextForm::$definitions as $key => $value): $key = str_replace('.', '_', $key); ?>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('cf-' . $key)) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('cf-' . $key)) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElementErrors($form->get('cf-' . $key)) ?>
+                        <?= $this->formElementNotes($form->get('cf-' . $key)) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+
+            <?= $this->formRowSubmit($form, 'cf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

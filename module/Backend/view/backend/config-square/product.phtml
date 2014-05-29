@@ -1,0 +1,37 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Products',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Configuration' => $this->url('backend/config'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Products') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('Which additional products or services do you offer with your bookings?') ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php if ($this->squareProducts): ?>
+            <?= $this->backendSquareProductsFormat($this->squareProducts) ?>
+        <?php endif; ?>
+
+        <div class="centered-text" style="margin-top: 32px;">
+            <p>
+                <a href="<?= $this->url('backend/config/square/product/edit') ?>" class="default-button">
+                    <span class="symbolic symbolic-plus"><?= $this->t('New product') ?></span>
+                </a>
+            </p>
+        </div>
+
+    </div>
+</div>

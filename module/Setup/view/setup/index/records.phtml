@@ -1,0 +1,55 @@
+<?php
+
+$this->setup(array(
+    'panel' => 'large-sized',
+));
+
+?>
+
+<div>
+    <h1>Insert database records</h1>
+
+    <div class="separator-small"></div>
+
+    <p>The system needs these information to render the calendar and all pages correctly with your information in it.</p>
+
+    <p>You can edit these (and more) later via the system backend.</p>
+
+    <p>Note that these fields are about your institution (business, club, ...) not about you as a person (this comes in the next step).</p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->textForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('setup/records'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?php foreach (\Backend\Form\Config\TextForm::$definitions as $key => $value): $key = str_replace('.', '_', $key); ?>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('cf-' . $key)) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('cf-' . $key)) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElementErrors($form->get('cf-' . $key)) ?>
+                        <?= $this->formElementNotes($form->get('cf-' . $key)) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+
+            <?= $this->formRowSubmit($form, 'cf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

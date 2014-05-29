@@ -1,0 +1,39 @@
+<?php
+
+$dateStartClone = clone $this->dateStart;
+$dateStartClone->modify('-1 day');
+
+$previousDayUrl = $this->url('frontend', [], ['query' => ['date' => $dateStartClone->format('Y-m-d')]]);
+
+$dateStartClone->modify('+1 day');
+
+$currentDay = $this->dateFormat($dateStartClone, IntlDateFormatter::MEDIUM);
+
+$dateStartClone->modify('+1 day');
+
+$nextDayUrl = $this->url('frontend', [], ['query' => ['date' => $dateStartClone->format('Y-m-d')]]);
+
+$todayUrl = $this->url('frontend', [], ['query' => ['date' => $this->dateNow->format('Y-m-d')]]);
+
+?>
+
+<table style="height: 100%;">
+    <tr>
+        <td><a href="<?= $previousDayUrl ?>" class="default-button symbolic symbolic-button"><div class="arrow-left"></div>&nbsp;</a></td>
+        <td><a href="<?= $todayUrl ?>" class="default-button"><?= $this->t('Today') ?></a></td>
+
+        <td>
+            <form method="get" action="<?= $this->url('frontend') ?>">
+                <div class="inline-element">
+                    <label for="c-date" class="inline-label symbolic symbolic-date"><span><?= $this->t('Date') ?></span></label>
+                    <input type="text" name="date" id="c-date" value="<?= $currentDay ?>"
+                        class="inline-label-container datepicker datepicker-autosubmit" style="padding-left: 28px; width: 96px;">
+                </div>
+
+                <input type="submit" value="<?= $this->t('Show') ?>" id="calendar-toolbar-datepicker-submit" class="default-button">
+            </form>
+        </td>
+
+        <td><a href="<?= $nextDayUrl ?>" class="default-button symbolic symbolic-button"><div class="arrow-right"></div>&nbsp;</a></td>
+    </tr>
+</table>

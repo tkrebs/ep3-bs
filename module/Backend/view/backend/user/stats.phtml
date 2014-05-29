@@ -1,0 +1,105 @@
+<?php
+
+$this->setup(array(
+    'title' => 'User-Statistic',
+    'panel' => 'centered-panel',
+    'back' => true,
+    'links' => array(
+        'Booking-Statistic' => $this->url('backend/booking/stats'),
+    ),
+));
+
+$placeholder = $deleted = $blocked = $disabled = $enabled = $assist = $admin = 0;
+
+foreach ($this->stats as $stat) {
+    $var = $stat['status'];
+    $$var += $stat['count'];
+}
+
+$total = $deleted + $blocked + $disabled + $enabled + $assist + $admin;
+
+?>
+
+<div>
+    <h1><?= $this->t('User-Statistic') ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <table class="bordered-table">
+        <tr>
+            <td><b><?= $this->t('Users total') ?></b></td>
+            <td class="right-text"><b><code><?= $this->numberFormat($total) ?></code></b></td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Deleted user') ?></td>
+            <td class="right-text">
+                <code>
+                    <a href="<?= $this->url('backend/user', [], ['query' => ['usf-search' => '(status = deleted)']]) ?>">
+                        <?= $this->numberFormat($deleted) ?>
+                    </a>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Blocked user') ?></td>
+            <td class="right-text">
+                <code>
+                    <a href="<?= $this->url('backend/user', [], ['query' => ['usf-search' => '(status = blocked)']]) ?>">
+                        <?= $this->numberFormat($blocked) ?>
+                    </a>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Waiting for activation') ?></td>
+            <td class="right-text">
+                <code>
+                    <a href="<?= $this->url('backend/user', [], ['query' => ['usf-search' => '(status = disabled)']]) ?>">
+                        <?= $this->numberFormat($disabled) ?>
+                    </a>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Enabled user') ?></td>
+            <td class="right-text">
+                <code>
+                    <a href="<?= $this->url('backend/user', [], ['query' => ['usf-search' => '(status = enabled)']]) ?>">
+                        <?= $this->numberFormat($enabled) ?>
+                    </a>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Assist') ?></td>
+            <td class="right-text">
+                <code>
+                    <a href="<?= $this->url('backend/user', [], ['query' => ['usf-search' => '(status = assist)']]) ?>">
+                        <?= $this->numberFormat($assist) ?>
+                    </a>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Admin') ?></td>
+            <td class="right-text">
+                <code>
+                    <a href="<?= $this->url('backend/user', [], ['query' => ['usf-search' => '(status = admin)']]) ?>">
+                        <?= $this->numberFormat($admin) ?>
+                    </a>
+                </code>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b><?= $this->t('Placeholders total') ?></b></td>
+            <td class="right-text"><b><code><?= $this->numberFormat($placeholder) ?></code></b></td>
+        </tr>
+    </table>
+</div>

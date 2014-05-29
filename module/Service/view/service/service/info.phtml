@@ -1,0 +1,22 @@
+<?php
+
+$this->setup(array(
+    'title' => ucfirst($this->option('subject.type')),
+    'panel' => 'centered-panel large-sized',
+    'back' => true,
+    'links' => array(
+        'Help' => $this->url('service/help'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/service/info.min.js'));
+
+?>
+
+<div id="info-panel">
+    <h1><?= ucfirst($this->option('subject.type')) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->option('subject.about', '<p><em>' . $this->t('We are currently working on this page.') . '</em></p>') ?>
+</div>

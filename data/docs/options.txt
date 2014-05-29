@@ -1,0 +1,82 @@
+Options:
+
+- client.name.full
+- client.name.short
+- client.contact.email
+- client.contact.phone
+- client.website                        URL
+- client.website.contact                URL
+- client.website.imprint                URL
+
+- service.name.full
+- service.name.short
+- service.user.registration             true|false
+- service.user.registration.message     (optional)
+- service.user.activation               immediate|manual|manual-email|email
+- service.calendar.days                 int
+- service.website                       URL
+- service.meta.description              (optional)
+- service.meta.keywords                 (optional)
+- service.maintenance                   (optional) true|false
+- service.maintenance.message           (optional)
+- service.branding                      (optional) true|false
+- service.branding.name                 (optional)
+- service.branding.website              (optional)
+- service.pricing.visibility            public|private|never
+- service.pricing.payment               none|invoice|paypal|invoice,paypal
+
+- subject.help                          HTML
+- subject.about                         HTML
+- subject.type                          (including determiner)
+- subject.square.type
+- subject.square.type.plural
+- subject.square.unit
+- subject.square.unit.plural
+
+
+
+Booking meta keys:
+
+- date_start                            (for subscriptions)
+- date_end                              (for subscriptions)
+- time_start                            (for subscriptions)
+- time_end                              (for subscriptions)
+- repeat                                (for subscriptions)
+- notes                                 (optional)
+
+
+
+Reservation meta keys:
+
+- notes                                 (optional)
+
+
+
+Square meta keys:
+
+- info.pre                              (optional)
+- info.post                             (optional)
+- info.capacity                         (optional) true|false
+- rules.text                            (optional)
+- rules.document.name                   (optional)
+- rules.document.file                   (optional)
+- readonly.message                      (optional)
+
+
+
+User meta keys:
+
+- gender
+- firstname
+- lastname
+- street
+- zip
+- city
+- phone
+- birthdate                             (optional)
+- locale                                (optional)
+- allow.{privilege}                     (optional) true|false
+- notification.bookings                 (optional) true|false
+- deletion.reason                       (optional)
+- legacy-pw                             (optional)
+- notes                                 (optional)

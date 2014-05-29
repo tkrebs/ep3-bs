@@ -1,0 +1,40 @@
+Notes on the architecture:
+
+- index.php changes working directory, loads and registers the standard autoloader and invokes the application init()
+  method with the application's global config (which essentially determines which modules to load,
+  where to find them and which other global config files should be loaded and merged with each module config)
+
+- init() creates and prepares ServiceManager (optionally configured with passed array)
+- init() creates and prepares ModuleManager (via ServiceManager)
+  * prepares separate service locators for controllers, controller plugins, form elements, view helpers, etc.
+
+- ModuleManager triggers
+  1. loadModules
+     1. loadModule.resolve
+        * load module via ModuleAutoloader
+        * instantiate module class
+     2. loadModule (each with own ModuleEvent)
+        * invokes module's init method (if available)
+        * registers module's onBootstrap method (if available)
+        * merges all arrays from module's config file and get*() methods
+  2. loadModules.post (free for custom listeners)
+
+- Now we have a complete config array merged together from all loaded modules and autoload config files.
+  Also we have separate service locators for the controllers, controller plugins, view helpers, etc.
+  Config and ServiceManager are now passed to a newly created application object.
+
+- bootstrap() registers route, dispatch and view listeners
+- bootstrap() triggers
+  1. bootstrap
+     * view manager prepares itself
+     * custom module's onBootstraps are called
+
+- run() triggers
+  1. route
+     * match request against configured route (since usually a route stack/tree, match against all route rules)
+     * if found, return RouteMatch, otherwise trigger dispatch.error
+  2. dispatch
+     * determine controller from RouteMatch
+     * if found and dispatchable, call it, otherwise trigger dispatch.error
+  3. render
+  4. finish

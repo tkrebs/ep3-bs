@@ -1,0 +1,43 @@
+<form method="post" action="<?= $this->url('user/login') ?>">
+    <table style="height: 100%;">
+        <tr>
+            <td style="padding-right: 12px;">
+                <?php
+
+                echo sprintf($this->t('To book %s, %splease register first%s'),
+                    $this->option('subject.square.type.plural'),
+                    '<br><a href="' . $this->url('user/registration') . '" class="symbolic symbolic-plus-link">', '</a>');
+
+                ?>
+            </td>
+
+            <td class="responsive-pass-5" style="padding-left: 12px; padding-right: 12px; border-left: solid 1px #CCC;">
+                <?= sprintf($this->t('or simply %s login here'), '<br>') ?>
+            </td>
+
+            <td class="responsive-pass-3">
+                <div class="inline-element">
+                    <label for="lf-email" class="inline-label symbolic symbolic-email"><span><?= $this->t('Email address') ?></span></label>
+                    <input type="text" name="lf-email" id="lf-email" value=""
+                        class="inline-label-container" style="padding-left: 32px; width: 150px;">
+                </div>
+            </td>
+
+            <td class="responsive-pass-3">
+                <div class="inline-element">
+                    <label for="lf-pw" class="inline-label symbolic symbolic-pw"><span><?= $this->t('Password') ?></span></label>
+                    <input type="password" name="lf-pw" id="lf-pw" size="10" value=""
+                        class="inline-label-container" style="padding-left: 24px; width: 158px;">
+                </div>
+            </td>
+
+            <td style="padding-right: 12px;">
+                <input type="submit" value="<?= $this->t('Login') ?>" class="default-button">
+            </td>
+
+            <td style="padding-left: 12px; border-left: solid 1px #CCC;">
+                <a href="<?= $this->url('service/help') ?>" class="default-button" data-tooltip="<?= sprintf($this->t('Get additional %shelp and information%s'), '<b>', '</b>') ?>"><b>?</b></a>
+            </td>
+        </tr>
+    </table>
+</form>

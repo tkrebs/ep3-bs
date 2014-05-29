@@ -1,0 +1,293 @@
+<?php
+
+$this->setup(array(
+    'title' => 'My account',
+    'panel' => 'centered-panel',
+    'back' => true,
+    'links' => array(
+        'My bookings' => $this->url('user/bookings'),
+    ),
+    'messages' => array(
+        'success' => $this->deleteAccountMessage,
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/user/settings.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('My account') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <style type="text/css">
+        .symbolic-user { padding-left: 32px; background-position: 6px 1px; }
+        .symbolic-email { padding-left: 32px; background-position: 4px 3px; }
+        .symbolic-pw { padding-left: 32px; background-position: 8px 2px; }
+        .symbolic-phone { padding-left: 32px; background-position: 5px 0px; }
+        .symbolic-cross { padding-left: 32px; background-position: 5px 1px; }
+
+        .dark-gray { color: #666; }
+        .phantom { display: none; }
+    </style>
+
+    <div class="sandbox">
+        <div class="symbolic symbolic-user">
+            <div class="dark-gray">
+                <?= $this->t('Personal data') ?><br>
+                <span class="small-text">(<?= $this->t('please inform us about changes, so we can update this data') ?>)</span>
+            </div>
+
+            <div class="separator-small"></div>
+
+            <?php
+
+            /* Print gender and name */
+
+            if ($this->user->getMeta('gender') && $this->user->getMeta('name')) {
+                echo '<p>' . $this->t($this->user->getGender()) . ' ' . $this->user->getMeta('name') . '</p>';
+            }
+
+            if ($this->user->getMeta('gender') && $this->user->getMeta('name') && $this->user->getMeta('firstname')) {
+                echo '<p>' . $this->user->getMeta('firstname') . ' ' . $this->user->getMeta('lastname') . '</p>';
+            } else if ($this->user->getMeta('firstname')) {
+                echo '<p>' . $this->t($this->user->getGender()) . ' ' . $this->user->getMeta('firstname') . ' ' . $this->user->getMeta('lastname') .'</p>';
+            }
+
+            /* Print address */
+
+            echo '<p>';
+
+            if ($this->user->getMeta('street')) {
+                echo $this->user->getMeta('street');
+
+                if ($this->user->getMeta('city')) {
+                    echo '<br>' . $this->user->getMeta('zip') . ' ' . $this->user->getMeta('city');
+                }
+            }
+
+            echo '</p>';
+
+            ?>
+        </div>
+    </div>
+
+    <div class="separator-small"></div>
+
+    <div class="sandbox">
+        <div class="symbolic symbolic-phone">
+            <div class="edit-label dark-gray"><?= $this->t('Update phone number') ?></div>
+
+            <div class="edit-panel">
+                <div class="separator-small"></div>
+
+                <?php
+
+                $form = $this->editPhoneForm;
+                $form->setAttribute('method', 'post');
+                $form->setAttribute('action', $this->url('user/settings', array(), array('query' => array('edit' => 'phone'))));
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+
+                ?>
+
+                <table class="default-table" style="margin: 0px;">
+                    <tr>
+                        <td>
+                            <?= $this->formElement($form->get('epf-phone')) ?>
+                            <?= $this->formElementErrors($form->get('epf-phone')) ?>
+                            <?= $this->formElementNotes($form->get('epf-phone')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('epf-submit')) ?>
+                        </td>
+                    </tr>
+                </table>
+
+                <?= $this->form()->closeTag() ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator-small"></div>
+
+    <div class="sandbox">
+        <div class="symbolic symbolic-email">
+            <div class="edit-label dark-gray"><?= $this->t('Update email address') ?></div>
+
+            <div class="edit-panel">
+                <div class="separator-small"></div>
+
+                <?php if ($this->option('service.user.activation') == 'email'): ?>
+                    <p class="dark-gray"><?= $this->t('Note: You need to activate your account again if you update your email address.') ?></p>
+                <?php endif; ?>
+
+                <?php
+
+                $form = $this->editEmailForm;
+                $form->setAttribute('method', 'post');
+                $form->setAttribute('action', $this->url('user/settings', array(), array('query' => array('edit' => 'email'))));
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+
+                ?>
+
+                <table class="default-table" style="margin: 0px;">
+                    <tr>
+                        <td>
+                            <?= $this->formElement($form->get('eef-email1')) ?>
+                            <?= $this->formElementErrors($form->get('eef-email1')) ?>
+                            <?= $this->formElementNotes($form->get('eef-email1')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('eef-email2')) ?>
+                            <?= $this->formElementErrors($form->get('eef-email2')) ?>
+                            <?= $this->formElementNotes($form->get('eef-email2')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('eef-submit')) ?>
+                        </td>
+                    </tr>
+                </table>
+
+                <?= $this->form()->closeTag() ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator-small"></div>
+
+    <div class="sandbox">
+        <div class="symbolic symbolic-email">
+            <div class="edit-label dark-gray"><?= $this->t('Update notifications') ?></div>
+
+            <div class="edit-panel">
+                <div class="separator-small"></div>
+
+                <?php
+
+                $form = $this->editNotificationsForm;
+                $form->setAttribute('method', 'post');
+                $form->setAttribute('action', $this->url('user/settings', array(), array('query' => array('edit' => 'notifications'))));
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+
+                ?>
+
+                <table class="default-table" style="margin: 0px;">
+                    <tr>
+                        <td>
+                            <?= $this->formElement($form->get('enf-booking-notifications')) ?>
+                            <?= $this->formLabel($form->get('enf-booking-notifications')) ?>
+                            <?= $this->formElementErrors($form->get('enf-booking-notifications')) ?>
+                            <?= $this->formElementNotes($form->get('enf-booking-notifications')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('enf-submit')) ?>
+                        </td>
+                    </tr>
+                </table>
+
+                <?= $this->form()->closeTag() ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator-small"></div>
+
+    <div class="sandbox">
+        <div class="symbolic symbolic-pw">
+            <div class="edit-label dark-gray"><?= $this->t('Update password') ?></div>
+
+            <div class="edit-panel">
+                <div class="separator-small"></div>
+
+                <?php
+
+                $form = $this->editPasswordForm;
+                $form->setAttribute('method', 'post');
+                $form->setAttribute('action', $this->url('user/settings', array(), array('query' => array('edit' => 'password'))));
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+
+                ?>
+
+                <table class="default-table" style="margin: 0px;">
+                    <tr>
+                        <td colspan="3">
+                            <?= $this->formElement($form->get('epf-pw-current')) ?>
+                            <?= $this->formElementErrors($form->get('epf-pw-current')) ?>
+                            <?= $this->formElementNotes($form->get('epf-pw-current')) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <?= $this->formElement($form->get('epf-pw1')) ?>
+                            <?= $this->formElementErrors($form->get('epf-pw1')) ?>
+                            <?= $this->formElementNotes($form->get('epf-pw1')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('epf-pw2')) ?>
+                            <?= $this->formElementErrors($form->get('epf-pw2')) ?>
+                            <?= $this->formElementNotes($form->get('epf-pw2')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('epf-submit')) ?>
+                        </td>
+                    </tr>
+                </table>
+
+                <?= $this->form()->closeTag() ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator-small"></div>
+
+    <div class="sandbox">
+        <div class="symbolic symbolic-cross">
+            <div class="edit-label dark-gray"><?= $this->t('Delete this account') ?></div>
+
+            <div class="edit-panel">
+                <div class="separator-small"></div>
+
+                <?php
+
+                $form = $this->deleteAccountForm;
+                $form->setAttribute('method', 'post');
+                $form->setAttribute('action', $this->url('user/settings', array(), array('query' => array('edit' => 'delete'))));
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+
+                ?>
+
+                <table class="default-table" style="margin: 0px;">
+                    <tr>
+                        <td colspan="2">
+                            <?= $this->formElement($form->get('daf-why')) ?>
+                            <?= $this->formElementNotes($form->get('daf-why')) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 250px;">
+                            <?= $this->formElement($form->get('daf-pw-current')) ?>
+                            <?= $this->formElementErrors($form->get('daf-pw-current')) ?>
+                            <?= $this->formElementNotes($form->get('daf-pw-current')) ?>
+                        </td>
+                        <td>
+                            <?= $this->formElement($form->get('daf-submit')) ?>
+                        </td>
+                    </tr>
+                </table>
+
+                <?= $this->form()->closeTag() ?>
+            </div>
+        </div>
+    </div>
+</div>

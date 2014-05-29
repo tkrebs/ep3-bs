@@ -1,0 +1,23 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Cancel this booking',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div class="padded centered-text">
+    <p><span class="symbolic symbolic-warning"><?= $this->t('Are you sure you want to cancel this booking?') ?></span></p>
+
+    <p class="no-wrap">
+        <a href="<?= $this->url('square/booking/cancellation', [], ['query' => ['bid' => $this->bid, 'confirmed' => 'true']]) ?>" class="default-button">
+            <span class="symbolic symbolic-cross"><?= $this->t('Yes, cancel this booking') ?></span>
+        </a>
+
+        &nbsp;
+
+        <a href="<?= $this->basePath($this->origin) ?>" class="default-button squarebox-close-link"><?= $this->t('No, go back') ?></a>
+    </p>
+</div>

@@ -1,0 +1,24 @@
+<div>
+    <h1>Welcome to the ep-3 Bookingsystem Setup</h1>
+
+    <div class="separator-small"></div>
+
+    <p>This tool will help you initially setup the database.</p>
+
+    <div class="separator separator-line"></div>
+
+    <p>
+        In the first step, we will try to create all the MySQL tables the system needs by executing the
+        <code>/data/db/ep3-bs.sql</code> file on the <code><?= $this->config('db.dsn') ?></code> database.
+    </p>
+
+    <p>
+        However, if that fails, you can easily install/import it manually.
+    </p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="centered-text">
+        <a href="<?= $this->url('setup/tables') ?>" class="default-button"><b>1. Create</b> database tables</a>
+    </div>
+</div>

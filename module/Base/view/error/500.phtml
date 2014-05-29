@@ -1,0 +1,25 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Error',
+    'panel' => 'centered-panel',
+));
+
+?>
+
+<div class="padded centered-text">
+
+    <h2><?= $this->t('Oops ... something went wrong here') ?></h2>
+    <h1><?= $this->t($this->exception->getMessage()) ?></h1>
+
+    <div class="separator"></div>
+
+    <p class="gray">
+        <?= sprintf($this->t('Please %sdrop us a note%s in case of unexpected error messages, %s so that we can repair them quickly.'), '<a href="' . $this->option('client.website.contact') . '">', '</a>', '<br>'); ?>
+    </p>
+
+    <div class="separator"></div>
+
+    <a href="<?= $this->url('frontend') ?>" class="default-button"><?= $this->t('Back to front page') ?></a>
+
+</div>

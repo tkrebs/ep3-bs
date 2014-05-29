@@ -1,0 +1,43 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Registration complete',
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'success' => 'The registration is complete and your user account has been created successfully',
+    ),
+    'back' => true,
+    'links' => array(
+        'Login' => $this->url('user/login'),
+        'Resend activation email' => $this->url('user/activation-resend'),
+    ),
+));
+
+?>
+
+<div class="padded centered-text">
+    <?php if ($this->activation == 'immediate'): ?>
+
+        <p><?= $this->t('You can now login with your email address and password. Have fun!') ?></p>
+
+    <?php elseif ($this->activation == 'manual' || $this->activation == 'manual-email'): ?>
+
+        <p><?= sprintf($this->t('However, your user account is %snot yet activated%s.'), '<b>', '</b>') ?></p>
+
+        <p><?= $this->t('This will happen during a quick manual verification of your user account data.') ?></p>
+
+        <p><?= $this->t('Please be patient, this will be done soon.') ?></p>
+
+    <?php elseif ($this->activation == 'email'): ?>
+
+        <p><?= sprintf($this->t('The only step remaining is to %sactivate your user account%s.'), '<b>', '</b>') ?></p>
+
+        <p><?= $this->t('For this, we just sent you an email with an activation link within. Please check.') ?></p>
+
+        <p class="gray small-text">
+            <?= sprintf($this->t('If you did not receive an email from us, you can always %srequest a new one%s.'),
+                '<a href="' . $this->url('user/activation-resend') . '">', '</a>') ?>
+        </p>
+
+    <?php endif; ?>
+</div>

@@ -1,0 +1,212 @@
+<?php
+
+if ($this->user) {
+    $uid = $this->user->need('uid');
+} else {
+    $uid = null;
+}
+
+if ($this->search) {
+    $back = array(
+        'User-Administration' => $this->url('backend/user', [], ['query' => ['usf-search' => $this->search]])
+    );
+} else {
+    $back = true;
+}
+
+$this->setup(array(
+    'title' => 'User-Administration',
+    'panel' => 'centered-panel large-sized',
+    'back' => $back,
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('User-Administration') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('Here you can create, edit or delete the users of your system.') ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <?= $this->partial('backend/user/index.search.phtml', ['search' => $this->search]) ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php
+
+        $form = $this->editUserForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/user/edit', ['uid' => $uid], ['query' => ['search' => $this->search]]));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <div>
+            <table class="default-table half-table" style="float: left;">
+                <tr>
+                    <td colspan="2" class="centered-text">
+                        <div class="badge">1</div> <span class="badge-label"><?= $this->t('Account data') ?></span>
+                        <div class="separator-small"></div>
+                    </td>
+                </tr>
+
+                <?= $this->formRowDefault($form, 'euf-uid') ?>
+                <?= $this->formRowDefault($form, 'euf-alias') ?>
+                <?= $this->formRowDefault($form, 'euf-status') ?>
+                <?= $this->formRowDefault($form, 'euf-privileges') ?>
+                <?= $this->formRowDefault($form, 'euf-email') ?>
+                <?= $this->formRowDefault($form, 'euf-pw') ?>
+
+                <tr>
+                    <td class="right-text"><?= $this->t('Last activity') ?></td>
+                    <td>
+                        <?php
+
+                        if ($this->user && $this->user->get('last_activity')) {
+                            echo $this->prettyDate(new \DateTime($this->user->need('last_activity')));
+                        } else {
+                            echo '-';
+                        }
+
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right-text"><?= $this->t('Last IP') ?></td>
+                    <td>
+                        <?php
+
+                        if ($this->user && $this->user->get('last_ip')) {
+                            echo $this->user->get('last_ip');
+                        } else {
+                            echo '-';
+                        }
+
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right-text"><?= $this->t('Created') ?></td>
+                    <td>
+                        <?php
+
+                        if ($this->user && $this->user->get('created')) {
+                            echo $this->prettyDate(new \DateTime($this->user->need('created')));
+                        } else {
+                            echo '-';
+                        }
+
+                        ?>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="default-table half-table" style="float: right;">
+                <tr>
+                    <td colspan="2" class="centered-text">
+                        <div class="badge">2</div> <span class="badge-label"><?= $this->t('Personal data') ?></span>
+                        <div class="separator-small"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-gender')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-gender')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-gender')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-firstname')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-firstname')) ?>
+                        <?php echo $this->formElement($form->get('euf-lastname')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-firstname')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-lastname')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-street')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-street')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-street')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-zip')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-zip')) ?>
+                        <?php echo $this->formElement($form->get('euf-city')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-zip')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-city')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-phone')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-phone')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-phone')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-birthdate')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-birthdate')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-birthdate')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?php echo $this->formLabel($form->get('euf-notes')) ?>
+                    </td>
+                    <td>
+                        <?php echo $this->formElement($form->get('euf-notes')) ?>
+                        <?php echo $this->formElementNotes($form->get('euf-notes')) ?>
+                        <?php echo $this->formElementErrors($form->get('euf-notes')) ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <br clear="all">
+
+        <div class="separator separator-line"></div>
+
+        <div class="centered-text">
+            <div id="euf-generic-label" style="display: none;"><?= $this->t('Name') ?></div>
+
+            <?= $this->formElement($form->get('euf-submit')) ?>
+
+            <?php if ($this->user): ?>
+
+                &nbsp;
+
+                <a href="<?= $this->url('backend/user/delete', ['uid' => $uid], ['query' => ['search' => $this->search]]) ?>" class="default-button">
+                    <span class="symbolic symbolic-cross">Benutzer löschen</span>
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Error',
+    'panel' => 'centered-panel',
+));
+
+?>
+
+<div class="centered-text">
+
+    <h2><?= $this->t('Oops ... something went wrong here') ?></h2>
+    <h1><?= $this->t($this->exception->getMessage()) ?></h1>
+
+    <div class="separator"></div>
+
+    <a href="<?= $this->url('setup') ?>" class="default-button"><?= $this->t('Go to setup page') ?></a>
+
+</div>

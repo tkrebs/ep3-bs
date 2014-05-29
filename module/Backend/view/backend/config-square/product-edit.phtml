@@ -1,0 +1,33 @@
+<?php
+
+if ($this->squareProduct) {
+    $spid = $this->squareProduct->need('spid');
+} else {
+    $spid = null;
+}
+
+$this->setup(array(
+    'title' => 'Products',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Products' => $this->url('backend/config/square/product'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Products') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('Which additional products or services do you offer with your bookings?') ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?= $this->formDefault($this->editForm, $this->url('backend/config/square/product/edit', ['spid' => $spid])) ?>
+
+    </div>
+</div>

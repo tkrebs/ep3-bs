@@ -1,0 +1,19 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Page not found',
+    'panel' => 'centered-panel',
+));
+
+?>
+
+<div class="centered-text">
+
+    <h2><?= $this->t('Oops ... something went wrong here') ?></h2>
+    <h1><?= $this->t('This page does not (yet) exist') ?></h1>
+
+    <div class="separator"></div>
+
+    <a href="<?= $this->url('setup') ?>" class="default-button"><?= $this->t('Go to setup page') ?></a>
+
+</div>

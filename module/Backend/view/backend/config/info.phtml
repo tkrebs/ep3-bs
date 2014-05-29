@@ -1,0 +1,37 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Info page',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Configuration' => $this->url('backend/config'),
+    ),
+    'links' => array(
+        'Help page' => $this->url('backend/config/help'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.min.js'));
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.setup.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('Info page') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= sprintf($this->t('Which text should appear on the info page (%s)?'), $this->option('subject.type')) ?></p>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator-small"></div>
+
+    <form method="post" action="<?= $this->url('backend/config/info') ?>">
+        <div>
+            <textarea name="cf-info" id="cf-info" class="wysiwyg-editor" style="height: 600px;">
+                <?= $this->option('subject.about') ?>
+            </textarea>
+        </div>
+    </form>
+</div>

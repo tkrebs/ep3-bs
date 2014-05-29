@@ -1,0 +1,151 @@
+<?php
+
+namespace Backend\Controller;
+
+use Backend\Form\Config\TextForm;
+use Zend\Mvc\Controller\AbstractActionController;
+
+class ConfigController extends AbstractActionController
+{
+
+    public function indexAction()
+    {
+        $this->authorize('admin.config');
+    }
+
+    public function textAction()
+    {
+        $this->authorize('admin.config');
+
+        $serviceManager = $this->getServiceLocator();
+        $optionManager = $serviceManager->get('Base\Manager\OptionManager');
+        $formElementManager = $serviceManager->get('FormElementManager');
+
+        $textForm = $formElementManager->get('Backend\Form\Config\TextForm');
+
+        if ($this->getRequest()->isPost()) {
+            $textForm->setData($this->params()->fromPost());
+
+            if ($textForm->isValid()) {
+                $textData = $textForm->getData();
+
+                foreach (TextForm::$definitions as $key => $value) {
+                    $formKey = str_replace('.', '_', $key);
+
+                    $currentValue = $optionManager->get($key);
+                    $formValue = $textData['cf-' . $formKey];
+
+                    if ($formValue && $formValue != $currentValue) {
+                        $optionManager->set($key, $formValue, $this->config('i18n.locale'));
+                    }
+                }
+
+                $this->flashMessenger()->addSuccessMessage('Namen und Texte wurden gespeichert');
+
+                return $this->redirect()->toRoute('backend/config/text');
+            }
+        } else {
+            foreach (TextForm::$definitions as $key => $value) {
+                $formKey = str_replace('.', '_', $key);
+                $textForm->get('cf-' . $formKey)->setValue($optionManager->get($key));
+            }
+        }
+
+        return array(
+            'textForm' => $textForm,
+        );
+    }
+
+    public function infoAction()
+    {
+        $this->authorize('admin.config');
+
+        if ($this->getRequest()->isPost()) {
+            $info = $this->params()->fromPost('cf-info');
+
+            if ($info && strlen($info) > 32) {
+                $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
+                $optionManager->set('subject.about', $info, $this->config('i18n.locale'));
+
+                $this->flashMessenger()->addSuccessMessage('Infoseite wurde gespeichert');
+            } else {
+                $this->flashMessenger()->addErrorMessage('Der Text der Infoseite ist zu kurz');
+            }
+
+            return $this->redirect()->toRoute('backend/config/info');
+        }
+    }
+
+    public function helpAction()
+    {
+        $this->authorize('admin.config');
+
+        if ($this->getRequest()->isPost()) {
+            $help = $this->params()->fromPost('cf-help');
+
+            if ($help && strlen($help) > 32) {
+                $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
+                $optionManager->set('subject.help', $help, $this->config('i18n.locale'));
+
+                $this->flashMessenger()->addSuccessMessage('Hilfeseite wurde gespeichert');
+            } else {
+                $this->flashMessenger()->addErrorMessage('Der Text der Hilfeseite ist zu kurz');
+            }
+
+            return $this->redirect()->toRoute('backend/config/help');
+        }
+    }
+
+    public function behaviourAction()
+    {
+        $this->authorize('admin.config');
+
+        $serviceManager = $this->getServiceLocator();
+        $optionManager = $serviceManager->get('Base\Manager\OptionManager');
+        $formElementManager = $serviceManager->get('FormElementManager');
+
+        $behaviourForm = $formElementManager->get('Backend\Form\Config\BehaviourForm');
+
+        if ($this->getRequest()->isPost()) {
+            $behaviourForm->setData($this->params()->fromPost());
+
+            if ($behaviourForm->isValid()) {
+                $data = $behaviourForm->getData();
+
+                $maintenance = $data['cf-maintenance'];
+                $maintenanceMessage = $data['cf-maintenance-message'];
+                $registration = $data['cf-registration'];
+                $registrationMessage = $data['cf-registration-message'];
+                $activation = $data['cf-activation'];
+                $calendarDays = $data['cf-calendar-days'];
+
+                $locale = $this->config('i18n.locale');
+
+                $optionManager->set('service.maintenance', $maintenance);
+                $optionManager->set('service.maintenance.message', $maintenanceMessage, $locale);
+                $optionManager->set('service.user.registration', $registration);
+                $optionManager->set('service.user.registration.message', $registrationMessage, $locale);
+                $optionManager->set('service.user.activation', $activation);
+                $optionManager->set('service.calendar.days', $calendarDays);
+
+                $this->flashMessenger()->addSuccessMessage('Einstellungen wurden gespeichert');
+            } else {
+                $this->flashMessenger()->addErrorMessage('Einstellungen sind teilweise ungültig');
+            }
+
+            return $this->redirect()->toRoute('backend/config/behaviour');
+        } else {
+            $behaviourForm->get('cf-maintenance')->setValue($optionManager->get('service.maintenance', 'false'));
+            $behaviourForm->get('cf-maintenance-message')->setValue($optionManager->get('service.maintenance.message'));
+            $behaviourForm->get('cf-registration')->setValue($optionManager->get('service.user.registration', 'false'));
+            $behaviourForm->get('cf-registration-message')->setValue($optionManager->get('service.user.registration.message'));
+            $behaviourForm->get('cf-activation')->setValue($optionManager->get('service.user.activation', 'email'));
+            $behaviourForm->get('cf-calendar-days')->setValue($optionManager->get('service.calendar.days', '4'));
+        }
+
+        return array(
+            'behaviourForm' => $behaviourForm,
+        );
+    }
+
+}

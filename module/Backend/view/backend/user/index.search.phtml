@@ -1,0 +1,55 @@
+<?php
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/user/index.search.min.js'));
+
+?>
+
+<div style="padding: 10px 0px 16px 0px;">
+    <form method="get" action="<?= $this->url('backend/user') ?>">
+        <table class="default-table">
+            <tr>
+                <td>
+                    <div class="default-form-label-top gray">
+                        <label for="usf-search"><?= $this->t('Name or number') ?>:</label>
+                    </div>
+
+                    <input type="text" name="usf-search" id="usf-search" value="<?= $this->search ?>" data-autocomplete-url="<?= $this->url('backend/user/interpret') ?>" style="width: 320px;">
+                </td>
+
+                <td style="vertical-align: bottom;">
+                    <input type="submit" value="<?= $this->t('Search') ?>" class="default-button">
+                </td>
+
+                <td style="vertical-align: bottom; padding-bottom: 7px;">
+                    <a href="#" id="usf-filters-link" class="unlined gray"><?= $this->t('Advanced search') ?></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div id="usf-filters-box" class="sandbox" style="display: none; margin: 26px auto 0px auto;">
+        <div class="sandbox-arrow"></div>
+
+        <p><?= $this->t('You can use filters like these to narrow your search:') ?></p>
+
+        <?= $this->backendUserFilterHelp('Status', '=', 'Placeholder') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Deleted user') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Blocked user') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Waiting for activation') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Enabled user') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Assist') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Admin') ?>
+        <?= $this->backendUserFilterHelp('Email', '=', $this->option('client.contact.email')) ?>
+        <?= $this->backendUserFilterHelp('Active', '>', new DateTime()) ?>
+        <?= $this->backendUserFilterHelp('Active', '<', new DateTime()) ?>
+        <?= $this->backendUserFilterHelp('IP', '=', $_SERVER['REMOTE_ADDR']) ?>
+        <?= $this->backendUserFilterHelp('Created', '=', new DateTime()) ?>
+        <?= $this->backendUserFilterHelp('Created', '>', new DateTime()) ?>
+        <?= $this->backendUserFilterHelp('Created', '<', new DateTime()) ?>
+
+        <p style="margin-top: 16px;">
+            <?= $this->t('You can also combine a search term and multiple filters like this:') ?><br>
+            <code>Tom (... = ...) (... > ...)</code>
+        </p>
+    </div>
+</div>

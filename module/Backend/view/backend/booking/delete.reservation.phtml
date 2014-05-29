@@ -1,0 +1,23 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Delete this reservation',
+    'panel' => 'centered-panel',
+    'back' => true
+));
+
+?>
+
+<div class="padded centered-text">
+    <p><span class="symbolic symbolic-warning"><?= $this->t('Are you sure you want to delete this reservation?') ?></span></p>
+
+    <p class="no-wrap">
+        <a href="<?= $this->url('backend/booking/delete', ['rid' => $this->rid], ['query' => ['confirmed' => 'true', 'edit-mode' => 'reservation']]) ?>" class="default-button">
+            <span class="symbolic symbolic-cross"><?= $this->t('Yes, delete this reservation') ?></span>
+        </a>
+
+        <a href="<?= $this->url('frontend') ?>" class="default-button squarebox-close-link"><?= $this->t('No, go back') ?></a>
+    </p>
+
+    <p class="small-text gray">Die Buchung bleibt erhalten, es wird nur diese eine Reservierung gelöscht.</p>
+</div>

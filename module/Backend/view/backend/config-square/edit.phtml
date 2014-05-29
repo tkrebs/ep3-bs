@@ -1,0 +1,73 @@
+<?php
+
+if ($this->square) {
+    $sid = $this->square->need('sid');
+} else {
+    $sid = null;
+}
+
+$this->setup(array(
+    'title' => $this->option('subject.square.type.plural'),
+    'panel' => 'centered-panel',
+    'back' => array(
+        $this->option('subject.square.type.plural') => $this->url('backend/config/square'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/config-square/edit.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->option('subject.square.type.plural') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= sprintf($this->t('Which %s do you have? What are their names?'), $this->option('subject.square.type.plural')) ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->editForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/config/square/edit', ['sid' => $sid]));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?= $this->formRowDefault($form, 'cf-name') ?>
+            <?= $this->formRowDefault($form, 'cf-status') ?>
+            <?= $this->formRowDefault($form, 'cf-readonly-message') ?>
+            <?= $this->formRowDefault($form, 'cf-priority') ?>
+            <?= $this->formRowDefault($form, 'cf-capacity') ?>
+            <?= $this->formRowCheckbox($form, 'cf-capacity-heterogenic') ?>
+            <?= $this->formRowDefault($form, 'cf-time-start') ?>
+            <?= $this->formRowDefault($form, 'cf-time-end') ?>
+            <?= $this->formRowDefault($form, 'cf-time-block') ?>
+            <?= $this->formRowDefault($form, 'cf-time-block-bookable') ?>
+            <?= $this->formRowDefault($form, 'cf-time-block-bookable-max') ?>
+            <?= $this->formRowDefault($form, 'cf-range-book') ?>
+            <?= $this->formRowDefault($form, 'cf-range-cancel') ?>
+
+            <?php if ($this->square): ?>
+                <tr>
+                    <td class="default-form-label-row">&nbsp;</td>
+                    <td>
+                        <a href="<?= $this->url('backend/config/square/edit/info', ['sid' => $this->square->need('sid')]) ?>" class="default-button">
+                            <span class="symbolic symbolic-edit"><?= $this->t('Edit square info and rule texts') ?></span>
+                        </a>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            <?= $this->formRowSubmit($form, 'cf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

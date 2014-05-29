@@ -1,0 +1,37 @@
+<?php
+
+$this->setup(array(
+    'title' => $this->option('subject.square.type.plural'),
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Configuration' => $this->url('backend/config'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->option('subject.square.type.plural') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= sprintf($this->t('Which %s do you have? What are their names?'), $this->option('subject.square.type.plural')) ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php if ($this->squares): ?>
+            <?= $this->backendSquaresFormat($this->squares) ?>
+        <?php endif; ?>
+
+        <div class="centered-text" style="margin-top: 32px;">
+            <p>
+                <a href="<?= $this->url('backend/config/square/edit') ?>" class="default-button">
+                    <span class="symbolic symbolic-plus"><?= sprintf($this->t('New %s'), $this->option('subject.square.type')) ?></span>
+                </a>
+            </p>
+        </div>
+
+    </div>
+</div>

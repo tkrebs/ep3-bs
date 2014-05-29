@@ -1,0 +1,28 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Logout',
+    'panel' => 'centered-panel',
+    'back' => true,
+    'links' => array(
+        'Login' => $this->url('user/login'),
+    ),
+));
+
+?>
+
+<div>
+    <?php
+
+    switch ($this->result) {
+        case true:
+            echo $this->message(sprintf($this->t('Bye, %s'), $this->user->need('alias')), 'success');
+            break;
+        case false:
+        default:
+            echo $this->message($this->t('You are not logged in (anymore)'), 'info');
+            break;
+    }
+
+    ?>
+</div>

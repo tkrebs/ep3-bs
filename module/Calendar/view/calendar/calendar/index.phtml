@@ -1,0 +1,33 @@
+<?php
+
+$this->headScript()->appendFile($this->basePath('js/controller/calendar/index.min.js'));
+
+?>
+
+<style type="text/css"> #content { padding: 0px !important; } </style>
+
+<div id="calendar" class="panel">
+    <?php if ($this->squares): ?>
+        <table class="calendar-table full-width">
+            <tr>
+                <?php if ($this->timeBlockCount > 3): ?>
+                    <?= $this->partial('calendar/calendar/index.landscape.phtml', $this->vars()) ?>
+                <?php else: ?>
+                    <?= $this->partial('calendar/calendar/index.portrait.phtml', $this->vars()) ?>
+                <?php endif; ?>
+            </tr>
+        </table>
+    <?php else: ?>
+        <?= $this->message('There are no squares available', 'info') ?>
+    <?php endif; ?>
+</div>
+
+<div id="calendar-squarebox-template" style="display: none;">
+    <div class="padded centered-text gray">
+        <p>
+            <img src="<?= $this->basePath('imgs/icons/wait.gif') ?>" alt="<?= $this->t('Please wait') ?>">
+        </p>
+
+        <p><?= $this->t('Loading') ?> ...</p>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Bill',
+    'panel' => 'centered-panel',
+    'back' => array(
+        'My bookings' => $this->url('user/bookings'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Booking-Bill') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t(sprintf('Status: %s', '<code>' . $this->t($this->booking->getBillingStatus()) . '</code>')) ?></p>
+
+    <div class="sandbox">
+        <table class="bordered-table middle-table">
+
+            <?php
+
+            $total = 0;
+
+            ?>
+
+            <?php foreach ($this->bills as $bill): ?>
+
+                <?php
+
+                if ($bill->get('quantity') == 1) {
+                    $squareUnit = $this->option('subject.square.unit');
+                } else {
+                    $squareUnit = $this->option('subject.square.unit.plural');
+                }
+
+                $total += $bill->get('price');
+
+                ?>
+
+                <tr>
+                    <td><?= $bill->get('description') ?></td>
+
+                    <?php if ($bill->get('time')): ?>
+                        <td><?= $this->prettyTime($bill->get('time')) ?></td>
+                        <td><?= $this->numberFormat($bill->get('quantity')) . ' ' . $squareUnit ?></td>
+                    <?php else: ?>
+                        <td colspan="2"><?= sprintf($this->t('%s items'), $bill->get('quantity')) ?></td>
+                    <?php endif; ?>
+
+                    <td><?= $this->priceFormat($bill->get('price'), $bill->get('rate'), $bill->get('gross')) ?></td>
+                </tr>
+
+            <?php endforeach; ?>
+
+            <tr>
+                <td colspan="3" style="border-top: solid 2px #666;"><?= $this->t('Total') ?></td>
+                <td style="border-top: solid 2px #666;"><?= $this->priceFormat($total) ?></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
