@@ -45,3 +45,9 @@ where you can find stable and (latest) development releases.
 
 The current version (May, 2014) is simply 1.1, as the versioning has been reset with the release as open source
 software.
+
+## Bug reports, feature requests, ideas ...
+
+We use the GitHub Issue Tracker for such things:
+
+https://github.com/tkrebs/ep3-bs/issues

@@ -21,3 +21,9 @@ Since the system requires PHP 5.4+, everyone is encouraged to use all the new fe
 ## License
 
 By contributing your code, you agree to license your contribution under the MIT license.
+
+## Bug reports, feature requests, ideas ...
+
+We use the GitHub Issue Tracker for such things:
+
+https://github.com/tkrebs/ep3-bs/issues
