@@ -11,8 +11,7 @@ class ValidateSetupFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $sm)
     {
         return new ValidateSetup(
-            $sm->getServiceLocator()->get('Base\Manager\OptionManager'),
-            $sm->getServiceLocator()->get('User\Manager\UserManager'),
+            $sm->getServiceLocator(),
             $sm->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
     }
 

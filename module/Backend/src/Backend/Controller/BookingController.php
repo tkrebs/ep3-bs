@@ -70,22 +70,24 @@ class BookingController extends AbstractActionController
 
         $params = $this->backendBookingDetermineParams();
 
-        switch (count($params['reservations'])) {
-            case 0:
-                $reservation = $booking = null;
-                break;
-            case 1:
-                $reservation = current($params['reservations']);
-                $booking = $reservation->getExtra('booking');
+        if (! $this->getRequest()->isPost()) {
+            switch (count($params['reservations'])) {
+                case 0:
+                    $reservation = $booking = null;
+                    break;
+                case 1:
+                    $reservation = current($params['reservations']);
+                    $booking = $reservation->getExtra('booking');
 
-                if ($booking->get('status') == 'subscription') {
-                    if (! $params['editMode']) {
-                        return $this->forward()->dispatch('Backend\Controller\Booking', ['action' => 'editMode', 'params' => $params]);
+                    if ($booking->get('status') == 'subscription') {
+                        if (! $params['editMode']) {
+                            return $this->forward()->dispatch('Backend\Controller\Booking', ['action' => 'editMode', 'params' => $params]);
+                        }
                     }
-                }
-                break;
-            default:
-                return $this->forward()->dispatch('Backend\Controller\Booking', ['action' => 'editChoice', 'params' => $params]);
+                    break;
+                default:
+                    return $this->forward()->dispatch('Backend\Controller\Booking', ['action' => 'editChoice', 'params' => $params]);
+            }
         }
 
         $serviceManager = $this->getServiceLocator();

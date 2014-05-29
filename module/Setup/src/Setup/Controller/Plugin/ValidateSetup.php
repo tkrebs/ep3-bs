@@ -2,22 +2,19 @@
 
 namespace Setup\Controller\Plugin;
 
-use Base\Manager\OptionManager;
-use User\Manager\UserManager;
 use Zend\Db\Adapter\Adapter;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\ServiceManager\ServiceManager;
 
 class ValidateSetup extends AbstractPlugin
 {
 
-    protected $optionManager;
-    protected $userManager;
+    protected $serviceManager;
     protected $dbAdapter;
 
-    public function __construct(OptionManager $optionManager, UserManager $userManager, Adapter $dbAdapter)
+    public function __construct(ServiceManager $serviceManager, Adapter $dbAdapter)
     {
-        $this->optionManager = $optionManager;
-        $this->userManager = $userManager;
+        $this->serviceManager = $serviceManager;
         $this->dbAdapter = $dbAdapter;
     }
 
@@ -34,13 +31,17 @@ class ValidateSetup extends AbstractPlugin
 
                 break;
             case 'records':
-                if ($this->optionManager->get('client.name.full')) {
+                $optionManager = $this->serviceManager->get('Base\Manager\OptionManager');
+
+                if ($optionManager->get('client.name.full')) {
                     throw new \RuntimeException('System has already been setup');
                 }
 
                 break;
             case 'user':
-                $users = $this->userManager->getAll(null, 1);
+                $userManager = $this->serviceManager->get('User\Manager\UserManager');
+
+                $users = $userManager->getAll(null, 1);
 
                 if ($users && count($users) > 0) {
                     throw new \RuntimeException('System has already been setup');
