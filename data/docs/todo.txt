@@ -1,6 +1,7 @@
 Short Term:
 
 - Date range for products
+- Localization for products
 
 - Billing module (invoice/paypal)
 - Coupon module

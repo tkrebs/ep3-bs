@@ -440,8 +440,8 @@ return array(
 
     'Your registration to the %s %s' => 'Ihre Registrierung beim %s %s',
 
-    "Welcome to the %s %s!\r\n\r\nThank you for your registration to our service.\r\n\r\nBefore you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"
-        => "Herzlich Willkommen zum %s %s!\r\n\r\nVielen Dank für Ihre Registrierung für unser Angebot.\r\n\r\nBevor Sie nun freie %s online buchen können, müssen Sie nur noch folgende Internetseite besuchen um Ihr Benutzerkonto zu aktivieren und schon können Sie loslegen!\r\n\r\n%s",
+    "welcome to the %s %s!\r\n\r\nThank you for your registration to our service.\r\n\r\nBefore you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"
+        => "herzlich Willkommen zum %s %s!\r\n\r\nVielen Dank für Ihre Registrierung für unser Angebot.\r\n\r\nBevor Sie nun freie %s online buchen können, müssen Sie nur noch folgende Internetseite besuchen um Ihr Benutzerkonto zu aktivieren und schon können Sie loslegen!\r\n\r\n%s",
 
     'Your activation code seems invalid. Please try again.' => 'Ihr Aktivierungs-Code scheint ungültig zu sein. Bitte versuchen Sie es erneut.',
 
@@ -655,6 +655,7 @@ return array(
 
     /* Email */
 
+    'Dear' => 'Sehr geehrte/r Herr/Frau',
     'Hello' => 'Hallo',
     'This was an automated message from the system.' => 'Diese Nachricht wurde automatisch gesendet.',
     'Sincerely' => 'Viele Grüße',

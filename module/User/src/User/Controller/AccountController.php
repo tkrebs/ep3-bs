@@ -217,7 +217,7 @@ class AccountController extends AbstractActionController
                     $subject = sprintf($this->t('Your registration to the %s %s'),
                         $this->option('client.name.short', false), $this->option('service.name.full', false));
 
-                    $text = sprintf($this->t("Welcome to the %s %s!\r\n\r\nThank you for your registration to our service.\r\n\r\nBefore you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"),
+                    $text = sprintf($this->t("welcome to the %s %s!\r\n\r\nThank you for your registration to our service.\r\n\r\nBefore you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"),
                         $this->option('client.name.full', false), $this->option('service.name.full', false), $this->option('subject.square.type.plural', false), $activationLink);
 
                     $userMailService = $serviceManager->get('User\Service\MailService');
