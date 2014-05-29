@@ -2,12 +2,13 @@
 
     $(document).ready(function() {
 
+        var buttonBook = $("#sb-button");
+
         /* Alternate time choice */
 
         var at = $("#sb-alternate-times");
 
         if (at.length) {
-            var buttonBook = $("#sb-button");
             var buttonReload = $("#sb-reload-button");
 
             at.on("change", function() {
@@ -32,8 +33,6 @@
         var ad = $("#sb-alternate-date");
 
         if (ad.length) {
-            var buttonBook = $("#sb-button");
-
             ad.on("change", "#sb-date-start-choice, #sb-date-end-choice, #sb-time-start-choice, #sb-time-end-choice", function() {
                 var alteredHref = buttonBook.attr("href");
 
@@ -45,7 +44,7 @@
                 alteredHref = alteredHref.replace(/\/booking\/customization/, "");
 
                 buttonBook.attr("href", alteredHref);
-                buttonBook.find("span").attr("class", "symbolic-reload").text(ad.data("sb-new-button"));
+                buttonBook.find("span").attr("class", "symbolic symbolic-reload").text(ad.data("sb-new-button"));
             });
 
             ad.show();
