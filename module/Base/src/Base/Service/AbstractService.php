@@ -18,7 +18,6 @@ abstract class AbstractService implements EventManagerAwareInterface
      * Provides the service's event manager.
      *
      * @param EventManagerInterface $events
-     *
      * @return EventManagerInterface
      */
     public function setEventManager(EventManagerInterface $events)

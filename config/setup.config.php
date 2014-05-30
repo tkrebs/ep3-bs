@@ -32,9 +32,9 @@ return array(
             'vendor',
         ),
         'config_cache_enabled' => ! EP3_BS_DEV,
-        'config_cache_key' => 'ep3-bs',
+        'config_cache_key' => 'ep3-bs-setup',
         'module_map_cache_enabled' => ! EP3_BS_DEV,
-        'module_map_cache_key' => 'ep3-bs',
+        'module_map_cache_key' => 'ep3-bs-setup',
         'cache_dir' => getcwd() . '/data/cache/',
     ),
 );
