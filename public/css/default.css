@@ -441,14 +441,14 @@ p.symbolic { display: block; }
     font-size: 28px;
     line-height: 1.0;
     cursor: default;
-    background-color: #656A73;
+    background-color: #547B97;
 
     -webkit-border-radius: 128px;
     -moz-border-radius: 128px;
     border-radius: 128px;
 }
 
-.badge-label { margin: 0 8px; color: #656A73; vertical-align: middle; font-size: 16px; cursor: default; }
+.badge-label { margin: 0 8px; color: #547B97; vertical-align: middle; font-size: 16px; cursor: default; }
 
 .default-table td { padding-right: 16px; padding-bottom: 16px; vertical-align: top; }
 .default-table td:last-child { padding-right: 0; }
