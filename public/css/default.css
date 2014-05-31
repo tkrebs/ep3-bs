@@ -466,7 +466,7 @@ p.symbolic { display: block; }
 
 .links-back,
 .links-forth { display: inline-block; margin: 0 48px; line-height: 1.3; vertical-align: top; }
-.links-forth ul { margin: 4px 0 0 4px; padding-left: 16px; color: #656A73; }
+.links-forth ul { margin: 4px 0 0 4px; padding-left: 16px; color: #FFF; }
 
 .loading {
     width: 100%; height: 100%;
