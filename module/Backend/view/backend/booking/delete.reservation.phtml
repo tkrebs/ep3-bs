@@ -19,5 +19,7 @@ $this->setup(array(
         <a href="<?= $this->url('frontend') ?>" class="default-button squarebox-close-link"><?= $this->t('No, go back') ?></a>
     </p>
 
-    <p class="small-text gray">Die Buchung bleibt erhalten, es wird nur diese eine Reservierung gelöscht.</p>
+    <p class="small-text gray">
+        <?= $this->t('The booking itself will not be changed. Only the reservation at this date will be deleted.') ?>
+    </p>
 </div>

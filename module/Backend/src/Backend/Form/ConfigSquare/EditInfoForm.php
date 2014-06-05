@@ -21,8 +21,8 @@ class EditInfoForm extends Form
                 'style' => 'width: 320px; height: 120px;',
             ),
             'options' => array(
-                'label' => 'Info (oben)',
-                'notes' => 'Optionaler Infotext, der <b>über</b> den Platzdetails angezeigt wird',
+                'label' => 'Info (top)',
+                'notes' => 'Optional info text, that will be displayed <b>above</b> square details',
             ),
         ));
 
@@ -35,8 +35,8 @@ class EditInfoForm extends Form
                 'style' => 'width: 320px; height: 120px;',
             ),
             'options' => array(
-                'label' => 'Info (unten)',
-                'notes' => 'Optionaler Infotext, der <b>unter</b> den Platzdetails angezeigt wird',
+                'label' => 'Info (bottom)',
+                'notes' => 'Optional info text, that will be displayed <b>beneath</b> square details',
             ),
         ));
 
@@ -49,8 +49,8 @@ class EditInfoForm extends Form
                 'style' => 'width: 320px; height: 120px;',
             ),
             'options' => array(
-                'label' => 'Regeln',
-                'notes' => 'Optionale Regeln, die vor der Buchung akzeptiert werden müssen',
+                'label' => 'Rules',
+                'notes' => 'Optional rules that must be accepted prior to booking',
             ),
         ));
 
@@ -62,8 +62,8 @@ class EditInfoForm extends Form
                 'accept' => '.pdf',
             ),
             'options' => array(
-                'label' => 'Regeln (Datei)',
-                'notes' => 'Optionale Regeln als PDF-Datei, die vor der Buchung akzeptiert werden müssen',
+                'label' => 'Rules (file)',
+                'notes' => 'Optional rules as PDF-Document that must be accepted prior to booking',
             ),
         ));
 
@@ -75,8 +75,8 @@ class EditInfoForm extends Form
                 'style' => 'width: 250px;',
             ),
             'options' => array(
-                'label' => 'Regeln (Dateiname)',
-                'notes' => 'Optionaler Name der o.g. PDF-Datei',
+                'label' => 'Rules (file name)',
+                'notes' => 'Optional file name of the PDF-Document above',
             ),
         ));
 

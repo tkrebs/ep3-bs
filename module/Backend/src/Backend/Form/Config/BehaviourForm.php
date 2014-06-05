@@ -21,10 +21,10 @@ class BehaviourForm extends Form
             'options' => array(
                 'label' => 'System',
                 'value_options' => array(
-                    'false' => 'Eingeschaltet',
-                    'true' => 'Wartungsmodus',
+                    'false' => 'Enabled',
+                    'true' => 'Maintenance',
                 ),
-                'notes' => 'Hiermit kann das System in den Wartungsmodus versetzt werden.<br>Im Wartungsmodus ist der Kalender nicht mehr sichtbar und<br>außer Ihnen kann sich niemand anmelden',
+                'notes' => 'Essentially disables the system for the public,<br>but allows administrators to still login',
             ),
         ));
 
@@ -36,8 +36,8 @@ class BehaviourForm extends Form
                 'style' => 'width: 320px; height: 48px;',
             ),
             'options' => array(
-                'label' => 'Mitteilung',
-                'notes' => 'Diese Nachricht erscheint optional im Wartungsmodus',
+                'label' => 'Message',
+                'notes' => 'This message optionally appears in maintenance mode',
             ),
         ));
 
@@ -49,12 +49,12 @@ class BehaviourForm extends Form
                 'style' => 'width: 220px;',
             ),
             'options' => array(
-                'label' => 'Registrierung',
+                'label' => 'Registration',
                 'value_options' => array(
-                    'true' => 'Eingeschaltet',
-                    'false' => 'Ausgeschaltet',
+                    'true' => 'Enabled',
+                    'false' => 'Disabled',
                 ),
-                'notes' => 'Legt fest, ob sich neue Besucher registrieren,<br>also ein eigenes Konto anlegen dürfen',
+                'notes' => 'Sets if new users are allowed to register',
             ),
         ));
 
@@ -66,8 +66,8 @@ class BehaviourForm extends Form
                 'style' => 'width: 320px; height: 48px;',
             ),
             'options' => array(
-                'label' => 'Mitteilung',
-                'notes' => 'Diese Nachricht erscheint optional bei ausgeschalteter Registrierung',
+                'label' => 'Message',
+                'notes' => 'This message optionally appears when registration is disabled',
             ),
         ));
 
@@ -79,13 +79,13 @@ class BehaviourForm extends Form
                 'style' => 'width: 220px;',
             ),
             'options' => array(
-                'label' => 'Aktivierung',
+                'label' => 'Activation',
                 'value_options' => array(
-                    'immediate' => 'Sofort',
-                    'manual-email' => 'Per Verwaltung (manuell)',
-                    'email' => 'Per E-Mail (automatisch)',
+                    'immediate' => 'Immediately',
+                    'manual-email' => 'Manually (per backend)',
+                    'email' => 'Automatically (per email)',
                 ),
-                'notes' => 'Legt fest, wie neue Benutzer aktiviert werden sollen',
+                'notes' => 'Sets how new users are activated after registration',
             ),
         ));
 
@@ -97,7 +97,7 @@ class BehaviourForm extends Form
                 'style' => 'width: 96px;',
             ),
             'options' => array(
-                'label' => 'Tage im Kalender',
+                'label' => 'Days in calendar',
                 'value_options' => array(
                     '1' => '1',
                     '2' => '2',
@@ -108,7 +108,7 @@ class BehaviourForm extends Form
                     '7' => '7',
                     '8' => '8',
                 ),
-                'notes' => 'Legt fest, wieviele Tage im Kalender<br>gleichzeitig angezeigt werden sollen',
+                'notes' => 'Sets how many days are displayed in the calendar',
             ),
         ));
 

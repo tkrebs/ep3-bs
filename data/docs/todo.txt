@@ -6,8 +6,6 @@ Short Term:
 - Billing module (invoice/paypal)
 - Coupon module
 
-- Backend is partially unlocalized
-
 Long Term:
 
 - Introduce unit tests

@@ -46,8 +46,8 @@ class EditForm extends Form
                 'style' => 'width: 320px; height: 48px;',
             ),
             'options' => array(
-                'label' => 'Mitteilung',
-                'notes' => 'Optionale Nachricht wenn schreibgeschützt',
+                'label' => 'Message',
+                'notes' => 'Optional message when readonly',
             ),
         ));
 
@@ -59,7 +59,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Reihenfolge',
+                'label' => 'Priority',
             ),
         ));
 
@@ -71,8 +71,8 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Kapazität',
-                'notes' => 'Wieviele Spieler passen auf einen Platz?',
+                'label' => 'Capacity',
+                'notes' => 'How many players fit into one square?',
             ),
         ));
 
@@ -83,8 +83,8 @@ class EditForm extends Form
                 'id' => 'cf-capacity-heterogenic',
             ),
             'options' => array(
-                'label' => 'Mehrfachbuchungen',
-                'notes' => 'Kann dieser Platz mehrmals gebucht werden bis er voll ist (s. Kapazität)?',
+                'label' => 'Multiple bookings',
+                'notes' => 'May this square be booked multiple times until its full?',
             ),
         ));
 
@@ -96,8 +96,8 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Startzeit',
-                'postfix' => 'Uhr',
+                'label' => 'Time (Start)',
+                'postfix' => 'Clock',
             ),
         ));
 
@@ -109,8 +109,8 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Endzeit',
-                'postfix' => 'Uhr',
+                'label' => 'Time (End)',
+                'postfix' => 'Clock',
             ),
         ));
 
@@ -122,7 +122,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Zeitblock',
+                'label' => 'Time block',
                 'postfix' => 'Minutes',
             ),
         ));
@@ -135,7 +135,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Zeitblock (min. buchbar)',
+                'label' => 'Time block (min. bookable)',
                 'postfix' => 'Minutes',
             ),
         ));
@@ -148,7 +148,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Zeitblock (max. buchbar)',
+                'label' => 'Time block (max. bookable)',
                 'postfix' => 'Minutes',
             ),
         ));
@@ -161,8 +161,8 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Buchung im Voraus',
-                'notes' => 'Wie viele Tage im Voraus<br>kann max. gebucht werden?',
+                'label' => 'Booking range',
+                'notes' => 'How many days in advance<br>can squares be booked?',
                 'postfix' => 'Days',
             ),
         ));
@@ -175,8 +175,8 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Stornierung',
-                'notes' => 'Bis wann darf spätestens storniert werden?',
+                'label' => 'Cancel range',
+                'notes' => 'Until when may bookings be cancelled?',
                 'postfix' => 'Hours',
             ),
         ));
@@ -204,7 +204,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -218,14 +218,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -238,14 +238,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -258,7 +258,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -266,7 +266,7 @@ class EditForm extends Form
                         'name' => 'Regex',
                         'options' => array(
                             'pattern' => '/^[0-9][0-9]:[0-9][0-9]$/',
-                            'message' => 'Bitte geben Sie die Zeit im Format HH:MM ein',
+                            'message' => 'Please provide the time in format HH:MM',
                         ),
                     ),
                 ),
@@ -279,7 +279,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -287,7 +287,7 @@ class EditForm extends Form
                         'name' => 'Regex',
                         'options' => array(
                             'pattern' => '/^[0-9][0-9]:[0-9][0-9]$/',
-                            'message' => 'Bitte geben Sie die Zeit im Format HH:MM ein',
+                            'message' => 'Please provide the time in format HH:MM',
                         ),
                     ),
                 ),
@@ -300,14 +300,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -320,14 +320,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -340,14 +340,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -360,14 +360,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -380,14 +380,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),

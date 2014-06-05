@@ -40,7 +40,7 @@ class ConfigController extends AbstractActionController
                     }
                 }
 
-                $this->flashMessenger()->addSuccessMessage('Namen und Texte wurden gespeichert');
+                $this->flashMessenger()->addSuccessMessage('Names and text have been saved');
 
                 return $this->redirect()->toRoute('backend/config/text');
             }
@@ -67,9 +67,9 @@ class ConfigController extends AbstractActionController
                 $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
                 $optionManager->set('subject.about', $info, $this->config('i18n.locale'));
 
-                $this->flashMessenger()->addSuccessMessage('Infoseite wurde gespeichert');
+                $this->flashMessenger()->addSuccessMessage('Info page has been saved');
             } else {
-                $this->flashMessenger()->addErrorMessage('Der Text der Infoseite ist zu kurz');
+                $this->flashMessenger()->addErrorMessage('Info page text is too short');
             }
 
             return $this->redirect()->toRoute('backend/config/info');
@@ -87,9 +87,9 @@ class ConfigController extends AbstractActionController
                 $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
                 $optionManager->set('subject.help', $help, $this->config('i18n.locale'));
 
-                $this->flashMessenger()->addSuccessMessage('Hilfeseite wurde gespeichert');
+                $this->flashMessenger()->addSuccessMessage('Help page has been saved');
             } else {
-                $this->flashMessenger()->addErrorMessage('Der Text der Hilfeseite ist zu kurz');
+                $this->flashMessenger()->addErrorMessage('Help page text is too short');
             }
 
             return $this->redirect()->toRoute('backend/config/help');
@@ -128,9 +128,9 @@ class ConfigController extends AbstractActionController
                 $optionManager->set('service.user.activation', $activation);
                 $optionManager->set('service.calendar.days', $calendarDays);
 
-                $this->flashMessenger()->addSuccessMessage('Einstellungen wurden gespeichert');
+                $this->flashMessenger()->addSuccessMessage('Configuration has been saved');
             } else {
-                $this->flashMessenger()->addErrorMessage('Einstellungen sind teilweise ungültig');
+                $this->flashMessenger()->addErrorMessage('Configuration is (partially) invalid');
             }
 
             return $this->redirect()->toRoute('backend/config/behaviour');

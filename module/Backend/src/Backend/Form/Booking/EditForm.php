@@ -39,7 +39,7 @@ class EditForm extends Form
                 'style' => 'width: 200px;',
             ),
             'options' => array(
-                'label' => 'Gebucht auf',
+                'label' => 'Booked to',
             ),
         ));
 
@@ -57,7 +57,7 @@ class EditForm extends Form
                 'style' => 'width: 124px',
             ),
             'options' => array(
-                'label' => 'Platz',
+                'label' => 'Square',
                 'value_options' => $squareOptions,
             ),
         ));
@@ -70,7 +70,7 @@ class EditForm extends Form
                 'style' => 'width: 124px',
             ),
             'options' => array(
-                'label' => 'Rechnungsstatus',
+                'label' => 'Billing status',
                 'value_options' => Booking::$billingStatusOptions,
             ),
         ));
@@ -84,7 +84,7 @@ class EditForm extends Form
                 'value' => '1',
             ),
             'options' => array(
-                'label' => 'Anzahl Spieler',
+                'label' => 'Number of players',
             ),
         ));
 
@@ -96,7 +96,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Datum (Start)',
+                'label' => 'Date (Start)',
             ),
         ));
 
@@ -108,7 +108,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Uhrzeit (Start)',
+                'label' => 'Time (Start)',
             ),
         ));
 
@@ -120,7 +120,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Datum (Ende)',
+                'label' => 'Date (End)',
             ),
         ));
 
@@ -132,7 +132,7 @@ class EditForm extends Form
                 'style' => 'width: 80px;',
             ),
             'options' => array(
-                'label' => 'Uhrzeit (Ende)',
+                'label' => 'Time (End)',
             ),
         ));
 
@@ -144,7 +144,7 @@ class EditForm extends Form
                 'style' => 'width: 124px',
             ),
             'options' => array(
-                'label' => 'Wiederholung',
+                'label' => 'Repeat',
                 'value_options' => Booking::$repeatOptions,
             ),
         ));
@@ -186,7 +186,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -200,14 +200,14 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -220,7 +220,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -236,7 +236,7 @@ class EditForm extends Form
                                     return false;
                                 }
                             },
-                            'message' => 'Ungültiges Datum',
+                            'message' => 'Invalid date',
                         ),
                     ),
                 ),
@@ -249,7 +249,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -257,7 +257,7 @@ class EditForm extends Form
                         'name' => 'Regex',
                         'options' => array(
                             'pattern' => '/^[0-9]?[0-9]:[0-9][0-9]$/',
-                            'message' => 'Bitte geben Sie die Zeit im Format HH:MM ein',
+                            'message' => 'Please provide the time in format HH:MM',
                         ),
                     ),
                 ),
@@ -271,7 +271,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -287,7 +287,7 @@ class EditForm extends Form
                                         return false;
                                     }
                                 },
-                            'message' => 'Ungültiges Datum',
+                            'message' => 'Invalid date',
                         ),
                     ),
                 ),
@@ -300,7 +300,7 @@ class EditForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -308,7 +308,7 @@ class EditForm extends Form
                         'name' => 'Regex',
                         'options' => array(
                             'pattern' => '/^[0-9]?[0-9]:[0-9][0-9]$/',
-                            'message' => 'Bitte geben Sie die Zeit im Format HH:MM ein',
+                            'message' => 'Please provide the time in format HH:MM',
                         ),
                     ),
                 ),

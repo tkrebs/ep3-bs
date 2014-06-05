@@ -14,7 +14,7 @@ $booking = $reservation->getExtra('booking');
 ?>
 
 <div class="padded centered-text">
-    <p>Diese Buchung besteht aus mehreren Reservierungen:</p>
+    <p><?= $this->t('This booking consists of multiple reservations:') ?></p>
 
     <div class="sandbox" style="margin-bottom: 16px;">
         <?php
@@ -32,17 +32,17 @@ $booking = $reservation->getExtra('booking');
         ?>
     </div>
 
-    <p>Was möchten Sie bearbeiten?</p>
+    <p><?= $this->t('What do you want to edit?') ?></p>
 
     <div class="sandbox">
         <a href="<?= $this->url('backend/booking/edit', [], ['query' => array_merge($this->query, ['em' => 'reservation'])]) ?>" class="default-button squarebox-internal-link">
-            <span class="symbolic symbolic-booking">Nur diese eine Reservierung</span>
+            <span class="symbolic symbolic-booking"><?= $this->t('Only this one reservation') ?></span>
         </a>
 
         &nbsp;
 
         <a href="<?= $this->url('backend/booking/edit', [], ['query' => array_merge($this->query, ['em' => 'booking'])]) ?>" class="default-button squarebox-internal-link">
-            <span class="symbolic symbolic-booking">Die gesamte Buchung</span>
+            <span class="symbolic symbolic-booking"><?= $this->t('The entire booking') ?></span>
         </a>
     </div>
 </div>

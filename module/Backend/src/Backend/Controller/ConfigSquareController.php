@@ -230,12 +230,12 @@ class ConfigSquareController extends AbstractActionController
 
                     $squarePricingManager->create($rules);
 
-                    $this->flashMessenger()->addMessage('Preisregeln wurden gespeichert');
+                    $this->flashMessenger()->addMessage('Pricing rules have been saved');
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
             } else {
-                $this->flashMessenger()->addErrorMessage('Keine Preisregeln empfangen');
+                $this->flashMessenger()->addErrorMessage('Unknown pricing rules error');
             }
 
             // Set pricing visibility

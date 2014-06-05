@@ -9,22 +9,22 @@ class TextForm extends Form
 {
 
     public static $definitions = array(
-        'client.name.full' => array('Ihr Name', 'Wird Ihren Besuchern als Betreiber angezeigt.<br>Erscheint z.B. ganz oben neben dem Logo.'),
-        'client.name.short' => array('Ihr Kürzel', 'Kurzform, Abkürzung oder Akronym Ihres Namens.<br>Erscheint z.B. in der Betreffzeile von E-Mails.'),
-        'client.contact.email' => array('Ihre E-Mail Adresse', 'Wird für Benachrichtigungen des Systems benötigt.<br>Kann auch Benutzern für Hilfe angezeigt werden.'),
-        'client.contact.phone' => array('Ihre Telefonnummer', 'Wird für die telefonische Buchung angezeigt.<br>Erscheint z.B. ganz oben in der Kopfleiste.'),
-        'client.website' => array('Ihre Webseite', 'Die Internetadresse Ihrer Webseite.<br>Erscheint z.B. ganz oben in der Kopfleiste.'),
-        'client.website.contact' => array('Ihre Kontaktseite', 'Die Internetadresse Ihrer Kontaktseite.<br>Erscheint z.B. ganz oben in der Kopfleiste.'),
-        'client.website.imprint' => array('Ihr Impressum', 'Die Internetadresse Ihres Impressums.'),
-        'service.name.full' => array('Name des Systems', 'Unter diesem Namen präsentiert sich das System.<br>Erscheint z.B. ganz oben neben dem Logo.'),
-        'service.name.short' => array('Kürzel des Systems', 'Kurzform, Abkürzung oder Akronym des Systems.<br>Erscheint z.B. in E-Mails.'),
-        'service.meta.description' => array('Kurzbeschreibung Ihres Angebotes', 'Am besten ein bis zwei Sätze über Ihr Angebot.'),
-        'service.meta.keywords' => array('Stichworte Ihres Angebotes', 'Am besten 10 bis 20 Stichworte über Ihr Angebot.'),
-        'subject.square.type' => array('Bezeichnung Ihrer "Plätze"', 'Singular'),
-        'subject.square.type.plural' => array('Bezeichnung Ihrer "Plätze"', 'Plural'),
-        'subject.square.unit' => array('Bezeichnung Ihrer "Spieler"', 'Singular'),
-        'subject.square.unit.plural' => array('Bezeichnung Ihrer "Spieler"', 'Plural'),
-        'subject.type' => array('Bezeichnung Ihrer Anlage', 'Erscheint z.B. in der Kopfleiste.<br>Bitte mit kleinem Artikelwort beginnen.'),
+        'client.name.full' => array('Your name', 'Will be shown as the operator of this site.<br>Displayed next to the logo, for example.'),
+        'client.name.short' => array('Your abbreviation', 'Short form or abbreviation of your name.<br>Displayed in emails, for example.'),
+        'client.contact.email' => array('Your email address', 'Will be used for system notifications.<br>Might also be displayed to users for help.'),
+        'client.contact.phone' => array('Your phone number', 'Displayed for booking by phone.'),
+        'client.website' => array('Your website', 'The address of your website.<br>Displayed in the header, for example.'),
+        'client.website.contact' => array('Your contact page', 'The address of your website\'s contact page.<br>Displayed in the header, for example.'),
+        'client.website.imprint' => array('Your imprint page', 'The address of your website\'s imprint page.'),
+        'service.name.full' => array('Name of the system', 'The system presents itself under this name.<br>Displayed next to the logo, for example.'),
+        'service.name.short' => array('System abbreviation', 'Short form or abbreviation of the system name.<br>Displayed in emails, for example.'),
+        'service.meta.description' => array('Description of your service', 'One or two short sentences recommended.'),
+        'service.meta.keywords' => array('Keywords for your service', '10-20 keywords recommended.'),
+        'subject.square.type' => array('Notation of your "squares"', 'Singular'),
+        'subject.square.type.plural' => array('Notation of your "squares"', 'Plural'),
+        'subject.square.unit' => array('Notation of your "players"', 'Singular'),
+        'subject.square.unit.plural' => array('Notation of your "players"', 'Plural'),
+        'subject.type' => array('Name of your facility', 'Displayed in the header, for example.<br>Must start with a lower cased noun marker.'),
     );
 
     public function init()
@@ -75,7 +75,7 @@ class TextForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -83,7 +83,7 @@ class TextForm extends Form
                         'name' => 'StringLength',
                         'options' => array(
                             'min' => 2,
-                            'message' => 'Diese Eingabe muss mindestens drei Zeichen lang sein',
+                            'message' => 'Please type more characters here',
                         ),
                     ),
                 ),
@@ -95,9 +95,9 @@ class TextForm extends Form
                         'name' => 'EmailAddress',
                         'options' => array(
                             'useMxCheck' => true,
-                            'message' => 'Bitte geben Sie eine richtige E-Mail Adresse ein.',
+                            'message' => 'Please type something here',
                             'messages' => array(
-                                'emailAddressInvalidMxRecord' => 'Dieser E-Mail Anbieter existiert leider nicht.',
+                                'emailAddressInvalidMxRecord' => 'We could not verify your email provider',
                             ),
                         ),
                     );

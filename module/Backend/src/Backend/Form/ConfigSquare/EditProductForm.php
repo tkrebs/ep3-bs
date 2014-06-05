@@ -2,6 +2,7 @@
 
 namespace Backend\Form\ConfigSquare;
 
+use Base\Manager\ConfigManager;
 use Square\Manager\SquareManager;
 use Zend\Form\Form;
 use Zend\InputFilter\Factory;
@@ -9,12 +10,14 @@ use Zend\InputFilter\Factory;
 class EditProductForm extends Form
 {
 
+    protected $configManager;
     protected $squareManager;
 
-    public function __construct(SquareManager $squareManager)
+    public function __construct(ConfigManager $configManager, SquareManager $squareManager)
     {
         parent::__construct();
 
+        $this->configManager = $configManager;
         $this->squareManager = $squareManager;
     }
 
@@ -42,8 +45,8 @@ class EditProductForm extends Form
                 'style' => 'width: 320px; height: 48px;',
             ),
             'options' => array(
-                'label' => 'Beschreibung',
-                'notes' => 'Optionale Beschreibung dieses Produktes',
+                'label' => 'Description',
+                'notes' => 'Optional description of this product',
             ),
         ));
 
@@ -56,8 +59,8 @@ class EditProductForm extends Form
                 'value' => '1,2,3,4,5,6,7,8,9,10',
             ),
             'options' => array(
-                'label' => 'Optionen',
-                'notes' => 'Auswahlmöglichkeiten der Anzahl dieses Produktes,<br>z.B. 1,2,3 um zwischen 1 und 3 Stück zu wählen',
+                'label' => 'Options',
+                'notes' => 'Amount of products to choose from,<br>e.g. 1,2,3 to choose between 1 and 3 items',
             ),
         ));
 
@@ -77,7 +80,7 @@ class EditProductForm extends Form
                 'style' => 'width: 264px',
             ),
             'options' => array(
-                'label' => 'Platz',
+                'label' => 'Square',
                 'value_options' => $squareOptions,
             ),
         ));
@@ -91,7 +94,7 @@ class EditProductForm extends Form
                 'value' => '1',
             ),
             'options' => array(
-                'label' => 'Reihenfolge',
+                'label' => 'Priority',
             ),
         ));
 
@@ -105,9 +108,9 @@ class EditProductForm extends Form
                 'value' => '0',
             ),
             'options' => array(
-                'label' => 'Preis',
-                'notes' => 'Preis pro Stück',
-                'postfix' => '&euro;',
+                'label' => 'Price',
+                'notes' => 'Price per item',
+                'postfix' => $this->configManager->get('i18n.currency'),
             ),
         ));
 
@@ -165,7 +168,7 @@ class EditProductForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -185,7 +188,7 @@ class EditProductForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
@@ -193,7 +196,7 @@ class EditProductForm extends Form
                         'name' => 'Regex',
                         'options' => array(
                             'pattern' => '/^[0-9\, ]+$/u',
-                            'message' => 'Nur Zahlen und Kommata erlaubt',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -206,14 +209,14 @@ class EditProductForm extends Form
                     array(
                         'name' => 'NotEmpty',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier etwas ein',
+                            'message' => 'Please type something here',
                         ),
                         'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Digits',
                         'options' => array(
-                            'message' => 'Bitte geben Sie hier eine Zahl ein',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),
@@ -227,7 +230,7 @@ class EditProductForm extends Form
                         'name' => 'Regex',
                         'options' => array(
                             'pattern' => '/^[0-9\,\. ]+$/u',
-                            'message' => 'Nur Zahlen und Kommata erlaubt',
+                            'message' => 'Please type a number here',
                         ),
                     ),
                 ),

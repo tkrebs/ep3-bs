@@ -202,7 +202,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit
                 &nbsp;
 
                 <a href="<?= $this->url('backend/user/delete', ['uid' => $uid], ['query' => ['search' => $this->search]]) ?>" class="default-button">
-                    <span class="symbolic symbolic-cross">Benutzer löschen</span>
+                    <span class="symbolic symbolic-cross"><?= $this->t('Delete user') ?></span>
                 </a>
             <?php endif; ?>
         </div>

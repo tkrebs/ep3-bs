@@ -27,5 +27,7 @@ $this->setup(array(
         <a href="<?= $this->url('frontend') ?>" class="default-button squarebox-close-link"><?= $this->t('No, go back') ?></a>
     </p>
 
-    <p class="small-text gray">Wenn die Buchung storniert wird, verschwindet sie zwar vom Kalender,<br>bleibt aber in der Datenbank erhalten.</p>
+    <p class="small-text gray">
+        <?= $this->t('If this booking is cancelled, it will disappear from the calendar, but remain in the database.') ?>
+    </p>
 </div>

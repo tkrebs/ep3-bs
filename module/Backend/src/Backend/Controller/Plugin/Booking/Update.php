@@ -3,7 +3,6 @@
 namespace Backend\Controller\Plugin\Booking;
 
 use Booking\Entity\Booking;
-use Booking\Entity\Reservation;
 use Booking\Manager\BookingManager;
 use Booking\Manager\ReservationManager;
 use Square\Entity\Square;

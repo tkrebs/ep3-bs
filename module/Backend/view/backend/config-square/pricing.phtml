@@ -66,7 +66,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
         <table><tbody>
             <tr>
                 <td class="pricing-date-range">
-                    <input type="text" value="" class="pricing-dateStart datepicker"><span class="pricing-grammar">bis</span><input type="text" value="" class="pricing-dateEnd datepicker">
+                    <input type="text" value="" class="pricing-dateStart datepicker"><span class="pricing-grammar"><?= $this->t('to') ?></span><input type="text" value="" class="pricing-dateEnd datepicker">
                 </td>
                 <td>
                     <table><tbody>
@@ -77,16 +77,16 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                                         <td class="pricing-day-range">
                                             <?php
 
-                                            $days = array('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag');
+                                            $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 
                                             echo '<select class="pricing-dayStart">';
-                                            foreach ($days as $index => $day) echo '<option value="' . $index . '"' . ($index == 0 ? ' selected="selected"' : '') . '>' . $day . '</option>';
+                                            foreach ($days as $index => $day) echo '<option value="' . $index . '"' . ($index == 0 ? ' selected="selected"' : '') . '>' . $this->t($day) . '</option>';
                                             echo '</select>';
 
-                                            echo '<span class="pricing-grammar">bis</span>';
+                                            echo '<span class="pricing-grammar">' . $this->t('to') . '</span>';
 
                                             echo '<select class="pricing-dayEnd">';
-                                            foreach ($days as $index => $day) echo '<option value="' . $index . '"' . ($index == 4 ? ' selected="selected"' : '') . '>' . $day . '</option>';
+                                            foreach ($days as $index => $day) echo '<option value="' . $index . '"' . ($index == 4 ? ' selected="selected"' : '') . '>' . $this->t($day) . '</option>';
                                             echo '</select>';
 
                                             ?>
@@ -98,7 +98,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                                                         <table><tbody>
                                                             <tr>
                                                                 <td class="pricing-time-range">
-                                                                    <input type="text" value="06:00" maxlength="5" class="pricing-timeStart timepicker"><span class="pricing-grammar">bis</span><input type="text" value="24:00" maxlength="5" class="pricing-timeEnd timepicker"><span class="pricing-grammar">Uhr</span>
+                                                                    <input type="text" value="06:00" maxlength="5" class="pricing-timeStart timepicker"><span class="pricing-grammar"><?= $this->t('to') ?></span><input type="text" value="24:00" maxlength="5" class="pricing-timeEnd timepicker"><span class="pricing-grammar"><?= $this->t('Clock') ?></span>
                                                                 </td>
                                                                 <td>
                                                                     <table><tbody>
@@ -106,27 +106,36 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                                                                             <td class="pricing-price">
                                                                                 <?php
 
-                                                                                echo '<input type="text" value="0,00" maxlength="6" class="pricing-price-number pricepicker"><span class="pricing-grammar">&euro;</span>';
-                                                                                echo '<select class="pricing-rate"><option value="7,0">zzgl. 7% USt</option><option value="7,1">inkl. 7% USt</option><option value="19,0">zzgl. 19% USt</option><option value="19,1" selected="selected">inkl. 19% USt</option></select>';
-                                                                                echo '<span class="pricing-grammar">für</span>';
+                                                                                echo '<input type="text" value="0,00" maxlength="6" class="pricing-price-number pricepicker"><span class="pricing-grammar">' . $this->config('i18n.currency') . '</span>';
 
-                                                                                echo '<select class="pricing-sid">';
-                                                                                echo '<option value="null">Alle ' . $this->option('subject.square.type.plural') . '</option>';
-                                                                                foreach ($this->squares as $square) echo '<option value="' . $square->get('sid') . '">' . $this->option('subject.square.type') . ' ' . $square->get('name') . '</option>';
+                                                                                echo '<select class="pricing-rate">';
+                                                                                echo '<option value="7,0">' . $this->t('plus') . ' 7% ' . $this->t('VAT') . '</option>';
+                                                                                echo '<option value="7,1">' . $this->t('including') . ' 7% ' . $this->t('VAT') . '</option>';
+                                                                                echo '<option value="19,0">' . $this->t('plus') . ' 19% ' . $this->t('VAT') . '</option>';
+                                                                                echo '<option value="19,1" selected="selected">' . $this->t('including') . ' 19% ' . $this->t('VAT') . '</option>';
                                                                                 echo '</select>';
 
-                                                                                echo '<span class="pricing-grammar">und</span>';
+                                                                                echo '<span class="pricing-grammar">' . $this->t('for') . '</span>';
+
+                                                                                echo '<select class="pricing-sid">';
+                                                                                echo '<option value="null">' . sprintf($this->t('All %s'), $this->option('subject.square.type.plural')) . '</option>';
+                                                                                foreach ($this->squares as $square) {
+                                                                                    echo '<option value="' . $square->get('sid') . '">' . $this->option('subject.square.type') . ' ' . $square->get('name') . '</option>';
+                                                                                }
+                                                                                echo '</select>';
+
+                                                                                echo '<span class="pricing-grammar">' . $this->t('and') . '</span>';
                                                                                 echo '<input type="text" value="' . round($this->squaresTimeBlock / 60) . '" maxlength="3" class="pricing-timeBlock timeblockpicker">';
                                                                                 echo '<span class="pricing-grammar">Min.</span>';
 
-                                                                                echo '<a href="#" class="pricing-grammar pricing-delete tooltip" data-tooltip-content="Diese Regel <strong>löschen</strong>">x</a>';
+                                                                                echo '<a href="#" class="pricing-grammar pricing-delete tooltip">x</a>';
 
                                                                                 ?>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                <a href="#" class="pricing-price-new unlined gray"><em>Neuer Preis</em></a>
+                                                                                <a href="#" class="pricing-price-new unlined gray"><em><?= $this->t('New price') ?></em></a>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody></table>
@@ -137,7 +146,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a href="#" class="pricing-time-range-new unlined gray"><em>Neue Zeit</em></a>
+                                                        <a href="#" class="pricing-time-range-new unlined gray"><em><?= $this->t('New time') ?></em></a>
                                                     </td>
                                                 </tr>
                                             </tbody></table>
@@ -148,7 +157,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                         </tr>
                         <tr>
                             <td>
-                                <a href="#" class="pricing-day-range-new unlined gray"><em>Neuer Wochentag</em></a>
+                                <a href="#" class="pricing-day-range-new unlined gray"><em><?= $this->t('New day') ?></em></a>
                             </td>
                         </tr>
                     </tbody></table>
@@ -161,7 +170,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
         <table class="default-table">
             <tr>
                 <td>
-                    <a href="#" class="pricing-date-range-new unlined gray"><em>Neuer Zeitraum</em></a>
+                    <a href="#" class="pricing-date-range-new unlined gray"><em><?= $this->t('New period') ?></em></a>
                 </td>
             </tr>
         </table>
@@ -177,7 +186,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                 <table class="default-table">
                     <tr>
                         <td class="default-form-label-row">
-                            <label for="pricing-visibility">Preise anzeigen:</label>
+                            <label for="pricing-visibility"><?= $this->t('Display pricing:') ?></label>
                         </td>
                         <td>
                             <?php
@@ -185,9 +194,9 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
                             $element = new \Zend\Form\Element\Select('pricing-visibility');
                             $element->setAttribute('id', 'pricing-visibility');
                             $element->setValueOptions(array(
-                                'never' => 'Für niemanden',
-                                'private' => 'Für angemeldete Benutzer',
-                                'public' => 'Für Benutzer und Besucher',
+                                'never' => 'For no one',
+                                'private' => 'For users',
+                                'public' => 'For users and visitors',
                             ));
                             $element->setValue($this->option('service.pricing.visibility', 'never'));
 
@@ -202,7 +211,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
             <div class="separator separator-line"></div>
 
             <input type="hidden" name="pricing-rules-count" id="pricing-rules-count" value="0">
-            <input type="submit" id="pricing-save" value="Speichern" class="default-button">
+            <input type="submit" id="pricing-save" value="<?= $this->t('Save') ?>" class="default-button">
         </form>
     </div>
 </div>
