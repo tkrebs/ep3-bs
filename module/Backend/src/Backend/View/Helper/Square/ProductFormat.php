@@ -44,7 +44,8 @@ class ProductFormat extends AbstractHelper
             $squareName);
 
         $html .= sprintf('<td>%s</td>',
-            $view->priceFormat($squareProduct->get('price'), $squareProduct->get('rate'), $squareProduct->get('gross'), null, null, 'per item'));
+            $view->priceFormat($squareProduct->get('price'), $squareProduct->get('rate'), $squareProduct->get('gross'),
+            null, null, 'per item', false));
 
         /* Actions col */
 

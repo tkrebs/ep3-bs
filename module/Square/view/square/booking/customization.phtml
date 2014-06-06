@@ -35,7 +35,7 @@ echo $this->ajaxAwareScript('js/controller/square/booking/customization.min.js')
 
     <?php
 
-    $squareProducts = $this->squareProductChoice($square);
+    $squareProducts = $this->squareProductChoice($square, $this->dateStart);
 
     if ($squareProducts) {
         echo '<p class="gray"><em>' . $this->t('Consider our additional offers:') . '</em></p>';

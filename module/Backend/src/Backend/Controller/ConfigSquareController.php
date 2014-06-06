@@ -292,21 +292,39 @@ class ConfigSquareController extends AbstractActionController
                     $squareProduct = new SquareProduct();
                 }
 
-                $price = str_replace(',', '.', $editData['cf-price']);
-                $price = floatval($price);
-                $price *= 100;
-
                 $sid = $editData['cf-square'];
 
                 if ($sid == 'null') {
                     $sid = null;
                 }
 
+                $dateStart = $editData['cf-date-start'];
+
+                if ($dateStart) {
+                    $dateStart = (new \DateTime($dateStart))->format('Y-m-d');
+                } else {
+                    $dateStart = null;
+                }
+
+                $dateEnd = $editData['cf-date-end'];
+
+                if ($dateEnd) {
+                    $dateEnd = (new \DateTime($dateEnd))->format('Y-m-d');
+                } else {
+                    $dateEnd = null;
+                }
+
+                $price = str_replace(',', '.', $editData['cf-price']);
+                $price = floatval($price);
+                $price *= 100;
+
                 $squareProduct->set('name', $editData['cf-name']);
                 $squareProduct->set('description', $editData['cf-description']);
                 $squareProduct->set('options', $editData['cf-options']);
                 $squareProduct->set('sid', $sid);
                 $squareProduct->set('priority', $editData['cf-priority']);
+                $squareProduct->set('date_start', $dateStart);
+                $squareProduct->set('date_end', $dateEnd);
                 $squareProduct->set('price', $price);
                 $squareProduct->set('gross', $editData['cf-gross']);
                 $squareProduct->set('rate', $editData['cf-rate']);
@@ -325,7 +343,9 @@ class ConfigSquareController extends AbstractActionController
                     'cf-options' => $squareProduct->get('options'),
                     'cf-square' => $squareProduct->get('sid'),
                     'cf-priority' => $squareProduct->get('priority'),
-                    'cf-price' => $squareProduct->get('price') / 100,
+                    'cf-date-start' => $this->dateFormat($squareProduct->get('date_start')),
+                    'cf-date-end' => $this->dateFormat($squareProduct->get('date_end')),
+                    'cf-price' => $this->numberFormat($squareProduct->get('price') / 100),
                     'cf-gross' => $squareProduct->get('gross'),
                     'cf-rate' => $squareProduct->get('rate'),
                 ));

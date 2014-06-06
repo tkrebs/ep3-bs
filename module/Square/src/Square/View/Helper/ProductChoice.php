@@ -16,7 +16,7 @@ class ProductChoice extends AbstractHelper
         $this->squareProductManager = $squareProductManager;
     }
 
-    public function __invoke(Square $square)
+    public function __invoke(Square $square, \DateTime $dateStart)
     {
         $products = $this->squareProductManager->getBySquare($square);
 
@@ -27,9 +27,30 @@ class ProductChoice extends AbstractHelper
         $view = $this->getView();
         $html = '';
 
-        $html .= '<table class="default-table">';
-
         foreach ($products as $product) {
+
+            /* Validate product date range */
+
+            if ($product->get('date_start')) {
+                $productDateStart = new \DateTime($product->get('date_start'));
+                $productDateStart->setTime(0, 0, 0);
+
+                if ($dateStart <= $productDateStart) {
+                    continue;
+                }
+            }
+
+            if ($product->get('date_end')) {
+                $productDateEnd = new \DateTime($product->get('date_end'));
+                $productDateEnd->setTime(23, 59, 59);
+
+                if ($dateStart >= $productDateEnd) {
+                    continue;
+                }
+            }
+
+            /* Render product */
+
             $html .= '<tr>';
 
             $spid = $product->need('spid');
@@ -65,7 +86,9 @@ class ProductChoice extends AbstractHelper
             $html .= '</tr>';
         }
 
-        $html .= '</table>';
+        if ($html) {
+            $html = sprintf('<table class="default-table">%s</table>', $html);
+        }
 
         return $html;
     }

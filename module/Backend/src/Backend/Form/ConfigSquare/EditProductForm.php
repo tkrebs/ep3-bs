@@ -99,6 +99,34 @@ class EditProductForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-date-start',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'cf-date-start',
+                'class' => 'datepicker',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Date (Start)',
+                'notes' => 'Optionally set a date from when<br>this product will be available.<br>Determined from the booked date.',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cf-date-end',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'cf-date-end',
+                'class' => 'datepicker',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Date (End)',
+                'notes' => 'Optionally set a date until<br>this product will be available.<br>Determined from the booked date.',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-price',
             'type' => 'Text',
             'attributes' => array(
@@ -217,6 +245,66 @@ class EditProductForm extends Form
                         'name' => 'Digits',
                         'options' => array(
                             'message' => 'Please type a number here',
+                        ),
+                    ),
+                ),
+            ),
+            'cf-date-start' => array(
+                'required' => false,
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please type something here',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Callback',
+                        'options' => array(
+                            'callback' => function($value) {
+                                    try {
+                                        new \DateTime($value);
+
+                                        return true;
+                                    } catch (\Exception $e) {
+                                        return false;
+                                    }
+                                },
+                            'message' => 'Invalid date',
+                        ),
+                    ),
+                ),
+            ),
+            'cf-date-end' => array(
+                'required' => false,
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please type something here',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Callback',
+                        'options' => array(
+                            'callback' => function($value) {
+                                    try {
+                                        new \DateTime($value);
+
+                                        return true;
+                                    } catch (\Exception $e) {
+                                        return false;
+                                    }
+                                },
+                            'message' => 'Invalid date',
                         ),
                     ),
                 ),

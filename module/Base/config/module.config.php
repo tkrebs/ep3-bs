@@ -12,6 +12,7 @@ return array(
             'Config' => 'Base\Controller\Plugin\ConfigFactory',
             'Cookie' => 'Base\Controller\Plugin\CookieFactory',
             'DateFormat' => 'Base\Controller\Plugin\DateFormatFactory',
+            'NumberFormat' => 'Base\Controller\Plugin\NumberFormatFactory',
             'Option' => 'Base\Controller\Plugin\OptionFactory',
             'RedirectBack' => 'Base\Controller\Plugin\RedirectBackFactory',
             'Translate' => 'Base\Controller\Plugin\TranslateFactory',

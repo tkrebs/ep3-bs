@@ -77,6 +77,9 @@ return array(
     'Are you sure you want to delete this reservation?' => 'Sind Sie sicher, dass Sie diese Reservierung löschen möchten?',
     'Yes, delete this reservation' => 'Ja, Reservierung löschen',
 
+    'Are you sure you want to delete this product?' => 'Sind Sie sicher, dass Sie dieses Produkt löschen möchten?',
+    'Yes, delete this product' => 'Ja, Produkt löschen',
+
     'If this booking is cancelled, it will disappear from the calendar, but remain in the database.'
         => 'Wenn diese Buchung storniert wird, verschwindet sie zwar vom Kalender,<br>bleibt aber in der Datenbank erhalten.',
 
@@ -262,5 +265,11 @@ return array(
     'For no one' => 'Für niemanden',
     'For users' => 'Für angemeldete Benutzer',
     'For users and visitors' => 'Für Benutzer und Besucher',
+
+    'Optionally set a date from when<br>this product will be available.<br>Determined from the booked date.'
+        => 'Optionales Datum, ab welchem<br>das Produkt verfügbar sein soll.<br>Bezieht sich auf das gebuchte Datum.',
+
+    'Optionally set a date until<br>this product will be available.<br>Determined from the booked date.'
+        => 'Optionales Datum, bis zu welchem<br>das Produkt verfügbar sein soll.<br>Bezieht sich auf das gebuchte Datum.',
 
 );
