@@ -1,7 +1,5 @@
 Short Term:
 
-- Localization for products
-
 - Billing module (invoice/paypal)
 - Coupon module
 

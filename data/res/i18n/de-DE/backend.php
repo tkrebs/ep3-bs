@@ -272,4 +272,9 @@ return array(
     'Optionally set a date until<br>this product will be available.<br>Determined from the booked date.'
         => 'Optionales Datum, bis zu welchem<br>das Produkt verfügbar sein soll.<br>Bezieht sich auf das gebuchte Datum.',
 
+    'Language' => 'Sprache',
+    'All languages' => 'Alle Sprachen',
+
+    'Displays this product only to this language' => 'Zeigt dieses Produkt nur bei dieser Sprache an',
+
 );

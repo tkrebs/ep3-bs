@@ -318,6 +318,12 @@ class ConfigSquareController extends AbstractActionController
                 $price = floatval($price);
                 $price *= 100;
 
+                $locale = $editData['cf-locale'];
+
+                if ($locale == '0') {
+                    $locale = null;
+                }
+
                 $squareProduct->set('name', $editData['cf-name']);
                 $squareProduct->set('description', $editData['cf-description']);
                 $squareProduct->set('options', $editData['cf-options']);
@@ -328,6 +334,7 @@ class ConfigSquareController extends AbstractActionController
                 $squareProduct->set('price', $price);
                 $squareProduct->set('gross', $editData['cf-gross']);
                 $squareProduct->set('rate', $editData['cf-rate']);
+                $squareProduct->set('locale', $locale);
 
                 $squareProductManager->save($squareProduct);
 

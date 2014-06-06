@@ -174,6 +174,20 @@ class EditProductForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-locale',
+            'type' => 'Select',
+            'attributes' => array(
+                'id' => 'cf-locale',
+                'style' => 'width: 264px',
+            ),
+            'options' => array(
+                'label' => 'Language',
+                'notes' => 'Displays this product only to this language',
+                'value_options' => array_merge(array('0' => 'All languages'), $this->configManager->get('i18n.choice')),
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-submit',
             'type' => 'Submit',
             'attributes' => array(
