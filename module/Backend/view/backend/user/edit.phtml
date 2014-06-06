@@ -18,6 +18,10 @@ $this->setup(array(
     'title' => 'User-Administration',
     'panel' => 'centered-panel large-sized',
     'back' => $back,
+    'links' => array(
+        'Booking-Administration' => $this->url('backend/booking'),
+        'Configuration' => $this->url('backend/config'),
+    ),
 ));
 
 $this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit.min.js'));

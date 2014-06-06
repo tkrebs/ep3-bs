@@ -4,6 +4,10 @@ $this->setup(array(
     'title' => 'Configuration',
     'panel' => 'centered-panel large-sized',
     'back' => true,
+    'links' => array(
+        'User-Administration' => $this->url('backend/user'),
+        'Booking-Administration' => $this->url('backend/booking'),
+    ),
 ));
 
 ?>
