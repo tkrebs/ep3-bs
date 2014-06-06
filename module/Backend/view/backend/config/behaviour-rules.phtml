@@ -1,0 +1,92 @@
+<?php
+
+$this->setup(array(
+    'title' => $this->t('Edit business terms and privacy policy'),
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Behaviour' => $this->url('backend/config/behaviour'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Edit business terms and privacy policy') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->rulesForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/config/behaviour/rules'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?= $this->formRowDefault($form, 'cf-terms-file') ?>
+
+            <?php if ($this->option('service.user.registration.terms.file')): ?>
+                <tr>
+                    <td class="default-form-label-row">&nbsp;</td>
+                    <td>
+                        <?php
+
+                        $termsFile = $this->option('service.user.registration.terms.file');
+
+                        echo sprintf('%s <a href="%s" target="_blank">%s</a> ',
+                            $this->t('Current file:'),
+                            $this->basePath($termsFile),
+                            basename($termsFile));
+
+                        echo sprintf('<a href="%s" class="unlined gray" data-tooltip="%s">(x)</a>',
+                            $this->url('backend/config/behaviour/rules', [], ['query' => ['delete' => 'terms']]),
+                            $this->t('Delete'));
+
+                        ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            <?= $this->formRowDefault($form, 'cf-terms-name') ?>
+
+            <?= $this->formRowDefault($form, 'cf-privacy-file') ?>
+
+            <?php if ($this->option('service.user.registration.privacy.file')): ?>
+                <tr>
+                    <td class="default-form-label-row">&nbsp;</td>
+                    <td>
+                        <?php
+
+                        $termsFile = $this->option('service.user.registration.privacy.file');
+
+                        echo sprintf('%s <a href="%s" target="_blank">%s</a> ',
+                            $this->t('Current file:'),
+                            $this->basePath($termsFile),
+                            basename($termsFile));
+
+                        echo sprintf('<a href="%s" class="unlined gray" data-tooltip="%s">(x)</a>',
+                            $this->url('backend/config/behaviour/rules', [], ['query' => ['delete' => 'privacy']]),
+                            $this->t('Delete'));
+
+                        ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            <?= $this->formRowDefault($form, 'cf-privacy-name') ?>
+
+            <?= $this->formRowSubmit($form, 'cf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

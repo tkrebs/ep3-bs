@@ -1,15 +1,12 @@
 Short Term:
 
-- Billing module (invoice/paypal)
-- Coupon module
+- Social media integration
 
 Long Term:
 
 - Introduce unit tests
+- Introduce maintenance cronjob
 
+- Coupon module
+- Billing module (invoice/paypal)
 - Advanced statistics module
-- Social media integration
-
-- Maintenance cronjob
-
-- Business terms and privacy policy for registration

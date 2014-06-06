@@ -10,7 +10,9 @@ class RegistrationFormFactory implements FactoryInterface
 
     public function createService(ServiceLocatorInterface $sm)
     {
-        return new RegistrationForm($sm->getServiceLocator()->get('User\Manager\UserManager'));
+        return new RegistrationForm(
+            $sm->getServiceLocator()->get('Base\Manager\OptionManager'),
+            $sm->getServiceLocator()->get('User\Manager\UserManager'));
     }
 
 }

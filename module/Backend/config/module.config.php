@@ -261,6 +261,18 @@ return array(
                                         'action' => 'behaviour',
                                     ),
                                 ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'rules' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/rules',
+                                            'defaults' => array(
+                                                'action' => 'behaviourRules',
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),

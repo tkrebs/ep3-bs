@@ -148,4 +148,105 @@ class ConfigController extends AbstractActionController
         );
     }
 
+    public function behaviourRulesAction()
+    {
+        $this->authorize('admin.config');
+
+        $serviceManager = $this->getServiceLocator();
+        $optionManager = $serviceManager->get('Base\Manager\OptionManager');
+        $formElementManager = $serviceManager->get('FormElementManager');
+
+        $rulesForm = $formElementManager->get('Backend\Form\Config\BehaviourRulesForm');
+
+        $locale = $this->config('i18n.locale');
+
+        if ($this->getRequest()->isGet()) {
+
+            switch ($this->params()->fromQuery('delete')) {
+                case 'terms':
+                    $optionManager->set('service.user.registration.terms.file', null, $locale);
+
+                    $this->flashMessenger()->addSuccessMessage('Configuration has been updated');
+
+                    return $this->redirect()->toRoute('backend/config/behaviour/rules');
+                case 'privacy':
+                    $optionManager->set('service.user.registration.privacy.file', null, $locale);
+
+                    $this->flashMessenger()->addSuccessMessage('Configuration has been updated');
+
+                    return $this->redirect()->toRoute('backend/config/behaviour/rules');
+            }
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $post = array_merge_recursive(
+                $this->getRequest()->getPost()->toArray(),
+                $this->getRequest()->getFiles()->toArray()
+            );
+
+            $rulesForm->setData($post);
+
+            if ($rulesForm->isValid()) {
+                $rulesData = $rulesForm->getData();
+
+                /* Save business terms */
+
+                $termsFile = $rulesData['cf-terms-file'];
+
+                if (isset($termsFile['name']) && $termsFile['name'] && isset($termsFile['tmp_name']) && $termsFile['tmp_name']) {
+                    $rulesFileName = $termsFile['name'];
+                    $rulesFileName = str_replace('.pdf', '', $rulesFileName);
+                    $rulesFileName = trim($rulesFileName);
+                    $rulesFileName = preg_replace('/[^a-zA-Z0-9 -]/', '', $rulesFileName);
+                    $rulesFileName = str_replace(' ', '-', $rulesFileName);
+                    $rulesFileName = strtolower($rulesFileName);
+
+                    $destination = sprintf('docs-client/upload/%s.pdf',
+                        $rulesFileName);
+
+                    move_uploaded_file($termsFile['tmp_name'], sprintf('%s/public/%s', getcwd(), $destination));
+
+                    $optionManager->set('service.user.registration.terms.file', $destination, $locale);
+                }
+
+                $optionManager->set('service.user.registration.terms.name', $rulesData['cf-terms-name'], $locale);
+
+                /* Save privacy policy */
+
+                $privacyFile = $rulesData['cf-privacy-file'];
+
+                if (isset($privacyFile['name']) && $privacyFile['name'] && isset($privacyFile['tmp_name']) && $privacyFile['tmp_name']) {
+                    $privacyFileName = $privacyFile['name'];
+                    $privacyFileName = str_replace('.pdf', '', $privacyFileName);
+                    $privacyFileName = trim($privacyFileName);
+                    $privacyFileName = preg_replace('/[^a-zA-Z0-9 -]/', '', $privacyFileName);
+                    $privacyFileName = str_replace(' ', '-', $privacyFileName);
+                    $privacyFileName = strtolower($privacyFileName);
+
+                    $destination = sprintf('docs-client/upload/%s.pdf',
+                        $privacyFileName);
+
+                    move_uploaded_file($privacyFile['tmp_name'], sprintf('%s/public/%s', getcwd(), $destination));
+
+                    $optionManager->set('service.user.registration.privacy.file', $destination, $locale);
+                }
+
+                $optionManager->set('service.user.registration.privacy.name', $rulesData['cf-privacy-name'], $locale);
+
+                $this->flashMessenger()->addSuccessMessage('Configuration has been saved');
+
+                return $this->redirect()->toRoute('backend/config/behaviour/rules');
+            }
+        } else {
+            $rulesForm->setData(array(
+                'cf-terms-name' => $optionManager->get('service.user.registration.terms.name'),
+                'cf-privacy-name' => $optionManager->get('service.user.registration.privacy.name'),
+            ));
+        }
+
+        return array(
+            'rulesForm' => $rulesForm,
+        );
+    }
+
 }

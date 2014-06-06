@@ -24,6 +24,37 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config/be
     <div class="separator separator-line"></div>
 
     <div class="padded">
-        <?= $this->formDefault($this->behaviourForm, $this->url('backend/config/behaviour')) ?>
+        <?php
+
+        $form = $this->behaviourForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/config/behaviour'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?= $this->formRowDefault($form, 'cf-maintenance') ?>
+            <?= $this->formRowDefault($form, 'cf-maintenance-message') ?>
+            <?= $this->formRowDefault($form, 'cf-registration') ?>
+            <?= $this->formRowDefault($form, 'cf-registration-message') ?>
+            <?= $this->formRowDefault($form, 'cf-activation') ?>
+            <?= $this->formRowDefault($form, 'cf-calendar-days') ?>
+
+            <tr>
+                <td class="default-form-label-row">&nbsp;</td>
+                <td>
+                    <a href="<?= $this->url('backend/config/behaviour/rules') ?>" class="default-button">
+                        <span class="symbolic symbolic-edit"><?= $this->t('Edit business terms and privacy policy') ?></span>
+                    </a>
+                </td>
+            </tr>
+
+            <?= $this->formRowSubmit($form, 'cf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
     </div>
 </div>

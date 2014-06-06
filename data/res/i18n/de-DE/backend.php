@@ -13,6 +13,7 @@ return array(
 
     'Configuration' => 'Einstellungen',
     'Configuration has been saved' => 'Einstellungen wurden gespeichert',
+    'Configuration has been updated' => 'Einstellungen wurden aktualisiert',
     'Configuration is (partially) invalid' => 'Einstellung sind (teilweise) ungültig',
     'Configure your system just as you need it' => 'Passen Sie Ihr System nach Ihren Wünschen an',
     'Here you can configure and fine tune your system just as you need it.'
@@ -276,5 +277,17 @@ return array(
     'All languages' => 'Alle Sprachen',
 
     'Displays this product only to this language' => 'Zeigt dieses Produkt nur bei dieser Sprache an',
+
+    'Edit business terms and privacy policy' => 'AGB und Datenschutzerklärung bearbeiten',
+
+    'Business terms (file)' => 'AGB (Datei)',
+    'Business terms (file name)' => 'AGB (Dateiname)',
+    'Privacy policy (file)' => 'Datenschutzerklärung (Datei)',
+    'Privacy policy (file name)' => 'Datenschutzerklärung (Dateiname)',
+
+    'Optional business terms as PDF-Document that must be accepted prior to registration'
+        => 'Optionale AGB als PDF-Datei,<br>die vor der Registrierung akzeptiert werden müssen',
+    'Optional privacy policy as PDF-Document that must be accepted prior to registration'
+        => 'Optionale Datenschutzerklärung als PDF-Datei,<br>die vor der Registrierung akzeptiert werden muss',
 
 );

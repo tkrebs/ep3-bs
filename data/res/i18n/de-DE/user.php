@@ -247,6 +247,9 @@ return array(
 
     'Booking-Bill' => 'Buchungs-Rechnung',
 
+    'I agree to %s' => 'Ich habe das Dokument %s gelesen und akzeptiere es',
+    'Please agree to this' => 'Bitte akzeptieren Sie das',
+
     /* Email */
 
     'Dear' => 'Sehr geehrte/r Herr/Frau',

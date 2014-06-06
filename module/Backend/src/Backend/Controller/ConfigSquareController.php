@@ -143,8 +143,6 @@ class ConfigSquareController extends AbstractActionController
                 $documentFile = $editData['cf-rules-document-file'];
 
                 if (isset($documentFile['name']) && $documentFile['name'] && isset($documentFile['tmp_name']) && $documentFile['tmp_name']) {
-                    $documentFileTmpName = $documentFile['tmp_name'];
-
                     $documentFileName = $documentFile['name'];
                     $documentFileName = str_replace('.pdf', '', $documentFileName);
                     $documentFileName = trim($documentFileName);
@@ -155,7 +153,7 @@ class ConfigSquareController extends AbstractActionController
                     $destination = sprintf('docs-client/upload/%s.pdf',
                         $documentFileName);
 
-                    move_uploaded_file($documentFileTmpName, sprintf('%s/public/%s', getcwd(), $destination));
+                    move_uploaded_file($documentFile['tmp_name'], sprintf('%s/public/%s', getcwd(), $destination));
 
                     $square->setMeta('rules.document.file', $destination, $locale);
                 }

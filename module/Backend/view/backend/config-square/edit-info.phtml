@@ -4,7 +4,8 @@ $this->setup(array(
     'title' => $this->t('Edit square info and rule texts'),
     'panel' => 'centered-panel large-sized',
     'back' => array(
-        $this->option('subject.square.type.plural') => $this->url('backend/config/square'),
+        $this->option('subject.square.type') . ' ' . $this->square->get('name')
+            => $this->url('backend/config/square/edit', ['sid' => $this->square->need('sid')]),
     ),
 ));
 

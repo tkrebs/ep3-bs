@@ -2,6 +2,7 @@
 
 namespace User\Form;
 
+use Base\Manager\OptionManager;
 use User\Entity\User;
 use User\Manager\UserManager;
 use Zend\Crypt\BlockCipher;
@@ -11,12 +12,14 @@ use Zend\InputFilter\Factory;
 class RegistrationForm extends Form
 {
 
+    protected $optionManager;
     protected $userManager;
 
-    public function __construct(UserManager $userManager)
+    public function __construct(OptionManager $optionManager, UserManager $userManager)
     {
         parent::__construct();
 
+        $this->optionManager = $optionManager;
         $this->userManager = $userManager;
     }
 
@@ -196,6 +199,42 @@ class RegistrationForm extends Form
                 'notes' => 'This is optional',
             ),
         ));
+
+        /* Add business terms and privacy policy if configured */
+
+        $termsFile = $this->optionManager->get('service.user.registration.terms.file');
+
+        if ($termsFile) {
+            $this->add(array(
+                'name' => 'rf-terms',
+                'type' => 'Checkbox',
+                'attributes' => array(
+                    'id' => 'rf-terms',
+                ),
+                'options' => array(
+                    'label' => 'I agree to %s',
+                    'checked_value' => 'true',
+                    'unchecked_value' => 'false',
+                ),
+            ));
+        }
+
+        $privacyFile = $this->optionManager->get('service.user.registration.privacy.file');
+
+        if ($privacyFile) {
+            $this->add(array(
+                'name' => 'rf-privacy',
+                'type' => 'Checkbox',
+                'attributes' => array(
+                    'id' => 'rf-privacy',
+                ),
+                'options' => array(
+                    'label' => 'I agree to %s',
+                    'checked_value' => 'true',
+                    'unchecked_value' => 'false',
+                ),
+            ));
+        }
 
         /* Add fake nickname to fool spam bots */
 
@@ -543,6 +582,50 @@ class RegistrationForm extends Form
                 'required' => false,
                 'filters' => array(
                     array('name' => 'StringTrim'),
+                ),
+            ),
+            'rf-terms' => array(
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please accept this',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Callback',
+                        'options' => array(
+                            'callback' => function($value) {
+                                return $value === 'true';
+                            },
+                            'message' => 'Please agree to this',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                ),
+            ),
+            'rf-privacy' => array(
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please accept this',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Callback',
+                        'options' => array(
+                            'callback' => function($value) {
+                                return $value === 'true';
+                            },
+                            'message' => 'Please agree to this',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
                 ),
             ),
             'rf-nickname' => array(

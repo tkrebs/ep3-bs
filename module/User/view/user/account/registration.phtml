@@ -128,23 +128,63 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/registration
             <div class="separator separator-line"></div>
 
             <div class="centered-text">
-                <?= $this->formElement($form->get('rf-nickname')) ?>
-                <?= $this->formElementErrors($form->get('rf-nickname'), array('id' => 'form-nickname-error')) ?>
+                <div>
+                    <?= $this->formElement($form->get('rf-nickname')) ?>
+                    <?= $this->formElementErrors($form->get('rf-nickname'), array('id' => 'form-nickname-error')) ?>
+                </div>
 
-                <?= $this->formElement($form->get('rf-csrf')) ?>
-                <?= $this->formElementErrors($form->get('rf-csrf')) ?>
+                <div>
+                    <?= $this->formElement($form->get('rf-csrf')) ?>
+                    <?= $this->formElementErrors($form->get('rf-csrf')) ?>
+                </div>
+
+                <!-- Business terms and privacy policy -->
+
+                <div>
+                    <?php
+
+                    $html = '';
+
+                    foreach (['terms', 'privacy'] as $option) {
+                        $optionFile = $this->option('service.user.registration.' . $option . '.file');
+                        $optionName = $this->option('service.user.registration.' . $option . '.name',
+                            basename($optionFile));
+
+                        if ($optionFile) {
+                            $html .= sprintf('<div>%s %s</div> <div style="margin: 0 0 8px 8px;">%s</div>',
+                                $this->formElement($form->get('rf-' . $option)),
+                                sprintf($this->formLabel($form->get('rf-' . $option)),
+                                    sprintf('<a href="%s" target="_blank">%s</a>',
+                                        $this->basePath($optionFile),
+                                        $optionName)),
+                                $this->formElementErrors($form->get('rf-' . $option)));
+                        }
+                    }
+
+                    if ($html) {
+                        echo '<div class="left-text sandbox" style="margin-bottom: 16px; display: inline-block;">';
+                        echo $html;
+                        echo '</div>';
+                    }
+
+                    ?>
+                </div>
+
+                <!-- Submit -->
 
                 <?= $this->formElement($form->get('rf-submit')) ?>
 
-                <p class="gray small-text" style="margin-top: 12px;">
-                    <em>
-                        <strong><?= $this->t('Data privacy') ?>:</strong>
+                <?php if (! $this->option('service.user.registration.privacy.file')): ?>
+                    <p class="gray small-text" style="margin-top: 16px;">
+                        <em>
+                            <strong><?= $this->t('Data privacy') ?>:</strong>
 
-                        <?= $this->t('Your data will be handled trustfully and responsible.') ?>
-                        <?= $this->t('It will only be used and processed for the purpose of our service.') ?>
-                        <?= $this->t('It will neither be shared with third parties nor displayed publicly without your permission.') ?>
-                    </em>
-                </p>
+                            <?= $this->t('Your data will be handled trustfully and responsible.') ?>
+                            <?= $this->t('It will only be used and processed for the purpose of our service.') ?>
+                            <?= $this->t('It will neither be shared with third parties nor displayed publicly without your permission.') ?>
+                        </em>
+                    </p>
+                <?php endif; ?>
             </div>
 
             <?= $this->form()->closeTag() ?>
