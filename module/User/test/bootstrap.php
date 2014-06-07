@@ -17,13 +17,13 @@ ini_set('log_errors', 0);
 
 ini_set('date.timezone', 'Europe/Berlin');
 
-chdir(dirname(__DIR__));
+chdir(dirname(dirname(dirname(__DIR__))));
 
-/* Setup the application */
+/* Setup constants */
 
 define('EP3_BS_DEV', true);
 
-/* Setup composer autoloader */
+/* Setup autoloader */
 
 $autoloaderFile = 'vendor/autoload.php';
 
@@ -33,16 +33,20 @@ if (! is_readable($autoloaderFile)) {
 
 $autoloader = require $autoloaderFile;
 
-$config = include 'config/application.config.php';
-$configModules = $config['modules'];
+/* Setup modules */
 
-foreach ($configModules as $configModule) {
-    $modulePrefix = sprintf('%s\\',
-        $configModule);
+$moduleConfig = array(
+    'module_listener_options' => array(
+        'module_paths' => array(
+            'module',
+            'vendor',
+        ),
+    ),
+    'modules' => array(
+        'User',
+    ),
+);
 
-    $modulePath = sprintf('%s/module/%s/src',
-        getcwd(),
-        $configModule);
-
-    $autoloader->set($modulePrefix, $modulePath);
-}
+$serviceManager = new Zend\ServiceManager\ServiceManager(new Zend\Mvc\Service\ServiceManagerConfig());
+$serviceManager->setService('ApplicationConfig', $moduleConfig);
+$serviceManager->get('ModuleManager')->loadModules();

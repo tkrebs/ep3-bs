@@ -30,6 +30,7 @@ class Result extends ZendResult
      *
      * @param string $key
      * @param mixed $value
+     * @throws InvalidArgumentException
      */
     public function setExtra($key, $value)
     {
