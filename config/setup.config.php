@@ -11,7 +11,9 @@
  *
  * Should always be true in this context!
  */
-define('EP3_BS_DEV', true);
+if (! defined('EP3_BS_DEV')) {
+    define('EP3_BS_DEV', true);
+}
 
 /**
  * Setup configuration array

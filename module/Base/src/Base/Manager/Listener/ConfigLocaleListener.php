@@ -5,7 +5,8 @@ namespace Base\Manager\Listener;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
-use Zend\Http\Request;
+use Zend\Http\Request as HttpRequest;
+use Zend\Stdlib\RequestInterface as Request;
 
 class ConfigLocaleListener extends AbstractListenerAggregate
 {
@@ -24,42 +25,45 @@ class ConfigLocaleListener extends AbstractListenerAggregate
 
     public function onPrepare(Event $event)
     {
-        $configManager = $event->getTarget();
-        $configI18n = $configManager->need('i18n');
+        if ($this->request instanceof HttpRequest) {
 
-        $cookieNamePrefix = $configManager->need('cookie_config.cookie_name_prefix');
-        $cookieName = $cookieNamePrefix . '-locale';
+            $configManager = $event->getTarget();
+            $configI18n = $configManager->need('i18n');
 
-        $locale = $this->request->getQuery('locale');
+            $cookieNamePrefix = $configManager->need('cookie_config.cookie_name_prefix');
+            $cookieName = $cookieNamePrefix . '-locale';
 
-        if ($locale && isset($configI18n['choice'][$locale])) {
-            $configManager->set('i18n.locale', $locale);
+            $locale = $this->request->getQuery('locale');
 
-            setcookie($cookieName, $locale, time() + 1209600, '/');
-        } else {
-            if (isset($_COOKIE[$cookieName])) {
-                $locale = $_COOKIE[$cookieName];
+            if ($locale && isset($configI18n['choice'][$locale])) {
+                $configManager->set('i18n.locale', $locale);
 
-                if (isset($configI18n['choice'][$locale])) {
-                    $configManager->set('i18n.locale', $locale);
-                }
+                setcookie($cookieName, $locale, time() + 1209600, '/');
             } else {
-                $headers = $this->request->getHeaders();
+                if (isset($_COOKIE[$cookieName])) {
+                    $locale = $_COOKIE[$cookieName];
 
-                if ($headers->has('Accept-Language')) {
-                    $acceptedLocales = $headers->get('Accept-Language')->getPrioritized();
+                    if (isset($configI18n['choice'][$locale])) {
+                        $configManager->set('i18n.locale', $locale);
+                    }
+                } else {
+                    $headers = $this->request->getHeaders();
 
-                    foreach ($acceptedLocales as $acceptedLocale) {
-                        $acceptedLocaleParts = preg_split('/[\-\_]/', $acceptedLocale->getLanguage());
-                        $acceptedLocalePart = $acceptedLocaleParts[0];
+                    if ($headers->has('Accept-Language')) {
+                        $acceptedLocales = $headers->get('Accept-Language')->getPrioritized();
 
-                        foreach ($configI18n['choice'] as $locale => $title) {
-                            $localeParts = preg_split('/[\-\_]/', $locale);
-                            $localePart = $localeParts[0];
+                        foreach ($acceptedLocales as $acceptedLocale) {
+                            $acceptedLocaleParts = preg_split('/[\-\_]/', $acceptedLocale->getLanguage());
+                            $acceptedLocalePart = $acceptedLocaleParts[0];
 
-                            if ($localePart == $acceptedLocalePart) {
-                                $configManager->set('i18n.locale', $locale);
-                                break 2;
+                            foreach ($configI18n['choice'] as $locale => $title) {
+                                $localeParts = preg_split('/[\-\_]/', $locale);
+                                $localePart = $localeParts[0];
+
+                                if ($localePart == $acceptedLocalePart) {
+                                    $configManager->set('i18n.locale', $locale);
+                                    break 2;
+                                }
                             }
                         }
                     }

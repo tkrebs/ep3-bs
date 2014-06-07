@@ -4,7 +4,7 @@ Short Term:
 
 Long Term:
 
-- Introduce unit tests
+- Introduce testing via PHPUnit/Selenium
 - Introduce maintenance cronjob
 
 - Coupon module
