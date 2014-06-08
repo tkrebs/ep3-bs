@@ -7,6 +7,6 @@ Long Term:
 - Introduce testing via PHPUnit/Selenium
 - Introduce maintenance cronjob
 
-- Coupon module
-- Billing module (invoice/paypal)
 - Advanced statistics module
+- Billing module (invoice/paypal)
+- Coupon module

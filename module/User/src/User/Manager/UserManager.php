@@ -70,8 +70,8 @@ class UserManager extends AbstractManager
      * Saves (updates or creates) a user.
      *
      * @param User $user
+     * @throws Exception
      * @return User
-     * @throws RuntimeException
      */
     public function save(User $user)
     {
