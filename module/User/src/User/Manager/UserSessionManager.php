@@ -3,6 +3,7 @@
 namespace User\Manager;
 
 use Base\Manager\AbstractManager;
+use Base\Manager\ConfigManager;
 use DateTime;
 use User\Authentication\Result;
 use User\Entity\User;
@@ -15,6 +16,7 @@ use Zend\Session\Validator\RemoteAddr;
 class UserSessionManager extends AbstractManager
 {
 
+    protected $configManager;
     protected $userManager;
     protected $sessionManager;
 
@@ -28,11 +30,13 @@ class UserSessionManager extends AbstractManager
     /**
      * Creates a new user session manager object.
      *
+     * @param ConfigManager $configManager
      * @param UserManager $userManager
      * @param SessionManager $sessionManager;
      */
-    public function __construct(UserManager $userManager, SessionManager $sessionManager)
+    public function __construct(ConfigManager $configManager, UserManager $userManager, SessionManager $sessionManager)
     {
+        $this->configManager = $configManager;
         $this->userManager = $userManager;
         $this->sessionManager = $sessionManager;
 
@@ -76,10 +80,14 @@ class UserSessionManager extends AbstractManager
         if ($this->user) {
             return $this->user;
         } else {
-            $container = $this->getSessionContainer();
+            $sessionName = $this->configManager->need('session_config.name');
 
-            if (isset($container->uid) && is_numeric($container->uid) && $container->uid > 0) {
-                return $this->user = $this->userManager->get($container->uid, false);
+            if (isset($_COOKIE[$sessionName])) {
+                $container = $this->getSessionContainer();
+
+                if (isset($container->uid) && is_numeric($container->uid) && $container->uid > 0) {
+                    return $this->user = $this->userManager->get($container->uid, false);
+                }
             }
         }
 
