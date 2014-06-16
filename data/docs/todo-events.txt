@@ -1,0 +1,10 @@
+- Introduce events (tables, models, module)
+
+- Events will be displayed in the calendar with name
+- Events will display information (text/images) on click
+- Events will block bookings
+- Events might have participants (can be participated instead of booked)
+
+- Use booking system for booking/participating events
+
+- Demo for purely informational and bookable event calendar
