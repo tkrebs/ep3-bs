@@ -18,10 +18,10 @@ class SquaresFormat extends AbstractHelper
         $html .= '<th>&nbsp;</th>';
         $html .= '<th>' . $view->t('Name') . '</th>';
         $html .= '<th>' . $view->t('Status') . '</th>';
-        $html .= '<th>' . $view->t('Zeit') . '</th>';
-        $html .= '<th>' . $view->t('Zeitblock') . '</th>';
-        $html .= '<th>' . $view->t('Zeitblock (min. buchbar) ') . '</th>';
-        $html .= '<th>' . $view->t('Zeitblock (max. buchbar) ') . '</th>';
+        $html .= '<th>' . $view->t('Time') . '</th>';
+        $html .= '<th>' . $view->t('Time block') . '</th>';
+        $html .= '<th>' . $view->t('Time block (min. bookable)') . '</th>';
+        $html .= '<th>' . $view->t('Time block (max. bookable)') . '</th>';
         $html .= '<th class="no-print">&nbsp;</th>';
         $html .= '</tr>';
 

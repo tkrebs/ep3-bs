@@ -78,6 +78,11 @@ return array(
     'Are you sure you want to delete this reservation?' => 'Sind Sie sicher, dass Sie diese Reservierung löschen möchten?',
     'Yes, delete this reservation' => 'Ja, Reservierung löschen',
 
+    'Are you sure you want to delete this square?' => 'Sind Sie sicher, dass Sie diesen Platz löschen möchten?',
+    'Yes, delete this square' => 'Ja, Platz löschen',
+    'Since this square has already bookings, it will be set to disabled but kept in the database'
+        => 'Da es bereits Buchungen für diesen Platz gibt, wird er auf deaktiviert gestellt, bleibt aber in der Datenbank',
+
     'Are you sure you want to delete this product?' => 'Sind Sie sicher, dass Sie dieses Produkt löschen möchten?',
     'Yes, delete this product' => 'Ja, Produkt löschen',
 
