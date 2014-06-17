@@ -1,5 +1,8 @@
 Short Term:
 
+- Show (disabled) date range when editing subscription booking and
+    - provide a link to change the range and time (only override untouched reservations)
+
 - Social media integration
 
 Long Term:
