@@ -65,6 +65,7 @@
                 disableFormElement("#bf-time-start");
                 disableFormElement("#bf-time-end");
                 disableFormElement("#bf-date-start");
+                disableFormElement("#bf-date-end");
             } else if (editMode == "reservation") {
                 disableFormElement("#bf-user");
                 disableFormElement("#bf-sid");

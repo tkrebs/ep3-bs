@@ -130,14 +130,27 @@ class BookingController extends AbstractActionController
                     'bf-rid' => $reservation->get('rid'),
                     'bf-user' => $user->need('alias') . ' (' . $user->need('uid') . ')',
                     'bf-sid' => $booking->get('sid'),
-                    'bf-date-start' => $this->dateFormat($reservation->get('date'), \IntlDateFormatter::MEDIUM),
-                    'bf-date-end' => $this->dateFormat($reservation->get('date'), \IntlDateFormatter::MEDIUM),
-                    'bf-time-start' => substr($reservation->get('time_start'), 0, 5),
-                    'bf-time-end' => substr($reservation->get('time_end'), 0, 5),
                     'bf-status-billing' => $booking->get('status_billing'),
                     'bf-quantity' => $booking->get('quantity'),
                     'bf-notes' => $booking->getMeta('notes'),
                 ));
+
+                if ($booking->get('status') == 'subscription' && $params['editMode'] == 'booking') {
+                    $editForm->setData(array(
+                        'bf-time-start' => substr($booking->getMeta('time_start', $reservation->get('time_start')), 0, 5),
+                        'bf-time-end' => substr($booking->getMeta('time_end', $reservation->get('time_end')), 0, 5),
+                        'bf-date-start' => $this->dateFormat($booking->getMeta('date_start', $reservation->get('date')), \IntlDateFormatter::MEDIUM),
+                        'bf-date-end' => $this->dateFormat($booking->getMeta('date_end', $reservation->get('date')), \IntlDateFormatter::MEDIUM),
+                        'bf-repeat' => $booking->getMeta('repeat'),
+                    ));
+                } else {
+                    $editForm->setData(array(
+                        'bf-time-start' => substr($reservation->get('time_start'), 0, 5),
+                        'bf-time-end' => substr($reservation->get('time_end'), 0, 5),
+                        'bf-date-start' => $this->dateFormat($reservation->get('date'), \IntlDateFormatter::MEDIUM),
+                        'bf-date-end' => $this->dateFormat($reservation->get('date'), \IntlDateFormatter::MEDIUM),
+                    ));
+                }
             } else {
                 $editForm->setData(array(
                     'bf-sid' => $params['square']->get('sid'),
