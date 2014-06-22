@@ -4,6 +4,7 @@ namespace Backend\Controller;
 
 use Booking\Entity\Booking;
 use Booking\Table\BookingTable;
+use Booking\Table\ReservationTable;
 use Zend\Db\Adapter\Adapter;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -181,6 +182,107 @@ class BookingController extends AbstractActionController
         $params = $this->getEvent()->getRouteMatch()->getParam('params');
 
         return $this->ajaxViewModel($params);
+    }
+
+    public function editRangeAction()
+    {
+        $this->authorize('admin.booking, calendar.create-subscription-bookings + calendar.cancel-subscription-bookings');
+
+        $serviceManager = $this->getServiceLocator();
+        $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
+        $reservationManager = $serviceManager->get('Booking\Manager\ReservationManager');
+        $formElementManager = $serviceManager->get('FormElementManager');
+
+        $bid = $this->params()->fromRoute('bid');
+
+        $booking = $bookingManager->get($bid);
+
+        if ($booking->get('status') != 'subscription') {
+            throw new \RuntimeException('Time and date range can only be edited on subscription bookings');
+        }
+
+        $editTimeRangeForm = $formElementManager->get('Backend\Form\Booking\Range\EditTimeRangeForm');
+        $editDateRangeForm = $formElementManager->get('Backend\Form\Booking\Range\EditDateRangeForm');
+
+        if ($this->getRequest()->isPost()) {
+            $db = $serviceManager->get('Zend\Db\Adapter\Adapter');
+
+            $mode = $this->params()->fromQuery('mode');
+
+            if ($mode == 'time') {
+                $editTimeRangeForm->setData($this->params()->fromPost());
+
+                if ($editTimeRangeForm->isValid()) {
+                    $data = $editTimeRangeForm->getData();
+
+                    $res = $db->query(
+                        sprintf('UPDATE %s SET time_start = "%s", time_end = "%s" WHERE bid = %s AND time_start = "%s" AND time_end = "%s"',
+                            ReservationTable::NAME,
+                            $data['bf-time-start'], $data['bf-time-end'], $bid, $booking->needMeta('time_start'), $booking->needMeta('time_end')),
+                        Adapter::QUERY_MODE_EXECUTE);
+
+                    if ($res->getAffectedRows() > 0) {
+                        $booking->setMeta('time_start', $data['bf-time-start']);
+                        $booking->setMeta('time_end', $data['bf-time-end']);
+
+                        $bookingManager->save($booking);
+                    }
+
+                    $this->flashMessenger()->addSuccessMessage('Booking has been saved');
+
+                    return $this->redirect()->toRoute('frontend');
+                }
+            } else if ($mode == 'date') {
+                $editDateRangeForm->setData($this->params()->fromPost());
+
+                if ($editDateRangeForm->isValid()) {
+                    $data = $editDateRangeForm->getData();
+
+                    $dateStart = new \DateTime($data['bf-date-start']);
+                    $dateEnd = new \DateTime($data['bf-date-end']);
+                    $repeat = $data['bf-repeat'];
+
+                    $res = $db->query(
+                        sprintf('DELETE FROM %s WHERE bid = %s',
+                            ReservationTable::NAME, $bid),
+                        Adapter::QUERY_MODE_EXECUTE);
+
+                    if ($res->getAffectedRows() > 0) {
+                        $reservationManager->createByRange($booking, $dateStart, $dateEnd,
+                            $booking->needMeta('time_start'), $booking->needMeta('time_end'), $repeat);
+
+                        $booking->setMeta('date_start', $dateStart->format('Y-m-d'));
+                        $booking->setMeta('date_end', $dateEnd->format('Y-m-d'));
+                        $booking->setMeta('repeat', $repeat);
+
+                        $bookingManager->save($booking);
+                    }
+
+                    $this->flashMessenger()->addSuccessMessage('Booking has been saved');
+
+                    return $this->redirect()->toRoute('frontend');
+                }
+            } else {
+                throw new \RuntimeException('Invalid edit mode received');
+            }
+        } else {
+            $editTimeRangeForm->setData(array(
+                'bf-time-start' => substr($booking->needMeta('time_start'), 0, 5),
+                'bf-time-end' => substr($booking->needMeta('time_end'), 0, 5),
+            ));
+
+            $editDateRangeForm->setData(array(
+                'bf-date-start' => $this->dateFormat($booking->needMeta('date_start'), \IntlDateFormatter::MEDIUM),
+                'bf-date-end' => $this->dateFormat($booking->needMeta('date_end'), \IntlDateFormatter::MEDIUM),
+                'bf-repeat' => $booking->needMeta('repeat'),
+            ));
+        }
+
+        return $this->ajaxViewModel(array(
+            'booking' => $booking,
+            'editTimeRangeForm' => $editTimeRangeForm,
+            'editDateRangeForm' => $editDateRangeForm,
+        ));
     }
 
     public function deleteAction()

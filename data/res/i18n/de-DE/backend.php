@@ -168,6 +168,12 @@ return array(
     'Clock' => 'Uhr',
     'Repeat' => 'Wiederholung',
 
+    'Edit time or date range' => 'Zeitraum bearbeiten',
+    'Time and date range can only be edited on subscription bookings' => 'Der Zeitraum kann nur bei Abo-Buchungen bearbeitet werden',
+
+    'Change the time range of all unmodified reservations of this booking:' => 'Uhrzeiten aller unveränderten Reservierungen dieser Buchung ändern:',
+    'Change the date range and/or interval of this booking:' => 'Zeitraum und/oder Wiederholungsinterval dieser Buchung ändern:',
+
     'Invalid date' => 'Ungültiges Datum',
 
     'Essentially disables the system for the public,<br>but allows administrators to still login'

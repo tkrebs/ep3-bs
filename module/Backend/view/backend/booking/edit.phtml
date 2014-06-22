@@ -77,6 +77,14 @@ $this->setup(array(
                             </td>
                         </tr>
                     </table>
+
+                    <?php if ($this->booking && $this->booking->get('status') == 'subscription' && $this->editMode == 'booking'): ?>
+                        <div class="centered-text small-text gray" style="margin-top: 16px; font-style: italic;">
+                            <a href="<?= $this->url('backend/booking/edit/range', ['bid' => $this->booking->need('bid')]) ?>" class="unlined symbolic symbolic-edit squarebox-internal-link">
+                                <?= $this->t('Edit time or date range') ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </td>
 
