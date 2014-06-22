@@ -88,6 +88,18 @@ return array(
                                         'action' => 'edit',
                                     ),
                                 ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'range' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '/range/:bid',
+                                            'defaults' => array(
+                                                'action' => 'editRange',
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
                             'delete' => array(
                                 'type' => 'Segment',

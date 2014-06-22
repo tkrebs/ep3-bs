@@ -1,0 +1,97 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking-Administration',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div class="padded">
+    <p><?= $this->t('Change the time range of all unmodified reservations of this booking:') ?></p>
+
+    <div class="sandbox" style="margin-bottom: 32px;">
+        <?php
+
+        $form = $this->editTimeRangeForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/booking/edit/range', ['bid' => $this->booking->need('bid')], ['query' => ['mode' => 'time']]));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table" style="margin: 0;">
+            <tr>
+                <td>
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-time-start') ?>
+                    </table>
+                </td>
+
+                <td>
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-time-end') ?>
+                    </table>
+                </td>
+
+                <td style="padding-top: 15px;">
+                    <table class="default-table">
+                        <?= $this->formRowSubmit($form, 'bf-submit') ?>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+
+    <p><?= $this->t('Change the date range and/or interval of this booking:') ?></p>
+
+    <div class="sandbox">
+        <?php
+
+        $form = $this->editDateRangeForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/booking/edit/range', ['bid' => $this->booking->need('bid')], ['query' => ['mode' => 'date']]));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table" style="margin: 0;">
+            <tr>
+                <td>
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-date-start') ?>
+                    </table>
+                </td>
+
+                <td>
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-date-end') ?>
+                    </table>
+                </td>
+
+                <td>
+                    <table class="default-table">
+                        <?= $this->formRowCompact($form, 'bf-repeat') ?>
+                    </table>
+                </td>
+
+                <td style="padding-top: 15px;">
+                    <table class="default-table">
+                        <?= $this->formRowSubmit($form, 'bf-submit') ?>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>
+
+<?= $this->ajaxAwareScript('js/controller/backend/booking/edit-range.min.js') ?>

@@ -1,6 +1,11 @@
-ToDos on new releases:
+On new release:
 
-- Update project files (VERSION / README / setup)
-- Push to GitHub repository
-- Create package (delete ignored files) (pack as zip) (upload) (update portal (version, date, size, hash))
-- Update features page (eventually)
+- Update features
+- Update documentation
+
+- Update project files
+    - README.md
+    - VERSION
+- Update package
+
+- Update demo
