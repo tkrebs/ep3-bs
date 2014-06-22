@@ -22,7 +22,7 @@ Documentation and installation instructions can be found in the following direct
 /data/docs/
 ```
 
-Unfortunately, documentation and source code comments are rather spare at the moment (sorry).
+Unfortunately, source code comments are rather spare at the moment (sorry).
 
 ## Architecture
 
@@ -43,8 +43,7 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (May, 2014) is simply 1.1, as the versioning has been reset with the release as open source
-software.
+The current version (June, 2014) is 1.2.
 
 ## Bug reports, feature requests, ideas ...
 
