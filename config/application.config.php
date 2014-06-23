@@ -31,6 +31,7 @@ return array(
         'Base',
         'Booking',
         'Calendar',
+        'Event',
         'Frontend',
         'Service',
         'Square',

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Mai 2014 um 03:14
+-- Erstellungszeit: 23. Jun 2014 um 23:00
 -- Server Version: 5.5.27
 -- PHP-Version: 5.4.7
 
@@ -66,6 +66,42 @@ CREATE TABLE IF NOT EXISTS `bs_bookings_meta` (
   `value` text NOT NULL,
   PRIMARY KEY (`bmid`),
   KEY `bid` (`bid`),
+  KEY `key` (`key`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `bs_events`
+--
+
+CREATE TABLE IF NOT EXISTS `bs_events` (
+  `eid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sid` int(10) unsigned DEFAULT NULL COMMENT 'NULL for all',
+  `status` varchar(64) NOT NULL DEFAULT 'enabled' COMMENT 'enabled',
+  `datetime_start` datetime NOT NULL,
+  `datetime_end` datetime NOT NULL,
+  `capacity` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`eid`),
+  KEY `sid` (`sid`),
+  KEY `datetime_start` (`datetime_start`),
+  KEY `datetime_end` (`datetime_end`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `bs_events_meta`
+--
+
+CREATE TABLE IF NOT EXISTS `bs_events_meta` (
+  `emid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `eid` int(10) unsigned NOT NULL,
+  `key` varchar(64) NOT NULL,
+  `value` text NOT NULL,
+  `locale` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`emid`),
+  KEY `eid` (`eid`),
   KEY `key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -285,6 +321,18 @@ ALTER TABLE `bs_bookings_bills`
 --
 ALTER TABLE `bs_bookings_meta`
   ADD CONSTRAINT `bs_bookings_meta_ibfk_1` FOREIGN KEY (`bid`) REFERENCES `bs_bookings` (`bid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints der Tabelle `bs_events`
+--
+ALTER TABLE `bs_events`
+  ADD CONSTRAINT `bs_events_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `bs_squares` (`sid`);
+
+--
+-- Constraints der Tabelle `bs_events_meta`
+--
+ALTER TABLE `bs_events_meta`
+  ADD CONSTRAINT `bs_events_meta_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `bs_events` (`eid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `bs_reservations`

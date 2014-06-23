@@ -56,6 +56,14 @@ Reservation meta keys:
 
 
 
+Event meta keys:
+
+- name
+- description                               HTML
+- notes                                     (optional)
+
+
+
 Square meta keys:
 
 - info.pre                                  (optional)
