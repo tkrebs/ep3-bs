@@ -1,6 +1,6 @@
 <?php
 
-namespace Calendar\View\Helper;
+namespace Calendar\View\Helper\Cell;
 
 use Zend\View\Helper\AbstractHelper;
 
@@ -25,7 +25,7 @@ class Cell extends AbstractHelper
             $innerTag,
             $outerClasses,
             $innerClasses,
-            $view->translate($content),
+            $view->t($content),
             $misc);
 
         return $html;

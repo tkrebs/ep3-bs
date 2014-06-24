@@ -21,6 +21,8 @@
             }).delay(5000).fadeOut(3000, function() {
                 $(this).remove();
             });
+
+            $(document).trigger("updateLayout");
         }
 
     });

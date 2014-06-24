@@ -34,9 +34,17 @@ return array(
 
     'view_helpers' => array(
         'invokables' => array(
-            'CalendarCell' => 'Calendar\View\Helper\Cell',
-            'CalendarCellLink' => 'Calendar\View\Helper\CellLink',
-            'CalendarCellLogic' => 'Calendar\View\Helper\CellLogic',
+            'CalendarCell' => 'Calendar\View\Helper\Cell\Cell',
+            'CalendarCellLink' => 'Calendar\View\Helper\Cell\CellLink',
+            'CalendarCellLogic' => 'Calendar\View\Helper\Cell\CellLogic',
+
+            'CalendarCellRenderCell' => 'Calendar\View\Helper\Cell\Render\Cell',
+            'CalendarCellRenderEvent' => 'Calendar\View\Helper\Cell\Render\Event',
+            'CalendarCellRenderFree' => 'Calendar\View\Helper\Cell\Render\Free',
+            'CalendarCellRenderFreeForPrivileged' => 'Calendar\View\Helper\Cell\Render\FreeForPrivileged',
+            'CalendarCellRenderOccupied' => 'Calendar\View\Helper\Cell\Render\Occupied',
+            'CalendarCellRenderOccupiedForPrivileged' => 'Calendar\View\Helper\Cell\Render\OccupiedForPrivileged',
+            'CalendarCellRenderOccupiedForVisitors' => 'Calendar\View\Helper\Cell\Render\OccupiedForVisitors',
 
             'CalendarDateRow' => 'Calendar\View\Helper\DateRow',
             'CalendarSquareRow' => 'Calendar\View\Helper\SquareRow',
@@ -47,6 +55,10 @@ return array(
             'CalendarReservationsCleanup' => 'Calendar\View\Helper\ReservationsCleanup',
             'CalendarReservationsForCell' => 'Calendar\View\Helper\ReservationsForCell',
             'CalendarReservationsForCol' => 'Calendar\View\Helper\ReservationsForCol',
+
+            'CalendarEventsCleanup' => 'Calendar\View\Helper\EventsCleanup',
+            'CalendarEventsForCell' => 'Calendar\View\Helper\EventsForCell',
+            'CalendarEventsForCol' => 'Calendar\View\Helper\EventsForCol',
         ),
     ),
 

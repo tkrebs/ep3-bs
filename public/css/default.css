@@ -220,33 +220,38 @@ a#logo:active { top: 1px; }
 .cc-label {
     display: block;
     height: 10px;
-    white-space: nowrap;
     overflow: visible;
 }
 
 .cc-over { cursor: default; color: #666; background-color: #F8F8F8; }
 
+a.cc-event:link,
+a.cc-event:visited { opacity: 1.0; color: #FFF; background: #975459 url(../imgs/icons/misc-event.png) no-repeat center center; }
+a.cc-event:hover { background-color: #6A3333; }
+
 a.cc-free:link,
-a.cc-free:visited { opacity: 1.0; color: #333; background: #EEE; }
-a.cc-free:hover { background: #CCC; }
+a.cc-free:visited { opacity: 1.0; color: #333; background-color: #EEE; }
+a.cc-free:hover { background-color: #CCC; }
 
 a.cc-free-partially { text-decoration: underline; }
 
 a.cc-own:link,
-a.cc-own:visited { opacity: 1.0; color: #FFF; background: #8BB243; }
-a.cc-own:hover { background: #5F8024; }
+a.cc-own:visited { opacity: 1.0; color: #FFF; background-color: #8BB243; }
+a.cc-own:hover { background-color: #5F8024; }
 
 a.cc-single:link,
-a.cc-single:visited { opacity: 1.0; color: #FFF; background: #808D96; }
-a.cc-single:hover { background: #4C5359; }
+a.cc-single:visited { opacity: 1.0; color: #FFF; background-color: #808D96; }
+a.cc-single:hover { background-color: #4C5359; }
 
 a.cc-multiple:link,
-a.cc-multiple:visited { opacity: 1.0; color: #FFF; background: #547B97; }
-a.cc-multiple:hover { background: #334F6A; }
+a.cc-multiple:visited { opacity: 1.0; color: #FFF; background-color: #547B97; }
+a.cc-multiple:hover { background-color: #334F6A; }
 
 a.cc-conflict:link,
-a.cc-conflict:visited { opacity: 1.0; color: #FFF; background: #334F6A; }
-a.cc-conflict:hover { background: #334F6A; }
+a.cc-conflict:visited { opacity: 1.0; color: #FFF; background-color: #334F6A; }
+a.cc-conflict:hover { background-color: #334F6A; }
+
+a.cc-conflict { position: relative; z-index: 256; }
 
 /* Layout - Alternate Calendar */
 

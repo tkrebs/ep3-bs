@@ -14,6 +14,8 @@ class Event extends AbstractLocaleEntity
     protected $datetime_end;
     protected $capacity;
 
+    protected $primary = 'eid';
+
     /**
      * The possible status options.
      *

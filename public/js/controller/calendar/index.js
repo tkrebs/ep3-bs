@@ -39,19 +39,31 @@
             var classes = that.attr("class");
             var group = classes.match(/cc-group-\d+/);
 
-            $("a." + group).css({ "opacity": 0.9, "background-color": that.css("background-color") });
-            that.css("opacity", 1.0);
+            if (group) {
+                $("a." + group).css({"opacity": 0.9, "background-color": that.css("background-color")});
+                that.css("opacity", 1.0);
+            }
         }, function() {
-            var classes = $(this).attr("class");
+            var that = $(this);
+            var classes = that.attr("class");
             var group = classes.match(/cc-group-\d+/);
 
-            $("a." + group).removeAttr("style");
+            if (group) {
+                $("a." + group).removeAttr("style");
+            }
         });
 
         /* Update calendar */
 
         updateCalendarCols();
         $(window).resize(updateCalendarCols);
+        $(document).on("updateLayout", updateCalendarCols);
+
+        /* Update calendar events */
+
+        updateCalendarEvents();
+        $(window).resize(updateCalendarEvents);
+        $(document).on("updateLayout", updateCalendarEvents);
 
         /* Beautify calendar */
 
@@ -224,6 +236,81 @@
         if (calendarWidth && calendarLegendColWidth && calendarDateCols.length) {
             calendarDateCols.width( Math.floor((calendarWidth - calendarLegendColWidth) / calendarDateCols.length) );
         }
+    }
+
+    function updateCalendarEvents()
+    {
+        $(".calendar-date-col").each(function(dateIndex) {
+            var calendarDateCol = $(this);
+
+            var eventGroups = [];
+
+            calendarDateCol.find(".cc-event").each(function() {
+                var classes = $(this).attr("class");
+                var eventGroup = classes.match(/cc-group-\d+/);
+
+                if (eventGroup) {
+                    if ($.inArray(eventGroup, eventGroups) === -1) {
+                        eventGroups.push(eventGroup);
+                    }
+                }
+            });
+
+            var eventGroupsLength = eventGroups.length;
+
+            for (var i = 0; i <= eventGroupsLength; i++) {
+                var eventGroup = eventGroups[i];
+
+                var eventGroupCellFirst = calendarDateCol.find("." + eventGroup + ":first");
+                var eventGroupCellLast = calendarDateCol.find("." + eventGroup + ":last");
+
+                var posFirst = eventGroupCellFirst.position();
+                var posLast = eventGroupCellLast.position();
+
+                if (posFirst && posLast) {
+                    var startX = Math.round(posFirst.left) - 1;
+                    var startY = Math.round(posFirst.top) - 1;
+
+                    var endX = Math.round(posLast.left) + 1;
+                    var endY = Math.round(posLast.top) + 1;
+
+                    var eventWidth = Math.round((endX + eventGroupCellLast.width()) - startX);
+                    var eventHeight = Math.round((endY + eventGroupCellLast.height()) - startY);
+
+                    /* Create event group overlay */
+
+                    var eventGroupOverlay = $("#" + eventGroup + "-overlay-" + dateIndex);
+
+                    if (! eventGroupOverlay.length) {
+                        eventGroupOverlay = eventGroupCellFirst.clone();
+                        eventGroupOverlay.appendTo( eventGroupCellFirst.closest("td") );
+                        eventGroupOverlay.attr("id", eventGroup + "-overlay-" + dateIndex);
+                        eventGroupOverlay.attr("class", "calendar-cell cc-event");
+                    }
+
+                    var eventGroupOverlayLabel = eventGroupOverlay.find(".cc-label");
+
+                    eventGroupOverlay.css({
+                        "position": "absolute",
+                        "z-index": 128,
+                        "left": startX, "top": startY,
+                        "width": eventWidth,
+                        "height": eventHeight
+                    });
+
+                    eventGroupOverlayLabel.css({
+                        "height": "auto",
+                        "font-size": "12px",
+                        "line-height": 1.5
+                    });
+
+                    eventGroupOverlayLabel.css({
+                        "position": "relative",
+                        "top": Math.round((eventHeight / 2) - (eventGroupOverlayLabel.height() / 2))
+                    });
+                }
+            }
+        });
     }
 
 })();

@@ -5,6 +5,13 @@
 <?php
 
 $reservations = $this->get('reservations');
+$events = $this->get('events');
+
+$reservationsForColPlugin = $this->plugin('CalendarReservationsForCol');
+$reservationsCleanupPlugin = $this->plugin('CalendarReservationsCleanup');
+
+$eventsForColPlugin = $this->plugin('CalendarEventsForCol');
+$eventsCleanupPlugin = $this->plugin('CalendarEventsCleanup');
 
 /* Loop through day cols */
 
@@ -30,10 +37,11 @@ while ($walkingDate <= $this->dateEnd) {
         for ($walkingTime = $this->timeStart; $walkingTime < $this->timeEnd; $walkingTime += $this->timeBlock) {
             $walkingDate->modify('+' . $walkingTime . ' sec');
 
-            $reservationsForColPlugin = $this->plugin('CalendarReservationsForCol');
             $reservationsForCol = $reservationsForColPlugin($reservations, $walkingDate, $walkingTime, $this->timeBlock);
+            $eventsForCol = $eventsForColPlugin($events, $walkingDate, $walkingTime, $this->timeBlock);
 
-            echo $this->calendarCellLogic($walkingDate, $walkingTime, $this->timeBlock, $this->dateNow, $square, $this->user, $reservationsForCol);
+            echo $this->calendarCellLogic($walkingDate, $walkingTime, $this->timeBlock, $this->dateNow,
+                $square, $this->user, $reservationsForCol, $eventsForCol);
 
             $walkingDate->setTime(0, 0, 0);
         }
@@ -41,8 +49,8 @@ while ($walkingDate <= $this->dateEnd) {
         echo '</tr>';
     }
 
-    $reservationsCleanupPlugin = $this->plugin('CalendarReservationsCleanup');
     $reservationsCleanupPlugin($reservations, $walkingDate);
+    $eventsCleanupPlugin($events, $walkingDate);
 
     echo '</table>';
 

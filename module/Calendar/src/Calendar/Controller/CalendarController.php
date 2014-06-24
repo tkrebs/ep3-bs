@@ -3,6 +3,7 @@
 namespace Calendar\Controller;
 
 use DateTime;
+use Zend\Debug\Debug;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class CalendarController extends AbstractActionController
@@ -13,6 +14,7 @@ class CalendarController extends AbstractActionController
         $serviceManager = $this->getServiceLocator();
 
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
+        $eventManager = $serviceManager->get('Event\Manager\EventManager');
         $reservationManager = $serviceManager->get('Booking\Manager\ReservationManager');
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
 
@@ -34,8 +36,10 @@ class CalendarController extends AbstractActionController
 
         $reservations = $reservationManager->getInRange($dateStart, $dateEnd);
         $bookings = $bookingManager->getByReservations($reservations);
+        $events = $eventManager->getInRange($dateStart, $dateEnd);
 
         $reservationManager->getSecondsPerDay($reservations);
+        $eventManager->getSecondsPerDay($events);
 
         $userSessionManager = $serviceManager->get('User\Manager\UserSessionManager');
         $user = $userSessionManager->getSessionUser();
@@ -61,6 +65,7 @@ class CalendarController extends AbstractActionController
             'squares' => $squares,
             'squaresCount' => $squaresCount,
             'reservations' => $reservations,
+            'events' => $events,
             'user' => $user,
         );
     }

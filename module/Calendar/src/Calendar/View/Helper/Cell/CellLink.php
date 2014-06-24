@@ -1,6 +1,6 @@
 <?php
 
-namespace Calendar\View\Helper;
+namespace Calendar\View\Helper\Cell;
 
 use Zend\View\Helper\AbstractHelper;
 
