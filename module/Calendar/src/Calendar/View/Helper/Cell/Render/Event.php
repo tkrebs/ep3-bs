@@ -11,9 +11,11 @@ class Event extends AbstractHelper
     {
         $view = $this->getView();
 
+        $eid = $event->need('eid');
+
         $cellLabel = $event->getMeta('name', '?');
-        $cellUrl = $view->url('square', [], $cellLinkParams);
-        $cellClass = 'cc-event cc-group-' . $event->need('eid');
+        $cellUrl = $view->url('event', ['eid' => $eid]);
+        $cellClass = 'cc-event cc-group-' . $eid;
 
         return $view->calendarCellLink($cellLabel, $cellUrl, $cellClass);
     }

@@ -82,8 +82,12 @@ class EventManager extends AbstractLocaleEntityManager
      * @param array $events
      * @return array
      */
-    public function getSecondsPerDay(array $events)
+    public function getSecondsPerDay($events)
     {
+        if (! is_array($events)) {
+            $events = array($events);
+        }
+
         foreach ($events as $event) {
             $dateTimeStart = new \DateTime($event->need('datetime_start'));
 
