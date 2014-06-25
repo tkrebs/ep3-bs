@@ -65,9 +65,9 @@ class EventManager extends AbstractLocaleEntityManager
     {
         $where = new Where();
 
-        $where->greaterThan('datetime_end', $dateTimeStart->format('Y-m-d'));
+        $where->greaterThan('datetime_end', $dateTimeStart->format('Y-m-d H:i:s'));
         $where->and;
-        $where->lessThan('datetime_start', $dateTimeEnd->format('Y-m-d'));
+        $where->lessThan('datetime_start', $dateTimeEnd->format('Y-m-d H:i:s'));
 
         return $this->getBy($where, 'datetime_start ASC', $limit, $offset, $loadMeta);
     }

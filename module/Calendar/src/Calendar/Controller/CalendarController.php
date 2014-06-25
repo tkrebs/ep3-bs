@@ -3,7 +3,6 @@
 namespace Calendar\Controller;
 
 use DateTime;
-use Zend\Debug\Debug;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class CalendarController extends AbstractActionController

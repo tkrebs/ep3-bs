@@ -7,6 +7,7 @@ use Booking\Entity\Booking;
 use Booking\Manager\BookingManager;
 use Booking\Manager\ReservationManager;
 use DateTime;
+use Event\Manager\EventManager;
 use Exception;
 use RuntimeException;
 use Square\Manager\SquareManager;
@@ -17,14 +18,16 @@ class SquareValidator extends AbstractService
 
     protected $bookingManager;
     protected $reservationManager;
+    protected $eventManager;
     protected $squareManager;
     protected $user;
 
     public function __construct(BookingManager $bookingManager, ReservationManager $reservationManager,
-        SquareManager $squareManager, UserSessionManager $userSessionManager)
+        EventManager $eventManager, SquareManager $squareManager, UserSessionManager $userSessionManager)
     {
         $this->bookingManager = $bookingManager;
         $this->reservationManager = $reservationManager;
+        $this->eventManager = $eventManager;
         $this->squareManager = $squareManager;
         $this->user = $userSessionManager->getSessionUser();
     }
@@ -201,6 +204,8 @@ class SquareValidator extends AbstractService
         $square = $byproducts['square'];
         $user = $byproducts['user'];
 
+        /* Check for other reservations */
+
         $possibleReservations = $this->reservationManager->getInRange($dateStart, $dateEnd);
         $possibleBookings = $this->bookingManager->getByReservations($possibleReservations);
 
@@ -247,11 +252,24 @@ class SquareValidator extends AbstractService
             $bookable = false;
         }
 
+        /* Check for blocking events */
+
+        $events = $this->eventManager->getInRange($dateStart, $dateEnd);
+
+        foreach ($events as $event) {
+            if (is_null($event->get('sid')) || $event->get('sid') == $square->need('sid')) {
+                $bookable = false;
+            }
+        }
+
+        /* Gather byproducts */
+
         $byproducts['bookings'] = $bookings;
         $byproducts['bookingsFromUser'] = $bookingsFromUser;
         $byproducts['reservations'] = $reservations;
         $byproducts['bookable'] = $bookable;
         $byproducts['quantity'] = $quantity;
+        $byproducts['events'] = $events;
 
         return $byproducts;
     }

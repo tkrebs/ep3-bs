@@ -18,7 +18,7 @@ $this->setup(array(
         <?php
 
         if ($this->square) {
-            echo sprintf('%s %s', $this->option('subject.square.type') . ' ' . $this->square->need('name'));
+            echo sprintf('%s %s', $this->option('subject.square.type'), $this->square->need('name'));
         } else {
             echo sprintf($this->t('All %s'), $this->option('subject.square.type.plural'));
         }
