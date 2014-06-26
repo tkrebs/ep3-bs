@@ -124,6 +124,49 @@ return array(
                             ),
                         ),
                     ),
+                    'event' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/event',
+                            'defaults' => array(
+                                'controller' => 'Backend\Controller\Event',
+                                'action' => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'edit' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/edit',
+                                    'defaults' => array(
+                                        'action' => 'edit',
+                                    ),
+                                ),
+                            ),
+                            'delete' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/delete/:eid',
+                                    'defaults' => array(
+                                        'action' => 'delete',
+                                    ),
+                                    'constraints' => array(
+                                        'eid' => '[0-9]+',
+                                    ),
+                                ),
+                            ),
+                            'stats' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/stats',
+                                    'defaults' => array(
+                                        'action' => 'stats',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                     'config' => array(
                         'type' => 'Literal',
                         'options' => array(
@@ -298,6 +341,7 @@ return array(
             'Backend\Controller\Index' => 'Backend\Controller\IndexController',
             'Backend\Controller\User' => 'Backend\Controller\UserController',
             'Backend\Controller\Booking' => 'Backend\Controller\BookingController',
+            'Backend\Controller\Event' => 'Backend\Controller\EventController',
             'Backend\Controller\Config' => 'Backend\Controller\ConfigController',
             'Backend\Controller\ConfigSquare' => 'Backend\Controller\ConfigSquareController',
         ),

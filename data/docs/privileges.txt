@@ -3,6 +3,7 @@
 - Assist users can do according to their meta values set to "true":
   - allow.admin.user
   - allow.admin.booking
+  - allow.admin.event
   - allow.admin.config
   - allow.admin.see-menu
 

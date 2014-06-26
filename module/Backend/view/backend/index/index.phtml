@@ -35,6 +35,17 @@ $this->setup(array(
         <a href="<?= $this->url('backend/booking/stats') ?>" class="unlined gray"><span class="symbolic symbolic-stats"><?= $this->t('Statistic') ?></span></a>
     </div>
 
+    <div style="margin-bottom: 8px;">
+        <a href="<?= $this->url('backend/event') ?>" class="default-button" style="width: 150px; text-align: left;"><span class="symbolic symbolic-date"><?= $this->t('Events') ?></span></a>
+        <span class="no-ajax gray" style="margin-left: 16px;">
+            <?= $this->t('Create, edit or delete the events of your system') ?>
+        </span>
+    </div>
+
+    <div style="margin-left: 14px; margin-bottom: 16px;">
+        <a href="<?= $this->url('backend/event/stats') ?>" class="unlined gray"><span class="symbolic symbolic-stats"><?= $this->t('Statistic') ?></span></a>
+    </div>
+
     <div>
         <a href="<?= $this->url('backend/config') ?>" class="default-button" style="width: 150px; text-align: left;"><span class="symbolic symbolic-config"><?= $this->t('Configuration') ?></span></a>
         <span class="no-ajax gray" style="margin-left: 16px;">

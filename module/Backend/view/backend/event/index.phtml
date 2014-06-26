@@ -1,0 +1,46 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Event-Administration',
+    'panel' => 'centered-panel large-sized',
+    'back' => true,
+    'links' => array(
+        'User-Administration' => $this->url('backend/user'),
+        'Booking-Administration' => $this->url('backend/booking'),
+        'Configuration' => $this->url('backend/config'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Event-Administration') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= $this->t('Here you can create, edit or delete the events of your system.') ?></p>
+
+    <div class="separator separator-line"></div>
+
+    <?= $this->partial('backend/event/index.datepicker.phtml', ['dateStart' => $this->dateStart, 'dateEnd' => $this->dateEnd, 'search' => $this->search]) ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="centered-text" style="padding: 16px 0px 16px 0px;">
+
+        <?php if ($this->events): ?>
+
+            <?php /* ... */ ?>
+
+        <?php else: ?>
+
+            <?php if ($this->dateStart || $this->dateEnd): ?>
+                <p><span class="red"><?= sprintf($this->t('%sNo events found%s for this search'), '<b>', '</b>') ?></span></p>
+            <?php endif; ?>
+
+            <p><a href="<?= $this->url('backend/event/edit') ?>" class="unlined gray"><span class="symbolic symbolic-plus"><?= $this->t('New event') ?></span></a></p>
+
+        <?php endif; ?>
+
+    </div>
+</div>

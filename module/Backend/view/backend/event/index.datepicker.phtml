@@ -1,0 +1,45 @@
+<?php
+
+if (! ($this->dateStart || $this->dateEnd)) {
+    $this->dateStart = new DateTime();
+    $this->dateEnd = new DateTime();
+    $this->dateEnd->modify('+ 2 days');
+}
+
+?>
+
+<div style="padding: 10px 0px 16px 0px;">
+    <form method="get" action="<?= $this->url('backend/event') ?>">
+        <table class="default-table">
+            <tr>
+                <td>
+                    <div class="default-form-label-top gray">
+                        <label for="date-start"><?= $this->t('Date') ?>:</label>
+                    </div>
+
+                    <div class="inline-element">
+                        <label for="date-start" class="inline-label symbolic symbolic-date"><span><?= $this->t('Date start') ?></span></label>
+                        <input type="text" name="date-start" id="date-start" value="<?= $this->dateFormat($this->dateStart, IntlDateFormatter::MEDIUM) ?>"
+                               class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">
+                    </div>
+                </td>
+
+                <td style="vertical-align: bottom; padding-bottom: 7px;">
+                    <?= $this->t('to') ?>
+                </td>
+
+                <td style="vertical-align: bottom;">
+                    <div class="inline-element">
+                        <label for="date-end" class="inline-label symbolic symbolic-date"><span><?= $this->t('Date end') ?></span></label>
+                        <input type="text" name="date-end" id="date-end" value="<?= $this->dateFormat($this->dateEnd, IntlDateFormatter::MEDIUM) ?>"
+                               class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">
+                    </div>
+                </td>
+
+                <td style="vertical-align: bottom;">
+                    <input type="submit" value="<?= $this->t('Search') ?>" class="default-button">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

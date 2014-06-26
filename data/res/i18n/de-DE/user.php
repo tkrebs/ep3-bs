@@ -86,6 +86,7 @@ return array(
 
     'May manage users' => 'Darf Benutzer verwalten',
     'May manage bookings' => 'Darf Buchungen verwalten',
+    'May manage events' => 'Darf Veranstaltungen verwalten',
     'May change configuration' => 'Darf Einstellungen verändern',
     'Can see the admin menu' => 'Sieht das Verwaltungsmenü',
     'Can see the past in calendar' => 'Sieht auch vergangene Buchungen',

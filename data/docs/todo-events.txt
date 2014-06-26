@@ -1,5 +1,5 @@
-- Events might have participants (can be participated instead of booked)
-
-- Use booking system for booking/participating events
+- Events have participants (tables)
+- Event administration like booking administration
+- Participation process like booking process
 
 - Demo for purely informational and bookable event calendar

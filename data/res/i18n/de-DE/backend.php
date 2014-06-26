@@ -4,12 +4,17 @@ return array(
 
     'Users' => 'Benutzer',
     'Create, edit or delete the users of your system' => 'Erstellen, bearbeiten oder löschen Sie Benutzer Ihres Systems',
-    'Statistic' => 'Statistik',
-    'User-Statistic' => 'Benutzer-Statistik',
-    'Booking-Statistic' => 'Buchungs-Statistik',
 
     'Bookings' => 'Buchungen',
     'Create, edit or delete the bookings of your system' => 'Erstellen, bearbeiten oder löschen Sie Buchungen Ihres Systems',
+
+    'Events' => 'Veranstaltungen',
+    'Create, edit or delete the events of your system' => 'Erstellen, bearbeiten oder löschen Sie Veranstaltungen Ihres Systems',
+
+    'Statistic' => 'Statistik',
+    'User-Statistic' => 'Benutzer-Statistik',
+    'Booking-Statistic' => 'Buchungs-Statistik',
+    'Event-Statistic' => 'Veranstaltungs-Statistik',
 
     'Configuration' => 'Einstellungen',
     'Configuration has been saved' => 'Einstellungen wurden gespeichert',
@@ -25,14 +30,19 @@ return array(
     'Booking-Administration' => 'Buchungs-Verwaltung',
     'Here you can create, edit or delete the bookings of your system.' => 'Hier können Sie die Buchungen Ihres Systems erstellen, bearbeiten oder löschen.',
 
+    'Event-Administration' => 'Veranstaltungs-Verwaltung',
+    'Here you can create, edit or delete the events of your system.' => 'Hier können Sie die Veranstaltungen Ihres Systems erstellen, bearbeiten oder löschen.',
+
     'Name or number' => 'Name oder Nummer',
     'Search' => 'Suche',
     'Advanced search' => 'Erweiterte Suche',
     '%sNo users found%s for this search' => '%sKeine Benutzer%s für diese Suche gefunden',
     '%sNo bookings found%s for this search' => '%sKeine Buchungen%s für diese Suche gefunden',
+    '%sNo events found%s for this search' => '%sKeine Veranstaltungen%s für diese Suche gefunden',
 
     'New user' => 'Neuer Benutzer',
     'New booking' => 'Neue Buchung',
+    'New event' => 'Neue Veranstaltung',
     'User has been saved' => 'Benutzer wurde gespeichert',
     'User has been deleted' => 'Benutzer wurde gelöscht',
     'Booking has been saved' => 'Buchung wurde gespeichert',
