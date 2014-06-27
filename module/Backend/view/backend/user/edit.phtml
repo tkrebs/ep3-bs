@@ -20,6 +20,7 @@ $this->setup(array(
     'back' => $back,
     'links' => array(
         'Booking-Administration' => $this->url('backend/booking'),
+        'Event-Administration' => $this->url('backend/event'),
         'Configuration' => $this->url('backend/config'),
     ),
 ));
@@ -123,70 +124,70 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-gender')) ?>
+                        <?= $this->formLabel($form->get('euf-gender')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-gender')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-gender')) ?>
+                        <?= $this->formElement($form->get('euf-gender')) ?>
+                        <?= $this->formElementErrors($form->get('euf-gender')) ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-firstname')) ?>
+                        <?= $this->formLabel($form->get('euf-firstname')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-firstname')) ?>
-                        <?php echo $this->formElement($form->get('euf-lastname')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-firstname')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-lastname')) ?>
+                        <?= $this->formElement($form->get('euf-firstname')) ?>
+                        <?= $this->formElement($form->get('euf-lastname')) ?>
+                        <?= $this->formElementErrors($form->get('euf-firstname')) ?>
+                        <?= $this->formElementErrors($form->get('euf-lastname')) ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-street')) ?>
+                        <?= $this->formLabel($form->get('euf-street')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-street')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-street')) ?>
+                        <?= $this->formElement($form->get('euf-street')) ?>
+                        <?= $this->formElementErrors($form->get('euf-street')) ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-zip')) ?>
+                        <?= $this->formLabel($form->get('euf-zip')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-zip')) ?>
-                        <?php echo $this->formElement($form->get('euf-city')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-zip')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-city')) ?>
+                        <?= $this->formElement($form->get('euf-zip')) ?>
+                        <?= $this->formElement($form->get('euf-city')) ?>
+                        <?= $this->formElementErrors($form->get('euf-zip')) ?>
+                        <?= $this->formElementErrors($form->get('euf-city')) ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-phone')) ?>
+                        <?= $this->formLabel($form->get('euf-phone')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-phone')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-phone')) ?>
+                        <?= $this->formElement($form->get('euf-phone')) ?>
+                        <?= $this->formElementErrors($form->get('euf-phone')) ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-birthdate')) ?>
+                        <?= $this->formLabel($form->get('euf-birthdate')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-birthdate')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-birthdate')) ?>
+                        <?= $this->formElement($form->get('euf-birthdate')) ?>
+                        <?= $this->formElementErrors($form->get('euf-birthdate')) ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="default-form-label-row">
-                        <?php echo $this->formLabel($form->get('euf-notes')) ?>
+                        <?= $this->formLabel($form->get('euf-notes')) ?>
                     </td>
                     <td>
-                        <?php echo $this->formElement($form->get('euf-notes')) ?>
-                        <?php echo $this->formElementNotes($form->get('euf-notes')) ?>
-                        <?php echo $this->formElementErrors($form->get('euf-notes')) ?>
+                        <?= $this->formElement($form->get('euf-notes')) ?>
+                        <?= $this->formElementNotes($form->get('euf-notes')) ?>
+                        <?= $this->formElementErrors($form->get('euf-notes')) ?>
                     </td>
                 </tr>
             </table>

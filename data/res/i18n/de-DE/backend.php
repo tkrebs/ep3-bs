@@ -8,6 +8,7 @@ return array(
     'Bookings' => 'Buchungen',
     'Create, edit or delete the bookings of your system' => 'Erstellen, bearbeiten oder löschen Sie Buchungen Ihres Systems',
 
+    'Event' => 'Veranstaltung',
     'Events' => 'Veranstaltungen',
     'Create, edit or delete the events of your system' => 'Erstellen, bearbeiten oder löschen Sie Veranstaltungen Ihres Systems',
 
@@ -48,6 +49,8 @@ return array(
     'Booking has been saved' => 'Buchung wurde gespeichert',
     'Booking has been deleted' => 'Buchung wurde gelöscht',
     'Booking has been cancelled' => 'Buchung wurde storniert',
+    'Event has been saved' => 'Veranstaltung wurde gespeichert',
+    'Event has been deleted' => 'Veranstaltung wurde gelöscht',
     'Square has been saved' => 'Platz wurde gespeichert',
     'Square has been deleted' => 'Platz wurde gelöscht',
     'User status has been set to deleted' => 'Benutzerstatus wurde auf gelöscht gesetzt',
@@ -82,6 +85,8 @@ return array(
     'Since this user has already bookings, he will be set to deleted but kept in the database'
         => 'Da dieser Benutzer bereits Buchungen hat, wird er auf gelöscht gestellt, bleibt aber in der Datenbank',
 
+    'Delete this booking' => 'Buchung löschen',
+
     'Are you sure you want to delete this booking?' => 'Sind Sie sicher, dass Sie diese Buchung löschen möchten?',
     'Yes, delete this booking' => 'Ja, Buchung löschen',
 
@@ -106,6 +111,10 @@ return array(
     'What do you want to edit?' => 'Was möchten Sie bearbeiten?',
     'Only this one reservation' => 'Nur diese eine Reservierung',
     'The entire booking' => 'Die gesamte Buchung',
+
+    'Delete this event' => 'Veranstaltung löschen',
+    'Are you sure you want to delete this event?' => 'Sind Sie sicher, dass Sie diese Veranstaltung löschen möchten?',
+    'Yes, delete this event' => 'Ja, Veranstaltung löschen',
 
     'You can use filters like these to narrow your search:' => 'Sie können Filter einsetzen um Ihre Suche einzuschränken:',
     'You can also combine a search term and multiple filters like this:'
@@ -149,6 +158,7 @@ return array(
 
     'All %s' => 'Alle %s',
     'All squares' => 'Alle Plätze',
+    'All' => 'Alle',
 
     'Edit square info and rule texts' => 'Platzinfos und -regeln bearbeiten',
     'Current file:' => 'Aktuelle Datei:',
@@ -310,5 +320,9 @@ return array(
         => 'Optionale AGB als PDF-Datei,<br>die vor der Registrierung akzeptiert werden müssen',
     'Optional privacy policy as PDF-Document that must be accepted prior to registration'
         => 'Optionale Datenschutzerklärung als PDF-Datei,<br>die vor der Registrierung akzeptiert werden muss',
+
+    'How many people can participate?' => 'Wieviele Personen können teilnehmen?',
+
+    'There are multiple events for this date and time:' => 'Es gibt mehrere Veranstaltungen für diesen Zeitraum:',
 
 );

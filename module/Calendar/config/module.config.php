@@ -40,6 +40,8 @@ return array(
 
             'CalendarCellRenderCell' => 'Calendar\View\Helper\Cell\Render\Cell',
             'CalendarCellRenderEvent' => 'Calendar\View\Helper\Cell\Render\Event',
+            'CalendarCellRenderEventConflict' => 'Calendar\View\Helper\Cell\Render\EventConflict',
+            'CalendarCellRenderEventForPrivileged' => 'Calendar\View\Helper\Cell\Render\EventForPrivileged',
             'CalendarCellRenderFree' => 'Calendar\View\Helper\Cell\Render\Free',
             'CalendarCellRenderFreeForPrivileged' => 'Calendar\View\Helper\Cell\Render\FreeForPrivileged',
             'CalendarCellRenderOccupied' => 'Calendar\View\Helper\Cell\Render\Occupied',

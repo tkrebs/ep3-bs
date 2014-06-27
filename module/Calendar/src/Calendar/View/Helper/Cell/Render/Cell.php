@@ -22,30 +22,23 @@ class Cell extends AbstractHelper
             $cellLinkParams['query']['te'] = '24:00';
         }
 
+        /* Check events */
+
+        if ($eventsForCell) {
+            if (count($eventsForCell) > 1 || count($reservationsForCell) > 0) {
+                return $view->calendarCellRenderEventConflict($user, $eventsForCell, $reservationsForCell, $cellLinkParams);
+            } else {
+                $event = current($eventsForCell);
+                return $view->calendarCellRenderEvent($user, $event, $cellLinkParams);
+            }
+        }
+
+        /* Check bookings */
+
         $capacity = $square->need('capacity');
         $capacityHeterogenic = $square->need('capacity_heterogenic');
 
         $quantity = 0;
-
-        /* Check events */
-
-        if ($eventsForCell) {
-            if ($user && $user->can('calendar.see-data')) {
-                if ($eventsForCell && $reservationsForCell) {
-                    return $view->calendarCellLink('Conflict', $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-conflict');
-                }
-
-                if (count($eventsForCell) > 1) {
-                    return $view->calendarCellLink('Conflict', $view->url('backend/event/edit', [], $cellLinkParams), 'cc-conflict');
-                }
-            }
-
-            $event = current($eventsForCell);
-
-            return $view->calendarCellRenderEvent($event, $cellLinkParams);
-        }
-
-        /* Check bookings */
 
         $userBooking = null;
 

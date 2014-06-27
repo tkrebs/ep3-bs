@@ -1,0 +1,97 @@
+<?php
+
+if ($this->event) {
+    $eid = $this->event->need('eid');
+} else {
+    $eid = null;
+}
+
+$this->setup(array(
+    'title' => 'Event-Administration',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Event-Administration' => $this->url('backend/event'),
+    ),
+    'links' => array(
+        'User-Administration' => $this->url('backend/user'),
+        'Booking-Administration' => $this->url('backend/booking'),
+        'Configuration' => $this->url('backend/config'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.min.js'));
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.setup.medium.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('Event-Administration') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->editForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/event/edit', ['eid' => $eid]));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?= $this->formRowDefault($form, 'ef-name') ?>
+            <?= $this->formRowDefault($form, 'ef-description') ?>
+
+            <tr>
+                <td colspan="2">
+                    <table class="default-table" style="margin: 0;">
+                        <tr>
+                            <td>
+                                <table class="default-table">
+                                    <?= $this->formRowDefault($form, 'ef-date-start') ?>
+                                    <?= $this->formRowDefault($form, 'ef-date-end') ?>
+                                    <?= $this->formRowDefault($form, 'ef-sid') ?>
+                                </table>
+                            </td>
+
+                            <td>
+                                <table class="default-table">
+                                    <?= $this->formRowDefault($form, 'ef-time-start') ?>
+                                    <?= $this->formRowDefault($form, 'ef-time-end') ?>
+                                    <?= $this->formRowDefault($form, 'ef-capacity') ?>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <?= $this->formRowDefault($form, 'ef-notes') ?>
+
+            <tr>
+                <td>&nbsp;</td>
+
+                <td>
+                    <?= $this->formElement($form->get('ef-submit')) ?>
+
+                    <?php if ($this->event): ?>
+                        <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+
+                        <a href="<?= $this->url('backend/event/delete', ['eid' => $eid]) ?>" class="default-button">
+                            <span class="symbolic symbolic-cross"><?= $this->t('Delete') ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

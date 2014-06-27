@@ -136,11 +136,23 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'edit' => array(
-                                'type' => 'Literal',
+                                'type' => 'Segment',
                                 'options' => array(
-                                    'route' => '/edit',
+                                    'route' => '/edit[/:eid]',
                                     'defaults' => array(
                                         'action' => 'edit',
+                                    ),
+                                    'constraints' => array(
+                                        'eid' => '[0-9]+',
+                                    ),
+                                ),
+                            ),
+                            'edit-choice' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/edit-choice',
+                                    'defaults' => array(
+                                        'action' => 'editChoice',
                                     ),
                                 ),
                             ),
@@ -371,6 +383,8 @@ return array(
         'factories' => array(
             'Backend\Form\Booking\EditForm' => 'Backend\Form\Booking\EditFormFactory',
 
+            'Backend\Form\Event\EditForm' => 'Backend\Form\Event\EditFormFactory',
+
             'Backend\Form\ConfigSquare\EditProductForm' => 'Backend\Form\ConfigSquare\EditProductFormFactory',
 
             'Backend\Form\User\EditForm' => 'Backend\Form\User\EditFormFactory',
@@ -380,6 +394,8 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'BackendBookingsFormat' => 'Backend\View\Helper\Booking\BookingsFormat',
+
+            'BackendEventsFormat' => 'Backend\View\Helper\Event\EventsFormat',
 
             'BackendSquareProductsFormat' => 'Backend\View\Helper\Square\ProductsFormat',
 
@@ -395,6 +411,8 @@ return array(
 
         'factories' => array(
             'BackendBookingFormat' => 'Backend\View\Helper\Booking\BookingFormatFactory',
+
+            'BackendEventFormat' => 'Backend\View\Helper\Event\EventFormatFactory',
 
             'BackendSquareProductFormat' => 'Backend\View\Helper\Square\ProductFormatFactory',
         ),

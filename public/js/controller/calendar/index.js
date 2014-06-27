@@ -17,12 +17,16 @@
         /* Squarebox */
 
         calendar.on("click", "a.calendar-cell", function(event) {
-            event.preventDefault();
+            var that = $(this);
 
-            if (! squarebox) {
-                event.stopPropagation();
+            if (! that.hasClass("squarebox-external-link")) {
+                event.preventDefault();
 
-                loadSquarebox( $(this).attr("href") );
+                if (!squarebox) {
+                    event.stopPropagation();
+
+                    loadSquarebox(that.attr("href"));
+                }
             }
         });
 
@@ -259,7 +263,7 @@
             var eventGroupsLength = eventGroups.length;
 
             for (var i = 0; i <= eventGroupsLength; i++) {
-                var eventGroup = eventGroups[i];
+                var eventGroup = eventGroups[i] + "";
 
                 var eventGroupCellFirst = calendarDateCol.find("." + eventGroup + ":first");
                 var eventGroupCellLast = calendarDateCol.find("." + eventGroup + ":last");
@@ -285,7 +289,7 @@
                         eventGroupOverlay = eventGroupCellFirst.clone();
                         eventGroupOverlay.appendTo( eventGroupCellFirst.closest("td") );
                         eventGroupOverlay.attr("id", eventGroup + "-overlay-" + dateIndex);
-                        eventGroupOverlay.attr("class", "calendar-cell cc-event");
+                        eventGroupOverlay.removeClass(eventGroup);
                     }
 
                     var eventGroupOverlayLabel = eventGroupOverlay.find(".cc-label");

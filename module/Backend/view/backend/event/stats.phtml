@@ -10,6 +10,15 @@ $this->setup(array(
     ),
 ));
 
+$enabled = 0;
+
+foreach ($this->stats as $stat) {
+    $var = $stat['status'];
+    $$var += $stat['count'];
+}
+
+$total = $enabled;
+
 ?>
 
 <div>
@@ -17,5 +26,19 @@ $this->setup(array(
 
     <div class="separator separator-line"></div>
 
-    <p>...</p>
+    <table class="bordered-table">
+        <tr>
+            <td><b><?= $this->t('Events') ?></b></td>
+            <td class="right-text"><b><code><?= $this->numberFormat($total) ?></code></b></td>
+        </tr>
+
+        <tr>
+            <td><span class="gray">&lfloor;</span> <?= $this->t('Enabled') ?></td>
+            <td class="right-text">
+                <code>
+                    <?= $this->numberFormat($enabled) ?>
+                </code>
+            </td>
+        </tr>
+    </table>
 </div>

@@ -22,7 +22,7 @@ $this->setup(array(
 
     <div class="separator separator-line"></div>
 
-    <?= $this->partial('backend/event/index.datepicker.phtml', ['dateStart' => $this->dateStart, 'dateEnd' => $this->dateEnd, 'search' => $this->search]) ?>
+    <?= $this->partial('backend/event/index.datepicker.phtml', ['dateStart' => $this->dateStart, 'dateEnd' => $this->dateEnd]) ?>
 
     <div class="separator separator-line"></div>
 
@@ -30,7 +30,7 @@ $this->setup(array(
 
         <?php if ($this->events): ?>
 
-            <?php /* ... */ ?>
+            <?= $this->backendEventsFormat($this->events, $this->dateStart, $this->dateEnd) ?>
 
         <?php else: ?>
 

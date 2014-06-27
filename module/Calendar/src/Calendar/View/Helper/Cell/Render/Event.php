@@ -7,17 +7,21 @@ use Zend\View\Helper\AbstractHelper;
 class Event extends AbstractHelper
 {
 
-    public function __invoke($event, array $cellLinkParams)
+    public function __invoke($user, $event, array $cellLinkParams)
     {
         $view = $this->getView();
 
-        $eid = $event->need('eid');
+        if ($user && $user->can('admin.events')) {
+            return $view->calendarCellRenderEventForPrivileged($event);
+        } else {
+            $eid = $event->need('eid');
 
-        $cellLabel = $event->getMeta('name', '?');
-        $cellUrl = $view->url('event', ['eid' => $eid]);
-        $cellClass = 'cc-event cc-group-' . $eid;
+            $cellLabel = $event->getMeta('name', '?');
+            $cellUrl = $view->url('event', ['eid' => $eid]);
+            $cellClass = 'cc-event cc-group-' . $eid;
 
-        return $view->calendarCellLink($cellLabel, $cellUrl, $cellClass);
+            return $view->calendarCellLink($cellLabel, $cellUrl, $cellClass);
+        }
     }
 
 }

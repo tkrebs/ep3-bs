@@ -16,7 +16,7 @@ class EventManager extends AbstractLocaleEntityManager
     {
         return array(
             'sid' => $entity->get('sid'),
-            'status' => $entity->get('status'),
+            'status' => $entity->get('status', 'enabled'),
             'datetime_start' => $entity->need('datetime_start'),
             'datetime_end' => $entity->need('datetime_end'),
             'capacity' => $entity->get('capacity'),

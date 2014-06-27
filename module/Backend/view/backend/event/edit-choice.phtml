@@ -1,0 +1,31 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Event-Administration',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div class="padded centered-text">
+    <p><?= $this->t('There are multiple events for this date and time:') ?></p>
+
+    <div class="sandbox">
+        <?php foreach ($this->events as $eid => $event): ?>
+
+            <div style="margin-bottom: 16px;">
+                <a href="<?= $this->url('backend/event/edit', ['eid' => $eid]) ?>" class="default-button" style="min-width: 64px;">
+                    <span class="symbolic symbolic-date">
+                        <?= $event->getMeta('name', '?') ?>
+                    </span>
+                </a>
+
+                <div class="small-text gray" style="margin-top: 4px;">
+                    <?= $this->squareDateFormat($event->needExtra('datetime_start'), $event->needExtra('datetime_end')) ?>
+                </div>
+            </div>
+
+        <?php endforeach; ?>
+    </div>
+</div>
