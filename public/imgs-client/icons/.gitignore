@@ -1,1 +1,3 @@
-fav.local.ico
+*
+!.gitignore
+!fav.ico

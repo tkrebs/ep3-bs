@@ -39,7 +39,7 @@ abstract class AbstractLocaleEntity extends AbstractEntity
             if (! array_key_exists($key, $this->metaLocale)) {
                 $this->metaLocale[$key] = $locale;
             } else {
-                if (is_null($this->metaLocale[$key])) {
+                if (is_null($this->metaLocale[$key]) && ! is_null($locale)) {
                     $this->metaLocale[$key] = $locale;
 
                     $index = array_search($key, $this->updatedMetaProperties);

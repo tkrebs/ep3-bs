@@ -1,1 +1,3 @@
-logo.local.png
+*
+!.gitignore
+!logo.png
