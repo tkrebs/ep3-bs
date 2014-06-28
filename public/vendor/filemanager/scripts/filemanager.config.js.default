@@ -7,7 +7,7 @@
         "showFullPath": false,
         "showTitleAttr": false,
         "browseOnly": false,
-        "showConfirmation": true,
+        "showConfirmation": false,
         "showThumbs": true,
         "generateThumbnails": true,
         "searchBox": true,

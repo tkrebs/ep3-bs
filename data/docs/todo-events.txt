@@ -1,4 +1,2 @@
 - Events can have participants (tables)
 - Participation process like booking process
-
-- Demo for purely informational and bookable event calendar
