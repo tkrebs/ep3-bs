@@ -1,2 +1,2 @@
-- Events can have participants (tables)
+- Events can have participants (tables/manager)
 - Participation process like booking process

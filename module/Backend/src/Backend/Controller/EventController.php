@@ -137,6 +137,17 @@ class EventController extends AbstractActionController
                     'ef-capacity' =>  $event->get('capacity', 0),
                     'ef-notes' =>  $event->getMeta('notes'),
                 ));
+            } else {
+                $params = $this->backendBookingDetermineParams();
+
+                $editForm->setData(array(
+                    'ef-date-start' => $this->dateFormat($params['dateTimeStart'], \IntlDateFormatter::MEDIUM),
+                    'ef-time-start' => $params['dateTimeStart']->format('H:i'),
+                    'ef-date-end' => $this->dateFormat($params['dateTimeEnd'], \IntlDateFormatter::MEDIUM),
+                    'ef-time-end' => $params['dateTimeEnd']->format('H:i'),
+                    'ef-sid' =>  $params['square']->get('sid'),
+                    'ef-capacity' => 0,
+                ));
             }
         }
 

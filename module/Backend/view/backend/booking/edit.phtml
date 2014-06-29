@@ -125,11 +125,15 @@ $this->setup(array(
             <td colspan="4" class="centered-text" style="padding-top: 16px; border-top: solid 1px #CCC;">
                 <?= $this->formElement($form->get('bf-submit')) ?>
 
-                <?php if ($this->reservation): ?>
-                    <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+                <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
 
+                <?php if ($this->reservation): ?>
                     <a href="<?= $this->url('backend/booking/delete', ['rid' => $this->reservation->get('rid')], ['query' => ['edit-mode' => $this->editMode]]) ?>" class="default-button squarebox-internal-link">
                         <span class="symbolic symbolic-cross"><?= $this->t('Delete') ?></span>
+                    </a>
+                <?php else: ?>
+                    <a href="<?= $this->url('backend/event/edit', [], ['query' => ['ds' => $this->query['ds'], 'ts' => $this->query['ts'], 'te' => $this->query['te'], 's' => $this->query['s']]]) ?>" class="gray">
+                        <span class="symbolic symbolic-date"><?= $this->t('New event') ?></span>
                     </a>
                 <?php endif; ?>
             </td>
