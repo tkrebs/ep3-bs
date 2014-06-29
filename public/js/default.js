@@ -46,6 +46,10 @@
         $(document).ready(updateLinksPanel);
         $(document).on("updateLayout", updateLinksPanel);
 
+        /* Popup links */
+
+        $(document).on("click", "a.popup-link", openPopup);
+
     });
 
     function updateLinksPanel()
@@ -189,6 +193,17 @@
             },
             "showAnim": "slideDown"
         });
+    }
+
+    function openPopup(event)
+    {
+        var link = $(this);
+
+        var popup = window.open(link.attr("href"), "bs-popup", "dependent=yes,height=512,left=64,location=no,menubar=no,resizable=yes,top=64,width=1024");
+
+        if (! (! popup || popup.closed || typeof popup.closed=='undefined')) {
+            event.preventDefault();
+        }
     }
 
 })();
