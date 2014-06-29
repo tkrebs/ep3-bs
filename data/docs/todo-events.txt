@@ -1,2 +1,4 @@
+Long Term:
+
 - Events can have participants (tables/manager)
 - Participation process like booking process

@@ -16,8 +16,8 @@ continue with installation.
    - /data/cache/
    - /data/log/
    - /data/session/
-   - /public/docs-client/
-   - /public/imgs-client/
+   - /public/docs-client/upload/
+   - /public/imgs-client/upload/
 
 3. Setup the database via setup.php
 

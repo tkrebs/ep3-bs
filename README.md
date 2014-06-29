@@ -43,7 +43,7 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (June, 2014) is 1.2.
+The current version (June, 2014) is 1.3.
 
 ## Bug reports, feature requests, ideas ...
 
