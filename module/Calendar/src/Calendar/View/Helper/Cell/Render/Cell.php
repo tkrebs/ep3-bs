@@ -70,7 +70,7 @@ class Cell extends AbstractHelper
         if ($cellFree) {
             return $view->calendarCellRenderFree($user, $userBooking, $reservationsForCell, $cellLinkParams);
         } else {
-            return $view->calendarCellRenderOccupied($user, $userBooking, $reservationsForCell, $cellLinkParams);
+            return $view->calendarCellRenderOccupied($user, $userBooking, $reservationsForCell, $cellLinkParams, $square);
         }
     }
 

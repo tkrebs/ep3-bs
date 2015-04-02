@@ -73,6 +73,7 @@ Square meta keys:
 - rules.document.name                       (optional)
 - rules.document.file                       (optional)
 - readonly.message                          (optional)
+- public_names                              (optional) true|false
 
 
 

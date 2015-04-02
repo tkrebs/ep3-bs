@@ -89,6 +89,18 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-public-names',
+            'type' => 'Checkbox',
+            'attributes' => array(
+                'id' => 'cf-public-names',
+            ),
+            'options' => array(
+                'label' => 'Public names',
+                'notes' => 'Should the names of the users are publicly visible in the calendar?',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-time-start',
             'type' => 'Text',
             'attributes' => array(

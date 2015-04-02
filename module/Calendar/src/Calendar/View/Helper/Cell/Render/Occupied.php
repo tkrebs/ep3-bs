@@ -2,12 +2,13 @@
 
 namespace Calendar\View\Helper\Cell\Render;
 
+use Square\Entity\Square;
 use Zend\View\Helper\AbstractHelper;
 
 class Occupied extends AbstractHelper
 {
 
-    public function __invoke($user, $userBooking, array $reservations, array $cellLinkParams)
+    public function __invoke($user, $userBooking, array $reservations, array $cellLinkParams, Square $square)
     {
         $view = $this->getView();
 
@@ -23,7 +24,7 @@ class Occupied extends AbstractHelper
                 return $view->calendarCellRenderOccupiedForVisitors($reservations, $cellLinkParams);
             }
         } else {
-            return $view->calendarCellRenderOccupiedForVisitors($reservations, $cellLinkParams);
+            return $view->calendarCellRenderOccupiedForVisitors($reservations, $cellLinkParams, $square);
         }
     }
 

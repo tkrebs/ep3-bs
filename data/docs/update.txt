@@ -4,6 +4,8 @@ First backup your database and project directory!
 
 Then replace the following directories and files with the new ones:
 
+- /data/res/
+
 - /module/
 
 - /public/css/

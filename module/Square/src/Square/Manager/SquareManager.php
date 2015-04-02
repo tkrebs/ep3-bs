@@ -465,6 +465,19 @@ class SquareManager extends AbstractManager
         return $minCancelRange;
     }
 
+    public function hasOneWithPublicNames()
+    {
+        $hasOne = false;
+
+        foreach ($this->activeSquares as $square) {
+            if ($square->getMeta('public_names', 'false') == 'true') {
+                $hasOne = true;
+            }
+        }
+
+        return $hasOne;
+    }
+
     /**
      * Deletes one square and all respective meta properties (through database foreign keys).
      *
