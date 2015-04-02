@@ -6,6 +6,6 @@
 
     "require": {
         "php": ">=5.4",
-        "zendframework/zendframework": "2.3.*"
+        "zendframework/zendframework": "2.4.*"
     }
 }

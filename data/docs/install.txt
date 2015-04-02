@@ -30,3 +30,23 @@ continue with installation.
    - imgs-client/layout/logo.png (75x75)
 
 6. Have fun! :)
+
+
+
+--- Deployment ---
+
+Once you are satisfied with the system and want to use it in the wild,
+please make sure to set the Apache document root directly to the /public/-directory
+so that your domain will read like that:
+
+http://example.com/
+
+And not like that:
+
+http://example.com/public/
+
+The latter is a huge security threat, that is only acceptable while testing the system.
+
+You may also consider to use a subdomain, like so:
+
+http://bookings.example.com/

@@ -10,13 +10,17 @@ ini_set('date.timezone', 'America/New_York');
 
 return array(
     'mail' => array(
-        'type' => 'sendmail',
+        'type' => 'sendmail', // or 'smtp'
         'address' => 'info@bookings.example.com',
+
+        'host' => '?', // for 'smtp' type only, otherwise remove or leave as is
+        'user' => '?', // for 'smtp' type only, otherwise remove or leave as is
+        'pw' => '?', // for 'smtp' type only, otherwise remove or leave as is
     ),
     'db' => array(
         'user' => '?',
         'pass' => '?',
-        'dsn' => 'mysql:dbname=?;host=127.0.0.1',
+        'dsn' => 'mysql:dbname=?;host=127.0.0.1', // usually, you only need to replace the ? with your database name
     ),
     'i18n' => array(
         'locale' => 'en-US',

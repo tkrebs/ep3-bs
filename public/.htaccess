@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 
     RewriteEngine On
-    RewriteBase /
+    #RewriteBase /   # Try to uncomment this if you experience redirect problems
 
     #RewriteCond %{ENV:REDIRECT_STATUS} ^$
     #RewriteRule ^index\.php$ http://bookings.example.com/ [R=301,L]

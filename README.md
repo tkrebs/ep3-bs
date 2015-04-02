@@ -27,7 +27,7 @@ Unfortunately, source code comments are rather spare at the moment (sorry).
 ## Architecture
 
 The system is based on the well-known LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.4+) and the popular and powerful
-[Zend Framework 2] (http://framework.zend.com/) (2.3+).
+[Zend Framework 2] (http://framework.zend.com/) (2.4+).
 
 Dependencies are managed with [composer] (https://getcomposer.org/).
 
@@ -43,7 +43,9 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (June, 2014) is 1.3.
+The current version (April, 2015) is 1.4.
+
+Version 1.4 introduces some requested features and the latest third party libraries and frameworks.
 
 ## Bug reports, feature requests, ideas ...
 
