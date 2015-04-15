@@ -37,6 +37,7 @@ while ($walkingDate <= $this->dateEnd) {
         for ($walkingTime = $this->timeStart; $walkingTime < $this->timeEnd; $walkingTime += $this->timeBlock) {
             $walkingDate->modify('+' . $walkingTime . ' sec');
 
+	        /* NOTE: Reservations and events for col DO NOT WORK in portrait mode! */
             $reservationsForCol = $reservationsForColPlugin($reservations, $walkingDate, $walkingTime, $this->timeBlock);
             $eventsForCol = $eventsForColPlugin($events, $walkingDate, $walkingTime, $this->timeBlock);
 
