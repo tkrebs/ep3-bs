@@ -10,7 +10,11 @@ $this->headScript()->appendFile($this->basePath('js/controller/calendar/index.mi
     <?php if ($this->squares): ?>
         <table class="calendar-table full-width">
             <tr>
-	            <?= $this->partial('calendar/calendar/index.landscape.phtml', $this->vars()) ?>
+				<?php if ($this->timeBlockCount > 3): ?>
+					<?= $this->partial('calendar/calendar/index.landscape.phtml', $this->vars()) ?>
+				<?php else: ?>
+					<?= $this->partial('calendar/calendar/index.portrait.phtml', $this->vars()) ?>
+				<?php endif; ?>
             </tr>
         </table>
     <?php else: ?>

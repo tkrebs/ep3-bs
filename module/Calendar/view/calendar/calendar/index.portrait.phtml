@@ -27,24 +27,39 @@ while ($walkingDate <= $this->dateEnd) {
     echo $this->calendarDateRow($walkingDate, $this->timeBlockCount);
     echo $this->calendarTimeRow($this->timeStart, $this->timeEnd, $this->timeBlock, $this->timeBlockCount);
 
-    /* Loop through square rows */
+    /* Gather output: Loop through time rows */
+
+	$output = array();
+
+    for ($walkingTime = $this->timeStart; $walkingTime < $this->timeEnd; $walkingTime += $this->timeBlock) {
+        $walkingDate->modify('+' . $walkingTime . ' sec');
+
+        $reservationsForCol = $reservationsForColPlugin($reservations, $walkingDate, $walkingTime, $this->timeBlock);
+        $eventsForCol = $eventsForColPlugin($events, $walkingDate, $walkingTime, $this->timeBlock);
+
+        /* Gather output: Loop through square cells */
+
+        foreach ($this->squares as $square) {
+	        $sid = $square->need('sid');
+
+            $output[$sid][$walkingTime] = $this->calendarCellLogic($walkingDate, $walkingTime,
+	            $this->timeBlock, $this->dateNow, $square, $this->user, $reservationsForCol, $eventsForCol);
+        }
+
+        $walkingDate->setTime(0, 0, 0);
+    }
+
+    /* Render output: Loop through square rows */
 
     foreach ($this->squares as $square) {
         echo '<tr class="calendar-core-row">';
 
-        /* Loop through time cells */
+	    $sid = $square->need('sid');
+
+        /* Render output: Loop through time cells */
 
         for ($walkingTime = $this->timeStart; $walkingTime < $this->timeEnd; $walkingTime += $this->timeBlock) {
-            $walkingDate->modify('+' . $walkingTime . ' sec');
-
-	        /* NOTE: Reservations and events for col DO NOT WORK in portrait mode! */
-            $reservationsForCol = $reservationsForColPlugin($reservations, $walkingDate, $walkingTime, $this->timeBlock);
-            $eventsForCol = $eventsForColPlugin($events, $walkingDate, $walkingTime, $this->timeBlock);
-
-            echo $this->calendarCellLogic($walkingDate, $walkingTime, $this->timeBlock, $this->dateNow,
-                $square, $this->user, $reservationsForCol, $eventsForCol);
-
-            $walkingDate->setTime(0, 0, 0);
+            echo $output[$sid][$walkingTime];
         }
 
         echo '</tr>';
