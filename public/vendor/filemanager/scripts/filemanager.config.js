@@ -2,12 +2,13 @@
     "options": {
         "culture": "en",
         "lang": "php",
+        "theme": "default",
         "defaultViewMode": "grid",
         "autoload": true,
         "showFullPath": false,
         "showTitleAttr": false,
         "browseOnly": false,
-        "showConfirmation": false,
+        "showConfirmation": true,
         "showThumbs": true,
         "generateThumbnails": true,
         "searchBox": true,
@@ -16,14 +17,16 @@
         "chars_only_latin": true,
         "dateFormat": "d M Y H:i",
         "serverRoot": true,
-        "fileRoot": "docs-client/upload/",
+        "fileRoot": false,
         "relPath": false,
         "logger": false,
         "capabilities": ["select", "download", "rename", "delete", "replace"],
         "plugins": []
     },
     "security": {
+        "allowFolderDownload": false,
         "allowChangeExtensions": false,
+        "allowNoExtension": false,
         "uploadPolicy": "DISALLOW_ALL",
         "uploadRestrictions": [
             "jpg",
@@ -50,13 +53,17 @@
             "m4v",
             "ogg",
             "mp3",
-            "wav"
+            "wav",
+            "zip",
+            "rar"
         ]
     },
     "upload": {
-        "overwrite": true,
+        "multiple": true,
+        "number": 5,
+        "overwrite": false,
         "imagesOnly": false,
-        "fileSizeLimit": 8
+        "fileSizeLimit": 16
     },
     "exclude": {
         "unallowed_files": [
@@ -80,7 +87,7 @@
             "svg"
         ],
         "resize": {
-        	"enabled": true,
+        	"enabled":true,
         	"maxWidth": 1280,
             "maxHeight": 1024
         }
@@ -110,7 +117,15 @@
         "lineWrapping": true,
         "codeHighlight": false,
         "theme": "elegant",
-        "editExt": [ ]
+        "editExt": [
+            "txt",
+            "csv"
+        ]
+    },
+    "customScrollbar": {
+    	"enabled": true,
+    	"theme": "inset-2-dark",
+    	"button": true
     },
     "extras": {
         "extra_js": [],
@@ -120,5 +135,7 @@
         "path": "images/fileicons/",
         "directory": "_Open.png",
         "default": "default.png"
-    }
+    },
+    "url": "https://github.com/simogeo/Filemanager",
+    "version": "2.0.0-dev"
 }

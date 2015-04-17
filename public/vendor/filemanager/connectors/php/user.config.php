@@ -16,6 +16,8 @@
  *	@copyright	Authors
  */
 
+
+
 /**
  *	Check if user is authorized
  *
@@ -31,16 +33,16 @@ function auth() {
     define('EP3_BS_DEV', false);
   }
 
-  $config = include 'config/autoload/global.php';
+  $config = require 'config/autoload/global.php';
 
   $sessionName = $config['session_config']['name'];
   $sessionPath = $config['session_config']['save_path'];
 
   if (isset($_COOKIE[$sessionName])) {
 
-    include 'vendor/zendframework/zendframework/library/Zend/Stdlib/Exception/ExceptionInterface.php';
-    include 'vendor/zendframework/zendframework/library/Zend/Stdlib/Exception/InvalidArgumentException.php';
-    include 'vendor/zendframework/zendframework/library/Zend/Stdlib/ArrayObject.php';
+    require 'vendor/zendframework/zendframework/library/Zend/Stdlib/Exception/ExceptionInterface.php';
+    require 'vendor/zendframework/zendframework/library/Zend/Stdlib/Exception/InvalidArgumentException.php';
+    require 'vendor/zendframework/zendframework/library/Zend/Stdlib/ArrayObject.php';
 
     session_name($sessionName);
     session_save_path($sessionPath);
@@ -55,7 +57,9 @@ function auth() {
 
         if ($userSession && $userSession instanceof Zend\Stdlib\ArrayObject) {
             if ($userSession->uid && is_numeric($userSession->uid) && $userSession->uid > 0) {
-                return true;
+	            if ($userSession->status && ($userSession->status == 'assist' || $userSession->status == 'admin')) {
+		            return true;
+	            }
             }
         }
     }

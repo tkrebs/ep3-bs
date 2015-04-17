@@ -24,6 +24,14 @@ if (version_compare(PHP_VERSION, '5.4.0') < 0) {
 }
 
 /**
+ * Quickly check if the intl extension is installed.
+ */
+if (! extension_loaded('intl')) {
+	exit('The PHP <a href="http://php.net/manual/de/book.intl.php">intl extension</a> is required but not installed. '
+	   . 'Please contact your web hosting provider to get this one fixed.');
+}
+
+/**
  * We are using composer (getcomposer.org) to install and autoload the dependencies.
  * Composer will create the entire vendor directory for us, including the autoloader.
  */

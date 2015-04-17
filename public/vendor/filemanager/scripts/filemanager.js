@@ -1,1 +1,1943 @@
-(function(C){C.urlParam=function(X){var Y=new RegExp("[\\?&]"+X+"=([^&#]*)").exec(window.location.href);if(Y){return Y[1]}else{return 0}};var L=function(Z){var Y=null;Z=(typeof Z==="undefined")?"user":Z;if(Z=="user"){var X="./scripts/filemanager.config.js"}else{var X="./scripts/filemanager.config.js.default"}C.ajax({async:false,url:X,dataType:"json",cache:false,success:function(aa){Y=aa}});return Y};var t=L("default");var F=L();var F=C.extend({},t,F);HEAD_included_files=new Array();loadCSS=function(Y){if(C.inArray(Y,HEAD_included_files)==-1){var X=C("<link rel='stylesheet' type='text/css' href='"+Y+"'>");C("head").append(X);HEAD_included_files.push(Y)}};loadJS=function(Y){if(C.inArray(Y,HEAD_included_files)==-1){var X=C("<script type='text/javascript' src='"+Y+"'>");C("head").append(X);HEAD_included_files.push(Y)}};var D=F.options.fileConnector||"connectors/"+F.options.lang+"/filemanager."+F.options.lang;var y=F.options.capabilities||new Array("select","download","rename","move","delete","replace");if(C.urlParam("langCode")!=0&&x("scripts/languages/"+C.urlParam("langCode")+".js")){F.options.culture=C.urlParam("langCode")}var E=[];C.ajax({url:"scripts/languages/"+F.options.culture+".js",async:false,dataType:"json",success:function(X){E=X}});C.prompt.setDefaults({overlayspeed:"fast",show:"fadeIn",opacity:0.4,persistent:false});var J=function(){var X=20;if(F.options.searchBox===true){X+=33}if(C.urlParam("CKEditorCleanUpFuncNum")){X+=60}var Y=C(window).height()-C("#uploader").height()-X;C("#splitter, #filetree, #fileinfo, .vsplitbar").height(Y);var Z=C("#splitter").width()-6-C("#filetree").width();C("#fileinfo").width(Z)};var e=function(X,Y){Y=(typeof Y==="undefined")?true:false;if(F.options.showFullPath==false){if("function"===typeof displayPathDecorator){return displayPathDecorator(X.replace(fileRoot,"/"))}else{X=X.replace(fileRoot,"/");if(X.length>50&&Y===true){var Z=X.split("/");X="/"+Z[1]+"/"+Z[2]+"/(...)/"+Z[Z.length-2]+"/"}return X}}else{return X}};var h=function(X){if(X=="grid"){C("#grid").addClass("ON");C("#list").removeClass("ON")}else{C("#list").addClass("ON");C("#grid").removeClass("ON")}};function x(X){var Y=this.window.ActiveXObject?new ActiveXObject("Microsoft.XMLHTTP"):new XMLHttpRequest();if(!Y){throw new Error("XMLHttpRequest not supported")}Y.open("HEAD",X,false);Y.send(null);if(Y.status==200){return true}return false}var O=function(aa,ab,ac){var X=String(ac);for(i=0;i<aa.length;i++){var Z=RegExp(aa[i],"g");var Y=ab[i];X=X.replace(Z,Y)}return X};var m=function(Z){var Y="";var aa=new Array("Š","š","Đ","đ","Ž","ž","Č","č","Ć","ć","À","Á","Â","Ã","Ä","Å","Æ","Ç","È","É","Ê","Ë","Ì","Í","Î","Ï","Ñ","Ò","Ó","Ô","Õ","Ö","Ő","Ø","Ù","Ú","Û","Ü","Ý","Þ","ß","à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î","ï","ð","ñ","ò","ó","ô","õ","ö","ő","ø","ù","ú","û","ü","ý","ý","þ","ÿ","Ŕ","ŕ"," ","'","/");var X=new Array("S","s","Dj","dj","Z","z","C","c","C","c","A","A","A","A","A","A","A","C","E","E","E","E","I","I","I","I","N","O","O","O","O","O","O","O","U","U","U","U","Y","B","Ss","a","a","a","a","a","a","a","c","e","e","e","e","i","i","i","i","o","n","o","o","o","o","o","o","o","u","u","u","u","y","y","b","y","R","r","_","_","");Y=O(aa,X,Z);if(F.options.chars_only_latin){Y=Y.replace(/[^_a-zA-Z0-9]/g,"")}Y=Y.replace(/[_]+/g,"_");return Y};var W=function(X){filename="";if(X.lastIndexOf(".")!=-1){filename=m(X.substr(0,X.lastIndexOf(".")));filename+="."+X.split(".").pop()}else{filename=m(X)}return filename};var K=function(X){var ab=parseFloat(X);var Z=parseFloat(1024);var aa=0;var Y=[E.bytes,E.kb,E.mb,E.gb];while(true){if(ab<Z){ab=Math.round(ab*100)/100;return ab+Y[aa]}else{ab/=Z;aa+=1}}};var Q=function(X){C("#fileinfo").html("<h1>"+X+"</h1>");C("#newfile").attr("disabled","disabled");C("#upload").attr("disabled","disabled");C("#newfolder").attr("disabled","disabled")};function d(Y,X){if(Y["File Type"]=="dir"&&(X=="download"||X=="replace")){return false}if(typeof(Y.Capabilities)=="undefined"){return true}else{return C.inArray(X,Y.Capabilities)>-1}}var H=function(X){if(F.security.uploadPolicy=="DISALLOW_ALL"){if(C.inArray(r(X),F.security.uploadRestrictions)!=-1){return true}}if(F.security.uploadPolicy=="ALLOW_ALL"){if(C.inArray(r(X),F.security.uploadRestrictions)==-1){return true}}return false};var P=function(Z,Y){var X=Z.replace(/^.*[\/\\]/g,"");if(typeof(Y)=="string"&&X.substr(X.length-Y.length)==Y){X=X.substr(0,X.length-Y.length)}return X};var r=function(X){if(X.split(".").length==1){return""}return X.split(".").pop().toLowerCase()};var w=function(X){if(X.lastIndexOf(".")!=-1){return X.substring(0,X.lastIndexOf("."))}else{return X}};var s=function(X){if(C.inArray(r(X),F.edit.editExt)!=-1){return true}else{return false}};var q=function(X){if(C.inArray(r(X),F.images.imagesExt)!=-1){return true}else{return false}};var M=function(X){if(C.inArray(r(X),F.videos.videosExt)!=-1){return true}else{return false}};var N=function(X){if(C.inArray(r(X),F.audios.audiosExt)!=-1){return true}else{return false}};var S=function(Y){var X="<video width="+F.videos.videosPlayerWidth+" height="+F.videos.videosPlayerHeight+' src="'+Y.Path+'" controls="controls">';X+='<img src="'+Y.Preview+'" />';X+="</video>";C("#fileinfo img").remove();C("#fileinfo #preview h1").before(X)};var A=function(Y){var X='<audio src="'+Y.Path+'" controls="controls">';X+='<img src="'+Y.Preview+'" />';X+="</audio>";C("#fileinfo img").remove();C("#fileinfo #preview h1").before(X)};var b=function(X){C("#fileinfo").find("td:first-child").each(function(){var Y=C(this).attr("data-path");var Z=C("#filetree").find('a[data-path="'+Y+'"]').parent();if(typeof Z.css("background-image")!=="undefined"){C(this).css("background-image",Z.css("background-image"));window.clearInterval(X)}})};var V=function(X){C("#currentpath").val(X);C("#uploader h1").text(E.current_folder+e(X)).attr("title",e(X,false)).attr("data-path",X);C("#newfolder").unbind().click(function(){var Y=E.default_foldername;var ab=E.prompt_foldername+' : <input id="fname" name="fname" type="text" value="'+Y+'" />';var Z=function(ad,ac){if(ad!=1){return false}var af=ac.children("#fname").val();if(af!=""){Y=m(af);var ae=new Date();C.getJSON(D+"?mode=addfolder&path="+C("#currentpath").val()+"&name="+Y+"&time="+ae.getMilliseconds(),function(ag){if(ag.Code==0){G(ag.Parent,ag.Name);v(ag.Parent);C("#filetree").find('a[data-path="'+ag.Parent+'/"]').click().click()}else{C.prompt(ag.Error)}})}else{C.prompt(E.no_foldername)}};var aa={};aa[E.create_folder]=true;aa[E.cancel]=false;C.prompt(ab,{callback:Z,buttons:aa})})};var z=function(X){C("#fileinfo button").each(function(Y){if(C(this).find("span").length==0){C(this).wrapInner("<span></span>")}});if(!d(X,"select")){C("#fileinfo").find("button#select").hide()}else{C("#fileinfo").find("button#select").click(function(){p(X)}).show();if(window.opener||window.tinyMCEPopup){C("#preview img").attr("title",E.select);C("#preview img").click(function(){p(X)}).css("cursor","pointer")}}if(!d(X,"rename")){C("#fileinfo").find("button#rename").hide()}else{C("#fileinfo").find("button#rename").click(function(){var Y=B(X);if(Y.length){C("#fileinfo > h1").text(Y)}}).show()}if(!d(X,"move")){C("#fileinfo").find("button#move").hide()}else{C("#fileinfo").find("button#move").click(function(){var Y=u(X);if(Y.length){C("#fileinfo > h1").text(Y)}}).show()}if(!d(X,"replace")){C("#fileinfo").find("button#replace").hide()}else{C("#fileinfo").find("button#replace").click(function(){c(X)}).show()}if(!d(X,"delete")){C("#fileinfo").find("button#delete").hide()}else{C("#fileinfo").find("button#delete").click(function(){if(g(X)){C("#fileinfo").html("<h1>"+E.select_from_left+"</h1>")}}).show()}if(!d(X,"download")){C("#fileinfo").find("button#download").hide()}else{C("#fileinfo").find("button#download").click(function(){window.location=D+"?mode=download&path="+encodeURIComponent(X.Path)}).show()}};var f=function(){C("#filetree").fileTree({root:fileRoot,datafunc:T,multiFolder:false,folderCallback:function(X){v(X)},expandedFolder:fullexpandedFolder,after:function(X){C("#filetree").find("li a").each(function(){C(this).contextMenu({menu:k(C(this))},function(Z,Y,ab){var aa=C(Y).attr("data-path");o(Z,aa)})});if(F.options.searchBox==true){C("#q").liveUpdate("#filetree ul").blur();C("#search span.q-inactive").html(E.search);C("#search a.q-reset").attr("title",E.search_reset)}}},function(X){U(X)})};var p=function(aa){if(F.options.relPath!==false){var Y=relPath+aa.Path.replace(fileRoot,"")}else{var Y=relPath+aa.Path}if(window.opener||window.tinyMCEPopup||C.urlParam("field_name")||C.urlParam("CKEditorCleanUpFuncNum")||C.urlParam("CKEditor")){if(window.tinyMCEPopup){var ac=tinyMCEPopup.getWindowArg("window");ac.document.getElementById(tinyMCEPopup.getWindowArg("input")).value=Y;if(typeof(ac.ImageDialog)!="undefined"){if(ac.ImageDialog.getImageData){ac.ImageDialog.getImageData()}if(ac.ImageDialog.showPreviewImage){ac.ImageDialog.showPreviewImage(Y)}}tinyMCEPopup.close();return}if(C.urlParam("field_name")){parent.document.getElementById(C.urlParam("field_name")).value=Y;if(typeof parent.tinyMCE!=="undefined"){parent.tinyMCE.activeEditor.windowManager.close()}if(typeof parent.$.fn.colorbox!=="undefined"){parent.$.fn.colorbox.close()}}else{if(C.urlParam("CKEditor")){if(window.opener){window.opener.CKEDITOR.tools.callFunction(C.urlParam("CKEditorFuncNum"),Y)}else{parent.CKEDITOR.tools.callFunction(C.urlParam("CKEditorFuncNum"),Y);parent.CKEDITOR.tools.callFunction(C.urlParam("CKEditorCleanUpFuncNum"))}}else{if(aa.Properties["Width"]!=""){var ab=Y;var X=aa.Properties["Width"];var Z=aa.Properties["Height"];window.opener.SetUrl(ab,X,Z)}else{window.opener.SetUrl(Y)}}}if(window.opener){window.close()}}else{C.prompt(E.fck_select_integration)}};var B=function(aa){var Z="";var ac=F.security.allowChangeExtensions?aa.Filename:w(aa.Filename);var ab=E.new_filename+' : <input id="rname" name="rname" type="text" value="'+ac+'" />';var X=function(ae,ad){if(ae!=1){return false}rname=ad.children("#rname").val();if(rname!=""){var af=rname;if(!F.security.allowChangeExtensions){af=W(rname);var ag=r(aa.Filename);if(ag.length>0){af=af+"."+ag}}if(aa.Path.charAt(aa.Path.length-1)!="/"&&!H(af)){var ai="<p>"+E.INVALID_FILE_TYPE+"</p>";if(F.security.uploadPolicy=="DISALLOW_ALL"){ai+="<p>"+E.ALLOWED_FILE_TYPE+F.security.uploadRestrictions.join(", ")+".</p>"}if(F.security.uploadPolicy=="ALLOW_ALL"){ai+="<p>"+E.DISALLOWED_FILE_TYPE+F.security.uploadRestrictions.join(", ")+".</p>"}C("#filepath").val("");C.prompt(ai);return false}var aj=aa.Path;var ah=D+"?mode=rename&old="+aa.Path+"&new="+af;C.ajax({type:"GET",url:ah,dataType:"json",async:false,success:function(ak){if(ak.Code==0){var am=ak["New Path"];var al=ak["New Name"];I(aj,am,al);var an=C("#preview h1").attr("title");if(typeof an!="undefined"&&an==aj){C("#preview h1").text(al)}if(C("#fileinfo").data("view")=="grid"){C('#fileinfo img[data-path="'+aj+'"]').parent().next("p").text(al);C('#fileinfo img[data-path="'+aj+'"]').attr("data-path",am)}else{C('#fileinfo td[data-path="'+aj+'"]').text(al);C('#fileinfo td[data-path="'+aj+'"]').attr("data-path",am)}C("#preview h1").html(al);aa.Path=am;aa.Filename=al;C("#fileinfo").find("button#rename, button#delete, button#download").unbind();z(aa);if(F.options.showConfirmation){C.prompt(E.successful_rename)}}else{C.prompt(ak.Error)}Z=ak["New Name"]}})}};var Y={};Y[E.rename]=true;Y[E.cancel]=false;C.prompt(ab,{callback:X,buttons:Y});return Z};var c=function(X){C("#fileR").bind("change",function(){C(this).closest("form#toolbar").submit()});C("#toolbar").attr("action",D);C("#toolbar").attr("method","post");C("#toolbar").ajaxForm({target:"#uploadresponse",beforeSubmit:function(Y,ac,aa){var Z=C("#fileR",ac).val();if(Z==""){return false}if(r(Z)!=X["File Type"]){C.prompt(E.ERROR_REPLACING_FILE+" ."+r(X.Filename));return false}C("#replace").attr("disabled",true);C("#upload span").addClass("loading").text(E.loading_data);if(typeof FileReader!=="undefined"&&typeof F.upload.fileSizeLimit!="auto"){var ab=C("#fileR",ac).get(0).files[0].size;if(ab>F.upload.fileSizeLimit*1024*1024){C.prompt("<p>"+E.file_too_big+"</p><p>"+E.file_size_limit+F.upload.fileSizeLimit+" "+E.mb+".</p>");C("#upload").removeAttr("disabled").find("span").removeClass("loading").text(E.upload);return false}}},error:function(Y,aa,Z){C("#upload").removeAttr("disabled").find("span").removeClass("loading").text(E.upload);C.prompt(E.ERROR_UPLOADING_FILE)},success:function(Y){var aa=jQuery.parseJSON(C("#uploadresponse").find("textarea").text());if(aa.Code==0){var Z=aa.Path+"/"+aa.Name;U(Z);C("#preview").find("img").hide().fadeIn("slow");C("ul.jqueryFileTree").find('li a[data-path="'+Z+'"]').parent().hide().fadeIn("slow");if(F.options.showConfirmation){C.prompt(E.successful_replace)}}else{C.prompt(aa.Error)}C("#replace").removeAttr("disabled");C("#upload span").removeClass("loading").text(E.upload)}});C("#newfilepath").val(X.Path);C("#fileR").click()};var u=function(aa){var Z="";var ab=E.move+' : <input id="rname" name="rname" type="text" value="" />';var X=function(ad,ac){if(ad!=1){return false}rname=ac.children("#rname").val();if(rname!=""){var ae=rname;var ag=aa.Path;var af=D+"?mode=move&old="+encodeURIComponent(aa.Path)+"&new="+encodeURIComponent(ae)+"&root="+encodeURIComponent(fileRoot);C.ajax({type:"GET",url:af,dataType:"json",async:false,success:function(ah){if(ah.Code==0){var aj=ah["New Path"];var ai=ah["New Name"];fullexpandedFolder=aj;f();v(aj);if(F.options.showConfirmation){C.prompt(E.successful_moved)}}else{C.prompt(ah.Error)}Z=aj+ai}})}};var Y={};Y[E.move]=true;Y[E.cancel]=false;C.prompt(ab,{callback:X,buttons:Y});return Z};var g=function(aa){var X=false;var ab=E.confirmation_delete;var Z=function(ad,ac){if(ad!=1){return false}var ag=new Date();var af=D+"?mode=delete&path="+encodeURIComponent(aa.Path)+"&time="+ag.getMilliseconds(),ae=aa.Path.split("/").reverse().slice(1).reverse().join("/")+"/";C.ajax({type:"GET",url:af,dataType:"json",async:false,success:function(ah){if(ah.Code==0){l(ah.Path);var ai=ah.Path.substring(0,ah.Path.length-1);ai=ai.substr(0,ai.lastIndexOf("/")+1);C("#uploader h1").text(E.current_folder+e(ai)).attr("title",e(ai,false)).attr("data-path",ai);X=true;if(F.options.showConfirmation){C.prompt(E.successful_delete)}C("#filetree").find('a[data-path="'+ae+'/"]').click().click()}else{X=false;C.prompt(ah.Error)}}})};var Y={};Y[E.yes]=true;Y[E.no]=false;C.prompt(ab,{callback:Z,buttons:Y});return X};var a=function(X){isEdited=false;C("#fileinfo").find("h1").append(' <a id="edit-file" href="#" title="'+E.edit+'"><span>'+E.edit+"</span></a>");C("#edit-file").click(function(){C(this).hide();var Z=new Date();var Y=D+"?mode=editfile&path="+encodeURIComponent(X.Path)+"&time="+Z.getMilliseconds();C.ajax({type:"GET",url:Y,dataType:"json",async:false,success:function(aa){if(aa.Code==0){var ab='<form id="edit-form">';ab+='<textarea id="edit-content" name="content">'+aa.Content+"</textarea>";ab+='<input type="hidden" name="mode" value="savefile" />';ab+='<input type="hidden" name="path" value="'+X.Path+'" />';ab+='<button id="edit-cancel" class="edition" type="button">'+E.quit_editor+"</button>";ab+='<button id="edit-save" class="edition" type="button">'+E.save+"</button>";ab+="</form>";C("#preview").find("img").hide();C("#preview").prepend(ab).hide().fadeIn();C("#edit-cancel").click(function(){C("#preview").find("form#edit-form").hide();C("#preview").find("img").fadeIn();C("#edit-file").show()});C("#edit-save").click(function(){var ad=codeMirrorEditor.getValue();C("textarea#edit-content").val(ad);var ac=C("#edit-form").serializeArray();C.ajax({type:"POST",url:D,dataType:"json",data:ac,async:false,success:function(ae){if(ae.Code==0){isEdited=true;C.prompt(E.successful_edit)}else{isEdited=false;C.prompt(ae.Error)}}})});codeMirrorEditor=instantiateCodeMirror(r(X.Path),F)}else{isEdited=false;C.prompt(aa.Error);C(this).show()}}})});return isEdited};var R=function(ac,Y){var ab=r(Y);var aa=C("#filetree").find('a[data-path="'+ac+'"]');var X=aa.parent();var Z='<li class="file ext_'+ab+'"><a data-path="'+ac+Y+'" href="#" class="">'+Y+"</a></li>";if(!X.find("ul").size()){X=C("#filetree").find("ul.jqueryFileTree");X.prepend(Z);f()}else{X.find("ul").prepend(Z);aa.click().click()}v(ac);if(F.options.showConfirmation){C.prompt(E.successful_added_file)}};var I=function(ab,aa,Y){var Z=C("#filetree").find('a[data-path="'+ab+'"]');var X=Z.parent().parent().prev("a");Z.attr("data-path",aa).text(Y);if(X.length==0){f()}else{X.click().click()}};var l=function(Z){C("#filetree").find('a[data-path="'+Z+'"]').parent().fadeOut("slow",function(){C(this).remove()});if(C("#uploader h1").attr("data-path")==Z){var X=Z.split("/");var Y=X.slice(0,length-2).join("/")+"/";v(Y)}if(C("#fileinfo").data("view")=="grid"){C('#contents img[data-path="'+Z+'"]').parent().parent().fadeOut("slow",function(){C(this).remove()})}else{C("table#contents").find('td[data-path="'+Z+'"]').parent().fadeOut("slow",function(){C(this).remove()})}if(C("#preview").length){v(Z.substr(0,Z.lastIndexOf("/")+1))}};var G=function(aa,Y){var Z='<li class="directory collapsed"><a data-path="'+aa+Y+'/" href="#">'+Y+'</a><ul class="jqueryFileTree" style="display: block;"></ul></li>';var X=C("#filetree").find('a[data-path="'+aa+'"]');if(aa!=fileRoot){X.next("ul").prepend(Z).prev("a").click().click()}else{C("#filetree > ul").prepend(Z);C("#filetree").find('li a[data-path="'+aa+Y+'/"]').attr("class","cap_rename cap_delete").click(function(){v(aa+Y+"/")}).each(function(){C(this).contextMenu({menu:k(C(this))},function(ac,ab,ae){var ad=C(ab).attr("data-path");o(ac,ad)})})}if(F.options.showConfirmation){C.prompt(E.successful_added_folder)}};var n=function(X){if(X.lastIndexOf("/")==X.length-1){v(X);C("#filetree").find('a[data-path="'+X+'"]').click()}else{U(X)}};function k(Y){var X=Y.attr("class").replace(/ /g,"_");if(X==""){return"itemOptions"}if(!(C("#"+X).length)){var Z=C("#itemOptions").clone().attr("id",X);if(!Y.hasClass("cap_select")){C(".select",Z).remove()}if(!Y.hasClass("cap_download")){C(".download",Z).remove()}if(!Y.hasClass("cap_rename")){C(".rename",Z).remove()}if(!Y.hasClass("cap_move")){C(".move",Z).remove()}C(".replace",Z).remove();if(!Y.hasClass("cap_delete")){C(".delete",Z).remove()}C("#itemOptions").after(Z)}return X}var o=function(X,Y){var Z=new Date();C.getJSON(D+"?mode=getinfo&path="+Y+"&time="+Z.getMilliseconds(),function(ac){if(C("#fileinfo").data("view")=="grid"){var ab=C("#fileinfo").find('img[data-path="'+ac.Path+'"]').parent()}else{var ab=C("#fileinfo").find('td[data-path="'+ac.Path+'"]').parent()}switch(X){case"select":p(ac);break;case"download":window.location=D+"?mode=download&path="+ac.Path+"&time="+Z.getMilliseconds();break;case"rename":var aa=B(ac);break;case"replace":c(ac);break;case"move":var aa=u(ac);break;case"delete":g(ac);break}})};var U=function(X){var aa=X.substr(0,X.lastIndexOf("/")+1);V(aa);var Y='<div id="preview"><img /><h1></h1><dl></dl></div>';Y+='<form id="toolbar">';Y+='<button id="parentfolder">'+E.parentfolder+"</button>";if(C.inArray("select",y)!=-1&&(C.urlParam("CKEditor")||window.opener||window.tinyMCEPopup||C.urlParam("field_name"))){Y+='<button id="select" name="select" type="button" value="Select">'+E.select+"</button>"}if(C.inArray("download",y)!=-1){Y+='<button id="download" name="download" type="button" value="Download">'+E.download+"</button>"}if(C.inArray("rename",y)!=-1&&F.options.browseOnly!=true){Y+='<button id="rename" name="rename" type="button" value="Rename">'+E.rename+"</button>"}if(C.inArray("move",y)!=-1&&F.options.browseOnly!=true){Y+='<button id="move" name="move" type="button" value="Move">'+E.move+"</button>"}if(C.inArray("delete",y)!=-1&&F.options.browseOnly!=true){Y+='<button id="delete" name="delete" type="button" value="Delete">'+E.del+"</button>"}if(C.inArray("replace",y)!=-1&&F.options.browseOnly!=true){Y+='<button id="replace" name="replace" type="button" value="Replace">'+E.replace+"</button>";Y+='<div class="hidden-file-input"><input id="fileR" name="fileR" type="file" /></div>';Y+='<input id="mode" name="mode" type="hidden" value="replace" /> ';Y+='<input id="newfilepath" name="newfilepath" type="hidden" />'}Y+="</form>";C("#fileinfo").html(Y);C("#parentfolder").click(function(){v(aa)});var Z=new Date();C.getJSON(D+"?mode=getinfo&path="+encodeURIComponent(X)+"&time="+Z.getMilliseconds(),function(ac){if(ac.Code==0){C("#fileinfo").find("h1").text(ac.Filename).attr("title",X);C("#fileinfo").find("img").attr("src",ac.Preview);if(M(ac.Filename)&&F.videos.showVideoPlayer==true){S(ac)}if(N(ac.Filename)&&F.audios.showAudioPlayer==true){A(ac)}if(s(ac.Filename)&&F.edit.enabled==true){a(ac)}var ab="";if(ac.Properties["Width"]&&ac.Properties["Width"]!=""){ab+="<dt>"+E.dimensions+"</dt><dd>"+ac.Properties["Width"]+"x"+ac.Properties["Height"]+"</dd>"}if(ac.Properties["Date Created"]&&ac.Properties["Date Created"]!=""){ab+="<dt>"+E.created+"</dt><dd>"+ac.Properties["Date Created"]+"</dd>"}if(ac.Properties["Date Modified"]&&ac.Properties["Date Modified"]!=""){ab+="<dt>"+E.modified+"</dt><dd>"+ac.Properties["Date Modified"]+"</dd>"}if(ac.Properties["Size"]||parseInt(ac.Properties["Size"])==0){ab+="<dt>"+E.size+"</dt><dd>"+K(ac.Properties["Size"])+"</dd>"}C("#fileinfo").find("dl").html(ab);z(ac)}else{C.prompt(ac.Error)}})};var v=function(Y){V(Y);C("#fileinfo").html('<img id="activity" src="images/wait30trans.gif" width="30" height="30" />');var Z=new Date();var X=D+"?path="+encodeURIComponent(Y)+"&mode=getfolder&showThumbs="+F.options.showThumbs+"&time="+Z.getMilliseconds();if(C.urlParam("type")){X+="&type="+C.urlParam("type")}C.getJSON(X,function(ae){var aa="";if(ae.Code=="-1"){Q(ae.Error);return}if(ae){if(C("#fileinfo").data("view")=="grid"){aa+='<ul id="contents" class="grid">';for(key in ae){var ad=ae[key]["Properties"];var ab="";for(cap in y){if(d(ae[key],y[cap])){ab+=" cap_"+y[cap]}}var ac=64;var ag=ad.Width;if(ag>1&&ag<ac){ac=ag}F.options.showTitleAttr?title=' title="'+ae[key]["Path"]+'"':title="";aa+='<li class="'+ab+'"'+title+'"><div class="clip"><img src="'+ae[key]["Preview"]+'" width="'+ac+'" alt="'+ae[key]["Path"]+'" data-path="'+ae[key]["Path"]+'" /></div><p>'+ae[key]["Filename"]+"</p>";if(ad.Width&&ad.Width!=""){aa+='<span class="meta dimensions">'+ad.Width+"x"+ad.Height+"</span>"}if(ad.Size&&ad.Size!=""){aa+='<span class="meta size">'+ad.Size+"</span>"}if(ad["Date Created"]&&ad["Date Created"]!=""){aa+='<span class="meta created">'+ad["Date Created"]+"</span>"}if(ad["Date Modified"]&&ad["Date Modified"]!=""){aa+='<span class="meta modified">'+ad["Date Modified"]+"</span>"}aa+="</li>"}aa+="</ul>"}else{aa+='<table id="contents" class="list">';aa+='<thead><tr><th class="headerSortDown"><span>'+E.name+"</span></th><th><span>"+E.dimensions+"</span></th><th><span>"+E.size+"</span></th><th><span>"+E.modified+"</span></th></tr></thead>";aa+="<tbody>";for(key in ae){var af=ae[key]["Path"];var ad=ae[key]["Properties"];var ab="";F.options.showTitleAttr?title=' title="'+ae[key]["Path"]+'"':title="";for(cap in y){if(d(ae[key],y[cap])){ab+=" cap_"+y[cap]}}aa+='<tr class="'+ab+'">';aa+='<td data-path="'+ae[key]["Path"]+'"'+title+'">'+ae[key]["Filename"]+"</td>";if(ad.Width&&ad.Width!=""){aa+=("<td>"+ad.Width+"x"+ad.Height+"</td>")}else{aa+="<td></td>"}if(ad.Size&&ad.Size!=""){aa+='<td><abbr title="'+ad.Size+'">'+K(ad.Size)+"</abbr></td>"}else{aa+="<td></td>"}if(ad["Date Modified"]&&ad["Date Modified"]!=""){aa+="<td>"+ad["Date Modified"]+"</td>"}else{aa+="<td></td>"}aa+="</tr>"}aa+="</tbody>";aa+="</table>"}}else{aa+="<h1>"+E.could_not_retrieve_folder+"</h1>"}C("#fileinfo").html(aa);if(C("#fileinfo").data("view")=="grid"){C("#fileinfo").find("#contents li").click(function(){var ai=C(this).find("img").attr("data-path");n(ai)}).each(function(){C(this).contextMenu({menu:k(C(this))},function(aj,ai,al){var ak=C(ai).find("img").attr("data-path");o(aj,ak)})})}else{C("#fileinfo tbody tr").click(function(){var ai=C("td:first-child",this).attr("data-path");n(ai)}).each(function(){C(this).contextMenu({menu:k(C(this))},function(aj,ai,al){var ak=C("td:first-child",ai).attr("data-path");o(aj,ak)})});C("#fileinfo").find("table").tablesorter({textExtraction:function(ai){if(C(ai).find("abbr").size()){return C(ai).find("abbr").attr("title")}else{return ai.innerHTML}}});var ah=setInterval(function(){b(ah)},300)}})};var T=function(Y,aa){var Z=new Date();var X=D+"?path="+encodeURIComponent(Y)+"&mode=getfolder&showThumbs="+F.options.showThumbs+"&time="+Z.getMilliseconds();if(C.urlParam("type")){X+="&type="+C.urlParam("type")}C.getJSON(X,function(ad){var ab="";if(ad.Code=="-1"){Q(ad.Error);return}if(ad){ab+='<ul class="jqueryFileTree" style="display: none;">';for(key in ad){var ac="";for(cap in y){if(d(ad[key],y[cap])){ac+=" cap_"+y[cap]}}if(ad[key]["File Type"]=="dir"){ab+='<li class="directory collapsed"><a href="#" class="'+ac+'" data-path="'+ad[key]["Path"]+'">'+ad[key]["Filename"]+"</a></li>"}else{if(F.options.listFiles){ab+='<li class="file ext_'+ad[key]["File Type"].toLowerCase()+'"><a href="#" class="'+ac+'" data-path="'+ad[key]["Path"]+'">'+ad[key]["Filename"]+"</a></li>"}}}ab+="</ul>"}else{ab+="<h1>"+E.could_not_retrieve_folder+"</h1>"}aa(ab)})};C(function(){if(F.extras.extra_js){for(var X=0;X<F.extras.extra_js.length;X++){C.ajax({url:F.extras.extra_js[X],dataType:"script",async:F.extras.extra_js_async})}}if(F.edit.enabled){loadCSS("./scripts/CodeMirror/lib/codemirror.css");loadCSS("./scripts/CodeMirror/theme/"+F.edit.theme+".css");loadJS("./scripts/CodeMirror/lib/codemirror.js");loadJS("./scripts/CodeMirror/addon/selection/active-line.js");loadJS("./scripts/CodeMirror/dynamic-mode.js")}if(!F.options.fileRoot){fileRoot="/"+document.location.pathname.substring(1,document.location.pathname.lastIndexOf("/")+1)+"userfiles/"}else{if(!F.options.serverRoot){fileRoot=F.options.fileRoot}else{fileRoot="/"+F.options.fileRoot}fileRoot=fileRoot.replace(/\/\//g,"/")}if(F.options.relPath===false){relPath=window.location.protocol+"//"+window.location.host}else{relPath=F.options.relPath}if(C.urlParam("exclusiveFolder")!=0){fileRoot+=C.urlParam("exclusiveFolder");if(fileRoot.charAt(fileRoot.length-1)!="/"){fileRoot+="/"}fileRoot=fileRoot.replace(/\/\//g,"/")}if(C.urlParam("expandedFolder")!=0){expandedFolder=C.urlParam("expandedFolder");fullexpandedFolder=fileRoot+expandedFolder}else{expandedFolder="";fullexpandedFolder=null}if(F.options.autoload==true){C("#upload").append(E.upload);C("#newfolder").append(E.new_folder);C("#grid").attr("title",E.grid_view);C("#list").attr("title",E.list_view);C("#fileinfo h1").append(E.select_from_left);C('#itemOptions a[href$="#select"]').append(E.select);C('#itemOptions a[href$="#download"]').append(E.download);C('#itemOptions a[href$="#rename"]').append(E.rename);C('#itemOptions a[href$="#move"]').append(E.move);C('#itemOptions a[href$="#replace"]').append(E.replace);C('#itemOptions a[href$="#delete"]').append(E.del)}if(C.urlParam("CKEditorCleanUpFuncNum")){C("body").append('<button id="close-btn" type="button">'+E.close+"</button>");C("#close-btn").click(function(){parent.CKEDITOR.tools.callFunction(C.urlParam("CKEditorCleanUpFuncNum"))})}C("#browse").append("+");C("#browse").attr("title",E.browse);C("#newfile").change(function(){C("#filepath").val(C(this).val().replace(/.+[\\\/]/,""))});if(F.options.searchBox===true){loadJS("./scripts/filemanager.liveSearch.min.js")}else{C("#search").remove()}C("button").wrapInner("<span></span>");C("#fileinfo").data("view",F.options.defaultViewMode);h(F.options.defaultViewMode);C("#home").click(function(){var Y=C("#fileinfo").data("view");C("#fileinfo").data("view",Y);C("#filetree>ul>li.expanded>a").trigger("click");v(fileRoot)});C("#grid").click(function(){h("grid");C("#fileinfo").data("view","grid");v(C("#currentpath").val())});C("#list").click(function(){h("list");C("#fileinfo").data("view","list");v(C("#currentpath").val())});V(fileRoot);C("#uploader").attr("action",D);C("#uploader").ajaxForm({target:"#uploadresponse",beforeSubmit:function(Y,ac,aa){if(C("#newfile",ac).val()==""){return false}if(!H(C("#newfile",ac).val())){var ae="<p>"+E.INVALID_FILE_TYPE+"</p>";if(F.security.uploadPolicy=="DISALLOW_ALL"){ae+="<p>"+E.ALLOWED_FILE_TYPE+F.security.uploadRestrictions.join(", ")+".</p>"}if(F.security.uploadPolicy=="ALLOW_ALL"){ae+="<p>"+E.DISALLOWED_FILE_TYPE+F.security.uploadRestrictions.join(", ")+".</p>"}C("#filepath").val("");C.prompt(ae);return false}C("#upload").attr("disabled",true);C("#upload span").addClass("loading").text(E.loading_data);if(C.urlParam("type").toString().toLowerCase()=="images"){var Z=C("#newfile",ac).val().toLowerCase().split(".");var ad=false;for(key in F.images.imagesExt){if(F.images.imagesExt[key]==Z[Z.length-1]){ad=true}}if(ad===false){C.prompt(E.UPLOAD_IMAGES_ONLY);C("#upload").removeAttr("disabled").find("span").removeClass("loading").text(E.upload);return false}}if(typeof FileReader!=="undefined"&&typeof F.upload.fileSizeLimit!="auto"){var ab=C("#newfile",ac).get(0).files[0].size;if(ab>F.upload.fileSizeLimit*1024*1024){C.prompt("<p>"+E.file_too_big+"</p><p>"+E.file_size_limit+F.upload.fileSizeLimit+" "+E.mb+".</p>");C("#upload").removeAttr("disabled").find("span").removeClass("loading").text(E.upload);return false}}},error:function(Y,aa,Z){C("#upload").removeAttr("disabled").find("span").removeClass("loading").text(E.upload);C.prompt(E.ERROR_UPLOADING_FILE)},success:function(Y){var Z=jQuery.parseJSON(C("#uploadresponse").find("textarea").text());if(Z.Code==0){R(Z.Path,Z.Name);C("#filepath, #newfile").val("");if(C.browser.msie){C("#newfile").replaceWith(C("#newfile").clone(true))}C("#filetree").find('a[data-path="'+Z.Path+'/"]').click().click()}else{C.prompt(Z.Error)}C("#upload").removeAttr("disabled");C("#upload span").removeClass("loading").text(E.upload);C("#filepath").val("")}});f();if(!(window.opener||window.tinyMCEPopup||C.urlParam("field_name"))){C('#itemOptions a[href$="#select"]').remove()}if(F.options.browseOnly==true){C("#file-input-container").remove();C("#upload").remove();C("#newfolder").remove();C("#toolbar").remove("#rename");C(".contextMenu .rename").remove();C(".contextMenu .move").remove();C(".contextMenu .replace").remove();C(".contextMenu .delete").remove()}J();C(window).resize(J);C("#splitter").splitter({sizeLeft:200});n(fileRoot+expandedFolder)});var j=document.documentElement;j.setAttribute("data-useragent",navigator.userAgent)})(jQuery);
+/**
+ *	Filemanager JS core
+ *
+ *	filemanager.js
+ *
+ *	@license	MIT License
+ *	@author		Jason Huck - Core Five Labs
+ *	@author		Simon Georget <simon (at) linea21 (dot) com>
+ *	@copyright	Authors
+ */
+
+(function($) {
+
+// function to retrieve GET params
+$.urlParam = function(name){
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (results)
+		return results[1];
+	else
+		return 0;
+};
+
+/*---------------------------------------------------------
+  Setup, Layout, and Status Functions
+---------------------------------------------------------*/
+
+// We retrieve config settings from filemanager.config.js
+var loadConfigFile = function (type) {
+	var json = null;
+	type = (typeof type === "undefined") ? "user" : type;
+
+	if(type == 'user') {
+		var url = './scripts/filemanager.config.js';
+	} else {
+		var url = './scripts/filemanager.config.js.default'
+	}
+
+    $.ajax({
+        'async': false,
+        'url': url,
+        'dataType': "json",
+        cache: false,
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+};
+
+// loading default configuration file
+var configd = loadConfigFile('default');
+// loading user configuration file
+var config = loadConfigFile();
+
+// we merge default config and user config file
+var config = $.extend({}, configd, config);
+
+if(config.options.logger) var start = new Date().getTime();
+
+// <head> included files collector
+HEAD_included_files = new Array();
+
+
+/**
+ * function to load a given css file into header
+ * if not already included
+ */
+loadCSS = function(href) {
+	// we check if already included
+	if($.inArray(href, HEAD_included_files) == -1) {
+		var cssLink = $("<link rel='stylesheet' type='text/css' href='" + href + "'>");
+		$("head").append(cssLink);
+	    HEAD_included_files.push(href);
+	}
+};
+
+/**
+* function to load a given js file into header
+* if not already included
+*/
+loadJS = function(src) {
+	// we check if already included
+	if($.inArray(src, HEAD_included_files) == -1) {
+		var jsLink = $("<script type='text/javascript' src='" + src + "'>");
+	    $("head").append(jsLink);
+	    HEAD_included_files.push(src);
+	}
+};
+
+
+// Sets paths to connectors based on language selection.
+var fileConnector = config.options.fileConnector || 'connectors/' + config.options.lang + '/filemanager.' + config.options.lang;
+
+// Read capabilities from config files if exists
+// else apply default settings
+var capabilities = config.options.capabilities || new Array('select', 'download', 'rename', 'move', 'delete', 'replace');
+
+// Get localized messages from file
+// through culture var or from URL
+if($.urlParam('langCode') != 0 && file_exists ('scripts/languages/'  + $.urlParam('langCode') + '.js')) config.options.culture = $.urlParam('langCode');
+
+var lg = [];
+$.ajax({
+  url: 'scripts/languages/'  + config.options.culture + '.js',
+  async: false,
+  dataType: 'json',
+  success: function (json) {
+    lg = json;
+  }
+});
+
+// Options for alert, prompt, and confirm dialogues.
+$.prompt.setDefaults({
+    overlayspeed: 'fast',
+    show: 'fadeIn',
+    opacity: 0.4,
+    persistent: false
+});
+
+// Forces columns to fill the layout vertically.
+// Called on initial page load and on resize.
+var setDimensions = function(){
+	var bheight = 53;
+
+	if($.urlParam('CKEditorCleanUpFuncNum')) bheight +=60;
+
+	var newH = $(window).height() - $('#uploader').height() - bheight;
+	$('#splitter, #filetree, #fileinfo, .vsplitbar').height(newH);
+	var newW = $('#splitter').width() - $('div.vsplitbar').width() - $('#filetree').width();
+    $('#fileinfo').width(newW);
+};
+
+// Display Min Path
+var displayPath = function(path, reduce) {
+
+	reduce = (typeof reduce === "undefined") ? true : false;
+
+	if(config.options.showFullPath == false) {
+    // if a "displayPathDecorator" function is defined, use it to decorate path
+	if('function' === typeof displayPathDecorator) {
+		return displayPathDecorator(path.replace(fileRoot, "/"));
+	} else {
+		path = path.replace(fileRoot, "/");
+		if(path.length > 50 && reduce === true) {
+			var n = path.split("/");
+			path = '/' + n[1] + '/' + n[2] + '/(...)/' + n[n.length-2] + '/';
+		}
+		return path;
+	}
+  } else {
+    return path;
+  }
+
+};
+
+// Set the view buttons state
+var setViewButtonsFor = function(viewMode) {
+    if (viewMode == 'grid') {
+        $('#grid').addClass('ON');
+        $('#list').removeClass('ON');
+    }
+    else {
+        $('#list').addClass('ON');
+        $('#grid').removeClass('ON');
+    }
+};
+
+// Test if a given url exists
+function file_exists (url) {
+    // http://kevin.vanzonneveld.net
+    // +   original by: Enrique Gonzalez
+    // +      input by: Jani Hartikainen
+    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // %        note 1: This function uses XmlHttpRequest and cannot retrieve resource from different domain.
+    // %        note 1: Synchronous so may lock up browser, mainly here for study purposes.
+    // *     example 1: file_exists('http://kevin.vanzonneveld.net/pj_test_supportfile_1.htm');
+    // *     returns 1: '123'
+    var req = this.window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+    if (!req) {
+        throw new Error('XMLHttpRequest not supported');
+    }
+
+    // HEAD Results are usually shorter (faster) than GET
+    req.open('HEAD', url, false);
+    req.send(null);
+    if (req.status == 200) {
+        return true;
+    }
+
+    return false;
+}
+
+// preg_replace
+// Code from : http://xuxu.fr/2006/05/20/preg-replace-javascript/
+var preg_replace = function(array_pattern, array_pattern_replace, str) {
+	var new_str = String (str);
+		for (i=0; i<array_pattern.length; i++) {
+			var reg_exp= RegExp(array_pattern[i], "g");
+			var val_to_replace = array_pattern_replace[i];
+			new_str = new_str.replace (reg_exp, val_to_replace);
+		}
+		return new_str;
+	};
+
+// cleanString (), on the same model as server side (connector)
+// cleanString
+var cleanString = function(str) {
+
+	var cleaned = "";
+	var p_search  = 	new Array("Š", "š", "Đ", "đ", "Ž", "ž", "Č", "č", "Ć", "ć", "À",
+						"Á", "Â", "Ã", "Ä", "Å", "Æ", "Ç", "È", "É", "Ê", "Ë", "Ì", "Í", "Î", "Ï",
+						"Ñ", "Ò", "Ó", "Ô", "Õ", "Ö", "Ő", "Ø", "Ù", "Ú", "Û", "Ü", "Ý", "Þ", "ß",
+						"à", "á", "â", "ã", "ä", "å", "æ", "ç", "è", "é", "ê", "ë", "ì",  "í",
+						"î", "ï", "ð", "ñ", "ò", "ó", "ô", "õ", "ö", "ő", "ø", "ù", "ú", "û", "ü",
+						"ý", "ý", "þ", "ÿ", "Ŕ", "ŕ", " ", "'", "/"
+						);
+	var p_replace = 	new Array("S", "s", "Dj", "dj", "Z", "z", "C", "c", "C", "c", "A",
+						"A", "A", "A", "A", "A", "A", "C", "E", "E", "E", "E", "I", "I", "I", "I",
+						"N", "O", "O", "O", "O", "O", "O", "O", "U", "U", "U", "U", "Y", "B", "Ss",
+						"a", "a", "a", "a", "a", "a", "a", "c", "e", "e", "e", "e", "i", "i",
+						"i", "i", "o", "n", "o", "o", "o", "o", "o", "o", "o", "u", "u", "u", "u",
+						"y", "y", "b", "y", "R", "r", "_", "_", ""
+					);
+
+	cleaned = preg_replace(p_search, p_replace, str);
+
+	// allow only latin alphabet
+	if(config.options.chars_only_latin) {
+		cleaned = cleaned.replace(/[^_a-zA-Z0-9]/g, "");
+	}
+
+	cleaned = cleaned.replace(/[_]+/g, "_");
+
+	return cleaned;
+};
+
+// nameFormat (), separate filename from extension before calling cleanString()
+// nameFormat
+var nameFormat = function(input) {
+	filename = '';
+	if(input.lastIndexOf('.') != -1) {
+		filename  = cleanString(input.substr(0, input.lastIndexOf('.')));
+		filename += '.' + input.split('.').pop();
+	} else {
+		filename = cleanString(input);
+	}
+	return filename;
+};
+
+//Converts bytes to kb, mb, or gb as needed for display.
+var formatBytes = function(bytes) {
+	var n = parseFloat(bytes);
+	var d = parseFloat(1024);
+	var c = 0;
+	var u = [lg.bytes,lg.kb,lg.mb,lg.gb];
+
+	while(true){
+		if(n < d){
+			n = Math.round(n * 100) / 100;
+			return n + u[c];
+		} else {
+			n /= d;
+			c += 1;
+		}
+	}
+};
+
+// Handle Error. Freeze interactive buttons and display
+// error message. Also called when auth() function return false (Code == "-1")
+var handleError = function(errMsg) {
+	$('#fileinfo').html('<h1>' + errMsg+ '</h1>');
+	$('#newfile').attr("disabled", "disabled");
+	$('#upload').attr("disabled", "disabled");
+	$('#newfolder').attr("disabled", "disabled");
+};
+
+// Test if Data structure has the 'cap' capability
+// 'cap' is one of 'select', 'rename', 'delete', 'download', move
+function has_capability(data, cap) {
+	if (data['File Type'] == 'dir' && cap == 'replace') return false;
+	if (data['File Type'] == 'dir' && cap == 'download') {
+		if(config.security.allowFolderDownload == true) return true;
+		else return false;
+	}
+	if (typeof(data['Capabilities']) == "undefined") return true;
+	else return $.inArray(cap, data['Capabilities']) > -1;
+}
+
+// Test if file is authorized
+var isAuthorizedFile = function(filename) {
+
+	var ext = getExtension(filename);
+
+	// no extension is allowed
+	if(ext == '' && config.security.allowNoExtension == true) return true;
+
+	if(config.security.uploadPolicy == 'DISALLOW_ALL') {
+		if($.inArray(ext, config.security.uploadRestrictions) != -1) return true;
+	}
+	if(config.security.uploadPolicy == 'ALLOW_ALL') {
+		if($.inArray(ext, config.security.uploadRestrictions) == -1) return true;
+	}
+
+    return false;
+};
+
+// from http://phpjs.org/functions/basename:360
+var basename = function(path, suffix) {
+    var b = path.replace(/^.*[\/\\]/g, '');
+
+    if (typeof(suffix) == 'string' && b.substr(b.length-suffix.length) == suffix) {
+        b = b.substr(0, b.length-suffix.length);
+    }
+
+    return b;
+};
+
+// return filename extension
+var getExtension = function(filename) {
+	if(filename.split('.').length == 1) {
+		return "";
+	}
+	return filename.split('.').pop().toLowerCase();
+};
+
+// return filename without extension {
+var getFilename = function(filename) {
+	if(filename.lastIndexOf('.') != -1) {
+		return filename.substring(0, filename.lastIndexOf('.'));
+	} else {
+		return filename;
+	}
+};
+
+//Test if is editable file
+var isEditableFile = function(filename) {
+	if($.inArray(getExtension(filename), config.edit.editExt) != -1) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+// Test if is image file
+var isImageFile = function(filename) {
+	if($.inArray(getExtension(filename), config.images.imagesExt) != -1) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+// Test if file is supported web video file
+var isVideoFile = function(filename) {
+	if($.inArray(getExtension(filename), config.videos.videosExt) != -1) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+// Test if file is supported web audio file
+var isAudioFile = function(filename) {
+	if($.inArray(getExtension(filename), config.audios.audiosExt) != -1) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+// Return HTML video player
+var getVideoPlayer = function(data) {
+	var code  = '<video width=' + config.videos.videosPlayerWidth + ' height=' + config.videos.videosPlayerHeight + ' src="' + data['Path'] + '" controls="controls">';
+		code += '<img src="' + data['Preview'] + '" />';
+		code += '</video>';
+
+	$("#fileinfo img").remove();
+	$('#fileinfo #preview #main-title').before(code);
+
+};
+
+//Return HTML audio player
+var getAudioPlayer = function(data) {
+	var code  = '<audio src="' + data['Path'] + '" controls="controls">';
+		code += '<img src="' + data['Preview'] + '" />';
+		code += '</audio>';
+
+	$("#fileinfo img").remove();
+	$('#fileinfo #preview #main-title').before(code);
+
+};
+
+
+// Display icons on list view
+// retrieving them from filetree
+// Called using SetInterval
+var display_icons = function(timer) {
+	$('#fileinfo').find('td:first-child').each(function(){
+		var path = $(this).attr('data-path');
+		var treenode = $('#filetree').find('a[data-path="' + path + '"]').parent();
+
+		if (typeof treenode.css('background-image') !== "undefined") {
+			$(this).css('background-image', treenode.css('background-image'));
+			window.clearInterval(timer);
+		}
+
+	});
+};
+
+// Sets the folder status, upload, and new folder functions
+// to the path specified. Called on initial page load and
+// whenever a new directory is selected.
+var setUploader = function(path) {
+	$('#currentpath').val(path);
+	$('#uploader h1').text(lg.current_folder + displayPath(path)).attr('title', displayPath(path, false)).attr('data-path', path);
+
+	$('#newfolder').unbind().click(function(){
+		var foldername =  lg.default_foldername;
+		var msg = lg.prompt_foldername + ' : <input id="fname" name="fname" type="text" value="' + foldername + '" />';
+
+		var getFolderName = function(v, m){
+			if(v != 1) return false;
+			var fname = m.children('#fname').val();
+
+			if(fname != ''){
+				foldername = cleanString(fname);
+				var d = new Date(); // to prevent IE cache issues
+				$.getJSON(fileConnector + '?mode=addfolder&path=' + $('#currentpath').val() + '&name=' + foldername + '&time=' + d.getMilliseconds(), function(result){
+					if(result['Code'] == 0){
+						addFolder(result['Parent'], result['Name']);
+						getFolderInfo(result['Parent']);
+
+                        // seems to be necessary when dealing w/ files located on s3 (need to look into a cleaner solution going forward)
+                        $('#filetree').find('a[data-path="' + result['Parent'] +'/"]').click().click();
+					} else {
+						$.prompt(result['Error']);
+					}
+				});
+			} else {
+				$.prompt(lg.no_foldername);
+			}
+		};
+		var btns = {};
+		btns[lg.create_folder] = true;
+		btns[lg.cancel] = false;
+		$.prompt(msg, {
+			callback: getFolderName,
+			buttons: btns
+		});
+
+
+
+
+	});
+};
+
+// Binds specific actions to the toolbar in detail views.
+// Called when detail views are loaded.
+var bindToolbar = function(data) {
+
+	// this little bit is purely cosmetic
+	$( "#fileinfo button" ).each(function( index ) {
+		// check if span doesn't exist yet, when bindToolbar called from renameItem for example
+		if($(this).find('span').length == 0)
+			$(this).wrapInner('<span></span>');
+	});
+
+	if (!has_capability(data, 'select')) {
+		$('#fileinfo').find('button#select').hide();
+	} else {
+        $('#fileinfo').find('button#select').click(function () { selectItem(data); }).show();
+        if(window.opener || window.tinyMCEPopup) {
+	        $('#preview img').attr('title', lg.select);
+	        $('#preview img').click(function () { selectItem(data); }).css("cursor", "pointer");
+        }
+	}
+
+	if (!has_capability(data, 'rename')) {
+		$('#fileinfo').find('button#rename').hide();
+	} else {
+		$('#fileinfo').find('button#rename').click(function(){
+			var newName = renameItem(data);
+			if(newName.length) $('#fileinfo > h1').text(newName);
+		}).show();
+	}
+
+	if (!has_capability(data, 'move')) {
+		$('#fileinfo').find('button#move').hide();
+	} else {
+		$('#fileinfo').find('button#move').click(function(){
+			var newName = moveItem(data);
+			if(newName.length) $('#fileinfo > h1').text(newName);
+		}).show();
+	}
+
+	// @todo
+	if (!has_capability(data, 'replace')) {
+		$('#fileinfo').find('button#replace').hide();
+	} else {
+		$('#fileinfo').find('button#replace').click(function(){
+			replaceItem(data);
+		}).show();
+	}
+
+	if (!has_capability(data, 'delete')) {
+		$('#fileinfo').find('button#delete').hide();
+	} else {
+		$('#fileinfo').find('button#delete').click(function(){
+			if(deleteItem(data)) $('#fileinfo').html('<h1>' + lg.select_from_left + '</h1>');
+		}).show();
+	}
+
+	if (!has_capability(data, 'download')) {
+		$('#fileinfo').find('button#download').hide();
+	} else {
+		$('#fileinfo').find('button#download').click(function(){
+			window.location = fileConnector + '?mode=download&path=' + encodeURIComponent(data['Path']);
+		}).show();
+	}
+};
+
+//Create FileTree and bind elements
+//called during initialization and also when adding a file
+//directly in root folder (via addNode)
+var createFileTree = function() {
+
+	if ($('#filetree .mCSB_container').length > 0) {
+		var el = '#filetree .mCSB_container';
+	} else {
+		var el = '#filetree';
+	}
+	// Creates file tree.
+ $(el).fileTree({
+		root: fileRoot,
+		datafunc: populateFileTree,
+		multiFolder: false,
+		folderCallback: function(path){ getFolderInfo(path); },
+		expandedFolder: fullexpandedFolder,
+		after: function(data){
+			$('#filetree').find('li a').each(function() {
+				$(this).contextMenu(
+					{ menu: getContextMenuOptions($(this)) },
+					function(action, el, pos){
+						var path = $(el).attr('data-path');
+						setMenus(action, path);
+					}
+				);
+			});
+			//Search function
+			if(config.options.searchBox == true)  {
+				$('#q').liveUpdate('#filetree ul').blur();
+				$('#search span.q-inactive').html(lg.search);
+				$('#search a.q-reset').attr('title', lg.search_reset);
+			}
+		}
+	}, function(file){
+		getFileInfo(file);
+	});
+
+};
+
+
+/*---------------------------------------------------------
+  Item Actions
+---------------------------------------------------------*/
+
+// Calls the SetUrl function for FCKEditor compatibility,
+// passes file path, dimensions, and alt text back to the
+// opening window. Triggered by clicking the "Select"
+// button in detail views or choosing the "Select"
+// contextual menu option in list views.
+// NOTE: closes the window when finished.
+var selectItem = function(data) {
+	if(config.options.relPath !== false ) {
+		var url = relPath + data['Path'].replace(fileRoot,"");
+	} else {
+		var url = relPath + data['Path'];
+	}
+
+	if(window.opener || window.tinyMCEPopup || $.urlParam('field_name') || $.urlParam('CKEditorCleanUpFuncNum') || $.urlParam('CKEditor')) {
+	 	if(window.tinyMCEPopup){
+        	// use TinyMCE > 3.0 integration method
+            var win = tinyMCEPopup.getWindowArg("window");
+			win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = url;
+            if (typeof(win.ImageDialog) != "undefined") {
+				// Update image dimensions
+            	if (win.ImageDialog.getImageData)
+                 	win.ImageDialog.getImageData();
+
+                // Preview if necessary
+                if (win.ImageDialog.showPreviewImage)
+					win.ImageDialog.showPreviewImage(url);
+			}
+			tinyMCEPopup.close();
+			return;
+		}
+	 // tinymce 4 and colorbox
+	 	if($.urlParam('field_name')){
+	 		parent.document.getElementById($.urlParam('field_name')).value = url;
+
+	 		if(typeof parent.tinyMCE !== "undefined") {
+		 		parent.tinyMCE.activeEditor.windowManager.close();
+		 	}
+		 	if(typeof parent.$.fn.colorbox !== "undefined") {
+		 		parent.$.fn.colorbox.close();
+		 	}
+	 	}
+
+		else if($.urlParam('CKEditor')){
+			// use CKEditor 3.0 + integration method
+			if (window.opener) {
+				// Popup
+				window.opener.CKEDITOR.tools.callFunction($.urlParam('CKEditorFuncNum'), url);
+			} else {
+				// Modal (in iframe)
+				parent.CKEDITOR.tools.callFunction($.urlParam('CKEditorFuncNum'), url);
+				parent.CKEDITOR.tools.callFunction($.urlParam('CKEditorCleanUpFuncNum'));
+			}
+		} else {
+			// use FCKEditor 2.0 integration method
+			if(data['Properties']['Width'] != ''){
+				var p = url;
+				var w = data['Properties']['Width'];
+				var h = data['Properties']['Height'];
+				window.opener.SetUrl(p,w,h);
+			} else {
+				window.opener.SetUrl(url);
+			}
+		}
+
+		if (window.opener) {
+			window.close();
+		}
+	} else {
+		$.prompt(lg.fck_select_integration);
+	}
+};
+
+// Renames the current item and returns the new name.
+// Called by clicking the "Rename" button in detail views
+// or choosing the "Rename" contextual menu option in
+// list views.
+var renameItem = function(data) {
+	var finalName = '';
+	var fileName = config.security.allowChangeExtensions ? data['Filename'] : getFilename(data['Filename']);
+	var msg = lg.new_filename + ' : <input id="rname" name="rname" type="text" value="' + fileName + '" />';
+
+	var getNewName = function(v, m){
+		if(v != 1) return false;
+		rname = m.children('#rname').val();
+
+		if(rname != ''){
+
+			var givenName = rname;
+
+ 			if (! config.security.allowChangeExtensions) {
+				givenName = nameFormat(rname);
+				var suffix = getExtension(data['Filename']);
+				if(suffix.length > 0) {
+					givenName = givenName + '.' + suffix;
+				}
+ 			}
+
+ 			// File only - Check if file extension is allowed
+			if (data['Path'].charAt(data['Path'].length-1) != '/'  && !isAuthorizedFile(givenName)) {
+				var str = '<p>' + lg.INVALID_FILE_TYPE + '</p>';
+				if(config.security.uploadPolicy == 'DISALLOW_ALL') {
+					str += '<p>' + lg.ALLOWED_FILE_TYPE +  config.security.uploadRestrictions.join(', ') + '.</p>';
+				}
+				if(config.security.uploadPolicy == 'ALLOW_ALL') {
+					str += '<p>' + lg.DISALLOWED_FILE_TYPE +  config.security.uploadRestrictions.join(', ') + '.</p>';
+				}
+				$("#filepath").val('');
+				$.prompt(str);
+				return false;
+			}
+
+			var oldPath = data['Path'];
+			var connectString = fileConnector + '?mode=rename&old=' + data['Path'] + '&new=' + givenName;
+
+			$.ajax({
+				type: 'GET',
+				url: connectString,
+				dataType: 'json',
+				async: false,
+				success: function(result){
+					if(result['Code'] == 0){
+						var newPath = result['New Path'];
+						var newName = result['New Name'];
+						var oldPath = result['Old Path'];
+
+						updateNode(oldPath, newPath, newName);
+
+						var title = $("#preview h1").attr("title");
+
+						if (typeof title !="undefined" && title == oldPath) {
+							$('#preview h1').text(newName);
+						}
+
+						if($('#fileinfo').data('view') == 'grid'){
+							$('#fileinfo img[data-path="' + oldPath + '"]').parent().next('p').text(newName);
+							$('#fileinfo img[data-path="' + oldPath + '"]').attr('data-path', newPath);
+						} else {
+							$('#fileinfo td[data-path="' + oldPath + '"]').text(newName);
+							$('#fileinfo td[data-path="' + oldPath + '"]').attr('data-path', newPath);
+						}
+						$("#preview h1").html(newName);
+
+						// actualized data for binding
+						data['Path']=newPath;
+						data['Filename']=newName;
+
+						// Bind toolbar functions.
+						$('#fileinfo').find('button#rename, button#delete, button#download').unbind();
+						bindToolbar(data);
+
+						if(config.options.showConfirmation) $.prompt(lg.successful_rename);
+					} else {
+						$.prompt(result['Error']);
+					}
+
+					finalName = result['New Name'];
+				}
+			});
+		}
+	};
+	var btns = {};
+	btns[lg.rename] = true;
+	btns[lg.cancel] = false;
+	$.prompt(msg, {
+		callback: getNewName,
+		buttons: btns
+	});
+
+	return finalName;
+};
+
+// Replace the current file and keep the same name.
+// Called by clicking the "Replace" button in detail views
+// or choosing the "Replace" contextual menu option in
+// list views.
+var replaceItem = function(data) {
+
+	// @todo remove all this
+	// remove dynamic form if already exists
+	//$('#file-replacement').remove();
+
+
+	// we create a dynamic form with input File
+//	$form = $('<form id="file-replacement" method="post">');
+//	$form.append('<input id="fileR" name="fileR" type="file" />');
+//	$form.append('<input id="mode" name="mode" type="hidden" value="replace" /> ');
+//	$form.append('<input id="newfilepath" name="newfilepath" type="hidden" value="' + data["Path"] + '" />');
+//	$('body').prepend($form);
+
+    // we auto-submit form when user filled it up
+    $('#fileR').bind('change', function () {
+        $(this).closest("form#toolbar").submit();
+    });
+
+    // we set the connector to send data to
+    $('#toolbar').attr('action', fileConnector);
+    $('#toolbar').attr('method', 'post');
+
+    // submission script
+    $('#toolbar').ajaxForm({
+        target: '#uploadresponse',
+        beforeSubmit: function (arr, form, options) {
+
+            var newFile = $('#fileR', form).val();
+
+            // Test if a value is given
+            if (newFile == '') {
+                return false;
+            }
+
+            // Check if file extension is matching with the original
+            if (getExtension(newFile) != data["File Type"]) {
+                $.prompt(lg.ERROR_REPLACING_FILE + " ." + getExtension(data["Filename"]));
+                return false;
+            }
+            $('#replace').attr('disabled', true);
+            $('#upload span').addClass('loading').text(lg.loading_data);
+
+            // if config.upload.fileSizeLimit == auto we delegate size test to connector
+            if (typeof FileReader !== "undefined" && typeof config.upload.fileSizeLimit != "auto") {
+                // Check file size using html5 FileReader API
+                var size = $('#fileR', form).get(0).files[0].size;
+                if (size > config.upload.fileSizeLimit * 1024 * 1024) {
+                    $.prompt("<p>" + lg.file_too_big + "</p><p>" + lg.file_size_limit + config.upload.fileSizeLimit + " " + lg.mb + ".</p>");
+                    $('#upload').removeAttr('disabled').find("span").removeClass('loading').text(lg.upload);
+                    return false;
+                }
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            $('#upload').removeAttr('disabled').find("span").removeClass('loading').text(lg.upload);
+            $.prompt(lg.ERROR_UPLOADING_FILE);
+        },
+        success: function (result) {
+            var data = jQuery.parseJSON($('#uploadresponse').find('textarea').text());
+
+            if (data['Code'] == 0) {
+                var fullpath = data["Path"] + '/' + data["Name"];
+
+                // Reloading file info
+                getFileInfo(fullpath);
+                // Visual effects for user to see action is successful
+                $('#preview').find('img').hide().fadeIn('slow'); // on right panel
+                $('ul.jqueryFileTree').find('li a[data-path="' + fullpath + '"]').parent().hide().fadeIn('slow'); // on fileTree
+
+                if (config.options.showConfirmation) $.prompt(lg.successful_replace);
+
+            } else {
+                $.prompt(data['Error']);
+            }
+            $('#replace').removeAttr('disabled');
+            $('#upload span').removeClass('loading').text(lg.upload);
+        }
+    });
+
+    // we pass data path value - original file
+    $('#newfilepath').val(data["Path"]);
+
+    // we open the input file dialog window
+    $('#fileR').click();
+};
+
+// Move the current item to specified dir and returns the new name.
+// Called by clicking the "Move" button in detail views
+// or choosing the "Move" contextual menu option in
+// list views.
+var moveItem = function(data) {
+	var finalName = '';
+	var msg  = lg.move + ' : <input id="rname" name="rname" type="text" value="" />';
+		msg += '<div class="prompt-info">' + lg.help_move + '</div>';
+
+	var doMove = function(v, m){
+		if(v != 1) return false;
+		rname = m.children('#rname').val();
+
+		if(rname != ''){
+			var givenName = rname;
+			var oldPath = data['Path'];
+			var connectString = fileConnector + '?mode=move&old=' + encodeURIComponent(data['Path']) + '&new=' + encodeURIComponent(givenName) + '&root=' + encodeURIComponent(fileRoot);
+
+			$.ajax({
+				type: 'GET',
+				url: connectString,
+				dataType: 'json',
+				async: false,
+				success: function(result){
+                    if(result['Code'] == 0){
+                        var newPath = result['New Path'];
+                        var newName = result['New Name'];
+
+                        // we set fullexpandedFolder value to automatically open file in
+                        // filetree when calling createFileTree() function
+                        fullexpandedFolder = newPath;
+
+                        createFileTree();
+                        getFolderInfo(newPath); // update list in main window
+
+						if(config.options.showConfirmation) $.prompt(lg.successful_moved);
+					} else {
+						$.prompt(result['Error']);
+					}
+
+					finalName = newPath + newName;
+				}
+			});
+		}
+	};
+	var btns = {};
+	btns[lg.move] = true;
+	btns[lg.cancel] = false;
+	$.prompt(msg, {
+		callback: doMove,
+		buttons: btns
+	});
+
+	return finalName;
+};
+
+// Prompts for confirmation, then deletes the current item.
+// Called by clicking the "Delete" button in detail views
+// or choosing the "Delete contextual menu item in list views.
+var deleteItem = function(data) {
+	var isDeleted = false;
+	var msg = lg.confirmation_delete;
+
+	var doDelete = function(v, m){
+		if(v != 1) return false;
+		var d = new Date(); // to prevent IE cache issues
+		var connectString = fileConnector + '?mode=delete&path=' + encodeURIComponent(data['Path'])  + '&time=' + d.getMilliseconds(),
+        parent        = data['Path'].split('/').reverse().slice(1).reverse().join('/') + '/';
+
+		$.ajax({
+			type: 'GET',
+			url: connectString,
+			dataType: 'json',
+			async: false,
+			success: function(result){
+				if(result['Code'] == 0){
+					removeNode(result['Path']);
+					var rootpath = result['Path'].substring(0, result['Path'].length-1); // removing the last slash
+					rootpath = rootpath.substr(0, rootpath.lastIndexOf('/') + 1);
+					$('#uploader h1').text(lg.current_folder + displayPath(rootpath)).attr("title", displayPath(rootpath, false)).attr('data-path', rootpath);
+					isDeleted = true;
+
+					if(config.options.showConfirmation) $.prompt(lg.successful_delete);
+
+                    // seems to be necessary when dealing w/ files located on s3 (need to look into a cleaner solution going forward)
+                    $('#filetree').find('a[data-path="' + parent +'/"]').click().click();
+				} else {
+					isDeleted = false;
+					$.prompt(result['Error']);
+				}
+			}
+		});
+	};
+	var btns = {};
+	btns[lg.yes] = true;
+	btns[lg.no] = false;
+	$.prompt(msg, {
+		callback: doDelete,
+		buttons: btns
+	});
+
+	return isDeleted;
+};
+
+// Display an 'edit' link for editable files
+// Then let user change the content of the file
+// Save action is handled by the method using ajax
+var editItem = function(data) {
+
+	isEdited = false;
+
+		$('#fileinfo').find('div#tools').append(' <a id="edit-file" href="#" title="' + lg.edit + '"><span>' + lg.edit + '</span></a>');
+
+		$('#edit-file').click(function() {
+
+					$(this).hide(); // hiding Edit link
+
+					var d = new Date(); // to prevent IE cache issues
+					var connectString = fileConnector + '?mode=editfile&path=' + encodeURIComponent(data['Path']) + '&time=' + d.getMilliseconds();
+
+					$.ajax({
+						type : 'GET',
+						url : connectString,
+						dataType : 'json',
+						async : false,
+						success : function(result) {
+							if (result['Code'] == 0) {
+
+								var content  = '<form id="edit-form">';
+								 	content += '<textarea id="edit-content" name="content">' + result['Content'] + '</textarea>';
+								 	content += '<input type="hidden" name="mode" value="savefile" />';
+								 	content += '<input type="hidden" name="path" value="' + data['Path'] + '" />';
+									content += '<button id="edit-cancel" class="edition" type="button">' + lg.quit_editor + '</button>';
+									content += '<button id="edit-save" class="edition" type="button">' + lg.save + '</button>';
+									content += '</form>';
+
+								$('#preview').find('img').hide();
+								$('#preview').prepend(content).hide().fadeIn();
+
+								// Cancel Button Behavior
+								$('#edit-cancel').click(function() {
+									$('#preview').find('form#edit-form').hide();
+									$('#preview').find('img').fadeIn();
+									$('#edit-file').show();
+								});
+
+								// Save Button Behavior
+								$('#edit-save').click(function() {
+
+									// we get new textarea content
+									var newcontent = codeMirrorEditor.getValue();
+									$("textarea#edit-content").val(newcontent);
+
+									var postData = $('#edit-form').serializeArray();
+
+									$.ajax({
+										type: 'POST',
+										url: fileConnector,
+										dataType: 'json',
+										data : postData,
+										async: false,
+										success: function(result){
+											if(result['Code'] == 0){
+												isEdited = true;
+												// if (config.options.showConfirmation) $.prompt(lg.successful_edit);
+												$.prompt(lg.successful_edit);
+											} else {
+												isEdited = false;
+												$.prompt(result['Error']);
+											}
+										}
+									});
+
+								});
+
+								// we instantiate codeMirror according to config options
+								codeMirrorEditor = instantiateCodeMirror(getExtension(data['Path']), config);
+
+
+							} else {
+								isEdited = false;
+								$.prompt(result['Error']);
+								$(this).show(); // hiding Edit link
+							}
+						}
+					});
+
+				});
+
+		return isEdited;
+};
+
+
+
+/*---------------------------------------------------------
+  Functions to Update the File Tree
+---------------------------------------------------------*/
+
+// Adds a new node as the first item beneath the specified
+// parent node. Called after a successful file upload.
+var addNode = function(path, name) {
+	var ext = getExtension(name);
+	var thisNode = $('#filetree').find('a[data-path="' + path + '"]');
+	var parentNode = thisNode.parent();
+	var newNode = '<li class="file ext_' + ext + '"><a data-path="' + path + name + '" href="#" class="">' + name + '</a></li>';
+
+	// if is root folder
+	// TODO optimize
+	if(!parentNode.find('ul').size()) {
+		parentNode = $('#filetree').find('ul.jqueryFileTree');
+
+		parentNode.prepend(newNode);
+		createFileTree();
+
+	} else {
+		parentNode.find('ul').prepend(newNode);
+		thisNode.click().click();
+	}
+
+	getFolderInfo(path); // update list in main window
+
+	if(config.options.showConfirmation) $.prompt(lg.successful_added_file);
+};
+
+// Updates the specified node with a new name. Called after
+// a successful rename operation.
+var updateNode = function(oldPath, newPath, newName){
+	var thisNode = $('#filetree').find('a[data-path="' + oldPath + '"]');
+	var parentNode = thisNode.parent().parent().prev('a');
+	thisNode.attr('data-path', newPath).text(newName);
+
+	// we work directly on root folder
+	// TODO optimize by binding only the renamed element
+	if(parentNode.length == 0) {
+		createFileTree();
+	} else {
+		parentNode.click().click();
+	}
+};
+
+// Removes the specified node. Called after a successful
+// delete operation.
+var removeNode = function(path) {
+    $('#filetree')
+        .find('a[data-path="' + path + '"]')
+        .parent()
+        .fadeOut('slow', function(){
+            $(this).remove();
+        });
+    // if the actual view is the deleted folder, we display parent folder
+    if($('#uploader h1').attr('data-path') == path) {
+    	var a =  path.split('/');
+    	var parent = a.slice(0, length - 2).join('/') + '/';
+    	getFolderInfo(parent);
+    }
+    // grid case
+    if($('#fileinfo').data('view') == 'grid'){
+        $('#contents img[data-path="' + path + '"]').parent().parent()
+            .fadeOut('slow', function(){
+                $(this).remove();
+        });
+    }
+    // list case
+    else {
+        $('table#contents')
+            .find('td[data-path="' + path + '"]')
+            .parent()
+            .fadeOut('slow', function(){
+                $(this).remove();
+        });
+    }
+    // remove fileinfo when item to remove is currently selected
+    if ($('#preview').length) {
+    	getFolderInfo(path.substr(0, path.lastIndexOf('/') + 1));
+	}
+};
+
+// Adds a new folder as the first item beneath the
+// specified parent node. Called after a new folder is
+// successfully created.
+var addFolder = function(parent, name) {
+	var newNode = '<li class="directory collapsed"><a data-path="' + parent + name + '/" href="#">' + name + '</a><ul class="jqueryFileTree" style="display: block;"></ul></li>';
+	var parentNode = $('#filetree').find('a[data-path="' + parent + '"]');
+	if(parent != fileRoot){
+		parentNode.next('ul').prepend(newNode).prev('a').click().click();
+	} else {
+		$('#filetree ul.jqueryFileTree').prepend(newNode);
+		$('#filetree').find('li a[data-path="' + parent + name + '/"]').attr('class', 'cap_rename cap_delete').click(function(){
+				getFolderInfo(parent + name + '/');
+			}).each(function() {
+				$(this).contextMenu(
+					{ menu: getContextMenuOptions($(this)) },
+					function(action, el, pos){
+						var path = $(el).attr('data-path');
+						setMenus(action, path);
+					});
+				}
+			);
+	}
+
+	if(config.options.showConfirmation) $.prompt(lg.successful_added_folder);
+};
+
+
+
+
+/*---------------------------------------------------------
+  Functions to Retrieve File and Folder Details
+---------------------------------------------------------*/
+
+// Decides whether to retrieve file or folder info based on
+// the path provided.
+var getDetailView = function(path) {
+	if(path.lastIndexOf('/') == path.length - 1){
+		getFolderInfo(path);
+		$('#filetree').find('a[data-path="' + path + '"]').click();
+	} else {
+		getFileInfo(path);
+	}
+};
+
+function getContextMenuOptions(elem) {
+	var optionsID = elem.attr('class').replace(/ /g, '_');
+	if (optionsID == "") return 'itemOptions';
+	if (!($('#' + optionsID).length)) {
+		// Create a clone to itemOptions with menus specific to this element
+		var newOptions = $('#itemOptions').clone().attr('id', optionsID);
+		if (!elem.hasClass('cap_select')) $('.select', newOptions).remove();
+		if (!elem.hasClass('cap_download')) $('.download', newOptions).remove();
+		if (!elem.hasClass('cap_rename')) $('.rename', newOptions).remove();
+		if (!elem.hasClass('cap_move')) $('.move', newOptions).remove();
+		$('.replace', newOptions).remove(); // we remove replace since it is not implemented on Opera + Chrome and works only if #preview panel is on on FF
+		if (!elem.hasClass('cap_delete')) $('.delete', newOptions).remove();
+		$('#itemOptions').after(newOptions);
+	}
+	return optionsID;
+}
+
+// Binds contextual menus to items in list and grid views.
+var setMenus = function(action, path) {
+	var d = new Date(); // to prevent IE cache issues
+	$.getJSON(fileConnector + '?mode=getinfo&path=' + path + '&time=' + d.getMilliseconds(), function(data){
+		if($('#fileinfo').data('view') == 'grid'){
+			var item = $('#fileinfo').find('img[data-path="' + data['Path'] + '"]').parent();
+		} else {
+			var item = $('#fileinfo').find('td[data-path="' + data['Path'] + '"]').parent();
+		}
+
+		switch(action){
+			case 'select':
+				selectItem(data);
+				break;
+
+			case 'download': // todo implement javascript method to test if exstension is correct
+				window.location = fileConnector + '?mode=download&path=' + data['Path'] + '&time=' + d.getMilliseconds();
+				break;
+
+			case 'rename':
+				var newName = renameItem(data);
+				break;
+
+			case 'replace':
+				replaceItem(data);
+				break;
+
+			case 'move':
+				var newName = moveItem(data);
+				break;
+
+			case 'delete':
+				deleteItem(data);
+				break;
+		}
+	});
+};
+
+// Retrieves information about the specified file as a JSON
+// object and uses that data to populate a template for
+// detail views. Binds the toolbar for that detail view to
+// enable specific actions. Called whenever an item is
+// clicked in the file tree or list views.
+var getFileInfo = function(file) {
+	// Update location for status, upload, & new folder functions.
+	var currentpath = file.substr(0, file.lastIndexOf('/') + 1);
+	setUploader(currentpath);
+
+	// Include the template.
+	var template = '<div id="preview"><img /><div id="main-title"><h1></h1><div id="tools"></div></div><dl></dl></div>';
+	template += '<form id="toolbar">';
+	template += '<button id="parentfolder">' + lg.parentfolder + '</button>';
+	if($.inArray('select', capabilities)  != -1 && ($.urlParam('CKEditor') || window.opener || window.tinyMCEPopup || $.urlParam('field_name'))) template += '<button id="select" name="select" type="button" value="Select">' + lg.select + '</button>';
+	if($.inArray('download', capabilities)  != -1) template += '<button id="download" name="download" type="button" value="Download">' + lg.download + '</button>';
+	if($.inArray('rename', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="rename" name="rename" type="button" value="Rename">' + lg.rename + '</button>';
+	if($.inArray('move', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="move" name="move" type="button" value="Move">' + lg.move + '</button>';
+	if($.inArray('delete', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="delete" name="delete" type="button" value="Delete">' + lg.del + '</button>';
+	if($.inArray('replace', capabilities)  != -1 && config.options.browseOnly != true)  {
+		template += '<button id="replace" name="replace" type="button" value="Replace">' + lg.replace + '</button>';
+		template += '<div class="hidden-file-input"><input id="fileR" name="fileR" type="file" /></div>';
+		template += '<input id="mode" name="mode" type="hidden" value="replace" /> ';
+		template += '<input id="newfilepath" name="newfilepath" type="hidden" />';
+	}
+	template += '</form>';
+
+	// test if scrollbar plugin is enabled
+	if ($('#fileinfo .mCSB_container').length > 0) {
+		$('#fileinfo .mCSB_container').html(template);
+	} else {
+		$('#fileinfo').html(template);
+	}
+
+	$('#parentfolder').click(function() {getFolderInfo(currentpath);});
+
+	// Retrieve the data & populate the template.
+	var d = new Date(); // to prevent IE cache issues
+	$.getJSON(fileConnector + '?mode=getinfo&path=' + encodeURIComponent(file) + '&time=' + d.getMilliseconds(), function(data){
+		if(data['Code'] == 0){
+			$('#fileinfo').find('h1').text(data['Filename']).attr('title', file);
+
+			$('#fileinfo').find('img').attr('src',data['Preview']);
+			if(isVideoFile(data['Filename']) && config.videos.showVideoPlayer == true) {
+				getVideoPlayer(data);
+			}
+			if(isAudioFile(data['Filename']) && config.audios.showAudioPlayer == true) {
+				getAudioPlayer(data);
+			}
+
+			if(isEditableFile(data['Filename']) && config.edit.enabled == true && data['Protected']==0) {
+				editItem(data);
+			}
+
+			// copy URL instructions - zeroclipboard
+			var d = new Date(); // to prevent IE cache issues
+
+			if(config.options.relPath !== false ) {
+				var url = relPath + data['Path'].replace(fileRoot,"");
+			} else {
+				var url = window.location.protocol + '//' + window.location.host + data['Path'];
+			}
+			if(data['Protected']==0) {
+				$('#fileinfo').find('div#tools').append(' <a id="copy-button" data-clipboard-text="'+ url + '" title="' + lg.copy_to_clipboard + '" href="#"><span>' + lg.copy_to_clipboard + '</span></a>');
+				// loading zeroClipboard code
+
+				loadJS('./scripts/zeroclipboard/copy.js?d' + d.getMilliseconds());
+				$('#copy-button').click(function () {
+					$('#fileinfo').find('div#tools').append('<span id="copied">' + lg.copied + '</span>');
+					$('#copied').delay(500).fadeOut(1000, function() { $(this).remove(); });
+				});
+			}
+
+			var properties = '';
+
+			if(data['Properties']['Width'] && data['Properties']['Width'] != '') properties += '<dt>' + lg.dimensions + '</dt><dd>' + data['Properties']['Width'] + 'x' + data['Properties']['Height'] + '</dd>';
+			if(data['Properties']['Date Created'] && data['Properties']['Date Created'] != '') properties += '<dt>' + lg.created + '</dt><dd>' + data['Properties']['Date Created'] + '</dd>';
+			if(data['Properties']['Date Modified'] && data['Properties']['Date Modified'] != '') properties += '<dt>' + lg.modified + '</dt><dd>' + data['Properties']['Date Modified'] + '</dd>';
+			if(data['Properties']['Size'] || parseInt(data['Properties']['Size'])==0) properties += '<dt>' + lg.size + '</dt><dd>' + formatBytes(data['Properties']['Size']) + '</dd>';
+			$('#fileinfo').find('dl').html(properties);
+
+			// Bind toolbar functions.
+			bindToolbar(data);
+
+		} else {
+			$.prompt(data['Error']);
+		}
+	});
+};
+
+// Retrieves data for all items within the given folder and
+// creates a list view. Binds contextual menu options.
+// TODO: consider stylesheet switching to switch between grid
+// and list views with sorting options.
+var getFolderInfo = function(path) {
+	// Update location for status, upload, & new folder functions.
+	setUploader(path);
+
+	// Display an activity indicator.
+	var loading = '<img id="activity" src="themes/' + config.options.theme + '/images/wait30trans.gif" width="30" height="30" />';
+
+	// test if scrollbar plugin is enabled
+	if ($('#fileinfo .mCSB_container').length > 0) {
+		$('#fileinfo .mCSB_container').html(loading);
+	} else {
+		$('#fileinfo').html(loading);
+	}
+
+	$('#loading-wrap').fadeOut(800); // we remove loading screen div
+
+	// Retrieve the data and generate the markup.
+	var d = new Date(); // to prevent IE cache issues
+	var url = fileConnector + '?path=' + encodeURIComponent(path) + '&mode=getfolder&showThumbs=' + config.options.showThumbs + '&time=' + d.getMilliseconds();
+	if ($.urlParam('type')) url += '&type=' + $.urlParam('type');
+	$.getJSON(url, function(data){
+		var result = '';
+
+		// Is there any error or user is unauthorized?
+		if(data.Code=='-1') {
+			handleError(data.Error);
+			return;
+		};
+
+		setDimensions(); //fix dimensions before all images load
+
+		if(data){
+			var counter = 0;
+			var totalSize = 0;
+			if($('#fileinfo').data('view') == 'grid'){
+				result += '<ul id="contents" class="grid">';
+
+				for(key in data){
+					counter++;
+					var props = data[key]['Properties'];
+					var cap_classes = "";
+					for (cap in capabilities) {
+						if (has_capability(data[key], capabilities[cap])) {
+							cap_classes += " cap_" + capabilities[cap];
+						}
+					}
+
+					var scaledWidth = 64;
+					var actualWidth = props['Width'];
+					if(actualWidth > 1 && actualWidth < scaledWidth) scaledWidth = actualWidth;
+
+					config.options.showTitleAttr ? title = ' title="' + data[key]['Path'] + '"' : title = '';
+
+					result += '<li class="' + cap_classes + '"' + title + '"><div class="clip"><img src="' + data[key]['Preview'] + '" width="' + scaledWidth + '" alt="' + data[key]['Path'] + '" data-path="' + data[key]['Path'] + '" /></div><p>' + data[key]['Filename'] + '</p>';
+					if(props['Width'] && props['Width'] != '') result += '<span class="meta dimensions">' + props['Width'] + 'x' + props['Height'] + '</span>';
+					if(props['Size'] && props['Size'] != '') result += '<span class="meta size">' + props['Size'] + '</span>';
+					if(props['Size'] && props['Size'] != '') totalSize += props['Size'];
+					if(props['Date Created'] && props['Date Created'] != '') result += '<span class="meta created">' + props['Date Created'] + '</span>';
+					if(props['Date Modified'] && props['Date Modified'] != '') result += '<span class="meta modified">' + props['Date Modified'] + '</span>';
+					result += '</li>';
+				}
+
+				result += '</ul>';
+			} else {
+				result += '<table id="contents" class="list">';
+				result += '<thead><tr><th class="headerSortDown"><span>' + lg.name + '</span></th><th><span>' + lg.dimensions + '</span></th><th><span>' + lg.size + '</span></th><th><span>' + lg.modified + '</span></th></tr></thead>';
+				result += '<tbody>';
+
+				for(key in data){
+					counter++;
+					var path = data[key]['Path'];
+					var props = data[key]['Properties'];
+					var cap_classes = "";
+					config.options.showTitleAttr ? title = ' title="' + data[key]['Path'] + '"' : title = '';
+
+					for (cap in capabilities) {
+						if (has_capability(data[key], capabilities[cap])) {
+							cap_classes += " cap_" + capabilities[cap];
+						}
+					}
+					result += '<tr class="' + cap_classes + '">';
+					result += '<td data-path="' + data[key]['Path'] + '"' + title + '">' + data[key]['Filename'] + '</td>';
+
+					if(props['Width'] && props['Width'] != ''){
+						result += ('<td>' + props['Width'] + 'x' + props['Height'] + '</td>');
+					} else {
+						result += '<td></td>';
+					}
+
+					if(props['Size'] && props['Size'] != ''){
+						result += '<td><abbr title="' + props['Size'] + '">' + formatBytes(props['Size']) + '</abbr></td>';
+						totalSize += props['Size'];
+					} else {
+						result += '<td></td>';
+					}
+
+					if(props['Date Modified'] && props['Date Modified'] != ''){
+						result += '<td>' + props['Date Modified'] + '</td>';
+					} else {
+						result += '<td></td>';
+					}
+
+					result += '</tr>';
+				}
+
+				result += '</tbody>';
+				result += '</table>';
+			}
+		} else {
+			result += '<h1>' + lg.could_not_retrieve_folder + '</h1>';
+		}
+
+		// Add the new markup to the DOM.
+		// test if scrollbar plugin is enabled
+		if ($('#fileinfo .mCSB_container').length > 0) {
+			$('#fileinfo .mCSB_container').html(result);
+		} else {
+			$('#fileinfo').html(result);
+		}
+
+		// update #folder-info
+		$('#items-counter').text(counter);
+		$('#items-size').text(Math.round(totalSize / 1024 /1024 * 100) / 100);
+
+		// Bind click events to create detail views and add
+		// contextual menu options.
+		if($('#fileinfo').data('view') == 'grid') {
+			$('#fileinfo').find('#contents li').click(function(){
+				var path = $(this).find('img').attr('data-path');
+				getDetailView(path);
+			}).each(function() {
+				$(this).contextMenu(
+					{ menu: getContextMenuOptions($(this)) },
+					function(action, el, pos){
+						var path = $(el).find('img').attr('data-path');
+						setMenus(action, path);
+					}
+				);
+			});
+		} else {
+			$('#fileinfo tbody tr').click(function(){
+				var path = $('td:first-child', this).attr('data-path');
+				getDetailView(path);
+			}).each(function() {
+				$(this).contextMenu(
+					{ menu: getContextMenuOptions($(this)) },
+					function(action, el, pos){
+						var path = $('td:first-child', el).attr('data-path');
+						setMenus(action, path);
+					}
+				);
+			});
+
+			$('#fileinfo').find('table').tablesorter({
+				textExtraction: function(node){
+					if($(node).find('abbr').size()){
+						return $(node).find('abbr').attr('title');
+					} else {
+						return node.innerHTML;
+					}
+				}
+			});
+			// Calling display_icons() function
+			// to get icons from filteree
+			// Necessary to fix bug #170
+			// https://github.com/simogeo/Filemanager/issues/170
+			var timer = setInterval(function() {display_icons(timer)}, 300);
+
+		}
+	});
+};
+
+// Retrieve data (file/folder listing) for jqueryFileTree and pass the data back
+// to the callback function in jqueryFileTree
+var populateFileTree = function(path, callback) {
+	var d = new Date(); // to prevent IE cache issues
+	var url = fileConnector + '?path=' + encodeURIComponent(path) + '&mode=getfolder&showThumbs=' + config.options.showThumbs + '&time=' + d.getMilliseconds();
+	if ($.urlParam('type')) url += '&type=' + $.urlParam('type');
+	$.getJSON(url, function(data) {
+		var result = '';
+		// Is there any error or user is unauthorized?
+		if(data.Code=='-1') {
+			handleError(data.Error);
+			return;
+		};
+
+		if(data) {
+			result += "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
+			for(key in data) {
+				var cap_classes = "";
+
+				for (cap in capabilities) {
+					if (has_capability(data[key], capabilities[cap])) {
+						cap_classes += " cap_" + capabilities[cap];
+					}
+				}
+				if (data[key]['File Type'] == 'dir') {
+					var extraclass = data[key]['Protected'] == 0 ? '' : ' directory-locked';
+					result += "<li class=\"directory collapsed" + extraclass + "\"><a href=\"#\" class=\"" + cap_classes + "\" data-path=\"" + data[key]['Path'] + "\">" + data[key]['Filename'] + "</a></li>";
+				} else {
+					if(config.options.listFiles) {
+					var extraclass = data[key]['Protected'] == 0 ? '' : ' file-locked';
+					result += "<li class=\"file ext_" + data[key]['File Type'].toLowerCase() + extraclass + "\"><a href=\"#\" class=\"" + cap_classes + "\" data-path=\"" + data[key]['Path'] + "\">" + data[key]['Filename'] + "</a></li>";
+					}
+				}
+			}
+			result += "</ul>";
+		} else {
+			result += '<h1>' + lg.could_not_retrieve_folder + '</h1>';
+		}
+		callback(result);
+	});
+};
+
+
+
+
+/*---------------------------------------------------------
+  Initialization
+---------------------------------------------------------*/
+
+$(function(){
+
+	if(config.extras.extra_js) {
+		for(var i=0; i< config.extras.extra_js.length; i++) {
+			$.ajax({
+				url: config.extras.extra_js[i],
+				dataType: "script",
+				async: config.extras.extra_js_async
+			});
+		}
+	}
+
+	$('#link-to-project').attr('href', config.url).attr('target', '_blank').attr('title', lg.support_fm + ' [' + lg.version + ' : ' + config.version + ']');
+	$('div.version').html(config.version);
+
+	// Loading theme
+	loadCSS('./themes/' + config.options.theme + '/styles/filemanager.css');
+	$.ajax({
+	    url:'./themes/' + config.options.theme + '/styles/ie.css',
+	    async: false,
+	    success: function(data)
+	    {
+	        $('head').append(data);
+	    }
+	});
+
+	// loading zeroClipboard
+	loadJS('./scripts/zeroclipboard/dist/ZeroClipboard.js');
+
+	// Loading CodeMirror if enabled for online edition
+	if(config.edit.enabled) {
+		loadCSS('./scripts/CodeMirror/lib/codemirror.css');
+		loadCSS('./scripts/CodeMirror/theme/' + config.edit.theme + '.css');
+		loadJS('./scripts/CodeMirror/lib/codemirror.js');
+		loadJS('./scripts/CodeMirror/addon/selection/active-line.js');
+		loadJS('./scripts/CodeMirror/dynamic-mode.js');
+	}
+
+	if(!config.options.fileRoot) {
+		fileRoot = document.location.pathname
+            .replace("\/vendor\/filemanager\/index\.html", "")
+            .replace("\/vendor\/filemanager\/", "")
+            + "/docs-client/upload/";
+	} else {
+		if(!config.options.serverRoot) {
+			fileRoot = config.options.fileRoot;
+		} else {
+			fileRoot = '/' + config.options.fileRoot;
+		}
+		// we remove double slashes - can happen when using PHP SetFileRoot() function with fileRoot = '/' value
+		fileRoot = fileRoot.replace(/\/\//g, '\/');
+	}
+
+	if(config.options.relPath === false) {
+		relPath = window.location.protocol + "//" + window.location.host;
+	} else {
+		relPath = config.options.relPath;
+	}
+
+	if($.urlParam('exclusiveFolder') != 0) {
+		fileRoot += $.urlParam('exclusiveFolder');
+		if(fileRoot.charAt(fileRoot.length-1) != '/' ) fileRoot += '/'; // add last '/' if needed
+		fileRoot = fileRoot.replace(/\/\//g, '\/');
+	}
+
+	if($.urlParam('expandedFolder') != 0) {
+		expandedFolder = $.urlParam('expandedFolder');
+		fullexpandedFolder = fileRoot + expandedFolder;
+	} else {
+		expandedFolder = '';
+		fullexpandedFolder = null;
+        }
+
+
+	$('#folder-info').html('<span id="items-counter"></span> ' + lg.items + ' - ' + lg.size + ' : <span id="items-size"></span> ' + lg.mb);
+
+	// we finalize the FileManager UI initialization
+	// with localized text if necessary
+	if(config.options.autoload == true) {
+		$('#upload').append(lg.upload);
+		$('#newfolder').append(lg.new_folder);
+		$('#grid').attr('title', lg.grid_view);
+		$('#list').attr('title', lg.list_view);
+		$('#fileinfo h1').append(lg.select_from_left);
+		$('#itemOptions a[href$="#select"]').append(lg.select);
+		$('#itemOptions a[href$="#download"]').append(lg.download);
+		$('#itemOptions a[href$="#rename"]').append(lg.rename);
+		$('#itemOptions a[href$="#move"]').append(lg.move);
+		$('#itemOptions a[href$="#replace"]').append(lg.replace);
+		$('#itemOptions a[href$="#delete"]').append(lg.del);
+	}
+
+	/** Adding a close button triggering callback function if CKEditorCleanUpFuncNum passed */
+	if($.urlParam('CKEditorCleanUpFuncNum')) {
+		$("body").append('<button id="close-btn" type="button">' + lg.close + '</button>');
+
+		$('#close-btn').click(function () {
+			parent.CKEDITOR.tools.callFunction($.urlParam('CKEditorCleanUpFuncNum'));
+		});
+	}
+
+	/** Input file Replacement */
+	$('#browse').append('+');
+	$('#browse').attr('title', lg.browse);
+	$("#newfile").change(function() {
+		$("#filepath").val($(this).val().replace(/.+[\\\/]/, ""));
+	});
+
+	/** load searchbox */
+	if(config.options.searchBox === true)  {
+		loadJS("./scripts/filemanager.liveSearch.min.js");
+	} else {
+		$('#search').remove();
+	}
+
+	// cosmetic tweak for buttons
+	$('button').wrapInner('<span></span>');
+
+	// Set initial view state.
+	$('#fileinfo').data('view', config.options.defaultViewMode);
+	setViewButtonsFor(config.options.defaultViewMode);
+
+	$('#home').click(function() {
+		var currentViewMode = $('#fileinfo').data('view');
+		$('#fileinfo').data('view', currentViewMode);
+		$('#filetree ul.jqueryFileTree > li.expanded > a').trigger('click');
+		getFolderInfo(fileRoot);
+	});
+
+	$('#level-up').click(function() {
+		var cpath = $('#uploader h1').attr('data-path'); // get path
+		// console.log(' cpath : ' + cpath + ' - fileRoot : ' + fileRoot ); // @todo remove
+		if(cpath != fileRoot) {
+			// we get the parent folder - cpath.slice(0, - 1) removes last slash
+			parent = cpath.substring(0, cpath.slice(0, - 1).lastIndexOf("/")) + '/';
+			// console.log(' parent : ' + parent); // @todo remove
+			var currentViewMode = $('#fileinfo').data('view');
+			$('#fileinfo').data('view', currentViewMode);
+			$('#filetree').find('a[data-path="' + cpath + '"]').click(); // we close the previous folder
+			getFolderInfo(parent);
+		}
+	});
+
+	// Set buttons to switch between grid and list views.
+	$('#grid').click(function() {
+		setViewButtonsFor('grid');
+		$('#fileinfo').data('view', 'grid');
+		getFolderInfo($('#currentpath').val());
+	});
+
+	$('#list').click(function() {
+		setViewButtonsFor('list');
+		$('#fileinfo').data('view', 'list');
+		getFolderInfo($('#currentpath').val());
+	});
+
+	// Provide initial values for upload form, status, etc.
+	setUploader(fileRoot);
+
+	// Handling File upload
+
+	// Multiple Uploads
+	if(config.upload.multiple) {
+
+		// we load dropzone library
+		loadCSS('./scripts/dropzone/downloads/css/dropzone.css');
+		loadJS('./scripts/dropzone/downloads/dropzone.js');
+		Dropzone.autoDiscover = false;
+
+		// we remove simple file upload element
+		$('#file-input-container').remove();
+
+		// we add multiple-files upload button using upload button
+		// $('#upload').prop('type', 'button');
+		// replaced by code below because og Chrome 18 bug https://github.com/simogeo/Filemanager/issues/304
+		// and it may also be safer for IE (see http://stackoverflow.com/questions/1544317/change-type-of-input-field-with-jquery
+		$('#upload').remove();
+		$( "#newfolder" ).before( '<button value="Upload" type="button" name="upload" id="upload" class="em"><span>' + lg.upload + '</span></button> ' );
+
+		$('#upload').unbind().click(function() {
+			// we create prompt
+			var msg  = '<div id="dropzone-container"><h2>' + lg.current_folder + $('#uploader h1').attr('title')  + '</h2><div id="multiple-uploads" class="dropzone"></div>';
+				msg += '<div id="total-progress"><div data-dz-uploadprogress="" style="width:0%;" class="progress-bar"></div></div>';
+				msg += '<div class="prompt-info">' + lg.dz_dictMaxFilesExceeded.replace('%s', config.upload.number) + lg.file_size_limit + config.upload.fileSizeLimit + ' ' + lg.mb + '.</div>';
+				msg += '<button id="process-upload">' + lg.upload + '</button></div>';
+
+			error_flag = false;
+			var path = $('#currentpath').val();
+
+			var fileSize = (config.upload.fileSizeLimit != 'auto') ? config.upload.fileSizeLimit : 256; // default dropzone value
+
+			if(config.security.uploadPolicy == 'DISALLOW_ALL') {
+				var allowedFiles = '.' + config.security.uploadRestrictions.join(',.');
+			} else {
+				// we allow any extension since we have no easy way to handle the the built-in `acceptedFiles` params
+				// Would be handled later by the connector
+				var allowedFiles = null;
+			}
+
+			if ($.urlParam('type').toString().toLowerCase() == 'images' || config.upload.imagesOnly) {
+				var allowedFiles = '.' + config.images.imagesExt.join(',.');
+			}
+
+			var btns = {};
+			btns[lg.close] = false;
+			$.prompt(msg, {
+				buttons: btns
+			});
+
+			$("div#multiple-uploads").dropzone({
+				paramName: "newfile",
+				url: fileConnector,
+				maxFilesize: fileSize,
+				maxFiles: config.upload.number,
+				addRemoveLinks: true,
+				parallelUploads: config.upload.number,
+				dictCancelUpload: lg.cancel,
+				dictRemoveFile: lg.del,
+				dictMaxFilesExceeded: lg.dz_dictMaxFilesExceeded.replace("%s", config.upload.number),
+				dictDefaultMessage: lg.dz_dictDefaultMessage,
+				dictInvalidFileType: lg.dz_dictInvalidFileType,
+				dictFileTooBig: lg.file_too_big + ' ' + lg.file_size_limit + config.upload.fileSizeLimit + ' ' + lg.mb,
+				acceptedFiles: allowedFiles,
+				autoProcessQueue:false,
+				init: function() {
+					// for accessing dropzone : https://github.com/enyo/dropzone/issues/180
+					var dropzone = this;
+				    $("#process-upload").click(function() {
+				    	// to proceed full queue parallelUploads ust be equal or > to maxFileSize
+				    	// https://github.com/enyo/dropzone/issues/462
+				    	dropzone.processQueue();
+				    });
+				},
+				totaluploadprogress: function(progress) {
+					$("#total-progress .progress-bar").css('width', progress + "%");
+				},
+				sending: function(file, xhr, formData) {
+					formData.append("mode", "add");
+					formData.append("currentpath", path);
+				},
+				success: function(file, response) {
+					$('#uploadresponse').empty().html(response);
+					var data = jQuery.parseJSON($('#uploadresponse').find('textarea').text());
+
+					if (data['Code'] == 0) {
+						this.removeFile(file);
+					} else {
+						// this.removeAllFiles();
+						getFolderInfo(path);
+						$('#filetree').find('a[data-path="' + path + '"]').click();
+						$.prompt(data['Error']);
+						error_flag = true;
+
+					}
+				},
+				complete: function(file) {
+					if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+						$("#total-progress .progress-bar").css('width', '0%');
+						if(this.getRejectedFiles().length === 0 && error_flag === false) {
+							setTimeout(function() { $.prompt.close();}, 800);
+						}
+						getFolderInfo(path);
+						if(path == fileRoot) createFileTree();
+						$('#filetree').find('a[data-path="' + path + '"]').click().click();
+						if(config.options.showConfirmation) {
+							$.prompt(lg.successful_added_file);
+						}
+				    }
+				}
+			});
+
+		});
+
+		// Simple Upload
+	} else {
+
+		$('#uploader').attr('action', fileConnector);
+
+		$('#uploader').ajaxForm({
+			target: '#uploadresponse',
+			beforeSubmit: function (arr, form, options) {
+				// Test if a value is given
+				if($('#newfile', form).val()=='') {
+					return false;
+				}
+				// Check if file extension is allowed
+				if (!isAuthorizedFile($('#newfile', form).val())) {
+					var str = '<p>' + lg.INVALID_FILE_TYPE + '</p>';
+					if(config.security.uploadPolicy == 'DISALLOW_ALL') {
+						str += '<p>' + lg.ALLOWED_FILE_TYPE +  config.security.uploadRestrictions.join(', ') + '.</p>';
+					}
+					if(config.security.uploadPolicy == 'ALLOW_ALL') {
+						str += '<p>' + lg.DISALLOWED_FILE_TYPE +  config.security.uploadRestrictions.join(', ') + '.</p>';
+					}
+					$("#filepath").val('');
+					$.prompt(str);
+					return false;
+				}
+				$('#upload').attr('disabled', true);
+				$('#upload span').addClass('loading').text(lg.loading_data);
+				if ($.urlParam('type').toString().toLowerCase() == 'images') {
+					// Test if uploaded file extension is in valid image extensions
+				    var newfileSplitted = $('#newfile', form).val().toLowerCase().split('.');
+				    var found = false;
+					for (key in config.images.imagesExt) {
+						if (config.images.imagesExt[key] == newfileSplitted[newfileSplitted.length - 1]) {
+						    found = true;
+						}
+					}
+				    if (found === false) {
+				        $.prompt(lg.UPLOAD_IMAGES_ONLY);
+				        $('#upload').removeAttr('disabled').find("span").removeClass('loading').text(lg.upload);
+				        return false;
+				    }
+				}
+				// if config.upload.fileSizeLimit == auto we delegate size test to connector
+				if (typeof FileReader !== "undefined" && typeof config.upload.fileSizeLimit != "auto") {
+					// Check file size using html5 FileReader API
+					var size = $('#newfile', form).get(0).files[0].size;
+					if (size > config.upload.fileSizeLimit * 1024 * 1024) {
+						$.prompt("<p>" + lg.file_too_big + "</p><p>" + lg.file_size_limit + config.upload.fileSizeLimit + " " + lg.mb + ".</p>");
+						$('#upload').removeAttr('disabled').find("span").removeClass('loading').text(lg.upload);
+						return false;
+					}
+				}
+
+
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				$('#upload').removeAttr('disabled').find("span").removeClass('loading').text(lg.upload);
+				$.prompt(lg.ERROR_UPLOADING_FILE);
+			},
+			success: function (result) {
+				var data = jQuery.parseJSON($('#uploadresponse').find('textarea').text());
+				if (data['Code'] == 0) {
+					addNode(data['Path'], data['Name']);
+					$("#filepath, #newfile").val('');
+					// IE can not empty input='file'. A fix consist to replace the element (see github issue #215)
+					if($.browser.msie) $("#newfile").replaceWith($("#newfile").clone(true));
+
+					// seems to be necessary when dealing w/ files located on s3 (need to look into a cleaner solution going forward)
+					$('#filetree').find('a[data-path="' + data['Path'] + '/"]').click().click();
+				} else {
+					$.prompt(data['Error']);
+				}
+				$('#upload').removeAttr('disabled');
+				$('#upload span').removeClass('loading').text(lg.upload);
+				$("#filepath").val('');
+			}
+		});
+	}
+
+	// Loading CustomScrollbar if enabled
+	// Important, the script should be called after calling createFileTree() to prevent bug
+	if(config.customScrollbar.enabled) {
+		loadCSS('./scripts/custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css');
+		loadJS('./scripts/custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js');
+
+		var csTheme = config.customScrollbar.theme != undefined ? config.customScrollbar.theme : 'inset-2-dark';
+		var csButton = config.customScrollbar.button != undefined ? config.customScrollbar.button : true;
+
+		$(window).load(function(){
+			$("#filetree").append('<div style="height:3000px"></div>'); // because if #filetree has height equal to 0, mCustomScrollbar is not applied
+			$("#filetree").mCustomScrollbar({
+				theme:csTheme,
+				scrollButtons:{enable:csButton},
+				advanced:{ autoExpandHorizontalScroll:true, updateOnContentResize: true },
+				callbacks:{
+					onInit:function(){ createFileTree(); }
+				},
+				axis: "yx"
+				});
+			$("#fileinfo").mCustomScrollbar({
+				theme:csTheme,
+				scrollButtons:{enable:csButton},
+				advanced:{ autoExpandHorizontalScroll:true, updateOnContentResize: true },
+				axis: "y"
+			});
+
+		});
+	} else {
+		createFileTree();
+	}
+
+	// Disable select function if no window.opener
+	if(! (window.opener || window.tinyMCEPopup || $.urlParam('field_name')) ) $('#itemOptions a[href$="#select"]').remove();
+	// Keep only browseOnly features if needed
+	if(config.options.browseOnly == true) {
+		$('#file-input-container').remove();
+		$('#upload').remove();
+		$('#newfolder').remove();
+		$('#toolbar').remove('#rename');
+		$('.contextMenu .rename').remove();
+		$('.contextMenu .move').remove();
+		$('.contextMenu .replace').remove();
+		$('.contextMenu .delete').remove();
+	}
+
+        // Adjust layout.
+	setDimensions();
+	$(window).resize(setDimensions);
+
+        // Provides support for adjustible columns.
+	$('#splitter').splitter({
+		sizeLeft: 200
+	});
+    getDetailView(fileRoot + expandedFolder);
+});
+
+// add useragent string to html element for IE 10/11 detection
+var doc = document.documentElement;
+doc.setAttribute('data-useragent', navigator.userAgent);
+
+if(config.options.logger) {
+	var end = new Date().getTime();
+	var time = end - start;
+	console.log('Total execution time : ' + time + ' ms');
+}
+
+$(window).load(function() {
+	setDimensions();
+});
+
+})(jQuery);

@@ -163,6 +163,7 @@ class UserSessionManager extends AbstractManager
 
             $container = $this->getSessionContainer();
             $container->uid = $user->need('uid');
+	        $container->status = $user->need('status');
 
             /* Update last activity and ip */
 
@@ -230,6 +231,7 @@ class UserSessionManager extends AbstractManager
 
         $container = $this->getSessionContainer();
         $container->uid = null;
+	    $container->status = null;
 
         $this->sessionManager->destroy();
 
