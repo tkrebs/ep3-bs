@@ -272,6 +272,8 @@ return array(
     'How many days in advance<br>can squares be booked?' => 'Wie viele Tage im Voraus<br>kann max. gebucht werden?',
     'Cancel range' => 'Stornierung',
     'Until when may bookings be cancelled?' => 'Bis wann darf spätestens storniert werden?',
+	'Label for free squares' => 'Bezeichnung freier Plätze',
+	'Custom label for free squares in the calendar; default is <b>Free</b>' => 'Individuelle Bezeichnung freier Plätze im Kalender; Standard ist <b>Frei</b>',
 
     'Info (top)' => 'Info (oben)',
     'Optional info text, that will be displayed <b>above</b> square details'

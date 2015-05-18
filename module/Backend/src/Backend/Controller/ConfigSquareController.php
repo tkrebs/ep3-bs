@@ -29,6 +29,8 @@ class ConfigSquareController extends AbstractActionController
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
+	    $locale = $this->config('i18n.locale');
+
         $sid = $this->params()->fromRoute('sid');
 
         if ($sid) {
@@ -63,6 +65,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('time_block_bookable_max', max($editData['cf-time-block-bookable-max'], 10) * 60);
                 $square->set('range_book', $editData['cf-range-book'] * 60 * 60 * 24);
                 $square->set('range_cancel', $editData['cf-range-cancel'] * 60 * 60);
+	            $square->setMeta('label.free', $editData['cf-label-free'], $locale);
 
                 $squareManager->save($square);
 
@@ -87,6 +90,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-time-block-bookable-max' => round($square->get('time_block_bookable_max') / 60),
                     'cf-range-book' => round($square->get('range_book') / 60 / 60 / 24),
                     'cf-range-cancel' => round($square->get('range_cancel') / 60 / 60),
+	                'cf-label-free' => $square->getMeta('label.free'),
                 ));
             } else {
                 $editForm->setData(array(

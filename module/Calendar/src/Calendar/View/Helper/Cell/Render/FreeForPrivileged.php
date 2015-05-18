@@ -2,19 +2,22 @@
 
 namespace Calendar\View\Helper\Cell\Render;
 
+use Square\Entity\Square;
 use Zend\View\Helper\AbstractHelper;
 
 class FreeForPrivileged extends AbstractHelper
 {
 
-    public function __invoke(array $reservations, array $cellLinkParams)
+    public function __invoke(array $reservations, array $cellLinkParams, Square $square)
     {
         $view = $this->getView();
 
         $reservationsCount = count($reservations);
 
         if ($reservationsCount == 0) {
-            return $view->calendarCellLink('Free', $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free');
+	        $labelFree = $square->getMeta('label.free', 'Free');
+
+            return $view->calendarCellLink($labelFree, $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free');
         } else if ($reservationsCount == 1) {
             $reservation = current($reservations);
             $booking = $reservation->needExtra('booking');
@@ -24,7 +27,9 @@ class FreeForPrivileged extends AbstractHelper
 
             return $view->calendarCellLink($cellLabel, $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free cc-free-partially' . $cellGroup);
         } else {
-            return $view->calendarCellLink('Still free', $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free cc-free-partially');
+	        $labelFree = $square->getMeta('label.free', 'Still free');
+
+            return $view->calendarCellLink($labelFree, $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free cc-free-partially');
         }
     }
 

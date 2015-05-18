@@ -193,6 +193,19 @@ class EditForm extends Form
             ),
         ));
 
+	    $this->add(array(
+            'name' => 'cf-label-free',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'cf-label-free',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Label for free squares',
+                'notes' => 'Custom label for free squares in the calendar; default is <b>Free</b>',
+            ),
+        ));
+
         $this->add(array(
             'name' => 'cf-submit',
             'type' => 'Submit',
@@ -402,6 +415,12 @@ class EditForm extends Form
                             'message' => 'Please type a number here',
                         ),
                     ),
+                ),
+            ),
+	        'cf-label-free' => array(
+		        'required' => false,
+                'filters' => array(
+                    array('name' => 'StringTrim'),
                 ),
             ),
         )));
