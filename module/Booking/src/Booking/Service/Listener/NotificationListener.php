@@ -2,12 +2,13 @@
 
 namespace Booking\Service\Listener;
 
+use Backend\Service\MailService as BackendMailService;
 use Base\Manager\OptionManager;
 use Base\View\Helper\DateRange;
 use Booking\Manager\ReservationManager;
 use Square\Manager\SquareManager;
 use User\Manager\UserManager;
-use User\Service\MailService;
+use User\Service\MailService as UserMailService;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -22,19 +23,22 @@ class NotificationListener extends AbstractListenerAggregate
     protected $squareManager;
     protected $userManager;
     protected $userMailService;
+	protected $backendMailService;
     protected $dateFormatHelper;
     protected $dateRangeHelper;
     protected $translator;
 
-    public function __construct(OptionManager $optionManager, ReservationManager $reservationManager,
-        SquareManager $squareManager, UserManager $userManager, MailService $userMailService,
-        DateFormat $dateFormatHelper, DateRange $dateRangeHelper, TranslatorInterface $translator)
+    public function __construct(OptionManager $optionManager, ReservationManager $reservationManager, SquareManager $squareManager,
+	    UserManager $userManager, UserMailService $userMailService, BackendMailService $backendMailService,
+	    DateFormat $dateFormatHelper, DateRange $dateRangeHelper, TranslatorInterface $translator)
     {
         $this->optionManager = $optionManager;
         $this->reservationManager = $reservationManager;
         $this->squareManager = $squareManager;
         $this->userManager = $userManager;
         $this->userMailService = $userMailService;
+	    $this->backendMailService = $backendMailService;
+
         $this->dateFormatHelper = $dateFormatHelper;
         $this->dateRangeHelper = $dateRangeHelper;
         $this->translator = $translator;
@@ -77,6 +81,10 @@ class NotificationListener extends AbstractListenerAggregate
                 $dateRangerHelper($reservationStart, $reservationEnd));
 
             $this->userMailService->send($user, $subject, $message);
+
+	        if ($this->optionManager->get('client.contact.email.user-notifications')) {
+		        $this->backendMailService->send('CC: ' . $subject, $message);
+	        }
         }
     }
 
@@ -110,6 +118,10 @@ class NotificationListener extends AbstractListenerAggregate
                 $dateRangerHelper($reservationStart, $reservationEnd));
 
             $this->userMailService->send($user, $subject, $message);
+
+	        if ($this->optionManager->get('client.contact.email.user-notifications')) {
+		        $this->backendMailService->send('CC: ' . $subject, $message);
+	        }
         }
     }
 

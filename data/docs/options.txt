@@ -3,6 +3,7 @@ Options:
 - client.name.full
 - client.name.short
 - client.contact.email
+- client.contact.email.user-notifications   (optional) true|false
 - client.contact.phone
 - client.website                            URL
 - client.website.contact                    URL

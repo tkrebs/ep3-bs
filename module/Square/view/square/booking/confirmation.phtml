@@ -70,8 +70,20 @@ $this->setup(array(
         <?php endif; ?>
 
         <div class="centered-text small-text gray" style="margin-bottom: 12px;">
-            <?= sprintf($this->t('Your booking will be binding, however, you can cancel it up to %s before it takes place.'),
-                $this->prettyTime($square->need('range_cancel'))) ?>
+	        <?php
+
+	        $cancelRange = $square->need('range_cancel');
+
+	        if ($cancelRange) {
+
+		        printf($this->t('Your booking will be binding, however, you can cancel it up to %s before it takes place.'),
+                    $this->prettyTime($cancelRange));
+	        } else {
+
+		        echo $this->t('Your booking will be binding.');
+	        }
+
+	        ?>
         </div>
 
         <div class="centered-text">

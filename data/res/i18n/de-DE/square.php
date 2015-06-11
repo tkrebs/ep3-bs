@@ -56,6 +56,7 @@ return array(
     'Yes, I have %1$sread and accepted%2$s the "%3$s"' => 'Ja, ich habe die "%3$s" %1$sgelesen und akzeptiert%2$s',
     'Yes, I have %sread and accepted%s these rules and notes' => 'Ja, ich habe die Regeln und Hinweise %sgelesen und akzeptiert%s',
 
+	'Your booking will be binding.' => 'Ihre Buchung ist verbindlich.',
     'Your booking will be binding, however, you can cancel it up to %s before it takes place.'
         => 'Ihre Buchung ist verbindlich. Sie können sie jedoch bis zu %s vorher stornieren.',
     'Complete booking' => 'Buchung abschließen',

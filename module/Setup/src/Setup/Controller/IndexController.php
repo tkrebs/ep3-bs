@@ -86,6 +86,16 @@ class IndexController extends AbstractActionController
                     $formKey = str_replace('.', '_', $key);
                     $formValue = $textData['cf-' . $formKey];
 
+	                if (isset($value[2]) && $value[2]) {
+				        $type = $value[2];
+			        } else {
+				        $type = 'Text';
+			        }
+
+	                if ($type == 'Checkbox') {
+				        $formValue = (boolean) $formValue;
+			        }
+
                     $optionManager->set($key, $formValue);
                 }
 

@@ -227,6 +227,8 @@ return array(
     'Your email address' => 'Ihre E-Mail Adresse',
     'Will be used for system notifications.<br>Might also be displayed to users for help.'
         => 'Wird für Benachrichtigungen des Systems benötigt.<br>Kann auch Benutzern für Hilfe angezeigt werden.',
+	'Send user emails like booking/cancel confirmation to this address as well'
+		=> 'Sende Benutzer-E-Mails wie Buchungs- oder Stornierungsbestätigungen als Kopie an diese Adresse',
     'Your phone number' => 'Ihre Telefonnummer',
     'Displayed for booking by phone.'
         => 'Wird für die telefonische Buchung angezeigt.<br>Erscheint z.B. ganz oben in der Kopfleiste.',

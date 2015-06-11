@@ -35,18 +35,39 @@ $this->setup(array(
 
         <table class="default-table">
             <?php foreach (\Backend\Form\Config\TextForm::$definitions as $key => $value): $key = str_replace('.', '_', $key); ?>
-                <tr>
-                    <td class="default-form-label-row">
-                        <?= $this->formLabel($form->get('cf-' . $key)) ?>
-                    </td>
-                    <td>
-                        <?= $this->formElement($form->get('cf-' . $key)) ?>
-                    </td>
-                    <td>
-                        <?= $this->formElementErrors($form->get('cf-' . $key)) ?>
-                        <?= $this->formElementNotes($form->get('cf-' . $key)) ?>
-                    </td>
-                </tr>
+
+	            <?php
+
+	            if (isset($value[2]) && $value[2]) {
+			        $type = $value[2];
+		        } else {
+			        $type = 'Text';
+		        }
+
+	            ?>
+
+	            <?php if ($type == 'Checkbox'): ?>
+	                <tr style="position: relative; top: -8px;">
+	                    <td class="default-form-label-row"></td>
+	                    <td colspan="2">
+	                        <?= $this->formElement($form->get('cf-' . $key)) ?>
+		                    <?= $this->formLabel($form->get('cf-' . $key)) ?>
+	                    </td>
+	                </tr>
+	            <?php elseif ($type == 'Text'): ?>
+		            <tr>
+	                    <td class="default-form-label-row">
+	                        <?= $this->formLabel($form->get('cf-' . $key)) ?>
+	                    </td>
+	                    <td>
+	                        <?= $this->formElement($form->get('cf-' . $key)) ?>
+	                    </td>
+	                    <td>
+	                        <?= $this->formElementErrors($form->get('cf-' . $key)) ?>
+	                        <?= $this->formElementNotes($form->get('cf-' . $key)) ?>
+	                    </td>
+	                </tr>
+	            <?php endif; ?>
             <?php endforeach; ?>
 
             <?= $this->formRowSubmit($form, 'cf-submit') ?>

@@ -12,6 +12,7 @@ class TextForm extends Form
         'client.name.full' => array('Your name', 'Will be shown as the operator of this site.<br>Displayed next to the logo, for example.'),
         'client.name.short' => array('Your abbreviation', 'Short form or abbreviation of your name.<br>Displayed in emails, for example.'),
         'client.contact.email' => array('Your email address', 'Will be used for system notifications.<br>Might also be displayed to users for help.'),
+	    'client.contact.email.user-notifications' => array('Send user emails like booking/cancel confirmation to this address as well', null, 'Checkbox'),
         'client.contact.phone' => array('Your phone number', 'Displayed for booking by phone.'),
         'client.website' => array('Your website', 'The address of your website.<br>Displayed in the header, for example.'),
         'client.website.contact' => array('Your contact page', 'The address of your website\'s contact page.<br>Displayed in the header, for example.'),
@@ -36,16 +37,40 @@ class TextForm extends Form
         foreach (self::$definitions as $key => $value) {
             $key = str_replace('.', '_', $key);
 
+	        if (isset($value[0]) && $value[0]) {
+		        $label = $value[0];
+	        } else {
+		        $label = null;
+	        }
+
+	        if (isset($value[1]) && $value[1]) {
+		        $notes = $value[1];
+	        } else {
+		        $notes = null;
+	        }
+
+	        if (isset($value[2]) && $value[2]) {
+		        $type = $value[2];
+	        } else {
+		        $type = 'Text';
+	        }
+
+	        if ($type == 'Text') {
+		        $style = 'width: 380px;';
+	        } else {
+		        $style = null;
+	        }
+
             $this->add(array(
                 'name' => 'cf-' . $key,
-                'type' => 'Text',
+                'type' => $type,
                 'attributes' => array(
                     'id' => 'cf-' . $key,
-                    'style' => 'width: 380px;',
+                    'style' => $style,
                 ),
                 'options' => array(
-                    'label' => $value[0],
-                    'notes' => $value[1],
+                    'label' => $label,
+                    'notes' => $notes,
                 ),
             ));
         }
@@ -67,27 +92,36 @@ class TextForm extends Form
         foreach (self::$definitions as $key => $value) {
             $formKey = str_replace('.', '_', $key);
 
-            $filters['cf-' . $formKey] = array(
-                'filters' => array(
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name' => 'NotEmpty',
-                        'options' => array(
-                            'message' => 'Please type something here',
-                        ),
-                        'break_chain_on_failure' => true,
-                    ),
-                    array(
-                        'name' => 'StringLength',
-                        'options' => array(
-                            'min' => 2,
-                            'message' => 'Please type more characters here',
-                        ),
-                    ),
-                ),
-            );
+	        if (isset($value[2]) && $value[2]) {
+		        $type = $value[2];
+	        } else {
+		        $type = 'Text';
+	        }
+
+	        if ($type == 'Text') {
+
+		        $filters['cf-' . $formKey] = array(
+	                'filters' => array(
+	                    array('name' => 'StringTrim'),
+	                ),
+	                'validators' => array(
+	                    array(
+	                        'name' => 'NotEmpty',
+	                        'options' => array(
+	                            'message' => 'Please type something here',
+	                        ),
+	                        'break_chain_on_failure' => true,
+	                    ),
+	                    array(
+	                        'name' => 'StringLength',
+	                        'options' => array(
+	                            'min' => 2,
+	                            'message' => 'Please type more characters here',
+	                        ),
+	                    ),
+	                ),
+	            );
+	        }
 
             switch ($key) {
                 case 'client.contact.email':

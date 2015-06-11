@@ -32,10 +32,20 @@ class ConfigController extends AbstractActionController
                 foreach (TextForm::$definitions as $key => $value) {
                     $formKey = str_replace('.', '_', $key);
 
-                    $currentValue = $optionManager->get($key);
+	                $currentValue = $optionManager->get($key);
                     $formValue = $textData['cf-' . $formKey];
 
-                    if ($formValue && $formValue != $currentValue) {
+	                if (isset($value[2]) && $value[2]) {
+				        $type = $value[2];
+			        } else {
+				        $type = 'Text';
+			        }
+
+	                if ($type == 'Checkbox') {
+				        $formValue = (boolean) $formValue;
+			        }
+
+                    if (($formValue && $formValue != $currentValue) || is_bool($formValue)) {
                         $optionManager->set($key, $formValue, $this->config('i18n.locale'));
                     }
                 }
