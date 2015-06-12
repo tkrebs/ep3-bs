@@ -21,7 +21,7 @@ class MailService extends AbstractService
         $this->optionManager = $optionManager;
     }
 
-    public function send($subject, $text, array $attachments = array())
+    public function send($subject, $text, array $attachments = array(), $addendum = null)
     {
         $fromAddress = $this->configManager->need('mail.address');
         $fromName = $this->optionManager->need('client.name.short') . ' ' . $this->optionManager->need('service.name.full');
@@ -32,10 +32,11 @@ class MailService extends AbstractService
         $toAddress = $this->optionManager->need('client.contact.email');
         $toName = $this->optionManager->need('client.name.full');
 
-        $text = sprintf("%s,\r\n\r\n%s\r\n\r\n%s\r\n\r\n%s,\r\n%s %s\r\n%s",
+        $text = sprintf("%s,\r\n\r\n%s\r\n\r\n%s %s\r\n\r\n%s,\r\n%s %s\r\n%s",
             $this->t('Hello'),
             $text,
             $this->t('This was an automated message from the system.'),
+            $addendum,
             $this->t('Sincerely'),
             $this->t("Your"),
             $this->optionManager->need('service.name.full'),

@@ -256,6 +256,7 @@ return array(
     'Dear' => 'Sehr geehrte/r Herr/Frau',
     'Hello' => 'Hallo',
     'This was an automated message from the system.' => 'Diese Nachricht wurde automatisch gesendet.',
+	'Originally sent to %s (%s).' => 'Ursprünglich gesendet an %s (%s).',
     'Sincerely' => 'Viele Grüße',
     'Your' => 'Ihr',
 

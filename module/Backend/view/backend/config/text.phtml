@@ -47,11 +47,13 @@ $this->setup(array(
 	            ?>
 
 	            <?php if ($type == 'Checkbox'): ?>
-	                <tr style="position: relative; top: -8px;">
+	                <tr>
 	                    <td class="default-form-label-row"></td>
 	                    <td colspan="2">
-	                        <?= $this->formElement($form->get('cf-' . $key)) ?>
-		                    <?= $this->formLabel($form->get('cf-' . $key)) ?>
+		                    <div style="position: relative; top: -8px;">
+	                            <?= $this->formElement($form->get('cf-' . $key)) ?>
+		                        <?= $this->formLabel($form->get('cf-' . $key)) ?>
+		                    </div>
 	                    </td>
 	                </tr>
 	            <?php elseif ($type == 'Text'): ?>
