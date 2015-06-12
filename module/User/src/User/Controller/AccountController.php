@@ -508,11 +508,7 @@ class AccountController extends AbstractActionController
 
                 $bookingNotifications = $data['enf-booking-notifications'];
 
-                if ($bookingNotifications) {
-                    $user->setMeta('notification.bookings', 'true');
-                } else {
-                    $user->setMeta('notification.bookings', 'false');
-                }
+                $user->setMeta('notification.bookings', $bookingNotifications);
 
                 $userManager->save($user);
 
