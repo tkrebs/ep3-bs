@@ -10,12 +10,14 @@ ini_set('date.timezone', 'America/New_York');
 
 return array(
     'mail' => array(
-        'type' => 'sendmail', // or 'smtp'
+        'type' => 'sendmail', // or 'smtp' or 'smtp-tls'
         'address' => 'info@bookings.example.com',
 
         'host' => '?', // for 'smtp' type only, otherwise remove or leave as is
         'user' => '?', // for 'smtp' type only, otherwise remove or leave as is
         'pw' => '?', // for 'smtp' type only, otherwise remove or leave as is
+
+        'port' => null, // for 'smtp' type only, otherwise remove or leave as is
     ),
     'db' => array(
         'user' => '?',
