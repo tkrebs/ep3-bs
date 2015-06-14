@@ -17,7 +17,7 @@ return array(
         'user' => '?', // for 'smtp' type only, otherwise remove or leave as is
         'pw' => '?', // for 'smtp' type only, otherwise remove or leave as is
 
-        'port' => null, // for 'smtp' type only, otherwise remove or leave as is
+        'port' => 'auto', // for 'smtp' type only, otherwise remove or leave as is
     ),
     'db' => array(
         'user' => '?',
