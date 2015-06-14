@@ -11,7 +11,7 @@ class Event extends AbstractHelper
     {
         $view = $this->getView();
 
-        if ($user && $user->can('admin.events')) {
+        if ($user && $user->can('admin.event')) {
             return $view->calendarCellRenderEventForPrivileged($event);
         } else {
             $eid = $event->need('eid');
