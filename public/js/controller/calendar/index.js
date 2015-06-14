@@ -69,12 +69,6 @@
         $(window).resize(updateCalendarEvents);
         $(document).on("updateLayout", updateCalendarEvents);
 
-        /* Beautify calendar */
-
-        if ($("body").height() < 576) {
-            $(".content-panel").css("padding", 30);
-        }
-
     });
 
     function loadSquarebox(href)
