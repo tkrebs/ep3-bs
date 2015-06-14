@@ -30,8 +30,8 @@ class MailTransportService extends AbstractService
                     $this->transport = new Sendmail();
                     break;
                 case 'smtp':
-				case 'smtp-tls':
-					$optionsArray = array(
+                case 'smtp-tls':
+                    $optionsArray = array(
                         'host' => $this->configManager->need('mail.host'),
                         'connection_class' => 'plain',
                         'connection_config' => array(
@@ -40,16 +40,16 @@ class MailTransportService extends AbstractService
                         ),
                     );
 
-					if ($mailType == 'smtp-tls') {
-						$optionsArray['port'] = 587;
-						$optionsArray['connection_config']['ssl'] = 'tls';
-					}
+                    if ($mailType == 'smtp-tls') {
+                        $optionsArray['port'] = 587;
+                        $optionsArray['connection_config']['ssl'] = 'tls';
+                    }
 
-					$optionPort = $this->configManager->get('mail.port');
+                    $optionPort = $this->configManager->get('mail.port');
 
-					if (is_numeric($optionPort)) {
-						$optionsArray['port'] = $optionPort;
-					}
+                    if (is_numeric($optionPort)) {
+                        $optionsArray['port'] = $optionPort;
+                    }
 
                     $options = new SmtpOptions($optionsArray);
 
