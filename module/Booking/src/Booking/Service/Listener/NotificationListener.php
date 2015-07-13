@@ -78,7 +78,7 @@ class NotificationListener extends AbstractListenerAggregate
             $square->need('name'),
             $dateRangerHelper($reservationStart, $reservationEnd));
 
-        if ($user->getMeta('notification.bookings', 'false') == 'true') {
+        if ($user->getMeta('notification.bookings', 'true') == 'true') {
             $this->userMailService->send($user, $subject, $message);
         }
 
@@ -122,7 +122,7 @@ class NotificationListener extends AbstractListenerAggregate
             $square->need('name'),
             $dateRangerHelper($reservationStart, $reservationEnd));
 
-        if ($user->getMeta('notification.bookings', 'false') == 'true') {
+        if ($user->getMeta('notification.bookings', 'true') == 'true') {
             $this->userMailService->send($user, $subject, $message);
         }
 

@@ -518,7 +518,7 @@ class AccountController extends AbstractActionController
                 return $this->redirect()->toRoute('user/settings');
             }
         } else {
-            $editNotificationsForm->get('enf-booking-notifications')->setValue($user->getMeta('notification.bookings', 'false'));
+            $editNotificationsForm->get('enf-booking-notifications')->setValue($user->getMeta('notification.bookings', 'true'));
         }
 
         /* Password form */
