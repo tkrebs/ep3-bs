@@ -121,7 +121,6 @@ class BehaviourForm extends Form
                 'style' => 'width: 200px;',
             ),
         ));
-
     }
 
 }

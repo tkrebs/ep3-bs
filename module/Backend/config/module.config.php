@@ -339,6 +339,15 @@ return array(
                                             ),
                                         ),
                                     ),
+                                    'status-colors' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/status-colors',
+                                            'defaults' => array(
+                                                'action' => 'behaviourStatusColors',
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),

@@ -8,6 +8,7 @@ return array(
             'Booking\Manager\ReservationManager' => 'Booking\Manager\ReservationManagerFactory',
 
             'Booking\Service\BookingService' => 'Booking\Service\BookingServiceFactory',
+            'Booking\Service\BookingStatusService' => 'Booking\Service\BookingStatusServiceFactory',
 
             'Booking\Table\BookingMetaTable' => 'Booking\Table\BookingMetaTableFactory',
             'Booking\Table\BookingTable' => 'Booking\Table\BookingTableFactory',

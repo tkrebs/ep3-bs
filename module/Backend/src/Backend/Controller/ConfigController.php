@@ -259,4 +259,44 @@ class ConfigController extends AbstractActionController
         );
     }
 
+    public function behaviourStatusColorsAction()
+    {
+        $this->authorize('admin.config');
+
+        $serviceManager = $this->getServiceLocator();
+        $formElementManager = $serviceManager->get('FormElementManager');
+
+        $statusColorsForm = $formElementManager->get('Backend\Form\Config\BehaviourStatusColorsForm');
+
+        $bookingStatusService = $serviceManager->get('Booking\Service\BookingStatusService');
+
+        if ($this->getRequest()->isPost()) {
+            $statusColorsForm->setData($this->params()->fromPost());
+
+            if ($statusColorsForm->isValid()) {
+                $data = $statusColorsForm->getData();
+
+                $statusColors = $data['cf-status-colors'];
+
+                if ($bookingStatusService->checkStatusColors($statusColors)) {
+                    $bookingStatusService->setStatusColors($statusColors, $this->config('i18n.locale'));
+
+                    $this->flashMessenger()->addSuccessMessage('Configuration has been saved');
+                } else {
+                    $this->flashMessenger()->addErrorMessage('Configuration is (partially) invalid');
+                }
+            } else {
+                $this->flashMessenger()->addErrorMessage('Configuration is (partially) invalid');
+            }
+
+            return $this->redirect()->toRoute('backend/config/behaviour/status-colors');
+        } else {
+            $statusColorsForm->get('cf-status-colors')->setValue($bookingStatusService->getStatusColorsRaw());
+        }
+
+        return array(
+            'statusColorsForm' => $statusColorsForm,
+        );
+    }
+
 }

@@ -52,6 +52,15 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config/be
                 </td>
             </tr>
 
+            <tr>
+                <td class="default-form-label-row">&nbsp;</td>
+                <td>
+                    <a href="<?= $this->url('backend/config/behaviour/status-colors') ?>" class="default-button">
+                        <span class="symbolic symbolic-edit"><?= $this->t('Edit billing status names and colors') ?></span>
+                    </a>
+                </td>
+            </tr>
+
             <?= $this->formRowSubmit($form, 'cf-submit') ?>
         </table>
 

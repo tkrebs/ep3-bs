@@ -3,6 +3,7 @@
 namespace Backend\Form\Booking;
 
 use Booking\Entity\Booking;
+use Booking\Service\BookingStatusService;
 use Square\Manager\SquareManager;
 use Zend\Form\Form;
 use Zend\InputFilter\Factory;
@@ -10,12 +11,14 @@ use Zend\InputFilter\Factory;
 class EditForm extends Form
 {
 
+    protected $bookingStatusService;
     protected $squareManager;
 
-    public function __construct(SquareManager $squareManager)
+    public function __construct(BookingStatusService $bookingStatusService, SquareManager $squareManager)
     {
         parent::__construct();
 
+        $this->bookingStatusService = $bookingStatusService;
         $this->squareManager = $squareManager;
     }
 
@@ -71,7 +74,7 @@ class EditForm extends Form
             ),
             'options' => array(
                 'label' => 'Billing status',
-                'value_options' => Booking::$billingStatusOptions,
+                'value_options' => $this->bookingStatusService->getStatusTitles(),
             ),
         ));
 

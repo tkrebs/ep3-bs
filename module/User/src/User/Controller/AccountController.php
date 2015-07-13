@@ -391,8 +391,10 @@ class AccountController extends AbstractActionController
 
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $bookingBillManager = $serviceManager->get('Booking\Manager\Booking\BillManager');
+        $bookingStatusService = $serviceManager->get('Booking\Service\BookingStatusService');
 
         $booking = $bookingManager->get($bid);
+        $bookingBillingStatus = $bookingStatusService->getStatusTitle($booking->getBillingStatus());
 
         if ($booking->get('uid') != $user->get('uid')) {
             if (! $user->can('admin.booking')) {
@@ -404,6 +406,7 @@ class AccountController extends AbstractActionController
 
         return array(
             'booking' => $booking,
+            'bookingBillingStatus' => $bookingBillingStatus,
             'bills' => $bills,
         );
     }

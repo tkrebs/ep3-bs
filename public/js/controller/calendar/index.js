@@ -44,7 +44,14 @@
             var group = classes.match(/cc-group-\d+/);
 
             if (group) {
-                $("a." + group).css({"opacity": 0.9, "background-color": that.css("background-color")});
+                var groupMembers = $("a." + group);
+
+                groupMembers.each(function() {
+                    $(this).data("original-style", $(this).attr("style"));
+                });
+
+                groupMembers.css({"opacity": 0.9, "background-color": that.css("background-color")});
+
                 that.css("opacity", 1.0);
             }
         }, function() {
@@ -53,7 +60,11 @@
             var group = classes.match(/cc-group-\d+/);
 
             if (group) {
-                $("a." + group).removeAttr("style");
+                var groupMembers = $("a." + group);
+
+                groupMembers.each(function() {
+                    $(this).attr("style", $(this).data("original-style"));
+                });
             }
         });
 

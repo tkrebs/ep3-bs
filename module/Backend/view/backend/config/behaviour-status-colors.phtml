@@ -1,0 +1,42 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Edit billing status names and colors',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Behaviour' => $this->url('backend/config/behaviour'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Edit billing status names and colors') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->statusColorsForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/config/behaviour/status-colors'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <?= $this->formRowDefault($form, 'cf-status-colors') ?>
+
+            <?= $this->formRowSubmit($form, 'cf-submit') ?>
+        </table>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

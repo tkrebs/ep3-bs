@@ -181,6 +181,7 @@ return array(
 
     'Go to booking bills' => 'Buchungs-Rechnung ansehen',
     'Billing status' => 'Rechnungsstatus',
+    'Billing status options' => 'Rechnungsstatus-Bezeichnungen',
     'Number of players' => 'Anzahl Spieler',
     'Booked to' => 'Gebucht auf',
 
@@ -320,6 +321,7 @@ return array(
     'Displays this product only to this language' => 'Zeigt dieses Produkt nur bei dieser Sprache an',
 
     'Edit business terms and privacy policy' => 'AGB und Datenschutzerklärung bearbeiten',
+    'Edit billing status names and colors' => 'Rechnungsstatus-Bezeichnungen und -Farben bearbeiten',
 
     'Business terms (file)' => 'AGB (Datei)',
     'Business terms (file name)' => 'AGB (Dateiname)',
@@ -334,5 +336,11 @@ return array(
     'How many people can participate?' => 'Wieviele Personen können teilnehmen?',
 
     'There are multiple events for this date and time:' => 'Es gibt mehrere Veranstaltungen für diesen Zeitraum:',
+
+    "Pending (pending)\nPaid (paid)\nCancelled (cancelled)\nUncollectable (uncollectable)"
+        => "Ausstehend (pending)\nBezahlt (paid)\nStorniert (cancelled)\nUneinbringlich (uncollectable)",
+
+    'One status option per line and formatted as either:<br>Name<br>Name (internal value)<br>Name (internal value) Color<br>Name Color<br><br>For example:<br>Open (pending) #F00<br>Paid at place #F00<br><br>The following values <b>must</b> exist once:<br>pending, paid, cancelled, uncollectable'
+        => 'Ein Wert pro Zeile in einem der folgenden Formate:<br>Name<br>Name (interne Bezeichnung)<br>Name (interne Bezeichnung) Farbe<br>Name Farbe<br><br>Zum Beispiel:<br>Offen (pending) #F00<br>Vor Ort bezahlt #F00<br><br>Die folgenden internen Bezeichnungen <b>müssen</b> vorkommen:<br>pending, paid, cancelled, uncollectable',
 
 );

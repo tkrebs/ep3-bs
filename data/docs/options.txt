@@ -29,6 +29,7 @@ Options:
 - service.branding.website                  (optional)
 - service.pricing.visibility                public|private|never
 - service.pricing.payment                   none|invoice|paypal|invoice,paypal
+- service.status-values.billing             (optional)
 
 - subject.help                              HTML
 - subject.about                             HTML

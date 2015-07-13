@@ -44,31 +44,13 @@ class Booking extends AbstractEntity
     }
 
     /**
-     * The possible billing status options.
-     *
-     * @var array
-     */
-    public static $billingStatusOptions = array(
-        'pending' => 'Pending',
-        'paid' => 'Paid',
-        'cancelled' => 'Cancelled',
-        'uncollectable' => 'Uncollectable',
-    );
-
-    /**
      * Returns the billing status string.
      *
      * @return string
      */
     public function getBillingStatus()
     {
-        $status = $this->need('status_billing');
-
-        if (isset(self::$billingStatusOptions[$status])) {
-            return self::$billingStatusOptions[$status];
-        } else {
-            return 'Unknown';
-        }
+        return $this->need('status_billing');
     }
 
     /**
