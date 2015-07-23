@@ -30,7 +30,7 @@ class Create extends AbstractPlugin
         $this->connection = $connection;
     }
 
-    public function __invoke($user, $timeStart, $timeEnd, $dateStart, $dateEnd, $repeat, $square, $statusBilling, $quantity, $notes = null)
+    public function __invoke($user, $timeStart, $timeEnd, $dateStart, $dateEnd, $repeat, $square, $statusBilling, $quantity, $notes = null, $creator = null)
     {
         $controller = $this->getController();
 
@@ -101,6 +101,7 @@ class Create extends AbstractPlugin
             }
 
             $bookingMeta['notes'] = $notes;
+            $bookingMeta['creator'] = $creator;
 
             /* Create booking */
 

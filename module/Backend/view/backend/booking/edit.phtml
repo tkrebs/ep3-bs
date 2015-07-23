@@ -118,7 +118,14 @@ $this->setup(array(
                         <div class="default-form-notes">
                             <div class="separator-small separator-line"></div>
 
-                            <?= $this->t('Booking created') ?>:<br><?= $this->prettyDate(new \DateTime($this->booking->get('created'))) ?>
+                            <?php if ($this->booking->getMeta('creator')): ?>
+                                <?= sprintf($this->t('Booking created:<br>%s by %s'),
+                                    $this->prettyDate(new \DateTime($this->booking->get('created'))),
+                                    $this->booking->getMeta('creator')) ?>
+                            <?php else: ?>
+                                <?= sprintf($this->t('Booking created:<br>%s'),
+                                    $this->prettyDate(new \DateTime($this->booking->get('created')))) ?>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                 </div>

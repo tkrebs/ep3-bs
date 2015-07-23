@@ -49,6 +49,7 @@ Booking meta keys:
 - time_end                                  (for subscriptions)
 - repeat                                    (for subscriptions)
 - notes                                     (optional)
+- creator                                   (optional, if by admin)
 
 
 

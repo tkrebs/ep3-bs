@@ -67,7 +67,7 @@ class BookingController extends AbstractActionController
 
     public function editAction()
     {
-        $this->authorize('admin.booking, calendar.see-data');
+        $sessionUser = $this->authorize('admin.booking, calendar.see-data');
 
         $params = $this->backendBookingDetermineParams();
 
@@ -116,7 +116,7 @@ class BookingController extends AbstractActionController
                     /* Create booking/reservation */
 
                     $this->backendBookingCreate($d['bf-user'], $d['bf-time-start'], $d['bf-time-end'], $d['bf-date-start'], $d['bf-date-end'],
-                        $d['bf-repeat'], $d['bf-sid'], $d['bf-status-billing'], $d['bf-quantity'], $d['bf-notes']);
+                        $d['bf-repeat'], $d['bf-sid'], $d['bf-status-billing'], $d['bf-quantity'], $d['bf-notes'], $sessionUser->get('alias'));
                 }
 
                 $this->flashMessenger()->addSuccessMessage('Booking has been saved');

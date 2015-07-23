@@ -173,6 +173,8 @@ return array(
     'This %s has multiple reservations here:' => 'Dieser %s ist hier mehrfach belegt:',
 
     'Booking created' => 'Buchung erstellt',
+    'Booking created:<br>%s' => 'Buchung erstellt:<br>%s',
+    'Booking created:<br>%s by %s' => 'Buchung erstellt:<br>%s von %s',
 
     'Admin users can only be edited by admins' => 'Verwaltungskonten können nur von anderen Verwaltungskonten bearbeitet werden',
     'Admin status can only be given by admins' => 'Verwaltungsstatus kann nur von anderen Verwaltungskonten gegeben werden',
