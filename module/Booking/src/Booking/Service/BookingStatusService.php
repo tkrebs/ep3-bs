@@ -48,6 +48,17 @@ class BookingStatusService extends AbstractService
         return true;
     }
 
+    public function checkStatus($slug)
+    {
+        $statusColors = $this->getStatusColors();
+
+        if (isset($statusColors[$slug])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function setStatusColors($statusColors, $locale = null)
     {
         $this->optionManager->set('service.status-values.billing', $statusColors, $locale);

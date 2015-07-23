@@ -12,6 +12,7 @@ return array(
 
     'Email address' => 'E-Mail Adresse',
     'Email' => 'E-Mail',
+    'Phone' => 'Tel.',
     'Password' => 'Passwort',
     'Login' => 'Anmelden',
     'Logout' => 'Abmelden',

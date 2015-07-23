@@ -408,6 +408,7 @@ class AccountController extends AbstractActionController
             'booking' => $booking,
             'bookingBillingStatus' => $bookingBillingStatus,
             'bills' => $bills,
+            'user' => $user,
         );
     }
 

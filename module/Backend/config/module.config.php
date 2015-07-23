@@ -122,6 +122,18 @@ return array(
                                     ),
                                 ),
                             ),
+                            'bills' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/bills/:bid',
+                                    'defaults' => array(
+                                        'action' => 'bills',
+                                    ),
+                                    'constraints' => array(
+                                        'bid' => '[0-9]+',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     'event' => array(

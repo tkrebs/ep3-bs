@@ -1,11 +1,20 @@
 <?php
 
+if ($this->user->can('admin.bookings')) {
+    $links = array(
+        'Edit bill' => $this->url('backend/booking/bills', ['bid' => $this->booking->need('bid')]),
+    );
+} else {
+    $links = array();
+}
+
 $this->setup(array(
     'title' => 'Booking-Bill',
     'panel' => 'centered-panel',
     'back' => array(
         'My bookings' => $this->url('user/bookings'),
     ),
+    'links' => $links,
 ));
 
 ?>

@@ -40,6 +40,10 @@ $this->setup(array(
                                 <div><?= $this->t('Email') ?>: <?= $user->get('email') ?></div>
                             <?php endif; ?>
 
+                            <?php if ($user->getMeta('phone')): ?>
+                                <div><?= $this->t('Phone') ?>: <?= $user->getMeta('phone') ?></div>
+                            <?php endif; ?>
+
                             <div style="margin-top: 8px;">
                                 <a href="<?= $this->url('backend/user/edit', ['uid' => $user->need('uid')]) ?>" class="gray">
                                     <span class="symbolic symbolic-edit"><?= $this->t('Edit user') ?></span>

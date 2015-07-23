@@ -59,6 +59,7 @@ return array(
     'User status has been set to deleted' => 'Benutzerstatus wurde auf gelöscht gesetzt',
     'Edit' => 'Bearbeiten',
     'Save' => 'Speichern',
+    'Save and back' => 'Speichern und zurück',
     'Delete' => 'Löschen',
 
     'Edit user' => 'Benutzer bearbeiten',
@@ -322,6 +323,8 @@ return array(
 
     'Edit business terms and privacy policy' => 'AGB und Datenschutzerklärung bearbeiten',
     'Edit billing status names and colors' => 'Rechnungsstatus-Bezeichnungen und -Farben bearbeiten',
+    'Edit Booking-Bill' => 'Buchungs-Rechnung bearbeiten',
+    'Edit bill' => 'Rechnung bearbeiten',
 
     'Business terms (file)' => 'AGB (Datei)',
     'Business terms (file name)' => 'AGB (Dateiname)',
@@ -343,4 +346,15 @@ return array(
     'One status option per line and formatted as either:<br>Name<br>Name (internal value)<br>Name (internal value) Color<br>Name Color<br><br>For example:<br>Open (pending) #F00<br>Paid at place #F00<br><br>The following values <b>must</b> exist once:<br>pending, paid, cancelled, uncollectable'
         => 'Ein Wert pro Zeile in einem der folgenden Formate:<br>Name<br>Name (interne Bezeichnung)<br>Name (interne Bezeichnung) Farbe<br>Name Farbe<br><br>Zum Beispiel:<br>Offen (pending) #F00<br>Vor Ort bezahlt #F00<br><br>Die folgenden internen Bezeichnungen <b>müssen</b> vorkommen:<br>pending, paid, cancelled, uncollectable',
 
+    'Invalid billing status selected' => 'Ungültigen Rechnungsstatus ausgewählt',
+    'Booking-Bill has been saved' => 'Buchungs-Rechnung wurde gespeichert',
+    'Booking-Bill position has been created' => 'Buchungs-Rechnungsposten wurde erstellt',
+    'No Booking-Bill position has been created' => 'Es wurde kein Buchungs-Rechnungsposten erstellt',
+    'Booking-Bill position has been deleted' => 'Buchungs-Rechnungsposten wurde gelöscht',
+
+    'Time (in minutes)' => 'Zeit (in Minuten)',
+    'Price (in cent)' => 'Preis (in Cent)',
+
+    'New position' => 'Neue Position',
+    'New position by using the pricing rules for this booking' => 'Neue Position durch Anwenden der Preis-Regeln auf diese Buchung',
 );

@@ -1,0 +1,117 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Edit Booking-Bill',
+    'panel' => 'centered-panel',
+    'back' => array(
+        'Booking-Bill' => $this->url('user/bookings/bills', ['bid' => $this->booking->need('bid')]),
+    ),
+));
+
+$last_vat = null;
+
+?>
+
+<div>
+    <h1><?= $this->t('Edit Booking-Bill') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <form method="post">
+        <p><?= $this->t(sprintf('Status: %s',
+            '<select name="ebf-status">' . $this->formSelect()->renderOptions(
+                $this->bookingStatusService->getStatusTitles(), array($this->booking->getBillingStatus())) . '</select>')) ?></p>
+
+        <div class="sandbox">
+            <table class="default-table middle-table">
+                <tr>
+                    <td><?= $this->t('Description') ?></td>
+                    <td class="right-text"><?= $this->t('Time (in minutes)') ?></td>
+                    <td class="right-text"><?= $this->option('subject.square.unit.plural') ?></td>
+                    <td><?= $this->t('Price (in cent)') ?></td>
+                    <td></td>
+                </tr>
+
+                <?php foreach ($this->bills as $bill): ?>
+                    <tr>
+                        <td><input type="text" name="ebf-<?= $bill->need('bbid') ?>-description" value="<?= $bill->get('description') ?>" style="width: 220px;"></td>
+
+                        <td class="right-text"><input type="text" name="ebf-<?= $bill->need('bbid') ?>-time" value="<?= ($bill->get('time') ? ($bill->get('time') / 60) : '') ?>" style="width: 64px; text-align: right;"></td>
+
+                        <td class="right-text"><input type="text" name="ebf-<?= $bill->need('bbid') ?>-quantity" value="<?= $bill->get('quantity') ?>" style="width: 64px; text-align: right;"></td>
+
+                        <td>
+                            <input type="text" name="ebf-<?= $bill->need('bbid') ?>-price" value="<?= $bill->get('price') ?>" style="width: 64px; text-align: right;">
+
+                            <?php
+
+                            echo '<select name="ebf-' . $bill->need('bbid') . '-vat">';
+
+                            $last_vat = $bill->get('rate') . ',' . $bill->get('gross');
+
+                            echo $this->formSelect()->renderOptions(array(
+                                '7,0' => $this->t('plus') . ' 7% ' . $this->t('VAT'),
+                                '7,1' => $this->t('including') . ' 7% ' . $this->t('VAT'),
+                                '19,0' => $this->t('plus') . ' 19% ' . $this->t('VAT'),
+                                '19,1' => $this->t('including') . ' 19% ' . $this->t('VAT'),
+                            ), array(
+                                $last_vat,
+                            ));
+
+                            echo '</select>';
+
+                            ?>
+                        </td>
+
+                        <td>
+                            <a href="?delete=<?= $bill->need('bbid') ?>" class="unlined gray symbolic symbolic-cross"></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+
+                <tr>
+                    <td><input type="text" name="ebf-new-description" placeholder="<?= $this->t('New position') ?>" style="width: 220px;"></td>
+
+                    <td class="right-text"><input type="text" name="ebf-new-time" style="width: 64px; text-align: right;"></td>
+
+                    <td class="right-text"><input type="text" name="ebf-new-quantity" style="width: 64px; text-align: right;"></td>
+
+                    <td>
+                        <input type="text" name="ebf-new-price" style="width: 64px; text-align: right;">
+
+                        <?php
+
+                        echo '<select name="ebf-new-vat">';
+
+                        echo $this->formSelect()->renderOptions(array(
+                            '7,0' => $this->t('plus') . ' 7% ' . $this->t('VAT'),
+                            '7,1' => $this->t('including') . ' 7% ' . $this->t('VAT'),
+                            '19,0' => $this->t('plus') . ' 19% ' . $this->t('VAT'),
+                            '19,1' => $this->t('including') . ' 19% ' . $this->t('VAT'),
+                        ), array(
+                            $last_vat,
+                        ));
+
+                        echo '</select>';
+
+                        ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <a href="?create=default-bill" class="symbolic symbolic-plus-link"><?= $this->t('New position by using the pricing rules for this booking') ?></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="separator-small"></div>
+
+        <div class="centered-text">
+            <input type="submit" name="ebf-save" value="<?= $this->t('Save') ?>" class="default-button">
+            &nbsp;
+            <input type="submit" name="ebf-save-and-back" value="<?= $this->t('Save and back') ?>" class="default-button">
+        </div>
+    </form>
+</div>

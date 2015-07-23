@@ -357,4 +357,164 @@ class BookingController extends AbstractActionController
         );
     }
 
+    public function billsAction()
+    {
+        $this->authorize('admin.booking');
+
+        $bid = $this->params()->fromRoute('bid');
+
+        $serviceManager = $this->getServiceLocator();
+
+        $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
+        $bookingBillManager = $serviceManager->get('Booking\Manager\Booking\BillManager');
+        $bookingStatusService = $serviceManager->get('Booking\Service\BookingStatusService');
+        $userManager = $serviceManager->get('User\Manager\UserManager');
+
+        $booking = $bookingManager->get($bid);
+        $bills = $bookingBillManager->getBy(array('bid' => $bid), 'bbid ASC');
+        $user = $userManager->get($booking->need('uid'));
+
+        if ($this->getRequest()->isGet()) {
+            $create = $this->params()->fromQuery('create');
+
+            if ($create == 'default-bill') {
+                $reservationManager = $serviceManager->get('Booking\Manager\ReservationManager');
+                $squareManager = $serviceManager->get('Square\Manager\SquareManager');
+                $squarePricingManager = $serviceManager->get('Square\Manager\SquarePricingManager');
+
+                $square = $squareManager->get($booking->get('sid'));
+                $squareType = $this->option('subject.square.type');
+                $squareName = $this->t($square->need('name'));
+
+                $dateRangeHelper = $serviceManager->get('ViewHelperManager')->get('DateRange');
+
+                $created = false;
+
+                foreach ($reservationManager->getBy(['bid' => $bid]) as $reservation) {
+
+                    $dateTimeStart = new \DateTime($reservation->get('date') . ' ' . $reservation->get('time_start'));
+                    $dateTimeEnd = new \DateTime($reservation->get('date') . ' ' . $reservation->get('time_end'));
+
+                    $pricing = $squarePricingManager->getFinalPricingInRange($dateTimeStart, $dateTimeEnd, $square, $booking->get('quantity'));
+
+                    if ($pricing) {
+
+                        $description = sprintf('%s %s, %s',
+                            $squareType, $squareName,
+                            $dateRangeHelper($dateTimeStart, $dateTimeEnd));
+
+                        $bookingBillManager->save(new Booking\Bill(array(
+                            'bid' => $bid,
+                            'description' => $description,
+                            'quantity' => $booking->get('quantity'),
+                            'time' => $pricing['seconds'],
+                            'price' => $pricing['price'],
+                            'rate' => $pricing['rate'],
+                            'gross' => $pricing['gross'],
+                        )));
+
+                        $created = true;
+                    }
+                }
+
+                if ($created) {
+                    $this->flashMessenger()->addSuccessMessage('Booking-Bill position has been created');
+                } else {
+                    $this->flashMessenger()->addErrorMessage('No Booking-Bill position has been created');
+                }
+
+                return $this->redirect()->toRoute('backend/booking/bills', ['bid' => $bid]);
+            }
+
+            $delete = $this->params()->fromQuery('delete');
+
+            if ($delete && is_numeric($delete) && isset($bills[$delete])) {
+                $bookingBillManager->delete($delete);
+
+                $this->flashMessenger()->addSuccessMessage('Booking-Bill position has been deleted');
+                return $this->redirect()->toRoute('backend/booking/bills', ['bid' => $bid]);
+            }
+        }
+
+        if ($this->getRequest()->isPost()) {
+
+            /* Check and save billing status */
+
+            $billingStatus = $this->params()->fromPost('ebf-status');
+
+            if ($bookingStatusService->checkStatus($billingStatus)) {
+                $booking->set('status_billing', $billingStatus);
+                $bookingManager->save($booking);
+            } else {
+                $this->flashMessenger()->addErrorMessage('Invalid billing status selected');
+            }
+
+            /* Check and save known (and new) bills */
+
+            $bills[] = new Booking\Bill(['bid' => $bid]);
+
+            foreach ($bills as $bill) {
+
+                $bbid = $bill->get('bbid', 'new');
+
+                $description = $this->params()->fromPost('ebf-' . $bbid . '-description');
+
+                if ($description) {
+                    $bill->set('description', $description);
+                }
+
+                $time = $this->params()->fromPost('ebf-' . $bbid . '-time');
+
+                if ($time && is_numeric($time)) {
+                    $bill->set('time', $time * 60);
+                }
+
+                $quantity = $this->params()->fromPost('ebf-' . $bbid . '-quantity');
+
+                if ($quantity && is_numeric($quantity)) {
+                    $bill->set('quantity', $quantity);
+                }
+
+                $price = $this->params()->fromPost('ebf-' . $bbid . '-price');
+
+                if ($price && is_numeric($price)) {
+                    $bill->set('price', $price);
+                }
+
+                $vat = $this->params()->fromPost('ebf-' . $bbid . '-vat');
+
+                if ($vat) {
+                    $vat_parts = explode(',', $vat);
+
+                    if (count($vat_parts) == 2 && is_numeric($vat_parts[0]) && is_numeric($vat_parts[1])) {
+                        $bill->set('rate', $vat_parts[0]);
+                        $bill->set('gross', $vat_parts[1]);
+                    }
+                }
+
+                if ($description) {
+                    $bookingBillManager->save($bill);
+                }
+            }
+
+            $save = $this->params()->fromPost('ebf-save');
+            $saveAndBack = $this->params()->fromPost('ebf-save-and-back');
+
+            $this->flashMessenger()->addSuccessMessage('Booking-Bill has been saved');
+
+            if ($save) {
+                return $this->redirect()->toRoute('backend/booking/bills', ['bid' => $bid]);
+            } else if ($saveAndBack) {
+                return $this->redirect()->toRoute('user/bookings/bills', ['bid' => $bid]);
+            }
+        }
+
+        return array(
+            'booking' => $booking,
+            'bookingStatusService' => $bookingStatusService,
+            'bills' => $bills,
+            'user' => $user,
+        );
+    }
+
 }
