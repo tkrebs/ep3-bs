@@ -21,7 +21,7 @@ class Update extends AbstractPlugin
     protected $connection;
 
     public function __construct(BookingManager $bookingManager, ReservationManager $reservationManager,
-                                SquareManager $squareManager, UserManager $userManager, ConnectionInterface $connection)
+        SquareManager $squareManager, UserManager $userManager, ConnectionInterface $connection)
     {
         $this->bookingManager = $bookingManager;
         $this->reservationManager = $reservationManager;
@@ -31,7 +31,7 @@ class Update extends AbstractPlugin
     }
 
     public function __invoke($rid, $newUser, $newTimeStart, $newTimeEnd, $newDate, $newSquare,
-        $newStatusBilling, $newQuantity, $newNotes = null)
+        $newStatusBilling, $newQuantity, $newNotes = null, $mode = null)
     {
         $controller = $this->getController();
         $controller->authorize('admin.booking');
@@ -48,49 +48,59 @@ class Update extends AbstractPlugin
             $reservation = $this->reservationManager->get($rid);
             $booking = $this->bookingManager->get($reservation->get('bid'));
 
-            /* Determine or create user */
-
-            if (preg_match('/\(([0-9]+)\)/', $newUser, $matches)) {
-                $newUser = $matches[1];
-            }
-
-            $users = $this->userManager->interpret($newUser, 2);
-
-            if (count($users) == 1) {
-                $user = current($users);
-            } else {
-                $user = $this->userManager->create($newUser);
-            }
-
-            /* Determine date */
-
-            $newDate = new \DateTime($newDate);
-
-            /* Determine square */
-
-            if ($newSquare instanceof Square) {
-                $square = $this->squareManager->get($newSquare->get('sid'));
-            } else {
-                $square = $this->squareManager->get($newSquare);
-            }
-
             /* Update booking */
 
-            $booking->set('uid', $user->need('uid'));
-            $booking->set('sid', $square->need('sid'));
-            $booking->set('status_billing', $newStatusBilling);
-            $booking->set('quantity', $newQuantity);
-            $booking->setMeta('notes', $newNotes);
+            if ($mode == null || $mode == 'booking') {
 
-            $this->bookingManager->save($booking);
+                /* Determine or create user */
+
+                if (preg_match('/\(([0-9]+)\)/', $newUser, $matches)) {
+                    $newUser = $matches[1];
+                }
+
+                $users = $this->userManager->interpret($newUser, 2);
+
+                if (count($users) == 1) {
+                    $user = current($users);
+                } else {
+                    $user = $this->userManager->create($newUser);
+                }
+
+                /* Determine square */
+
+                if ($newSquare instanceof Square) {
+                    $square = $this->squareManager->get($newSquare->get('sid'));
+                } else {
+                    $square = $this->squareManager->get($newSquare);
+                }
+
+                /* Save booking */
+
+                $booking->set('uid', $user->need('uid'));
+                $booking->set('sid', $square->need('sid'));
+                $booking->set('status_billing', $newStatusBilling);
+                $booking->set('quantity', $newQuantity);
+                $booking->setMeta('notes', $newNotes);
+
+                $this->bookingManager->save($booking);
+            }
 
             /* Update reservation */
 
-            $reservation->set('time_start', $newTimeStart);
-            $reservation->set('time_end', $newTimeEnd);
-            $reservation->set('date', $newDate->format('Y-m-d'));
+            if ($mode == null || $mode == 'reservation') {
 
-            $this->reservationManager->save($reservation);
+                /* Determine date */
+
+                $newDate = new \DateTime($newDate);
+
+                /* Save reservation */
+
+                $reservation->set('time_start', $newTimeStart);
+                $reservation->set('time_end', $newTimeEnd);
+                $reservation->set('date', $newDate->format('Y-m-d'));
+
+                $this->reservationManager->save($reservation);
+            }
 
             if ($transaction) {
                 $this->connection->commit();

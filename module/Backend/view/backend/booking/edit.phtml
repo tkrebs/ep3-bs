@@ -13,7 +13,7 @@ $this->setup(array(
 
     $form = $this->editForm;
     $form->setAttribute('method', 'post');
-    $form->setAttribute('action', $this->url('backend/booking/edit'));
+    $form->setAttribute('action', $this->url('backend/booking/edit', [], ['query' => ['em' => $this->editMode]]));
     $form->prepare();
 
     ?>

@@ -124,14 +124,12 @@ class DetermineParams extends AbstractPlugin
 
         /* Determine edit mode */
 
-        $editMode = null;
+        $editModeParam = $controller->params()->fromQuery('em');
 
-        if ($reservations) {
-            $editModeParam = $controller->params()->fromQuery('em');
-
-            if ($editModeParam == 'booking' || $editModeParam == 'reservation') {
-                $editMode = $editModeParam;
-            }
+        if ($editModeParam == 'booking' || $editModeParam == 'reservation') {
+            $editMode = $editModeParam;
+        } else {
+            $editMode = null;
         }
 
         /* Return gathered params */
