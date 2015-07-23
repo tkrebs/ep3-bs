@@ -9,6 +9,6 @@ Long Term:
 
 - Occasionally clean session directory
 
-- Advanced statistics module
+- Advanced statistics module (with billing reports)
 - Billing module (invoice/paypal)
 - Coupon module
