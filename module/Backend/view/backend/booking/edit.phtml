@@ -112,7 +112,11 @@ $this->setup(array(
                         <div class="default-form-notes">
                             <div class="separator-small separator-line"></div>
 
-                            <a href="<?= $this->url('user/bookings/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-edit unlined gray"><?= $this->t('Go to booking bills') ?></a>
+                            <?= $this->t('Bill') ?>:
+                            &nbsp;
+                            <a href="<?= $this->url('user/bookings/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-info unlined gray"><?= $this->t('Check') ?></a>
+                            &nbsp;
+                            <a href="<?= $this->url('backend/booking/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-edit unlined gray"><?= $this->t('Edit') ?></a>
                         </div>
 
                         <div class="default-form-notes">

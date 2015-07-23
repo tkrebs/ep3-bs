@@ -246,6 +246,7 @@ return array(
     'If you have already registered, you can login here with your email address and start booking %s.'
         => 'Wenn Sie sich bereits bei uns registriert haben, können Sie sich hier mit Ihrer E-Mail Adresse anmelden um %s zu buchen.',
 
+    'Bill' => 'Rechnung',
     'Booking-Bill' => 'Buchungs-Rechnung',
 
     'I agree to %s' => 'Ich habe das Dokument %s gelesen und akzeptiere es',

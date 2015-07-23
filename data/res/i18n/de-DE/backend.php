@@ -182,7 +182,6 @@ return array(
 
     'These are only visible for administration' => 'Nur für die Verwaltung sichtbar',
 
-    'Go to booking bills' => 'Buchungs-Rechnung ansehen',
     'Billing status' => 'Rechnungsstatus',
     'Billing status options' => 'Rechnungsstatus-Bezeichnungen',
     'Number of players' => 'Anzahl Spieler',

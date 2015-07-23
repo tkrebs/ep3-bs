@@ -458,6 +458,7 @@ class BookingController extends AbstractActionController
                 $bbid = $bill->get('bbid', 'new');
 
                 $description = $this->params()->fromPost('ebf-' . $bbid . '-description');
+                $description = trim(strip_tags($description));
 
                 if ($description) {
                     $bill->set('description', $description);
