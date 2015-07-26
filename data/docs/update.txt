@@ -1,4 +1,4 @@
---- Update to 1.4 ---
+--- Update to 1.4 / 1.5 ---
 
 First backup your database and project directory!
 
@@ -15,9 +15,8 @@ Then replace the following directories and files with the new ones:
 - /public/misc/
 - /public/vendor/
 - index.php
-- setup.php
 
-- /vendor/
+- /vendor/ (alternatively, you may update dependencies via composer after replacing the composer.json)
 
 - All single files in the project root directory
 

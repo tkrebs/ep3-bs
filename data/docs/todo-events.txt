@@ -1,4 +1,4 @@
 Long Term:
 
-- Events can have participants (tables/manager)
+- Events can have participants (tables/managers)
 - Participation process like booking process
