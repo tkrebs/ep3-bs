@@ -46,6 +46,7 @@ where you can find stable and (latest) development releases.
 The current version (August, 2015) is 1.5.
 
 Version 1.5 introduced some requested features (billing administration, custom billing statuses and colors) and fixed some bugs.
+
 Version 1.4 introduced some requested features and the latest third party libraries and frameworks.
 
 ## Bug reports, feature requests, ideas ...
