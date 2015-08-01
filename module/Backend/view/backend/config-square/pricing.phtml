@@ -108,12 +108,13 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/config-sq
 
                                                                                 echo '<input type="text" value="0,00" maxlength="6" class="pricing-price-number pricepicker"><span class="pricing-grammar">' . $this->config('i18n.currency') . '</span>';
 
-                                                                                echo '<select class="pricing-rate">';
-                                                                                echo '<option value="7,0">' . $this->t('plus') . ' 7% ' . $this->t('VAT') . '</option>';
-                                                                                echo '<option value="7,1">' . $this->t('including') . ' 7% ' . $this->t('VAT') . '</option>';
-                                                                                echo '<option value="19,0">' . $this->t('plus') . ' 19% ' . $this->t('VAT') . '</option>';
-                                                                                echo '<option value="19,1" selected="selected">' . $this->t('including') . ' 19% ' . $this->t('VAT') . '</option>';
+                                                                                echo '<select class="pricing-rate-gross" style="width: 60px;">';
+                                                                                echo '<option value="0">' . $this->t('plus') . '</option>';
+                                                                                echo '<option value="1" selected="selected">' . $this->t('including') . '</option>';
                                                                                 echo '</select>';
+
+                                                                                echo '<input type="text" value="19" maxlength="3" class="pricing-rate" style="width: 20px;">';
+                                                                                echo '<span class="pricing-grammar">% ' . $this->t('VAT') . '</span>';
 
                                                                                 echo '<span class="pricing-grammar">' . $this->t('for') . '</span>';
 

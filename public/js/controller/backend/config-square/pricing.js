@@ -80,11 +80,8 @@
                 var timeStart = timeRange.find("input.timepicker:first").val();
                 var timeEnd = timeRange.find("input.timepicker:last").val();
                 var price = pricing.find("input.pricepicker").val();
-
-                var priceMode = pricing.find("select:first").val().split(",");
-
-                var rate = priceMode[0];
-                var gross = priceMode[1];
+                var gross = pricing.find("select.pricing-rate-gross").val();
+                var rate = pricing.find("input.pricing-rate").val();
 
                 var priority = index;
 
@@ -219,7 +216,8 @@
             $("#pricing-table .pricing-timeStart:last").val(timeStart.substring(0, 5));
             $("#pricing-table .pricing-timeEnd:last").val(timeEnd.substring(0, 5));
             $("#pricing-table .pricing-price-number:last").val(price);
-            $("#pricing-table .pricing-rate:last").val(rate + "," + gross);
+            $("#pricing-table .pricing-rate-gross:last").val(gross);
+            $("#pricing-table .pricing-rate:last").val(rate);
             $("#pricing-table .pricing-sid:last").val(sid);
             $("#pricing-table .pricing-timeBlock:last").val(Math.round(timeBlock / 60));
 

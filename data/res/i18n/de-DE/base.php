@@ -47,6 +47,7 @@ return array(
     'to' => 'bis',
     'and' => 'und',
     'or' => 'oder',
+    'for' => 'für',
 
     'Page not found' => 'Seite nicht gefunden',
     'Oops ... something went wrong here' => 'Oops ... da ist wohl etwas schief gelaufen',
