@@ -277,14 +277,14 @@
                 var posLast = eventGroupCellLast.position();
 
                 if (posFirst && posLast) {
-                    var startX = Math.round(posFirst.left) - 1;
-                    var startY = Math.round(posFirst.top) - 1;
+                    var startX = Math.floor(posFirst.left) - 1;
+                    var startY = Math.floor(posFirst.top) - 1;
 
-                    var endX = Math.round(posLast.left) + 1;
-                    var endY = Math.round(posLast.top) + 1;
+                    var endX = Math.ceil(posLast.left) + 1;
+                    var endY = Math.ceil(posLast.top) + 1;
 
-                    var eventWidth = Math.round((endX + eventGroupCellLast.width()) - startX);
-                    var eventHeight = Math.round((endY + eventGroupCellLast.height()) - startY);
+                    var eventWidth = Math.round((endX + eventGroupCellLast.outerWidth()) - startX);
+                    var eventHeight = Math.round((endY + eventGroupCellLast.outerHeight()) - startY);
 
                     /* Create event group overlay */
 
@@ -304,7 +304,8 @@
                         "z-index": 128,
                         "left": startX, "top": startY,
                         "width": eventWidth,
-                        "height": eventHeight
+                        "height": eventHeight,
+                        "padding": 0
                     });
 
                     eventGroupOverlayLabel.css({

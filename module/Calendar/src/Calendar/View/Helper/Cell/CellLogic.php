@@ -32,7 +32,7 @@ class CellLogic extends AbstractHelper
 
         $timeBlockSplit = round($timeBlock / 2);
 
-        if ($timeBlockSplit >= $square->need('time_block_bookable')) {
+        if ($timeBlockSplit >= $square->need('time_block_bookable') || $eventsForCell) {
 
             $walkingTimeSplit = $walkingTime + $timeBlockSplit;
 

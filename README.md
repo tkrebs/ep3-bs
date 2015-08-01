@@ -22,8 +22,6 @@ Documentation and installation instructions can be found in the following direct
 /data/docs/
 ```
 
-Unfortunately, source code comments are rather spare at the moment (sorry).
-
 ## Architecture
 
 The system is based on the well-known LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.4+) and the popular and powerful
