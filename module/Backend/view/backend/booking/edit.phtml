@@ -1,6 +1,6 @@
 <?php
 
-if ($this->booking->get('status') == 'cancelled') {
+if ($this->booking && $this->booking->get('status') == 'cancelled') {
     $messages = ['info' => 'This booking has been cancelled'];
 } else {
     $messages = [];
