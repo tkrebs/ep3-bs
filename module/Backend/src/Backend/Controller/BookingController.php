@@ -108,20 +108,24 @@ class BookingController extends AbstractActionController
 
                     /* Update booking/reservation */
 
-                    $this->backendBookingUpdate($d['bf-rid'], $d['bf-user'], $d['bf-time-start'], $d['bf-time-end'], $d['bf-date-start'],
+                    $savedBooking = $this->backendBookingUpdate($d['bf-rid'], $d['bf-user'], $d['bf-time-start'], $d['bf-time-end'], $d['bf-date-start'],
                         $d['bf-sid'], $d['bf-status-billing'], $d['bf-quantity'], $d['bf-notes'], $params['editMode']);
 
                 } else {
 
                     /* Create booking/reservation */
 
-                    $this->backendBookingCreate($d['bf-user'], $d['bf-time-start'], $d['bf-time-end'], $d['bf-date-start'], $d['bf-date-end'],
+                    $savedBooking = $this->backendBookingCreate($d['bf-user'], $d['bf-time-start'], $d['bf-time-end'], $d['bf-date-start'], $d['bf-date-end'],
                         $d['bf-repeat'], $d['bf-sid'], $d['bf-status-billing'], $d['bf-quantity'], $d['bf-notes'], $sessionUser->get('alias'));
                 }
 
                 $this->flashMessenger()->addSuccessMessage('Booking has been saved');
 
-                return $this->redirect()->toRoute('frontend');
+                if ($this->params()->fromPost('bf-edit-user')) {
+                    return $this->redirect()->toRoute('backend/user/edit', ['uid' => $savedBooking->get('uid')]);
+                } else {
+                    return $this->redirect()->toRoute('frontend');
+                }
             }
         } else {
             if ($booking) {

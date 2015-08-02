@@ -57,6 +57,12 @@ $this->setup(array(
                                 </a>
                             </div>
                         </div>
+                    <?php else: ?>
+                        <div style="margin-top: 8px;">
+                            <label class="small-text gray">
+                                <input type="checkbox" name="bf-edit-user"> <?= $this->t('Edit user once saved') ?>
+                            </label>
+                        </div>
                     <?php endif; ?>
                 </div>
             </td>

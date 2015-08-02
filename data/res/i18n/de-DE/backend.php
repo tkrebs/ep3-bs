@@ -188,6 +188,7 @@ return array(
     'Billing status options' => 'Rechnungsstatus-Bezeichnungen',
     'Number of players' => 'Anzahl Spieler',
     'Booked to' => 'Gebucht auf',
+    'Edit user once saved' => 'Benutzer anschließend bearbeiten',
 
     'Date (Start)' => 'Datum (Start)',
     'Date (End)' => 'Datum (Ende)',
