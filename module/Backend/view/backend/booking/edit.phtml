@@ -1,8 +1,15 @@
 <?php
 
+if ($this->booking->get('status') == 'cancelled') {
+    $messages = ['info' => 'This booking has been cancelled'];
+} else {
+    $messages = [];
+}
+
 $this->setup(array(
     'title' => 'Booking-Administration',
     'panel' => 'centered-panel giant-sized',
+    'messages' => $messages,
     'back' => true,
 ));
 
