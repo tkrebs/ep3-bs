@@ -146,10 +146,6 @@ class SquareValidator extends AbstractService
         if ($timeBlockBookable) {
             $timeBlockRequested = $timeEnd->getTimestamp() - $timeStart->getTimestamp();
 
-            if (! ($timeBlockRequested % $square->need('time_block_bookable') == 0)) {
-                throw new RuntimeException('The passed time range is invalid');
-            }
-
             $timeBlockDays = $timeEnd->format('z') - $timeStart->format('z');
 
             if ($timeBlockDays > 0) {
