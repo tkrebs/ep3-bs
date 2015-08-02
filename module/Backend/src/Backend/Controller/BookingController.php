@@ -171,6 +171,7 @@ class BookingController extends AbstractActionController
             'editForm' => $editForm,
             'booking' => $booking,
             'reservation' => $reservation,
+            'sessionUser' => $sessionUser,
         )));
     }
 

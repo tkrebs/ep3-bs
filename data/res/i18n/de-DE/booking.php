@@ -36,10 +36,10 @@ return array(
     'Your %s-booking for %s' => 'Ihre %s-Buchung am %s',
     'we have reserved %s %s, %s for you. Thank you for your booking.'
         => 'wir haben %s %s am %s für Sie reserviert. Vielen Dank für Ihre Buchung.',
-	'we have just cancelled %s %s, %s for you.'
-		=> 'wir haben Ihre Buchung für %s %s, %s storniert.',
+    'we have just cancelled %s %s, %s for you.'
+        => 'wir haben Ihre Buchung für %s %s, %s storniert.',
 
-	'%s\'s %s-booking for %s' => '%s\'s %s-Buchung am %s',
-	'%s\'s %s-booking has been cancelled' => '%s\'s %s-Buchung wurde storniert',
+    '%s\'s %s-booking for %s' => '%s\'s %s-Buchung am %s',
+    '%s\'s %s-booking has been cancelled' => '%s\'s %s-Buchung wurde storniert',
 
 );

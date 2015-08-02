@@ -51,13 +51,15 @@ $this->setup(array(
                                 <div><?= $this->t('Phone') ?>: <?= $user->getMeta('phone') ?></div>
                             <?php endif; ?>
 
-                            <div style="margin-top: 8px;">
-                                <a href="<?= $this->url('backend/user/edit', ['uid' => $user->need('uid')]) ?>" class="gray">
-                                    <span class="symbolic symbolic-edit"><?= $this->t('Edit user') ?></span>
-                                </a>
-                            </div>
+                            <?php if ($this->sessionUser->can('admin.user')): ?>
+                                <div style="margin-top: 8px;">
+                                    <a href="<?= $this->url('backend/user/edit', ['uid' => $user->need('uid')]) ?>" class="gray">
+                                        <span class="symbolic symbolic-edit"><?= $this->t('Edit user') ?></span>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                    <?php else: ?>
+                    <?php elseif ($this->sessionUser->can('admin.user')): ?>
                         <div style="margin-top: 8px;">
                             <label class="small-text gray">
                                 <input type="checkbox" name="bf-edit-user"> <?= $this->t('Edit user once saved') ?>
@@ -128,8 +130,11 @@ $this->setup(array(
                             <?= $this->t('Bill') ?>:
                             &nbsp;
                             <a href="<?= $this->url('user/bookings/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-info unlined gray"><?= $this->t('Check') ?></a>
-                            &nbsp;
-                            <a href="<?= $this->url('backend/booking/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-edit unlined gray"><?= $this->t('Edit') ?></a>
+
+                            <?php if ($this->sessionUser->can('admin.booking')): ?>
+                                &nbsp;
+                                <a href="<?= $this->url('backend/booking/bills', ['bid' => $this->booking->get('bid')]) ?>" class="symbolic symbolic-edit unlined gray"><?= $this->t('Edit') ?></a>
+                            <?php endif; ?>
                         </div>
 
                         <div class="default-form-notes">
@@ -159,18 +164,25 @@ $this->setup(array(
 
         <tr>
             <td colspan="4" class="centered-text" style="padding-top: 16px; border-top: solid 1px #CCC;">
-                <?= $this->formElement($form->get('bf-submit')) ?>
+                <?php if ($this->sessionUser->can('admin.booking')): ?>
+                    <?= $this->formElement($form->get('bf-submit')) ?>
 
-                <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+                    <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+                <?php endif; ?>
 
                 <?php if ($this->reservation): ?>
-                    <a href="<?= $this->url('backend/booking/delete', ['rid' => $this->reservation->get('rid')], ['query' => ['edit-mode' => $this->editMode]]) ?>" class="default-button squarebox-internal-link">
-                        <span class="symbolic symbolic-cross"><?= $this->t('Delete') ?></span>
-                    </a>
+                    <?php if ($this->sessionUser->can(['admin.booking', 'calendar.cancel-single-bookings', 'calendar.delete-single-bookings', 'calendar.cancel-subscription-bookings', 'calendar.delete-subscription-bookings'])): ?>
+                        <a href="<?= $this->url('backend/booking/delete', ['rid' => $this->reservation->get('rid')], ['query' => ['edit-mode' => $this->editMode]]) ?>" class="default-button squarebox-internal-link">
+                            <span class="symbolic symbolic-cross"><?= $this->t('Delete') ?></span>
+                        </a>
+                    <?php endif; ?>
+
                 <?php else: ?>
-                    <a href="<?= $this->url('backend/event/edit', [], ['query' => ['ds' => $this->query['ds'], 'ts' => $this->query['ts'], 'te' => $this->query['te'], 's' => $this->query['s']]]) ?>" class="gray">
-                        <span class="symbolic symbolic-date"><?= $this->t('New event') ?></span>
-                    </a>
+                    <?php if ($this->sessionUser->can('admin.event')): ?>
+                        <a href="<?= $this->url('backend/event/edit', [], ['query' => ['ds' => $this->query['ds'], 'ts' => $this->query['ts'], 'te' => $this->query['te'], 's' => $this->query['s']]]) ?>" class="gray">
+                            <span class="symbolic symbolic-date"><?= $this->t('New event') ?></span>
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </td>
         </tr>
