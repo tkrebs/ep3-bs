@@ -97,7 +97,14 @@ class BookingFormat extends AbstractHelper
 
         if ($booking->get('status') == 'cancelled') {
 
-            $html .= '<td class="actions-col no-print">&nbsp;</td>';
+            $html .= sprintf('<td class="actions-col no-print"><a href="%s" class="unlined gray symbolic symbolic-edit">%s</a></td>',
+                $view->url('backend/booking/edit', [], ['query' => [
+                    'ds' => $date->format('Y-m-d'),
+                    'ts' => substr($reservation->get('time_start'), 0, 5),
+                    'te' => substr($reservation->get('time_end'), 0, 5),
+                    's' => $booking->get('sid'),
+                    'r' => $reservation->get('rid')]]),
+                $view->t('Edit'));
 
         } else {
 

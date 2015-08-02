@@ -11,5 +11,7 @@
   - allow.calendar.see-data
   - allow.calendar.create-single-bookings           (requires calendar.see-data)
   - allow.calendar.cancel-single-bookings           (requires calendar.see-data)
+  - allow.calendar.delete-single-bookings           (requires calendar.see-data)
   - allow.calendar.create-subscription-bookings     (requires calendar.see-data)
   - allow.calendar.cancel-subscription-bookings     (requires calendar.see-data)
+  - allow.calendar.delete-subscription-bookings     (requires calendar.see-data)

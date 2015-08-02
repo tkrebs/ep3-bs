@@ -52,6 +52,7 @@ return array(
     'Booking has been saved' => 'Buchung wurde gespeichert',
     'Booking has been deleted' => 'Buchung wurde gelöscht',
     'Booking has been cancelled' => 'Buchung wurde storniert',
+    'Reservation has been deleted' => 'Reservierung wurde gelöscht',
     'Event has been saved' => 'Veranstaltung wurde gespeichert',
     'Event has been deleted' => 'Veranstaltung wurde gelöscht',
     'Square has been saved' => 'Platz wurde gespeichert',
@@ -175,6 +176,7 @@ return array(
     'Booking created' => 'Buchung erstellt',
     'Booking created:<br>%s' => 'Buchung erstellt:<br>%s',
     'Booking created:<br>%s by %s' => 'Buchung erstellt:<br>%s von %s',
+    'Booking cancelled:<br>%s by %s' => 'Buchung storniert:<br>%s von %s',
 
     'Admin users can only be edited by admins' => 'Verwaltungskonten können nur von anderen Verwaltungskonten bearbeitet werden',
     'Admin status can only be given by admins' => 'Verwaltungsstatus kann nur von anderen Verwaltungskonten gegeben werden',

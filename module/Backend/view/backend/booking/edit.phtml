@@ -130,6 +130,14 @@ $this->setup(array(
                                 <?= sprintf($this->t('Booking created:<br>%s'),
                                     $this->prettyDate(new \DateTime($this->booking->get('created')))) ?>
                             <?php endif; ?>
+
+                            <?php if ($this->booking->getMeta('cancellor') && $this->booking->getMeta('cancelled')): ?>
+                                <br>
+
+                                <?= sprintf($this->t('Booking cancelled:<br>%s by %s'),
+                                    $this->prettyDate(new \DateTime($this->booking->get('cancelled'))),
+                                    $this->booking->getMeta('cancellor')) ?>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                 </div>

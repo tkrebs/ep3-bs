@@ -27,7 +27,7 @@ class DetermineParams extends AbstractPlugin
         $this->userManager = $userManager;
     }
 
-    public function __invoke()
+    public function __invoke($allowCancelled = false)
     {
         $controller = $this->getController();
 
@@ -80,12 +80,16 @@ class DetermineParams extends AbstractPlugin
 
         /* Determine reservations */
 
-        $reservationParam = null;
+        $reservationParam = $controller->params()->fromQuery('r');
 
         $reservations = $this->reservationManager->getInRange($dateTimeStart, $dateTimeEnd);
 
         if ($reservations) {
-            $bookings = $this->bookingManager->getByReservations($reservations, array(new Operator('status', '!=', 'cancelled')));
+            if ($reservationParam && $allowCancelled) {
+                $bookings = $this->bookingManager->getByReservations($reservations);
+            } else {
+                $bookings = $this->bookingManager->getByReservations($reservations, array(new Operator('status', '!=', 'cancelled')));
+            }
 
             $this->userManager->getByBookings($bookings);
 
@@ -110,8 +114,6 @@ class DetermineParams extends AbstractPlugin
             $reservations = $validReservations;
 
             /* Filter reservations with passed param */
-
-            $reservationParam = $controller->params()->fromQuery('r');
 
             if ($reservationParam) {
                 if (isset($reservations[$reservationParam])) {

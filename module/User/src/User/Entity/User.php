@@ -95,9 +95,11 @@ class User extends AbstractEntity
         'calendar.see-past' => 'Can see the past in calendar',
         'calendar.see-data' => 'Can see names and data in calendar',
         'calendar.create-single-bookings' => 'May create single bookings',
-        'calendar.cancel-single-bookings' => 'May delete single bookings',
-        'calendar.create-multiple-bookings' => 'May create multiple bookings',
-        'calendar.cancel-multiple-bookings' => 'May delete multiple bookings',
+        'calendar.cancel-single-bookings' => 'May cancel single bookings',
+        'calendar.delete-single-bookings' => 'May delete single bookings',
+        'calendar.create-subscription-bookings' => 'May create multiple bookings',
+        'calendar.cancel-subscription-bookings' => 'May cancel multiple bookings',
+        'calendar.delete-subscription-bookings' => 'May delete multiple bookings',
     );
 
     /**
@@ -113,6 +115,10 @@ class User extends AbstractEntity
         }
 
         if ($this->need('status') == 'assist') {
+            if (is_array($privileges)) {
+                $privileges = implode(',', $privileges);
+            }
+
             if (is_string($privileges)) {
                 $orPrivileges = explode(',', $privileges);
                 $orPrivilegesMatched = 0;

@@ -92,8 +92,10 @@ return array(
     'Can see the past in calendar' => 'Sieht auch vergangene Buchungen',
     'Can see names and data in calendar' => 'Sieht Namen und Details im Kalender',
     'May create single bookings' => 'Darf Einzelbuchungen erstellen',
+    'May cancel single bookings' => 'Darf Einzelbuchungen stornieren',
     'May delete single bookings' => 'Darf Einzelbuchungen löschen',
     'May create multiple bookings' => 'Darf Abos erstellen',
+    'May cancel multiple bookings' => 'Darf Abos stornieren',
     'May delete multiple bookings' => 'Darf Abos löschen',
 
     'Request activation mail' => 'Aktivierungs E-Mail senden',
