@@ -491,18 +491,15 @@ class BookingController extends AbstractActionController
                     $bill->set('price', $price);
                 }
 
-                $vat = $this->params()->fromPost('ebf-' . $bbid . '-vat');
+                $vatGross = $this->params()->fromPost('ebf-' . $bbid . '-vat-gross');
+                $vatRate = $this->params()->fromPost('ebf-' . $bbid . '-vat-rate');
 
-                if ($vat) {
-                    $vat_parts = explode(',', $vat);
-
-                    if (count($vat_parts) == 2 && is_numeric($vat_parts[0]) && is_numeric($vat_parts[1])) {
-                        $bill->set('rate', $vat_parts[0]);
-                        $bill->set('gross', $vat_parts[1]);
-                    }
+                if (is_numeric($vatGross) && is_numeric($vatRate)) {
+                    $bill->set('gross', $vatGross);
+                    $bill->set('rate', $vatRate);
                 }
 
-                if ($description) {
+                if ($description && $price && is_numeric($vatRate) && is_numeric($vatGross)) {
                     $bookingBillManager->save($bill);
                 }
             }

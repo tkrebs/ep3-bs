@@ -8,7 +8,8 @@ $this->setup(array(
     ),
 ));
 
-$last_vat = null;
+$last_vat_gross = 1;
+$last_vat_rate = 19;
 
 ?>
 
@@ -45,22 +46,23 @@ $last_vat = null;
 
                             <?php
 
-                            echo '<select name="ebf-' . $bill->need('bbid') . '-vat">';
+                            $last_vat_gross = $bill->get('gross');
+                            $last_vat_rate = $bill->get('rate');
 
-                            $last_vat = $bill->get('rate') . ',' . $bill->get('gross');
+                            echo '<select name="ebf-' . $bill->need('bbid') . '-vat-gross" style="width: 60px;">';
 
                             echo $this->formSelect()->renderOptions(array(
-                                '7,0' => $this->t('plus') . ' 7% ' . $this->t('VAT'),
-                                '7,1' => $this->t('including') . ' 7% ' . $this->t('VAT'),
-                                '19,0' => $this->t('plus') . ' 19% ' . $this->t('VAT'),
-                                '19,1' => $this->t('including') . ' 19% ' . $this->t('VAT'),
+                                '0' => $this->t('plus'),
+                                '1' => $this->t('including'),
                             ), array(
-                                $last_vat,
+                                $last_vat_gross,
                             ));
 
                             echo '</select>';
 
                             ?>
+
+                            <input type="text" name="ebf-<?= $bill->need('bbid') ?>-vat-rate" value="<?= $last_vat_rate ?>" style="width: 20px; text-align: right;"> % <?= $this->t('VAT') ?>
                         </td>
 
                         <td>
@@ -81,20 +83,20 @@ $last_vat = null;
 
                         <?php
 
-                        echo '<select name="ebf-new-vat">';
+                        echo '<select name="ebf-new-vat-gross" style="width: 60px;">';
 
                         echo $this->formSelect()->renderOptions(array(
-                            '7,0' => $this->t('plus') . ' 7% ' . $this->t('VAT'),
-                            '7,1' => $this->t('including') . ' 7% ' . $this->t('VAT'),
-                            '19,0' => $this->t('plus') . ' 19% ' . $this->t('VAT'),
-                            '19,1' => $this->t('including') . ' 19% ' . $this->t('VAT'),
+                            '0' => $this->t('plus'),
+                            '1' => $this->t('including'),
                         ), array(
-                            $last_vat,
+                            $last_vat_gross,
                         ));
 
                         echo '</select>';
 
                         ?>
+
+                        <input type="text" name="ebf-new-vat-rate" value="<?= $last_vat_rate ?>" style="width: 20px; text-align: right;"> % <?= $this->t('VAT') ?>
                     </td>
                 </tr>
 
