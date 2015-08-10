@@ -1,5 +1,6 @@
 Short Term:
 
+- Allow bookings without registration (i.e. inline registration)
 - Exceptional days for squares (meta field)
 
 - Social media integration
