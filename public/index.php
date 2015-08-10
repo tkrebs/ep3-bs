@@ -4,7 +4,7 @@
  *
  * ep-3 Bookingsystem
  *
- * (c) 2014 Tobias Krebs
+ * (c) 2015 Tobias Krebs
  *
  * Website: http://bs.hbsys.de/
  * License: MIT

@@ -1,5 +1,7 @@
 Short Term:
 
+- Exceptional days for squares (meta field)
+
 - Social media integration
 
 Long Term:
