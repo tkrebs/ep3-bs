@@ -57,7 +57,8 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('priority', $editData['cf-priority']);
                 $square->set('capacity', $editData['cf-capacity']);
                 $square->set('capacity_heterogenic', $editData['cf-capacity-heterogenic']);
-                $square->setMeta('public_names', $editData['cf-public-names'] ? 'true' : 'false');
+                $square->setMeta('private_names', $editData['cf-name-visibility'] == 'private' ? 'true' : 'false');
+                $square->setMeta('public_names', $editData['cf-name-visibility'] == 'public' ? 'true' : 'false');
                 $square->set('time_start', $editData['cf-time-start']);
                 $square->set('time_end', $editData['cf-time-end']);
                 $square->set('time_block', max($editData['cf-time-block'], 10) * 60);
@@ -75,6 +76,17 @@ class ConfigSquareController extends AbstractActionController
             }
         } else {
             if ($square) {
+                $private_names = $square->getMeta('private_names', 'false');
+                $public_names = $square->getMeta('public_names', 'false');
+
+                if ($private_names == 'true') {
+                    $nameVisibility = 'private';
+                } else if ($public_names == 'true') {
+                    $nameVisibility = 'public';
+                } else {
+                    $nameVisibility = null;
+                }
+
                 $editForm->setData(array(
                     'cf-name' => $square->get('name'),
                     'cf-status' => $square->get('status'),
@@ -82,7 +94,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-priority' => $square->get('priority'),
                     'cf-capacity' => $square->get('capacity'),
                     'cf-capacity-heterogenic' => $square->get('capacity_heterogenic'),
-                    'cf-public-names' => $square->getMeta('public_names', 'false') == 'false' ? false : true,
+                    'cf-name-visibility' => $nameVisibility,
                     'cf-time-start' => substr($square->get('time_start'), 0, 5),
                     'cf-time-end' => substr($square->get('time_end'), 0, 5),
                     'cf-time-block' => round($square->get('time_block') / 60),
@@ -98,7 +110,6 @@ class ConfigSquareController extends AbstractActionController
                     'cf-priority' => 1,
                     'cf-capacity' => 1,
                     'cf-capacity-heterogenic' => false,
-                    'cf-public-names' => false,
                     'cf-time-start' => '08:00',
                     'cf-time-end' => '23:00',
                     'cf-time-block' => 60,

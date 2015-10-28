@@ -89,14 +89,19 @@ class EditForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'cf-public-names',
-            'type' => 'Checkbox',
+            'name' => 'cf-name-visibility',
+            'type' => 'Select',
             'attributes' => array(
-                'id' => 'cf-public-names',
+                'id' => 'cf-name-visibility',
             ),
             'options' => array(
-                'label' => 'Public names',
-                'notes' => 'Should the names of the users are publicly visible in the calendar?',
+                'label' => 'Visibility of names',
+                'empty_option' => 'None',
+                'value_options' => array(
+                    'private' => 'For other users that are logged in',
+                    'public' => 'Publicly for everyone'
+                ),
+                'notes' => 'Who should see the names of the booking users in the calendar?',
             ),
         ));
 
@@ -274,6 +279,9 @@ class EditForm extends Form
                         ),
                     ),
                 ),
+            ),
+            'cf-name-visibility' => array(
+                'required' => false,
             ),
             'cf-time-start' => array(
                 'filters' => array(

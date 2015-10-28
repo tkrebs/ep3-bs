@@ -43,7 +43,21 @@ class CalendarController extends AbstractActionController
         $userSessionManager = $serviceManager->get('User\Manager\UserSessionManager');
         $user = $userSessionManager->getSessionUser();
 
-        if (($user && $user->can('calendar.see-data')) || $squareManager->hasOneWithPublicNames()) {
+        $getBookingUsers = false;
+
+        if ($user && $user->can('calendar.see-data')) {
+            $getBookingUsers = true;
+        }
+
+        if ($user && $squareManager->hasOneWithPrivateNames()) {
+            $getBookingUsers = true;
+        }
+
+        if ($squareManager->hasOneWithPublicNames()) {
+            $getBookingUsers = true;
+        }
+
+        if ($getBookingUsers) {
             $userManager = $serviceManager->get('User\Manager\UserManager');
             $userManager->getByBookings($bookings);
 

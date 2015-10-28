@@ -21,7 +21,7 @@ class Occupied extends AbstractHelper
 
                 return $view->calendarCellLink($cellLabel, $view->url('square', [], $cellLinkParams), 'cc-own' . $cellGroup);
             } else {
-                return $view->calendarCellRenderOccupiedForVisitors($reservations, $cellLinkParams, $square);
+                return $view->calendarCellRenderOccupiedForVisitors($reservations, $cellLinkParams, $square, $user);
             }
         } else {
             return $view->calendarCellRenderOccupiedForVisitors($reservations, $cellLinkParams, $square);

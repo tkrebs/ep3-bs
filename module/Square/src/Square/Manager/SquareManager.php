@@ -478,6 +478,19 @@ class SquareManager extends AbstractManager
         return $hasOne;
     }
 
+    public function hasOneWithPrivateNames()
+    {
+        $hasOne = false;
+
+        foreach ($this->activeSquares as $square) {
+            if ($square->getMeta('private_names', 'false') == 'true') {
+                $hasOne = true;
+            }
+        }
+
+        return $hasOne;
+    }
+
     /**
      * Deletes one square and all respective meta properties (through database foreign keys).
      *

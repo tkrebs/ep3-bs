@@ -270,9 +270,11 @@ return array(
     'Multiple bookings' => 'Mehrfachbuchungen',
     'May this square be booked multiple times until its full?'
         => 'Kann dieser Platz mehrmals gebucht werden bis er voll ist (s. Kapazität)?',
-    'Public names' => 'Öffentliche Namen',
-    'Should the names of the users are publicly visible in the calendar?'
-        => 'Sollen die Namen der Benutzer im Kalender öffentlich sichtbar sein?',
+    'Visibility of names' => 'Sichtbarkeit von Namen',
+    'For other users that are logged in' => 'Für andere angemeldete Benutzer',
+    'Publicly for everyone' => 'Für alle Besucher öffentlich',
+    'Who should see the names of the booking users in the calendar?'
+        => 'Wer darf die Namen der gebuchten Spieler im Kalender sehen?',
     'Time block' => 'Zeitblock',
     'Time block (min. bookable)' => 'Zeitblock (min. buchbar)',
     'Time block (max. bookable)' => 'Zeitblock (max. buchbar)',

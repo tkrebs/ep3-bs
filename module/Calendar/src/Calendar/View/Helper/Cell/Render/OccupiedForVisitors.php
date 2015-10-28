@@ -8,7 +8,7 @@ use Zend\View\Helper\AbstractHelper;
 class OccupiedForVisitors extends AbstractHelper
 {
 
-    public function __invoke(array $reservations, array $cellLinkParams, Square $square)
+    public function __invoke(array $reservations, array $cellLinkParams, Square $square, $user = null)
     {
         $view = $this->getView();
 
@@ -21,6 +21,8 @@ class OccupiedForVisitors extends AbstractHelper
             $booking = $reservation->needExtra('booking');
 
             if ($square->getMeta('public_names', 'false') == 'true') {
+                $cellLabel = $booking->needExtra('user')->need('alias');
+            } else if ($square->getMeta('private_names', 'false') == 'true' && $user) {
                 $cellLabel = $booking->needExtra('user')->need('alias');
             } else {
                 $cellLabel = null;
