@@ -27,6 +27,16 @@ class TranslatorFactory implements FactoryInterface
         $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n/', '%s/square.php');
         $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n/', '%s/user.php');
 
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/backend.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/base.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/booking.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/calendar.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/frontend.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/service.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/setup.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/square.php');
+        $translator->addTranslationFilePattern('phparray', getcwd() . '/data/res/i18n-custom/', '%s/user.php');
+
         $translator->setLocale($locale);
 
         return new \Zend\Mvc\I18n\Translator($translator);
