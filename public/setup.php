@@ -54,4 +54,4 @@ require $autoloader;
 /**
  * Initialize our application with the setup configuration file and run!
  */
-Zend\Mvc\Application::init(require 'config/setup.config.php')->run();
+Zend\Mvc\Application::init(require 'config/setup.php')->run();

@@ -19,7 +19,7 @@ if (! defined('EP3_BS_DEV')) {
  * Application configuration array
  */
 return array(
-    'modules' => array(
+    'modules' => array_merge(array(
 
         /**
          * Application core modules
@@ -40,10 +40,10 @@ return array(
         /**
          * Custom modules
          *
-         * Add your own or third party modules here
+         * Place your own or third party modules in the /modulex directory
+         * and they will be loaded automatically.
          */
-        // 'MyModule',
-    ),
+    ), include 'modules.php'),
 
     /**
      * Some further internal settings,
@@ -55,6 +55,7 @@ return array(
         ),
         'module_paths' => array(
             'module',
+            'modulex',
             'vendor',
         ),
         'config_cache_enabled' => ! EP3_BS_DEV,
