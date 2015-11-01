@@ -8,7 +8,6 @@
 
 ini_set('error_reporting', E_ALL | E_STRICT);
 ini_set('error_log', getcwd() . '/data/log/errors.txt');
-ini_set('default_charset', 'UTF-8');
 
 ini_set('display_errors', EP3_BS_DEV ? 1 : 0);
 ini_set('display_startup_errors', EP3_BS_DEV ? 1 : 0);
@@ -17,12 +16,12 @@ ini_set('ignore_repeated_errors', 1);
 ini_set('html_errors',  EP3_BS_DEV ? 1 : 0);
 ini_set('ignore_user_abort', EP3_BS_DEV ? 1 : 0);
 
+ini_set('default_charset', 'UTF-8');
+
 return array(
     'db' => array(
-        'driver' => 'pdo',
-        'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
-        ),
+        'driver' => 'pdo_mysql',
+        'charset' => 'UTF8',
     ),
     'cookie_config' => array(
         'cookie_name_prefix' => 'ep3-bs',

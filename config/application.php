@@ -40,7 +40,7 @@ return array(
         /**
          * Custom modules
          *
-         * Place your own or third party modules in the /modulex directory
+         * Place your own, custom or (third party) extra modules in the /modulex directory
          * and they will be loaded automatically.
          */
     ), include 'modules.php'),

@@ -52,6 +52,7 @@ Booking meta keys:
 - creator                                   (optional, if created by admin or assist)
 - cancellor                                 (optional, if cancelled by admin or assist)
 - cancelled                                 (optional, if cancelled by admin or assist)
+- player-names                              (optional, if multi-player bookinh)
 
 
 
@@ -79,6 +80,8 @@ Square meta keys:
 - rules.document.name                       (optional)
 - readonly.message                          (optional)
 - public_names                              (optional) true|false
+- private_names                             (optional) true|false
+- capacity-ask-names                        (optional)
 - label.free                                (optional)
 
 
