@@ -4,6 +4,7 @@ namespace Square\Controller;
 
 use Booking\Entity\Booking\Bill;
 use RuntimeException;
+use Zend\Json\Json;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class BookingController extends AbstractActionController
@@ -49,6 +50,7 @@ class BookingController extends AbstractActionController
         $squareParam = $this->params()->fromQuery('s');
         $quantityParam = $this->params()->fromQuery('q', 1);
         $productsParam = $this->params()->fromQuery('p', 0);
+        $playerNamesParam = $this->params()->fromQuery('pn', 0);
 
         $serviceManager = $this->getServiceLocator();
         $squareValidator = $serviceManager->get('Square\Service\SquareValidator');
@@ -128,6 +130,14 @@ class BookingController extends AbstractActionController
 
         $byproducts['products'] = $products;
 
+        /* Check passed player names */
+
+        if ($playerNamesParam) {
+            $playerNames = Json::decode($playerNamesParam, Json::TYPE_ARRAY);
+        } else {
+            $playerNames = null;
+        }
+
         /* Check booking form submission */
 
         $acceptRulesDocument = $this->params()->fromPost('bf-accept-rules-document');
@@ -166,7 +176,9 @@ class BookingController extends AbstractActionController
                 }
 
                 $bookingService = $serviceManager->get('Booking\Service\BookingService');
-                $bookingService->createSingle($user, $square, $quantityParam, $byproducts['dateStart'], $byproducts['dateEnd'], $bills);
+                $bookingService->createSingle($user, $square, $quantityParam, $byproducts['dateStart'], $byproducts['dateEnd'], $bills, array(
+                    'player-names' => $playerNames,
+                ));
 
                 $this->flashMessenger()->addSuccessMessage(sprintf($this->t('%sCongratulations:%s Your %s has been booked!'),
                     '<b>', '</b>', $this->option('subject.square.type')));

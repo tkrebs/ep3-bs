@@ -103,4 +103,10 @@ return array(
     'Change period:' => 'Zeitraum anpassen:',
     'Check new period' => 'Neuen Zeitraum prüfen',
 
+    'The names of the other players are <b>optional</b>' => 'Die Namen der anderen Spieler sind <b>optional</b>',
+    'The names of the other players are <b>required</b>' => 'Die Namen der anderen Spieler sind <b>erforderlich</b>',
+    'Player\'s name' => 'Spieler Name',
+    'and email address' => 'und E-Mail Adresse',
+    'and phone number' => 'und Telefonnummer',
+
 );

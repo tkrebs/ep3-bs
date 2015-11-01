@@ -77,6 +77,29 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-capacity-ask-names',
+            'type' => 'Select',
+            'attributes' => array(
+                'id' => 'cf-capacity-ask-names',
+                'style' => 'width: 270px',
+            ),
+            'options' => array(
+                'label' => ' ',
+                'empty_option' => 'Don\'t ask for other player\'s names',
+                'value_options' => array(
+                    'optional-names' => 'Ask for other player\'s names (optional)',
+                    'optional-names-email' => 'Ask for other player\'s names and email address (optional)',
+                    'optional-names-phone' => 'Ask for other player\'s names and phone number (optional)',
+                    'optional-names-email-phone' => 'Ask for other player\'s names, email address and phone number (optional)',
+                    'required-names' => 'Ask for other player\'s names (required)',
+                    'required-names-email' => 'Ask for other player\'s names and email address (required)',
+                    'required-names-phone' => 'Ask for other player\'s names and phone number (required)',
+                    'required-names-email-phone' => 'Ask for other player\'s names, email address and phone number (required)',
+                ),
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-capacity-heterogenic',
             'type' => 'Checkbox',
             'attributes' => array(
@@ -93,6 +116,7 @@ class EditForm extends Form
             'type' => 'Select',
             'attributes' => array(
                 'id' => 'cf-name-visibility',
+                'style' => 'width: 270px',
             ),
             'options' => array(
                 'label' => 'Visibility of names',
@@ -279,6 +303,9 @@ class EditForm extends Form
                         ),
                     ),
                 ),
+            ),
+            'cf-capacity-ask-names' => array(
+                'required' => false,
             ),
             'cf-name-visibility' => array(
                 'required' => false,

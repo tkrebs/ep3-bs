@@ -32,6 +32,8 @@
 
         $(window).resize(updateSquarebox);
 
+        $(window).on("squarebox.update", updateSquarebox);
+
         $("body").on("click", "#squarebox-overlay", function() {
             removeSquarebox();
         });

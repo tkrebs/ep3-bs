@@ -48,7 +48,7 @@ class BookingService extends AbstractService
         $this->connection = $connection;
     }
 
-    public function createSingle(User $user, Square $square, $quantity, DateTime $dateTimeStart, DateTime $dateTimeEnd, array $bills = array())
+    public function createSingle(User $user, Square $square, $quantity, DateTime $dateTimeStart, DateTime $dateTimeEnd, array $bills = array(), array $meta = array())
     {
         if (! $this->connection->inTransaction()) {
             $this->connection->beginTransaction();
@@ -66,7 +66,7 @@ class BookingService extends AbstractService
                 'status_billing' => 'pending',
                 'visibility' => 'public',
                 'quantity' => $quantity,
-            ));
+            ), $meta);
 
             $this->bookingManager->save($booking);
 

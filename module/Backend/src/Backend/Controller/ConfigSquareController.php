@@ -56,6 +56,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->setMeta('readonly.message', $editData['cf-readonly-message']);
                 $square->set('priority', $editData['cf-priority']);
                 $square->set('capacity', $editData['cf-capacity']);
+                $square->setMeta('capacity-ask-names', $editData['cf-capacity-ask-names']);
                 $square->set('capacity_heterogenic', $editData['cf-capacity-heterogenic']);
                 $square->setMeta('private_names', $editData['cf-name-visibility'] == 'private' ? 'true' : 'false');
                 $square->setMeta('public_names', $editData['cf-name-visibility'] == 'public' ? 'true' : 'false');
@@ -93,6 +94,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-readonly-message' => $square->getMeta('readonly.message'),
                     'cf-priority' => $square->get('priority'),
                     'cf-capacity' => $square->get('capacity'),
+                    'cf-capacity-ask-names' => $square->getMeta('capacity-ask-names'),
                     'cf-capacity-heterogenic' => $square->get('capacity_heterogenic'),
                     'cf-name-visibility' => $nameVisibility,
                     'cf-time-start' => substr($square->get('time_start'), 0, 5),
