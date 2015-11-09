@@ -134,6 +134,18 @@ return array(
                                     ),
                                 ),
                             ),
+                            'players' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/players/:bid',
+                                    'defaults' => array(
+                                        'action' => 'players',
+                                    ),
+                                    'constraints' => array(
+                                        'bid' => '[0-9]+',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     'event' => array(

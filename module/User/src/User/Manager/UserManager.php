@@ -316,6 +316,17 @@ class UserManager extends AbstractManager
         return $users;
     }
 
+    public function getByPhoneNumber($number)
+    {
+        $resultSet = $this->userMetaTable->select(['key' => 'phone', 'value' => $number]);
+
+        foreach ($resultSet as $resultRecord) {
+            return $this->get($resultRecord->uid);
+        }
+
+        return null;
+    }
+
     /**
      * Gets all users.
      *

@@ -1,0 +1,77 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Player\'s names',
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Player\'s names') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?php
+
+    printf('<p>%s <a href="%s">%s</a></p>',
+        $this->translate('Booked by'),
+        $this->url('backend/user/edit', ['uid' => $this->user->need('uid')]),
+        $this->user->need('alias'));
+
+    echo '<div class="separator separator-line"></div>';
+
+    echo '<table class="default-table middle-table" style="margin-left: 0;">';
+
+    $i = 1;
+
+    foreach ($this->players as $player) {
+        echo '<tr>';
+
+        printf('<td>%s.</td>',
+            $i++);
+
+        if (isset($player['name'])) {
+            printf('<td>%s</td>',
+                $player['name']);
+        } else {
+            echo '<td></td>';
+        }
+
+        if (isset($player['email'])) {
+            printf('<td><span class="gray">%s:</span> <a href="mailto:%s">%s</a></td>',
+                $this->translate('Email'),
+                $player['email'], $player['email']);
+        } else {
+            echo '<td></td>';
+        }
+
+        if (isset($player['phone'])) {
+            printf('<td><span class="gray">%s:</span> %s</td>',
+                $this->translate('Phone'),
+                $player['phone']);
+        } else {
+            echo '<td></td>';
+        }
+
+        if (isset($player['user']) && isset($player['userMatch'])) {
+            $user = $player['user'];
+            $userMatch = $player['userMatch'];
+
+            printf('<td><span class="gray">%s %s:</span> <a href="%s">%s</a></td>',
+                $this->translate('User matched by'),
+                $this->translate(ucfirst($userMatch)),
+                $this->url('backend/user/edit', ['uid' => $user->need('uid')]),
+                $user->need('alias'));
+        } else {
+            echo '<td></td>';
+        }
+
+        echo '</tr>';
+    }
+
+    echo '</table>';
+
+    ?>
+</div>

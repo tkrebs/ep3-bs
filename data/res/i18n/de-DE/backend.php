@@ -372,4 +372,11 @@ return array(
 
     'New position' => 'Neue Position',
     'New position by using the pricing rules for this booking' => 'Neue Position durch Anwenden der Preis-Regeln auf diese Buchung',
+
+    'Who?' => 'Wer?',
+
+    'Player\'s names' => 'Spielernamen',
+    'Booked by' => 'Gebucht von',
+
+    'User matched by' => 'Benutzer ermittelt nach',
 );

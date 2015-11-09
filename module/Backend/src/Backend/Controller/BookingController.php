@@ -167,6 +167,14 @@ class BookingController extends AbstractActionController
             }
         }
 
+        if ($booking && $booking->getMeta('player-names')) {
+            $editForm->get('bf-quantity')->setLabel(sprintf('%s (<a href="%s">%s</a>)',
+                $this->translate('Number of players'),
+                $this->url()->fromRoute('backend/booking/players', ['bid' => $booking->need('bid')]),
+                $this->translate('Who?')));
+            $editForm->get('bf-quantity')->setLabelOption('disable_html_escape', true);
+        }
+
         return $this->ajaxViewModel(array_merge($params, array(
             'editForm' => $editForm,
             'booking' => $booking,
@@ -526,6 +534,72 @@ class BookingController extends AbstractActionController
             'bookingStatusService' => $bookingStatusService,
             'bills' => $bills,
             'user' => $user,
+        );
+    }
+
+    public function playersAction()
+    {
+        $this->authorize('admin.booking, calendar.see-data');
+
+        $bid = $this->params()->fromRoute('bid');
+
+        $serviceManager = $this->getServiceLocator();
+        $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
+        $userManager = $serviceManager->get('User\Manager\UserManager');
+
+        $booking = $bookingManager->get($bid);
+        $user = $userManager->get($booking->need('uid'));
+
+        $playerNames = $booking->getMeta('player-names');
+
+        if (! $playerNames) {
+            throw new \RuntimeException('This booking has no additional player names');
+        }
+
+        $playerNames = @unserialize($playerNames);
+
+        if (! $playerNames) {
+            throw new \RuntimeException('Invalid player names data stored in database');
+        }
+
+        $players = array();
+
+        foreach ($playerNames as $playerData) {
+            $nameData = explode('-', $playerData['name']);
+            $playerNumber = $nameData[count($nameData) - 1];
+
+            if (! isset($players[$playerNumber])) {
+                $players[$playerNumber] = array();
+            }
+
+            $playerDataKey = $nameData[count($nameData) - 2];
+            $playerDataValue = $playerData['value'];
+
+            if ($playerDataKey == 'email') {
+                $respectiveUser = $userManager->getBy(['email' => $playerDataValue]);
+
+                if ($respectiveUser) {
+                    $players[$playerNumber]['user'] = current($respectiveUser);
+                    $players[$playerNumber]['userMatch'] = $playerDataKey;
+                }
+            }
+
+            if ($playerDataKey == 'phone') {
+                $respectiveUser = $userManager->getByPhoneNumber($playerDataValue);
+
+                if ($respectiveUser) {
+                    $players[$playerNumber]['user'] = $respectiveUser;
+                    $players[$playerNumber]['userMatch'] = $playerDataKey;
+                }
+            }
+
+            $players[$playerNumber][$playerDataKey] = $playerDataValue;
+        }
+
+        return array(
+            'booking' => $booking,
+            'user' => $user,
+            'players' => $players,
         );
     }
 
