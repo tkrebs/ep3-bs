@@ -83,6 +83,7 @@ Square meta keys:
 - private_names                             (optional) true|false
 - capacity-ask-names                        (optional)
 - label.free                                (optional)
+- pseudo-time-block-bookable                (optional) true|false
 
 
 

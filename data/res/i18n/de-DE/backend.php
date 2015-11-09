@@ -286,6 +286,8 @@ return array(
         => 'Wer darf die Namen der gebuchten Spieler im Kalender sehen?',
     'Time block' => 'Zeitblock',
     'Time block (min. bookable)' => 'Zeitblock (min. buchbar)',
+    'Allow min. bookable time block for admins only' => 'Erlaube min. buchbaren Zeitblock nur für die Verwaltung',
+    'Users still can only book the normal time blocks then' => 'Benutzer können dann trotzdem nur den normalen Zeitblock buchen',
     'Time block (max. bookable)' => 'Zeitblock (max. buchbar)',
     'Booking range' => 'Buchung im Voraus',
     'How many days in advance<br>can squares be booked?' => 'Wie viele Tage im Voraus<br>kann max. gebucht werden?',

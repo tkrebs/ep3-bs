@@ -182,6 +182,18 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-pseudo-time-block-bookable',
+            'type' => 'Checkbox',
+            'attributes' => array(
+                'id' => 'cf-pseudo-time-block-bookable',
+            ),
+            'options' => array(
+                'label' => 'Allow min. bookable time block for admins only',
+                'notes' => 'Users still can only book the normal time blocks then',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-time-block-bookable-max',
             'type' => 'Text',
             'attributes' => array(

@@ -64,6 +64,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('time_end', $editData['cf-time-end']);
                 $square->set('time_block', max($editData['cf-time-block'], 10) * 60);
                 $square->set('time_block_bookable', max($editData['cf-time-block-bookable'], 10) * 60);
+                $square->setMeta('pseudo-time-block-bookable', $editData['cf-pseudo-time-block-bookable'] ? 'true' : 'false');
                 $square->set('time_block_bookable_max', max($editData['cf-time-block-bookable-max'], 10) * 60);
                 $square->set('range_book', $editData['cf-range-book'] * 60 * 60 * 24);
                 $square->set('range_cancel', $editData['cf-range-cancel'] * 60 * 60);
@@ -101,6 +102,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-time-end' => substr($square->get('time_end'), 0, 5),
                     'cf-time-block' => round($square->get('time_block') / 60),
                     'cf-time-block-bookable' => round($square->get('time_block_bookable') / 60),
+                    'cf-pseudo-time-block-bookable' => $square->getMeta('pseudo-time-block-bookable', 'false') == 'true',
                     'cf-time-block-bookable-max' => round($square->get('time_block_bookable_max') / 60),
                     'cf-range-book' => round($square->get('range_book') / 60 / 60 / 24),
                     'cf-range-cancel' => round($square->get('range_cancel') / 60 / 60),
@@ -116,6 +118,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-time-end' => '23:00',
                     'cf-time-block' => 60,
                     'cf-time-block-bookable' => 30,
+                    'cf-pseudo-time-block-bookable' => false,
                     'cf-time-block-bookable-max' => 180,
                     'cf-range-book' => 56,
                     'cf-range-cancel' => 24,

@@ -81,6 +81,10 @@ class TimeBlockChoice extends AbstractHelper
         $walkingDateTime = clone $dateTimeStart;
         $walkingIndex = 0;
 
+        if ($square->getMeta('pseudo-time-block-bookable', 'false') == 'true') {
+            $bookable = $square->need('time_block');
+        }
+
         while ($walkingDateTime < $dateTimeCheck) {
             $walkingDateTime->modify('+' . $bookable . ' sec');
             $walkingIndex++;
