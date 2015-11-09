@@ -300,7 +300,7 @@ class BookingController extends AbstractActionController
 
     public function deleteAction()
     {
-        $sessionUser = $this->authorize(['admin.booking',
+        $sessionUser = $this->authorize([
             'calendar.cancel-single-bookings', 'calendar.delete-single-bookings',
             'calendar.cancel-subscription-bookings', 'calendar.delete-subscription-bookings']);
 
@@ -316,17 +316,17 @@ class BookingController extends AbstractActionController
 
         switch ($booking->get('status')) {
             case 'single':
-                $this->authorize(['admin.booking', 'calendar.cancel-single-bookings', 'calendar.delete-single-bookings']);
+                $this->authorize(['calendar.cancel-single-bookings', 'calendar.delete-single-bookings']);
                 break;
             case 'subscription':
-                $this->authorize(['admin.booking', 'calendar.cancel-subscription-bookings', 'calendar.delete-subscription-bookings']);
+                $this->authorize(['calendar.cancel-subscription-bookings', 'calendar.delete-subscription-bookings']);
                 break;
         }
 
         if ($this->params()->fromQuery('confirmed') == 'true') {
 
             if ($editMode == 'reservation') {
-                $this->authorize(['admin.booking', 'calendar.delete-single-bookings', 'calendar.delete-subscription-bookings']);
+                $this->authorize(['calendar.delete-single-bookings', 'calendar.delete-subscription-bookings']);
 
                 $reservationManager->delete($reservation);
 
@@ -334,7 +334,7 @@ class BookingController extends AbstractActionController
             } else {
 
                 if ($this->params()->fromQuery('cancel') == 'true') {
-                    $this->authorize(['admin.booking', 'calendar.cancel-single-bookings', 'calendar.cancel-subscription-bookings']);
+                    $this->authorize(['calendar.cancel-single-bookings', 'calendar.cancel-subscription-bookings']);
 
                     $booking->set('status', 'cancelled');
                     $booking->setMeta('cancellor', $sessionUser->get('alias'));
@@ -343,7 +343,7 @@ class BookingController extends AbstractActionController
 
                     $this->flashMessenger()->addSuccessMessage('Booking has been cancelled');
                 } else {
-                    $this->authorize(['admin.booking', 'calendar.delete-single-bookings', 'calendar.delete-subscription-bookings']);
+                    $this->authorize(['calendar.delete-single-bookings', 'calendar.delete-subscription-bookings']);
 
                     $bookingManager->delete($booking);
 
