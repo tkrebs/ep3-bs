@@ -71,10 +71,11 @@ class BookingController extends AbstractActionController
 
         $params = $this->backendBookingDetermineParams(true);
 
+        $reservation = $booking = null;
+
         if (! $this->getRequest()->isPost()) {
             switch (count($params['reservations'])) {
                 case 0:
-                    $reservation = $booking = null;
                     break;
                 case 1:
                     $reservation = current($params['reservations']);
