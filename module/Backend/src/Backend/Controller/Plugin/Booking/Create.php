@@ -7,6 +7,7 @@ use Booking\Manager\BookingManager;
 use Booking\Manager\ReservationManager;
 use Square\Entity\Square;
 use Square\Manager\SquareManager;
+use User\Entity\User;
 use User\Manager\UserManager;
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
@@ -46,14 +47,10 @@ class Create extends AbstractPlugin
             /* Determine or create user */
 
             if (preg_match('/\(([0-9]+)\)/', $user, $matches)) {
-                $user = $matches[1];
+                $user = $this->userManager->get($matches[1]);
             }
 
-            $users = $this->userManager->interpret($user, 2);
-
-            if (count($users) == 1) {
-                $user = current($users);
-            } else {
+            if (! ($user instanceof User)) {
                 $user = $this->userManager->create($user);
             }
 
