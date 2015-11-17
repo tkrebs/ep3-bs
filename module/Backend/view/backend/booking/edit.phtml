@@ -166,12 +166,12 @@ $this->setup(array(
             <td colspan="4" class="centered-text" style="padding-top: 16px; border-top: solid 1px #CCC;">
                 <?php if ($this->sessionUser->can('admin.booking')): ?>
                     <?= $this->formElement($form->get('bf-submit')) ?>
-
-                    <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
                 <?php endif; ?>
 
                 <?php if ($this->reservation): ?>
                     <?php if ($this->sessionUser->can(['admin.booking', 'calendar.cancel-single-bookings', 'calendar.delete-single-bookings', 'calendar.cancel-subscription-bookings', 'calendar.delete-subscription-bookings'])): ?>
+                        <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+
                         <a href="<?= $this->url('backend/booking/delete', ['rid' => $this->reservation->get('rid')], ['query' => ['edit-mode' => $this->editMode]]) ?>" class="default-button squarebox-internal-link">
                             <span class="symbolic symbolic-cross"><?= $this->t('Delete') ?></span>
                         </a>
@@ -179,6 +179,8 @@ $this->setup(array(
 
                 <?php else: ?>
                     <?php if ($this->sessionUser->can('admin.event')): ?>
+                        <span class="gray" style="margin: 0 8px;"><?= $this->t('or') ?></span>
+
                         <a href="<?= $this->url('backend/event/edit', [], ['query' => ['ds' => $this->query['ds'], 'ts' => $this->query['ts'], 'te' => $this->query['te'], 's' => $this->query['s']]]) ?>" class="gray">
                             <span class="symbolic symbolic-date"><?= $this->t('New event') ?></span>
                         </a>
