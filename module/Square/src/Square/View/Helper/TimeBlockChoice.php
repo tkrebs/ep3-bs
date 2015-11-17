@@ -60,7 +60,13 @@ class TimeBlockChoice extends AbstractHelper
             $dateTimeCheck->modify('-' . ($timeCheck - $squareTimeEnd) . ' sec');
         }
 
-        $reservations = $this->reservationManager->getInRange($dateTimeStart, $dateTimeEnd);
+        if ($dateTimeCheck > $dateTimeEnd) {
+            $reservationsDateTimeEnd = $dateTimeCheck;
+        } else {
+            $reservationsDateTimeEnd = $dateTimeEnd;
+        }
+
+        $reservations = $this->reservationManager->getInRange($dateTimeStart, $reservationsDateTimeEnd);
         $bookings = $this->bookingManager->getByReservations($reservations);
 
         $this->reservationManager->getSecondsPerDay($reservations);
