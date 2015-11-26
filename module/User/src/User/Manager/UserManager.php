@@ -14,6 +14,7 @@ use User\Table\UserTable;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Db\Sql\Predicate\In;
 use Zend\Db\Sql\Predicate\Like;
+use Zend\Db\Sql\Predicate\NotIn;
 
 class UserManager extends AbstractManager
 {
@@ -372,6 +373,12 @@ class UserManager extends AbstractManager
                 return array();
             }
         } else {
+            if (empty($where)) {
+                $where = array(
+                    new NotIn('status', array('deleted', 'disabled')),
+                );
+            }
+
             return $this->getBy(array_merge(array(new Like('alias', '%' . $input . '%')), $where), 'alias ASC', $limit, null, $loadMeta);
         }
     }
