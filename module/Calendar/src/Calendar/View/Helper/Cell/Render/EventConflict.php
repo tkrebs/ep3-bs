@@ -13,11 +13,11 @@ class EventConflict extends AbstractHelper
 
         if ($user && $user->can('calendar.see-data')) {
             if ($events && $reservations) {
-                return $view->calendarCellLink('Conflict', $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-conflict');
+                return $view->calendarCellLink($this->view->t('Conflict'), $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-conflict');
             }
 
             if (count($events) > 1) {
-                return $view->calendarCellLink('Conflict', $view->url('backend/event/edit-choice', [], $cellLinkParams), 'cc-conflict');
+                return $view->calendarCellLink($this->view->t('Conflict'), $view->url('backend/event/edit-choice', [], $cellLinkParams), 'cc-conflict');
             }
         }
 

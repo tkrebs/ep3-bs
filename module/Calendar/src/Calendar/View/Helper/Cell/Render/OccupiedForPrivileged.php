@@ -22,7 +22,7 @@ class OccupiedForPrivileged extends AbstractHelper
         $reservationsCount = count($reservations);
 
         if ($reservationsCount > 1) {
-            return $view->calendarCellLink('Occupied', $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-single');
+            return $view->calendarCellLink($this->view->t('Occupied'), $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-single');
         } else {
             $reservation = current($reservations);
             $booking = $reservation->needExtra('booking');

@@ -19,12 +19,12 @@ class CellLogic extends AbstractHelper
 
         if ($walkingDate <= $now) {
             if (! ($user && $user->can('calendar.see-past'))) {
-                return $view->calendarCell('Past', 'cc-over');
+                return $view->calendarCell($this->view->t('Past'), 'cc-over');
             }
         }
 
         if ($walkingTime < $square->needExtra('time_start_sec') || $walkingTime >= $square->needExtra('time_end_sec')) {
-            return $view->calendarCell('Closed', 'cc-over');
+            return $view->calendarCell($this->view->t('Closed'), 'cc-over');
         }
 
         $reservationsForCell = $view->calendarReservationsForCell($reservationsForCol, $square);

@@ -63,7 +63,7 @@ class Cell extends AbstractHelper
 
         if ($capacity - $quantity < 0) {
             if ($user && $user->can('calendar.see-data')) {
-                return $view->calendarCellLink('Conflict', $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-conflict');
+                return $view->calendarCellLink($this->view->t('Conflict'), $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-conflict');
             }
         }
 

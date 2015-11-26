@@ -25,7 +25,7 @@ class Cell extends AbstractHelper
             $innerTag,
             $outerClasses,
             $innerClasses,
-            $view->t($content),
+            $content,
             $misc);
 
         return $html;

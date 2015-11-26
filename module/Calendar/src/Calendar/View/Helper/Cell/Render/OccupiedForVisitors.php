@@ -15,7 +15,7 @@ class OccupiedForVisitors extends AbstractHelper
         $reservationsCount = count($reservations);
 
         if ($reservationsCount > 1) {
-            return $view->calendarCellLink('Occupied', $view->url('square', [], $cellLinkParams), 'cc-single');
+            return $view->calendarCellLink($this->view->t('Occupied'), $view->url('square', [], $cellLinkParams), 'cc-single');
         } else {
             $reservation = current($reservations);
             $booking = $reservation->needExtra('booking');
@@ -33,13 +33,13 @@ class OccupiedForVisitors extends AbstractHelper
             switch ($booking->need('status')) {
                 case 'single':
                     if (! $cellLabel) {
-                        $cellLabel = 'Occupied';
+                        $cellLabel = $this->view->t('Occupied');
                     }
 
                     return $view->calendarCellLink($cellLabel, $view->url('square', [], $cellLinkParams), 'cc-single' . $cellGroup);
                 case 'subscription':
                     if (! $cellLabel) {
-                        $cellLabel = 'Subscription';
+                        $cellLabel = $this->view->t('Subscription');
                     }
 
                     return $view->calendarCellLink($cellLabel, $view->url('square', [], $cellLinkParams), 'cc-multiple' . $cellGroup);
