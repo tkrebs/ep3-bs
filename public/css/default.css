@@ -253,6 +253,33 @@ a.cc-conflict:hover { background-color: #334F6A; }
 
 a.cc-conflict { position: relative; z-index: 256; }
 
+a.squarebox-primary-close-link,
+a.squarebox-primary-close-link:hover {
+    position: absolute;
+    right: -4px; top: -4px;
+    display: block;
+    padding: 4px;
+    opacity: 1 !important;
+    color: #666 !important;
+    line-height: 1;
+    font-size: 22px;
+    text-decoration: none;
+    background: #FFF;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+a.squarebox-primary-close-link:hover {
+    color: #FFF !important;
+    background: #933;
+}
+
 /* Layout - Alternate Calendar */
 
 #calendar-choice-start .ui-datepicker { min-height: 240px; }
