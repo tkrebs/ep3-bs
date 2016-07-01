@@ -41,7 +41,9 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (August, 2015) is 1.5.
+The current version (July, 2016) is 1.6.
+
+Version 1.6 introduced some requested features and fixed quite some bugs. It also introduced better support for custom translations and modules.
 
 Version 1.5 introduced some requested features (billing administration, custom billing statuses and colors) and fixed some bugs.
 

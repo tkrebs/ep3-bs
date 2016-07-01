@@ -459,7 +459,7 @@ class EditForm extends Form
                     array(
                         'name' => 'Regex',
                         'options' => array(
-                            'pattern' => '~^[0-9]+(\.[0-9]+)?$~',
+                            'pattern' => '~^[0-9]+(\.[0-9]{1,2})?$~',
                             'message' => 'Please type a number here',
                         ),
                     ),

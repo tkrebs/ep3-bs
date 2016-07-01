@@ -105,7 +105,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-pseudo-time-block-bookable' => $square->getMeta('pseudo-time-block-bookable', 'false') == 'true',
                     'cf-time-block-bookable-max' => round($square->get('time_block_bookable_max') / 60),
                     'cf-range-book' => round($square->get('range_book') / 60 / 60 / 24),
-                    'cf-range-cancel' => round($square->get('range_cancel') / 60 / 60),
+                    'cf-range-cancel' => round($square->get('range_cancel') / 60 / 60, 2),
 	                'cf-label-free' => $square->getMeta('label.free'),
                 ));
             } else {
