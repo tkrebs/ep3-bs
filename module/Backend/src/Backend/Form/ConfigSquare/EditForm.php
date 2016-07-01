@@ -229,7 +229,7 @@ class EditForm extends Form
             ),
             'options' => array(
                 'label' => 'Cancel range',
-                'notes' => 'Until when may bookings be cancelled?',
+                'notes' => 'Until when may bookings be cancelled?<br>Set to 0 to never allow.<br>Set to 0.01 for some seconds (practically always).',
                 'postfix' => 'Hours',
             ),
         ));
@@ -457,8 +457,9 @@ class EditForm extends Form
                         'break_chain_on_failure' => true,
                     ),
                     array(
-                        'name' => 'Digits',
+                        'name' => 'Regex',
                         'options' => array(
+                            'pattern' => '~^[0-9]+(\.[0-9]+)?$~',
                             'message' => 'Please type a number here',
                         ),
                     ),

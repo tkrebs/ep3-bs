@@ -66,7 +66,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('time_block_bookable', max($editData['cf-time-block-bookable'], 10) * 60);
                 $square->setMeta('pseudo-time-block-bookable', $editData['cf-pseudo-time-block-bookable'] ? 'true' : 'false');
                 $square->set('time_block_bookable_max', max($editData['cf-time-block-bookable-max'], 10) * 60);
-                $square->set('range_book', $editData['cf-range-book'] * 60 * 60 * 24);
+                $square->set('range_book', (float) $editData['cf-range-book'] * 60 * 60 * 24);
                 $square->set('range_cancel', $editData['cf-range-cancel'] * 60 * 60);
 	            $square->setMeta('label.free', $editData['cf-label-free'], $locale);
 
