@@ -19,6 +19,16 @@ $walkingDate = clone $this->dateStart;
 $walkingIndex = 0;
 
 while ($walkingDate <= $this->dateEnd) {
+    if (in_array($walkingDate->format($this->t('Y-m-d')), $this->dayExceptions) ||
+        in_array($this->t($walkingDate->format('l')), $this->dayExceptions)) {
+
+        if (! in_array($walkingDate->format($this->t('Y-m-d')), $this->dayExceptionsExceptions)) {
+            $walkingDate->modify('+1 day');
+            $walkingIndex++;
+            continue;
+        }
+    }
+
     echo sprintf('<td class="calendar-date-col %s">',
         ($walkingIndex > 0 ? 'responsive-pass-' . (max(1, 5 - $walkingIndex)) : ''));
 

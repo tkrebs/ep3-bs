@@ -2,6 +2,7 @@
 
 namespace Square\Service;
 
+use Base\Manager\OptionManager;
 use Base\Service\AbstractService;
 use Booking\Entity\Booking;
 use Booking\Manager\BookingManager;
@@ -20,15 +21,18 @@ class SquareValidator extends AbstractService
     protected $reservationManager;
     protected $eventManager;
     protected $squareManager;
+    protected $optionManager;
     protected $user;
 
     public function __construct(BookingManager $bookingManager, ReservationManager $reservationManager,
-        EventManager $eventManager, SquareManager $squareManager, UserSessionManager $userSessionManager)
+        EventManager $eventManager, SquareManager $squareManager, UserSessionManager $userSessionManager,
+        OptionManager $optionManager)
     {
         $this->bookingManager = $bookingManager;
         $this->reservationManager = $reservationManager;
         $this->eventManager = $eventManager;
         $this->squareManager = $squareManager;
+        $this->optionManager = $optionManager;
         $this->user = $userSessionManager->getSessionUser();
     }
 
@@ -166,6 +170,39 @@ class SquareValidator extends AbstractService
 
                         throw new RuntimeException(sprintf($this->t('You cannot book more than %s minutes at once'), $squareTimeBlockMaxRound));
                     }
+                }
+            }
+        }
+
+        /* Check for day exception */
+
+        $dayExceptions = $this->optionManager->get('service.calendar.day-exceptions');
+
+        if ($dayExceptions) {
+            $dayExceptions = preg_split('~(\\n|,)~', $dayExceptions);
+            $dayExceptionsExceptions = [];
+
+            $dayExceptionsCleaned = [];
+
+            foreach ($dayExceptions as $dayException) {
+                $dayException = trim($dayException);
+
+                if ($dayException) {
+                    if ($dayException[0] === '+') {
+                        $dayExceptionsExceptions[] = trim($dayException, '+');
+                    } else {
+                        $dayExceptionsCleaned[] = $dayException;
+                    }
+                }
+            }
+
+            $dayExceptions = $dayExceptionsCleaned;
+
+            if (in_array($dateStart->format($this->t('Y-m-d')), $dayExceptions) ||
+                in_array($this->t($dateStart->format('l')), $dayExceptions)) {
+
+                if (! in_array($dateStart->format($this->t('Y-m-d')), $dayExceptionsExceptions)) {
+                    throw new \RuntimeException('The passed date has been hidden from the calendar');
                 }
             }
         }

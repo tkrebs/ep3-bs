@@ -19,6 +19,7 @@ Options:
 - service.user.registration.privacy.name    (optional)
 - service.user.activation                   immediate|manual|manual-email|email
 - service.calendar.days                     int
+- service.calendar.day-exceptions           (optional)
 - service.website                           URL
 - service.meta.description                  (optional)
 - service.meta.keywords                     (optional)

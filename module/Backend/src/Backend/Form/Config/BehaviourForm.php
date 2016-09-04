@@ -113,6 +113,19 @@ class BehaviourForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-calendar-day-exceptions',
+            'type' => 'Textarea',
+            'attributes' => array(
+                'id' => 'cf-calendar-day-exceptions',
+                'style' => 'width: 320px; min-height: 80px',
+            ),
+            'options' => array(
+                'label' => 'Hide these days',
+                'notes' => 'Day names (like Sunday) or concrete dates (like 2016-08-16);<br>Separated by line breaks or commas;<br>Force concrete dates to be shown by adding a plus (like +2016-08-30)',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-submit',
             'type' => 'Submit',
             'attributes' => array(

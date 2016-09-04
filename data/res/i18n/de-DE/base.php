@@ -49,6 +49,8 @@ return array(
     'or' => 'oder',
     'for' => 'für',
 
+    'Y-m-d' => 'd.m.Y',
+
     'Page not found' => 'Seite nicht gefunden',
     'Oops ... something went wrong here' => 'Oops ... da ist wohl etwas schief gelaufen',
     'This page does not (yet) exist' => 'Diese Seite gibt es (noch) nicht',

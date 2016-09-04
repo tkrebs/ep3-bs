@@ -128,6 +128,7 @@ class ConfigController extends AbstractActionController
                 $registrationMessage = $data['cf-registration-message'];
                 $activation = $data['cf-activation'];
                 $calendarDays = $data['cf-calendar-days'];
+                $calendarDayExceptions = $data['cf-calendar-day-exceptions'];
 
                 $locale = $this->config('i18n.locale');
 
@@ -137,6 +138,7 @@ class ConfigController extends AbstractActionController
                 $optionManager->set('service.user.registration.message', $registrationMessage, $locale);
                 $optionManager->set('service.user.activation', $activation);
                 $optionManager->set('service.calendar.days', $calendarDays);
+                $optionManager->set('service.calendar.day-exceptions', $calendarDayExceptions);
 
                 $this->flashMessenger()->addSuccessMessage('Configuration has been saved');
             } else {
@@ -151,6 +153,7 @@ class ConfigController extends AbstractActionController
             $behaviourForm->get('cf-registration-message')->setValue($optionManager->get('service.user.registration.message'));
             $behaviourForm->get('cf-activation')->setValue($optionManager->get('service.user.activation', 'email'));
             $behaviourForm->get('cf-calendar-days')->setValue($optionManager->get('service.calendar.days', '4'));
+            $behaviourForm->get('cf-calendar-day-exceptions')->setValue($optionManager->get('service.calendar.day-exceptions'));
         }
 
         return array(

@@ -224,6 +224,10 @@ return array(
     'Days in calendar' => 'Tage im Kalender',
     'Sets how many days are displayed in the calendar' => 'Legt fest, wieviele Tage im Kalender<br>gleichzeitig angezeigt werden sollen',
 
+    'Hide these days' => 'Folgende Tage verstecken',
+    'Day names (like Sunday) or concrete dates (like 2016-08-16);<br>Separated by line breaks or commas;<br>Force concrete dates to be shown by adding a plus (like +2016-08-30)'
+        => 'Name des Tages (z.B. Sonntag) oder konkrete Datumangaben (z.B. 16.08.2016);<br>Getrennt durch Zeilenumbrüche oder Kommata;<br>Ein versteckter Tag kann mit einem Plus wieder angezeigt werden (z.B. +30.08.2016)',
+
     'Your name' => 'Ihr Name',
     'Will be shown as the operator of this site.<br>Displayed next to the logo, for example.'
         => 'Wird Ihren Besuchern als Betreiber angezeigt.<br>Erscheint z.B. ganz oben neben dem Logo.',

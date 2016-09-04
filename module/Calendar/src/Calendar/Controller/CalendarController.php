@@ -18,10 +18,53 @@ class CalendarController extends AbstractActionController
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
 
         $daysToRender = $this->option('service.calendar.days', false);
+        $dayExceptions = $this->option('service.calendar.day-exceptions');
+
+        if ($dayExceptions) {
+            $dayExceptions = preg_split('~(\\n|,)~', $dayExceptions);
+            $dayExceptionsExceptions = [];
+
+            $dayExceptionsCleaned = [];
+
+            foreach ($dayExceptions as $dayException) {
+                $dayException = trim($dayException);
+
+                if ($dayException) {
+                    if ($dayException[0] === '+') {
+                        $dayExceptionsExceptions[] = trim($dayException, '+');
+                    } else {
+                        $dayExceptionsCleaned[] = $dayException;
+                    }
+                }
+            }
+
+            $dayExceptions = $dayExceptionsCleaned;
+        } else {
+            $dayExceptions = [];
+            $dayExceptionsExceptions = [];
+        }
 
         $dateStart = $this->calendarDetermineDate();
         $dateEnd = clone $dateStart;
-        $dateEnd->modify('+' . ($daysToRender - 1) . ' days');
+
+        for ($i = 1; $i < $daysToRender; $i++) {
+            $dateEnd->modify('+1 day');
+
+            if (in_array($dateEnd->format($this->t('Y-m-d')), $dayExceptions) ||
+                in_array($this->t($dateEnd->format('l')), $dayExceptions)) {
+
+                if (in_array($dateEnd->format($this->t('Y-m-d')), $dayExceptionsExceptions)) {
+                    continue;
+                }
+
+                $daysToRender++;
+
+                if ($daysToRender > 24) {
+                    throw new \RuntimeException('Too many days are hidden from calendar');
+                }
+            }
+        }
+
         $dateEnd->setTime(23, 59, 59);
         $dateNow = new DateTime();
 
@@ -75,6 +118,8 @@ class CalendarController extends AbstractActionController
             'timeBlock' => $timeBlock,
             'timeBlockCount' => $timeBlockCount,
             'daysToRender' => $daysToRender,
+            'dayExceptions' => $dayExceptions,
+            'dayExceptionsExceptions' => $dayExceptionsExceptions,
             'squares' => $squares,
             'squaresCount' => $squaresCount,
             'reservations' => $reservations,
