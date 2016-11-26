@@ -381,7 +381,7 @@ class EditForm extends Form
                     ),
                 ),
             ),
-            'ef-street' => array(
+            'euf-street' => array(
                 'required' => false,
                 'filters' => array(
                     array('name' => 'StringTrim'),
