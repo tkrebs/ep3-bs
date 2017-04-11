@@ -494,7 +494,7 @@ class RegistrationForm extends Form
                     array(
                         'name' => 'Regex',
                         'options' => array(
-                            'pattern' => '/^([0-9a-zA-Z\.\-])+$/u',
+                            'pattern' => '/^([0-9a-zA-Z\.\-\/])+$/u',
                             'message' => 'This street number contains invalid characters - sorry',
                         ),
                     ),
@@ -544,7 +544,7 @@ class RegistrationForm extends Form
                     array(
                         'name' => 'Regex',
                         'options' => array(
-                            'pattern' => '/^([ \&\'\(\)\-\x{00c0}-\x{01ff}a-zA-Z])+$/u',
+                            'pattern' => '/^([ \&\'\(\)\.\-\x{00c0}-\x{01ff}a-zA-Z])+$/u',
                             'message' => 'This city name contains invalid characters - sorry',
                         ),
                     ),
