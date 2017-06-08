@@ -158,12 +158,18 @@ class BookingController extends AbstractActionController
                     ));
                 }
             } else {
+                $timeEnd = $params['dateTimeEnd']->format('H:i');
+
+                if ($timeEnd == '00:00') {
+                    $timeEnd = '24:00';
+                }
+
                 $editForm->setData(array(
                     'bf-sid' => $params['square']->get('sid'),
                     'bf-date-start' => $this->dateFormat($params['dateTimeStart'], \IntlDateFormatter::MEDIUM),
                     'bf-date-end' => $this->dateFormat($params['dateTimeEnd'], \IntlDateFormatter::MEDIUM),
                     'bf-time-start' => $params['dateTimeStart']->format('H:i'),
-                    'bf-time-end' => $params['dateTimeEnd']->format('H:i'),
+                    'bf-time-end' => $timeEnd,
                 ));
             }
         }
