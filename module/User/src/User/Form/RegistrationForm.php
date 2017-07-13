@@ -393,9 +393,7 @@ class RegistrationForm extends Form
                         'name' => 'Identical',
                         'options' => array(
                             'token' => 'rf-pw1',
-                            'message' => array(
-                                'Both passwords must be identical',
-                            ),
+                            'message' => 'Both passwords must be identical',
                         ),
                     ),
                 ),

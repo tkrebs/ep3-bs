@@ -88,9 +88,7 @@ class PasswordResetForm extends Form
                         'name' => 'Identical',
                         'options' => array(
                             'token' => 'prf-pw1',
-                            'message' => array(
-                                'Both passwords must be identical',
-                            ),
+                            'message' => 'Both passwords must be identical',
                         ),
                     ),
                 ),

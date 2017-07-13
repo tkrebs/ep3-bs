@@ -104,9 +104,7 @@ class EditPasswordForm extends Form
                         'name' => 'Identical',
                         'options' => array(
                             'token' => 'epf-pw1',
-                            'message' => array(
-                                'Both passwords must be identical',
-                            ),
+                            'message' => 'Both passwords must be identical',
                         ),
                     ),
                 ),
