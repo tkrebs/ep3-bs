@@ -1,0 +1,3 @@
+<?php
+
+define('EP3_BS_DEV', true);

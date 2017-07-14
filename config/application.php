@@ -12,7 +12,7 @@
  * If true, certain caches will be enabled.
  */
 if (! defined('EP3_BS_DEV')) {
-    define('EP3_BS_DEV', true);
+    define('EP3_BS_DEV', false);
 }
 
 /**

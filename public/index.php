@@ -59,6 +59,16 @@ if (! is_readable($autoloader)) {
 require $autoloader;
 
 /**
+ * Load a custom init script if available.
+ */
+$init = 'config/init.php';
+
+if (is_readable($init)) {
+
+    require $init;
+}
+
+/**
  * Initialize our application with the provided configuration file and ruuuuun!
  */
 Zend\Mvc\Application::init(require 'config/application.php')->run();
