@@ -16,4 +16,75 @@ $this->setup(array(
 
     <a href="<?= $this->url('setup') ?>" class="default-button"><?= $this->t('Go to setup page') ?></a>
 
+    <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
+
+        <div class="separator"></div>
+        <div class="separator separator-line"></div>
+        <div class="separator"></div>
+
+        <h1><?= $this->t('Exception details') ?></h1>
+
+        <dl>
+            <dt><?= $this->t('Type') ?></dt>
+            <dd style="margin: 0; overflow: auto">
+                <pre><?= get_class($this->exception) ?></pre>
+            </dd>
+
+            <dt><?= $this->t('Message') ?></dt>
+            <dd style="margin: 0; overflow: auto">
+                <pre><?= $this->escapeHtml($this->exception->getMessage()) ?></pre>
+            </dd>
+
+            <dt><?= $this->t('File') ?></dt>
+            <dd style="margin: 0; overflow: auto">
+                <pre><?= $this->exception->getFile() ?>:<?= $this->exception->getLine() ?></pre>
+            </dd>
+
+            <dt><?= $this->t('Stack trace') ?></dt>
+            <dd style="margin: 0; overflow: auto">
+                <pre><?= $this->escapeHtml($this->exception->getTraceAsString()) ?></pre>
+            </dd>
+        </dl>
+
+        <?php
+
+        $previousException = $this->exception->getPrevious();
+
+        while ($previousException instanceof Exception || $previousException instanceof Error) {
+
+            ?>
+
+            <hr>
+
+            <h2><?= $this->t('Previous exception') ?></h2>
+
+            <dl>
+                <dt><?= $this->t('Type') ?></dt>
+                <dd>
+                    <pre><?= get_class($previousException) ?></pre>
+                </dd>
+
+                <dt><?= $this->t('Message') ?></dt>
+                <dd>
+                    <pre><?= $this->escapeHtml($previousException->getMessage()) ?></pre>
+                </dd>
+
+                <dt><?= $this->t('File') ?></dt>
+                <dd>
+                    <pre><?= $previousException->getFile() ?>:<?= $previousException->getLine() ?></pre>
+                </dd>
+
+                <dt><?= $this->t('Stack trace') ?></dt>
+                <dd>
+                    <pre><?= $this->escapeHtml($previousException->getTraceAsString()) ?></pre>
+                </dd>
+            </dl>
+
+            <?php
+
+            $previousException = $previousException->getPrevious();
+        }
+
+        ?>
+    <?php endif ?>
 </div>

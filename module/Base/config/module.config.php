@@ -112,10 +112,10 @@ return array(
 
         'layout'                   => 'base/layout',
 
-        'display_exceptions'       => true,
+        'display_exceptions'       => EP3_BS_DEV,
         'exception_template'       => 'error/500',
 
-        'display_not_found_reason' => true,
+        'display_not_found_reason' => EP3_BS_DEV,
         'not_found_template'       => 'error/404',
 
         'doctype'                  => 'HTML5',
