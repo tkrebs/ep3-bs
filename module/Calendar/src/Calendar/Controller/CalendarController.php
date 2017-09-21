@@ -90,6 +90,7 @@ class CalendarController extends AbstractActionController
 
         if ($user && $user->can('calendar.see-data')) {
             $getBookingUsers = true;
+            $dateNow->setTime(0, 0, 0);
         }
 
         if ($user && $squareManager->hasOneWithPrivateNames()) {
@@ -103,8 +104,6 @@ class CalendarController extends AbstractActionController
         if ($getBookingUsers) {
             $userManager = $serviceManager->get('User\Manager\UserManager');
             $userManager->getByBookings($bookings);
-
-            $dateNow->setTime(0, 0, 0);
         }
 
         $this->redirectBack()->setOrigin('calendar');
