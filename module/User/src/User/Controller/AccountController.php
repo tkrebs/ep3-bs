@@ -262,7 +262,7 @@ class AccountController extends AbstractActionController
             throw new RuntimeException('Your activation code seems invalid. Please try again.');
         }
 
-        $user->set('status', 'enabled');
+        $user->set('status', $user->getMeta('status_before_reactivation', 'enabled'));
         $user->set('last_activity', date('Y-m-d H:i:s'));
         $user->set('last_ip', $_SERVER['REMOTE_ADDR']);
 
@@ -469,6 +469,9 @@ class AccountController extends AbstractActionController
                 $user->set('email', $email);
 
                 if ($this->option('service.user.activation') == 'email') {
+
+                    $user->setMeta('status_before_reactivation',
+                        $user->get('status'));
 
                     $user->set('status', 'disabled');
 
