@@ -329,11 +329,11 @@ class SquareValidator extends AbstractService
         }
 
         if (! ($this->user && $this->user->need('uid') == $booking->need('uid'))) {
-            throw new RuntimeException('You have no permission to cancel this booking');
+            return false;
         }
 
         if ($booking->need('status') == 'subscription') {
-            throw new RuntimeException('You have no permission to cancel this subscription');
+            return false;
         }
 
         $square = $this->squareManager->get($booking->need('sid'));
