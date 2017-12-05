@@ -2,7 +2,7 @@
 
 Contribution of code is very simple and (generally :relieved:) welcome.
 
-Just send [GitHub pull requests] (https://help.github.com/articles/using-pull-requests) to suggest new features, fixes
+Just send [GitHub pull requests](https://help.github.com/articles/using-pull-requests) to suggest new features, fixes
 or any other code changes and they will be gladly reviewed.
 
 Keep in mind though, that such requests will not necessarily be accepted. In order to enable quick reviews, you should
