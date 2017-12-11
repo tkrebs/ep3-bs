@@ -21,7 +21,6 @@
                     buttonBook.attr("href", hrefBook.replace(/\&te\=[0-9][0-9]:[0-9][0-9]/, "&te=" + choice));
                     buttonReload.attr("href", hrefReload.replace(/\&te\=[0-9][0-9]:[0-9][0-9]/, "&te=" + choice));
                     buttonReload.click();
-                    buttonReload[0].click();
                 }
             });
 
