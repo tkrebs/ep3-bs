@@ -25,11 +25,11 @@ Documentation and installation instructions can be found in the following direct
 ## Architecture
 
 The system is based on the well-known LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.4+) and the popular and powerful
-[Zend Framework 2] (http://framework.zend.com/) (2.4+).
+[Zend Framework 2](http://framework.zend.com/) (2.4+).
 
-Dependencies are managed with [composer] (https://getcomposer.org/).
+Dependencies are managed with [composer](https://getcomposer.org/).
 
-The source code is version controlled with [Git] (http://git-scm.com/) and hosted at [GitHub] (https://github.com/).
+The source code is version controlled with [Git](http://git-scm.com/) and hosted at [GitHub](https://github.com/).
 
 The link to the GitHub repository is
 
