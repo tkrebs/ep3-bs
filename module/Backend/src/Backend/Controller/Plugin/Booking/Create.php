@@ -49,10 +49,16 @@ class Create extends AbstractPlugin
             if (preg_match('/\(([0-9]+)\)/', $user, $matches)) {
                 $user = $this->userManager->get($matches[1]);
             } else {
-                $users = $this->userManager->getBy(['alias' => $user]);
+                $users = $this->userManager->getBy(['email' => $user]);
 
                 if ($users) {
                     $user = current($users);
+                } else {
+                    $users = $this->userManager->getBy(['alias' => $user]);
+
+                    if ($users) {
+                        $user = current($users);
+                    }
                 }
             }
 

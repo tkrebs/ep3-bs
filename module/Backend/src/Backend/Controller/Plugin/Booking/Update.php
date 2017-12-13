@@ -58,12 +58,18 @@ class Update extends AbstractPlugin
                 if (preg_match('/\(([0-9]+)\)/', $newUser, $matches)) {
                     $user = $this->userManager->get($matches[1]);
                 } else {
-                    $users = $this->userManager->getBy(['alias' => $newUser]);
+                    $users = $this->userManager->getBy(['email' => $newUser]);
 
                     if ($users) {
                         $user = current($users);
                     } else {
-                        $user = null;
+                        $users = $this->userManager->getBy(['alias' => $newUser]);
+
+                        if ($users) {
+                            $user = current($users);
+                        } else {
+                            $user = null;
+                        }
                     }
                 }
 
