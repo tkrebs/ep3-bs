@@ -40,11 +40,12 @@ class DetermineFilters extends AbstractPlugin
                 // Translate keys
                 $key = str_replace(
                     array(
+                        strtolower($controller->t('Email')),
                         strtolower($controller->t('Active')),
                         strtolower($controller->t('IP')),
                         strtolower($controller->t('Created')),
                     ),
-                    array('last_activity', 'last_ip', 'created'),
+                    array('email', 'last_activity', 'last_ip', 'created'),
                     $key);
 
                 // Translate values
