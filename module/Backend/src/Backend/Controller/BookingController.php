@@ -124,6 +124,8 @@ class BookingController extends AbstractActionController
 
                 if ($this->params()->fromPost('bf-edit-user')) {
                     return $this->redirect()->toRoute('backend/user/edit', ['uid' => $savedBooking->get('uid')]);
+                } else if ($this->params()->fromPost('bf-edit-bills')) {
+                    return $this->redirect()->toRoute('backend/booking/bills', ['bid' => $savedBooking->get('bid')]);
                 } else {
                     return $this->redirect()->toRoute('frontend');
                 }

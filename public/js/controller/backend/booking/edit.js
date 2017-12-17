@@ -27,6 +27,21 @@
 
         updateForm();
 
+        /* Exclusive edit fields */
+
+        var $editUser = $('#bf input[name="bf-edit-user"]');
+        var $editBills = $('#bf input[name="bf-edit-bills"]');
+
+        if ($editUser.length && $editBills.length) {
+            $editUser.on('change', function() {
+                $editBills.prop('checked', false);
+            });
+
+            $editBills.on('change', function() {
+                $editUser.prop('checked', false);
+            });
+        }
+
         /* Enable form on submit */
 
         var formSubmit = $("#bf-submit");

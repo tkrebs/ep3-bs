@@ -189,6 +189,7 @@ return array(
     'Number of players' => 'Anzahl Spieler',
     'Booked to' => 'Gebucht auf',
     'Edit user once saved' => 'Benutzer anschließend bearbeiten',
+    'Edit booking bills once saved' => 'Rechnung anschließend bearbeiten',
 
     'Date (Start)' => 'Datum (Start)',
     'Date (End)' => 'Datum (Ende)',

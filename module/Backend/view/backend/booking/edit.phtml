@@ -61,9 +61,17 @@ $this->setup(array(
                         </div>
                     <?php elseif ($this->sessionUser->can('admin.user')): ?>
                         <div style="margin-top: 8px;">
-                            <label class="small-text gray">
-                                <input type="checkbox" name="bf-edit-user"> <?= $this->t('Edit user once saved') ?>
-                            </label>
+                            <div>
+                                <label class="small-text gray">
+                                    <input type="checkbox" name="bf-edit-user"> <?= $this->t('Edit user once saved') ?>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="small-text gray">
+                                    <input type="checkbox" name="bf-edit-bills"> <?= $this->t('Edit booking bills once saved') ?>
+                                </label>
+                            </div>
                         </div>
                     <?php endif; ?>
                 </div>
