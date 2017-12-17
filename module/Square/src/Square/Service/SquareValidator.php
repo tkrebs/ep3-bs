@@ -150,6 +150,10 @@ class SquareValidator extends AbstractService
         if ($timeBlockBookable) {
             $timeBlockRequested = $timeEnd->getTimestamp() - $timeStart->getTimestamp();
 
+            if ($timeBlockRequested < $timeBlockBookable) {
+                $timeEnd->modify('+' . ($timeBlockBookable - $timeBlockRequested) . ' seconds');
+            }
+
             $timeBlockDays = $timeEnd->format('z') - $timeStart->format('z');
 
             if ($timeBlockDays > 0) {
