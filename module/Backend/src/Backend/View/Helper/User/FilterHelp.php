@@ -18,7 +18,7 @@ class FilterHelp extends AbstractHelper
         return sprintf('<div><a href="#" class="unlined gray usf-filter-snippet"><code>(%s %s %s)</code></a></div>',
             strtolower($view->t($key)),
             $operator,
-            strtolower($view->t($value)));
+            mb_strtolower($view->t($value)));
     }
 
 }
