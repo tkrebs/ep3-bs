@@ -1,5 +1,7 @@
 <?php
 
+$this->headScript()->appendFile($this->basePath('js/controller/backend/booking/index.search.min.js'));
+
 if (! ($this->dateStart || $this->dateEnd)) {
     $this->dateStart = new DateTime();
     $this->dateEnd = new DateTime();
@@ -36,10 +38,48 @@ if (! ($this->dateStart || $this->dateEnd)) {
                     </div>
                 </td>
 
+                <td>
+                    <div class="default-form-label-top gray">
+                        <label for="bs-filter"><?= $this->t('Filter') ?>:</label>
+                    </div>
+
+                    <input type="text" name="search" id="bs-filter" value="<?= $this->search ?>" style="width: 160px">
+
+                    <a href="#" id="bs-filters-help" class="unlined gray">
+                        <i class="symbolic symbolic-info symbol-shifted"></i>
+                    </a>
+                </td>
+
                 <td style="vertical-align: bottom;">
                     <input type="submit" value="<?= $this->t('Search') ?>" class="default-button">
                 </td>
             </tr>
         </table>
     </form>
+
+    <div id="bs-filters-help-box" class="sandbox" style="display: none; margin: 26px auto 0px auto;">
+        <div class="sandbox-arrow" style="right: 82px"></div>
+
+        <p><?= $this->t('You can use filters like these to narrow your search:') ?></p>
+
+        <?= $this->backendUserFilterHelp('User ID', '=', '1', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Square ID', '=', '1', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Single', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Subscription', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Status', '=', 'Cancelled', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Billing status', '=', 'Pending', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Billing status', '=', 'Paid', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Billing status', '=', 'Cancelled', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Billing status', '=', 'Uncollectable', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Billing status', '=', '[custom]', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Visibility', '=', 'Public', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Visibility', '=', 'Private', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Quantity', '>', '2', 'bs-filter-snippet') ?>
+        <?= $this->backendUserFilterHelp('Created', '<', new DateTime(), 'bs-filter-snippet') ?>
+
+        <p style="margin-top: 16px;">
+            <?= $this->t('You can also combine a search term and multiple filters like this:') ?><br>
+            <code>(... = ...) (... > ...)</code>
+        </p>
+    </div>
 </div>

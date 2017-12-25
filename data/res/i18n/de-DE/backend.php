@@ -125,6 +125,10 @@ return array(
     'You can also combine a search term and multiple filters like this:'
         => 'Sie können Suchbegriff und Filter auch kombinieren:',
 
+    'User ID' => 'Benutzer ID',
+    'Square ID' => 'Platz ID',
+    '[custom]' => '[eigene]',
+
     'Users total' => 'Benutzer insgesamt',
     'Placeholders total' => 'Platzhalter insgesamt',
 

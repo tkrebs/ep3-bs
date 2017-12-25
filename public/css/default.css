@@ -410,6 +410,7 @@ a.squarebox-primary-close-link:hover {
 p.symbolic { display: block; }
 
 .symbolic-tag { background-position: left top; }
+.symbol-shifted { position: relative; left: 4px; top: 4px; }
 
 .message { margin-bottom: 16px; }
 .message:last-child { margin-bottom: 0; }

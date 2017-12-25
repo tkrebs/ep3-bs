@@ -78,4 +78,7 @@ return array(
     'Player' => 'Spieler',
     'Players' => 'Spieler',
 
+    'Visibility' => 'Sichtbarkeit',
+    'Quantity' => 'Anzahl',
+
 );

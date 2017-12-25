@@ -32,11 +32,15 @@ class DetermineFilters extends AbstractPlugin
                 // Translate keys
                 $key = str_replace(
                     array(
+                        str_replace(' ', '_', strtolower($controller->t('User ID'))),
                         strtolower($controller->t('User')),
-                        strtolower($controller->option('subject.square.type')),
+                        str_replace(' ', '_', strtolower($controller->t('Square ID'))),
+                        str_replace(' ', '_', strtolower($controller->t('Billing status'))),
+                        strtolower($controller->t('Visibility')),
+                        strtolower($controller->t('Quantity')),
                         strtolower($controller->t('Created')),
                     ),
-                    array('user', 'sid', 'created'),
+                    array('uid', 'uid', 'sid', 'status_billing', 'visibility', 'quantity', 'created'),
                     $key);
 
                 // Translate values
@@ -44,8 +48,14 @@ class DetermineFilters extends AbstractPlugin
                     array(
                         strtolower($controller->t('Single')),
                         strtolower($controller->t('Subscription')),
-                        strtolower($controller->t('Cancelled'))),
-                    array('single', 'subscription', 'cancelled'),
+                        strtolower($controller->t('Cancelled')),
+                        strtolower($controller->t('Pending')),
+                        strtolower($controller->t('Paid')),
+                        strtolower($controller->t('Uncollectable')),
+                        strtolower($controller->t('Public')),
+                        strtolower($controller->t('private')),
+                        ),
+                    array('single', 'subscription', 'cancelled', 'pending', 'paid', 'uncollectable', 'public', 'private'),
                     $value);
 
                 // Transform dates
