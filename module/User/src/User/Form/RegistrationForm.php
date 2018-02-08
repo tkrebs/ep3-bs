@@ -5,7 +5,7 @@ namespace User\Form;
 use Base\Manager\OptionManager;
 use User\Entity\User;
 use User\Manager\UserManager;
-use Zend\Crypt\BlockCipher;
+use Zend\Crypt\Password\Bcrypt;
 use Zend\Form\Form;
 use Zend\InputFilter\Factory;
 
@@ -246,16 +246,19 @@ class RegistrationForm extends Form
             ),
         ));
 
-        /* Add AES encrypted timestamp for security */
+        /* Add weak CSRF protection */
 
-        $blockCipher = BlockCipher::factory('mcrypt', array('algo' => 'aes'));
-        $blockCipher->setKey('A balrog, a demon of the ancient world. Its foe is beyond any of you, RUN!');
+        $time = time();
+
+        $bcrypt = new Bcrypt();
+        $bcrypt->setCost(6);
+        $bcrypt->setSalt(php_uname());
 
         $this->add(array(
             'name' => 'rf-csrf',
             'type' => 'Hidden',
             'attributes' => array(
-                'value' => $blockCipher->encrypt(time()),
+                'value' => $time . $bcrypt->create($time),
             ),
         ));
 
@@ -650,15 +653,18 @@ class RegistrationForm extends Form
                     array(
                         'name' => 'Callback',
                         'options' => array(
-                            'callback' => function($value) use ($blockCipher) {
-                                $time = $blockCipher->decrypt($value);
+                            'callback' => function($value) use ($bcrypt) {
+                                $time = time();
 
-                                if (! is_numeric($time)) {
+                                $formTime = substr($value, 0, strlen($time));
+                                $formTimeHash = substr($value, strlen($time));
+
+                                if ($formTimeHash != $bcrypt->create($formTime)) {
                                     return false;
                                 }
 
                                 // Allow form submission after five seconds and until one hour
-                                if (time() - $time < 5 || time() - $time > 60 * 60) {
+                                if (time() - $formTime < 5 || time() - $formTime > 60 * 60) {
                                     return false;
                                 } else {
                                     return true;
