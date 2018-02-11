@@ -19,7 +19,7 @@ yourself.
 Documentation and installation instructions can be found in the following directory:
 
 ```
-/data/docs/
+data/docs/
 ```
 
 ## Architecture
@@ -41,7 +41,9 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (July, 2016) is 1.6.
+The current version (February, 2018) is 1.6.2.
+
+Version 1.6.2 changed the configuration behaviour and requires some manual changes (see data/docs/update.txt). Otherwise, the update will not work.
 
 Version 1.6 introduced some requested features and fixed quite some bugs. It also introduced better support for custom translations and modules.
 

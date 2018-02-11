@@ -6,30 +6,38 @@ continue with installation.
 
 0. Install dependencies via composer
 
+
+
 --- Installation ---
 
 1. Setup local configuration
-   - rename /config/autoload/local.php.dist to local.php
+   - rename config/init.php.dist to init.php
+   - edit init.php
+
+   - rename config/autoload/local.php.dist to local.php
    - edit local.php
 
 2. Enable (recursively) UNIX write permission for
-   - /data/cache/
-   - /data/log/
-   - /data/session/
-   - /public/docs-client/upload/
-   - /public/imgs-client/upload/
+   - data/cache/
+   - data/log/
+   - data/session/
+   - public/docs-client/upload/
+   - public/imgs-client/upload/
 
 3. Setup the database via setup.php
 
 4. Delete setup tool
-   - /public/setup.php
+   - public/setup.php
 
-5. Customize public files (optional)
+5. Delete any files in the following directory
+   - data/cache/
+
+6. Customize public files (optional)
    - css-client/default.css (custom color scheme)
    - imgs-client/icons/fav.ico
    - imgs-client/layout/logo.png (75x75)
 
-6. Have fun! :)
+7. Have fun! :)
 
 
 

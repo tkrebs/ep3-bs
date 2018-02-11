@@ -1,18 +1,17 @@
 <?php
 /**
- * Application configuration file
+ * Application configuration bootstrap
  */
 
 /**
  * Development mode
  *
- * If true, errors are displayed.
- * If false, errors are silently logged to an error file.
- *
- * If true, certain caches will be enabled.
+ * Should be controlled via TAG constant in the init.php
  */
-if (! defined('EP3_BS_DEV')) {
-    define('EP3_BS_DEV', false);
+if (defined('EP3_BS_DEV_TAG')) {
+    define('EP3_BS_DEV', EP3_BS_DEV_TAG);
+} else {
+    define('EP3_BS_DEV', true);
 }
 
 /**
@@ -40,10 +39,10 @@ return array(
         /**
          * Custom modules
          *
-         * Place your own, custom or (third party) extra modules in the /modulex directory
+         * Place your own, custom or third party modules in the modulex/ directory
          * and they will be loaded automatically.
          */
-    ), include 'modules.php'),
+    ), include 'modulexes.php'),
 
     /**
      * Some further internal settings,

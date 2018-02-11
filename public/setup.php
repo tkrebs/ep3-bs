@@ -52,13 +52,12 @@ if (! is_readable($autoloader)) {
 require $autoloader;
 
 /**
- * Load a custom init script if available.
+ * Initialize our PHP environment.
  */
 $init = 'config/init.php';
 
-if (is_readable($init)) {
-
-    require $init;
+if (! is_readable($init)) {
+    exit('Please rename <b>config/init.php.dist</b> to <b>config/init.php</b> and edit its options accordingly');
 }
 
 /**

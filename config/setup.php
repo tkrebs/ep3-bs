@@ -1,6 +1,6 @@
 <?php
 /**
- * Setup configuration file
+ * Setup configuration bootstrap
  *
  * Don't worry about this file. It is irrelevant for the actual system
  * and is only used for the first setup.
@@ -9,11 +9,9 @@
 /**
  * Development mode
  *
- * Should always be true in this context!
+ * Should always be enabled during setup
  */
-if (! defined('EP3_BS_DEV')) {
-    define('EP3_BS_DEV', true);
-}
+define('EP3_BS_DEV', true);
 
 /**
  * Setup configuration array

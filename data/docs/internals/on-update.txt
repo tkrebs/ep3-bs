@@ -1,5 +1,3 @@
-On new release:
-
 - Update features
 - Update documentation
 

@@ -2,21 +2,41 @@ First backup your database and project directory!
 
 
 
+--- Update to 1.6.2 ---
+
+There have been some internal changes to the configuration directory. Replace the following files:
+
+- config/init.php.dist
+- config/init.php
+  (and edit it according to your needs; if it does not yet exist, create it by copying init.php.dist)
+
+- data/docs/*
+
+- public/index.php
+
+- vendor/*
+  (alternatively, you may update dependencies via composer after replacing the composer.json)
+
+- All single files in the project root directory
+
+
+
 --- Update to 1.6 ---
 
 Replace the following directories and files with the new ones:
 
-- /config/application.php
-- /config/modules.php
-- /config/setup.php
+- config/application.php
+- config/modules.php
+- config/setup.php
 
-- /data/res/ (if you have custom translations you *can* now place them in /data/res/i18n-custom/ )
+- data/res/
+  (if you have custom translations you *can* now place them in data/res/i18n-custom/)
 
-- /module/
-- /modulex/
+- module/
+- modulex/
 
-- /public/js/
-- /public/index.php
+- public/js/
+- public/index.php
 
 
 
@@ -24,19 +44,20 @@ Replace the following directories and files with the new ones:
 
 Replace the following directories and files with the new ones:
 
-- /data/res/
+- data/res/
 
-- /module/
+- module/
 
-- /public/css/
-- /public/docs/
-- /public/imgs/
-- /public/js/
-- /public/misc/
-- /public/vendor/
+- public/css/
+- public/docs/
+- public/imgs/
+- public/js/
+- public/misc/
+- public/vendor/
 - index.php
 
-- /vendor/ (alternatively, you may update dependencies via composer after replacing the composer.json)
+- vendor/
+  (alternatively, you may update dependencies via composer after replacing the composer.json)
 
 - All single files in the project root directory
 
@@ -46,7 +67,7 @@ Replace the following directories and files with the new ones:
 
 After every update you should delete all files within the
 
-- /data/cache/
+- data/cache/
 
 directory.
 

@@ -1,5 +1,3 @@
-Notes on the architecture:
-
 - index.php changes working directory, loads and registers the standard autoloader and invokes the application init()
   method with the application's global config (which essentially determines which modules to load,
   where to find them and which other global config files should be loaded and merged with each module config)
