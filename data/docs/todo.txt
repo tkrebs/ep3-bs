@@ -6,6 +6,8 @@
 - Introduce testing via PHPUnit/Selenium
 - Introduce maintenance cronjob
 
+- Implement i18n aware date validators
+
 - Occasionally clean session directory
 
 - Advanced statistics module (with billing reports)
