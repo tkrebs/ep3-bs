@@ -67,6 +67,8 @@ if (! is_readable($init)) {
     exit('Please rename <b>config/init.php.dist</b> to <b>config/init.php</b> and edit its options according to your needs');
 }
 
+require $init;
+
 /**
  * Initialize our application with the provided configuration file and ruuuuun!
  */
