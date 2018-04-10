@@ -24,6 +24,7 @@ return array(
         'pw' => '?', // for 'smtp' type only, otherwise remove or leave as is
 
         'port' => 'auto', // for 'smtp' type only, otherwise remove or leave as is
+        'auth' => 'plain', // for 'smtp' type only, change this to 'login' if you have problems with SMTP authentication
     ),
     'i18n' => array(
         'locale' => 'de-DE',
