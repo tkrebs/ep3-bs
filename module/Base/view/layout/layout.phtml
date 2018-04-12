@@ -50,7 +50,7 @@
                         <span class="light-gray"><?= $this->t('Our website') ?></span><br>
                         <span class="large-text">
                             <a href="<?= $this->option('client.website') ?>" target="_blank" class="unlined white">
-                                <?= rtrim(str_replace(['http://', 'www.'], '', $this->option('client.website')), '/') ?>
+                                <?= $this->shortUrl($this->option('client.website')) ?>
                             </a>
                         </span>
                     </p>

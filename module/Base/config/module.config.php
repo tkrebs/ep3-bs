@@ -76,6 +76,7 @@ return array(
             /* Layout */
 
             'HeaderAttributes' => 'Base\View\Helper\Layout\HeaderAttributes',
+            'ShortUrl' => 'Base\View\Helper\Layout\ShortUrl',
         ),
 
         'factories' => array(
