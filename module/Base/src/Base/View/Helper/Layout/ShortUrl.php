@@ -8,11 +8,15 @@ use Zend\View\Helper\AbstractHelper;
 class ShortUrl extends AbstractHelper
 {
 
-    public function __invoke($url)
+    public function __invoke($url = null)
     {
-        $url = UriFactory::factory($url);
+        if ($url) {
+            $url = UriFactory::factory($url);
 
-        return $url->getHost();
+            return $url->getHost();
+        } else {
+            return $url;
+        }
     }
 
 }
