@@ -1,5 +1,34 @@
 First backup your database and project directory!
 
+--- Updates in general ---
+
+After every update you should delete all files within the
+
+- data/cache/
+
+directory.
+
+If you haven't made any changes to the core files, your configuration, customizations and data should stay intact
+after the update. Otherwise, it's clearly your fault! :)
+
+
+
+--- Update to 1.6.3 ---
+
+Replace the following directories:
+
+- data/docs/
+- data/res/i18n/de-DE/
+
+- module/
+
+- public/js/jquery/
+
+- vendor/
+  (alternatively, you may update dependencies via composer after replacing the composer.json)
+
+- All single files in the project root directory
+
 
 
 --- Update to 1.6.2 ---
@@ -60,16 +89,3 @@ Replace the following directories and files with the new ones:
   (alternatively, you may update dependencies via composer after replacing the composer.json)
 
 - All single files in the project root directory
-
-
-
---- Updates in general ---
-
-After every update you should delete all files within the
-
-- data/cache/
-
-directory.
-
-If you haven't made any changes to the core files, your configuration, customizations and data should stay intact
-after the update. Otherwise, it's clearly your fault! :)

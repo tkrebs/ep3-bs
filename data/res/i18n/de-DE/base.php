@@ -69,6 +69,7 @@ return array(
     'Book by phone' => 'Telefonische Buchung',
 
     'Imprint' => 'Impressum',
+    'Privacy' => 'Datenschutz',
 
     'You need to activate %sJavaScript%s in you web browser to proceed. If in doubt, switch to another web browser (e.g. Mozilla Firefox).'
         => 'Sie müssen %sJavaScript%s in Ihrem Webbrowser aktivieren, um fortzufahren. %s Im Zweifel benutzen Sie bitte einen anderen Webbrowser (z.B. Mozilla Firefox).',

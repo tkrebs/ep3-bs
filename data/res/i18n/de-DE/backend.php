@@ -254,7 +254,9 @@ return array(
     'The address of your website\'s contact page.<br>Displayed in the header, for example.'
         => 'Die Internetadresse Ihrer Kontaktseite.<br>Erscheint z.B. ganz oben in der Kopfleiste.',
     'Your imprint page' => 'Ihr Impressum',
+    'Your privacy policy page' => 'Ihre Datenschutzerklärung',
     'The address of your website\'s imprint page.' => 'Die Internetadresse Ihres Impressums.',
+    'The address of your website\'s privacy policy page.' => 'Die Internetadresse Ihrer Datenschutzerklärung.',
     'Name of the system' => 'Name des Systems',
     'The system presents itself under this name.<br>Displayed next to the logo, for example.'
         => 'Unter diesem Namen präsentiert sich das System.<br>Erscheint z.B. ganz oben neben dem Logo.',

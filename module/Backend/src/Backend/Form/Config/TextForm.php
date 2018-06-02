@@ -17,6 +17,7 @@ class TextForm extends Form
         'client.website' => array('Your website', 'The address of your website.<br>Displayed in the header, for example.'),
         'client.website.contact' => array('Your contact page', 'The address of your website\'s contact page.<br>Displayed in the header, for example.'),
         'client.website.imprint' => array('Your imprint page', 'The address of your website\'s imprint page.'),
+        'client.website.privacy' => array('Your privacy policy page', 'The address of your website\'s privacy policy page.'),
         'service.name.full' => array('Name of the system', 'The system presents itself under this name.<br>Displayed next to the logo, for example.'),
         'service.name.short' => array('System abbreviation', 'Short form or abbreviation of the system name.<br>Displayed in emails, for example.'),
         'service.meta.description' => array('Description of your service', 'One or two short sentences recommended.'),
