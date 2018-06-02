@@ -187,6 +187,9 @@ class RegistrationForm extends Form
             ),
         ));
 
+        /*
+         * Optional birthdate input not allowed anymore by EU GDPR
+         *
         $this->add(array(
             'name' => 'rf-birthdate',
             'type' => 'Text',
@@ -196,9 +199,10 @@ class RegistrationForm extends Form
             ),
             'options' => array(
                 'label' => 'Birthday',
-                'notes' => 'This is optional',
+                'notes' => 'We need this, because ...',
             ),
         ));
+        */
 
         /* Add business terms and privacy policy if configured */
 
@@ -579,12 +583,14 @@ class RegistrationForm extends Form
                     ),
                 ),
             ),
+            /*
             'rf-birthdate' => array(
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),
             ),
+            */
             'rf-terms' => array(
                 'required' => false,
                 'validators' => array(
