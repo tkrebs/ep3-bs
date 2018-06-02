@@ -5,7 +5,6 @@
 /vendor/
 
 composer.phar
-composer.lock
 
 Desktop.ini
 Thumbs.db
