@@ -254,8 +254,6 @@ return array(
         => 'Nom court ou Abréviation pour le système.<br>Affiché dans les E-Mails, par exemple.',
     'Description of your service' => 'Description de vos services',
     'One or two short sentences recommended.' => 'Une ou deux phrases courtes (recommandé).',
-    'Keywords for your service' => 'Mots clés pour définir vos services',
-    '10-20 keywords recommended.' => '10 à 20 mots clés recommandés.',
     'Notation of your "squares"' => 'Nom pour définir vos "Ressources" (terrains, salles...)',
     'Notation of your "players"' => 'Nom pour définir vos "Utilisateurs" (joueurs, intervenants...)',
     'Name of your facility' => 'Nom de votre établissement',

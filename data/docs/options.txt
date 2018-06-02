@@ -23,7 +23,6 @@ Options:
 - service.calendar.day-exceptions           (optional)
 - service.website                           URL
 - service.meta.description                  (optional)
-- service.meta.keywords                     (optional)
 - service.maintenance                       (optional) true|false
 - service.maintenance.message               (optional)
 - service.branding                          (optional) true|false

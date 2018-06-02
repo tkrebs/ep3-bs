@@ -21,7 +21,6 @@ class TextForm extends Form
         'service.name.full' => array('Name of the system', 'The system presents itself under this name.<br>Displayed next to the logo, for example.'),
         'service.name.short' => array('System abbreviation', 'Short form or abbreviation of the system name.<br>Displayed in emails, for example.'),
         'service.meta.description' => array('Description of your service', 'One or two short sentences recommended.'),
-        'service.meta.keywords' => array('Keywords for your service', '10-20 keywords recommended.'),
         'subject.square.type' => array('Notation of your "squares"', 'Singular'),
         'subject.square.type.plural' => array('Notation of your "squares"', 'Plural'),
         'subject.square.unit' => array('Notation of your "players"', 'Singular'),

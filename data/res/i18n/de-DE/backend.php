@@ -265,8 +265,6 @@ return array(
         => 'Kurzform, Abkürzung oder Akronym des System-Namens.<br>Erscheint z.B. in der Betreffzeile von E-Mails.',
     'Description of your service' => 'Beschreibung Ihres Angebotes',
     'One or two short sentences recommended.' => 'Am besten ein bis zwei Sätze über Ihr Angebot.',
-    'Keywords for your service' => 'Stichworte Ihres Angebotes',
-    '10-20 keywords recommended.' => 'Am besten 10 bis 20 Stichworte über Ihr Angebot.',
     'Notation of your "squares"' => 'Bezeichnung Ihrer "Plätze"',
     'Notation of your "players"' => 'Bezeichnung Ihrer "Spieler"',
     'Name of your facility' => 'Name Ihrer Anlage',

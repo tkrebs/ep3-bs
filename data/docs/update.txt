@@ -18,7 +18,7 @@ after the update. Otherwise, it's clearly your fault! :)
 Replace the following directories:
 
 - data/docs/
-- data/res/i18n/de-DE/
+- data/res/i18n/
 
 - module/
 
