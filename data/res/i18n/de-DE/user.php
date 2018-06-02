@@ -228,11 +228,7 @@ return array(
     'Account data' => 'Zugangsdaten',
     'Personal data' => 'Persönliche Angaben',
 
-    'Data privacy' => 'Datenschutz',
-    'Your data will be handled trustfully and responsible.' => 'Ihre Daten werden vertrauensvoll und verantwortungsbewusst behandelt.',
-    'It will only be used and processed for the purpose of our service.' => 'Sie werden ausschließlich für den Betrieb unseres Angebotes verwendet.',
-    'It will neither be shared with third parties nor displayed publicly without your permission.'
-        => 'Sie werden ohne Ihre Zustimmung nicht an Dritte weitergegeben oder öffentlich angezeigt.',
+    'I have read and accept the %1$sprivacy policy%2$s' => 'Ich habe die %1$sDatenschutzerklärung%2$s gelesen und akzeptiere diese',
 
     'please inform us about changes, so we can update this data' => 'bitte informieren Sie uns über Änderungen',
 

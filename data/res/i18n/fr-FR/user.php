@@ -228,12 +228,6 @@ return array(
     'Account data' => 'Données du compte',
     'Personal data' => 'Données Personnelles',
 
-    'Data privacy' => 'confidentialité',
-    'Your data will be handled trustfully and responsible.' => 'Vos données seront traitées avec confiance et responsabilité.',
-    'It will only be used and processed for the purpose of our service.' => 'Ces données ne seront utilisées que dans le but de notre service.',
-    'It will neither be shared with third parties nor displayed publicly without your permission.'
-        => 'Elles ne seront ni partagées avec des tiers, ni affichées en public sans votre permission.',
-
     'please inform us about changes, so we can update this data' => 'Veuillez nous informer de tout changement, afin que nous tenions le système à jours',
 
     'Note: You need to activate your account again if you update your email address.'

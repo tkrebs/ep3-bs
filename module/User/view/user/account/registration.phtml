@@ -160,6 +160,14 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/registration
                         }
                     }
 
+                    if (! $this->option('service.user.registration.privacy.file')) {
+                        if ($this->option('client.website.privacy')) {
+                            $html .= sprintf('<div><input type="checkbox" required> %s</div>',
+                                sprintf($this->t('I have read and accept the %1$sprivacy policy%2$s'),
+                                    '<a href="' . $this->option('client.website.privacy') . '" target="_blank">', '</a>'));
+                        }
+                    }
+
                     if ($html) {
                         echo '<div class="left-text sandbox" style="margin-bottom: 16px; display: inline-block;">';
                         echo $html;
@@ -172,18 +180,6 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/registration
                 <!-- Submit -->
 
                 <?= $this->formElement($form->get('rf-submit')) ?>
-
-                <?php if (! $this->option('service.user.registration.privacy.file')): ?>
-                    <p class="gray small-text" style="margin-top: 16px;">
-                        <em>
-                            <strong><?= $this->t('Data privacy') ?>:</strong>
-
-                            <?= $this->t('Your data will be handled trustfully and responsible.') ?>
-                            <?= $this->t('It will only be used and processed for the purpose of our service.') ?>
-                            <?= $this->t('It will neither be shared with third parties nor displayed publicly without your permission.') ?>
-                        </em>
-                    </p>
-                <?php endif; ?>
             </div>
 
             <?= $this->form()->closeTag() ?>
