@@ -6,7 +6,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/frontend/index.mi
 
 <div id="calendar-toolbar" class="no-print">
     <div id="calendar-toolbar-datepicker" class="panel">
-        <?= $this->partial('frontend/index/datepicker.phtml', ['dateStart' => $this->dateStart, 'dateNow' => $this->dateNow]) ?>
+        <?= $this->partial('frontend/index/datepicker.phtml', ['dateStart' => $this->dateStart, 'dateNow' => $this->dateNow, 'squaresFilter' => $this->squaresFilter]) ?>
     </div>
 
     <div id="calendar-toolbar-userpanel" class="panel">

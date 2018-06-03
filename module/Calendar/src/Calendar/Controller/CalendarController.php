@@ -75,6 +75,7 @@ class CalendarController extends AbstractActionController
 
         $squares = $this->calendarDetermineSquares();
         $squaresCount = count($squares);
+        $squaresFilter = $this->params()->fromQuery('squares');
 
         $reservations = $reservationManager->getInRange($dateStart, $dateEnd);
         $bookings = $bookingManager->getByReservations($reservations);
@@ -121,6 +122,7 @@ class CalendarController extends AbstractActionController
             'dayExceptionsExceptions' => $dayExceptionsExceptions,
             'squares' => $squares,
             'squaresCount' => $squaresCount,
+            'squaresFilter' => $squaresFilter,
             'reservations' => $reservations,
             'events' => $events,
             'user' => $user,

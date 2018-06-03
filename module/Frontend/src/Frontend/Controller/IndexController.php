@@ -15,6 +15,7 @@ class IndexController extends AbstractActionController
 
         $dateStart = $calendarViewModel->getVariable('dateStart');
         $dateNow = $calendarViewModel->getVariable('dateNow');
+        $squaresFilter = $calendarViewModel->getVariable('squaresFilter');
         $user = $calendarViewModel->getVariable('user');
 
         $this->redirectBack()->setOrigin('frontend');
@@ -22,6 +23,7 @@ class IndexController extends AbstractActionController
         $viewModel = new ViewModel(array(
             'dateStart' => $dateStart,
             'dateNow' => $dateNow,
+            'squaresFilter' => $squaresFilter,
             'user' => $user,
         ));
 

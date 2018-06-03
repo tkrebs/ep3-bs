@@ -3,7 +3,11 @@
 $dateStartClone = clone $this->dateStart;
 $dateStartClone->modify('-1 day');
 
-$previousDayUrl = $this->url('frontend', [], ['query' => ['date' => $dateStartClone->format('Y-m-d')]]);
+$previousDayUrlQuery = ['date' => $dateStartClone->format('Y-m-d')];
+if ($this->squaresFilter) {
+    $previousDayUrlQuery['squares'] = $this->squaresFilter;
+}
+$previousDayUrl = $this->url('frontend', [], ['query' => $previousDayUrlQuery]);
 
 $dateStartClone->modify('+1 day');
 
@@ -11,9 +15,17 @@ $currentDay = $this->dateFormat($dateStartClone, IntlDateFormatter::MEDIUM);
 
 $dateStartClone->modify('+1 day');
 
-$nextDayUrl = $this->url('frontend', [], ['query' => ['date' => $dateStartClone->format('Y-m-d')]]);
+$nextDayUrlQuery = ['date' => $dateStartClone->format('Y-m-d')];
+if ($this->squaresFilter) {
+    $nextDayUrlQuery['squares'] = $this->squaresFilter;
+}
+$nextDayUrl = $this->url('frontend', [], ['query' => $nextDayUrlQuery]);
 
-$todayUrl = $this->url('frontend', [], ['query' => ['date' => $this->dateNow->format('Y-m-d')]]);
+$todayUrlQuery = ['date' => $this->dateNow->format('Y-m-d')];
+if ($this->squaresFilter) {
+    $todayUrlQuery['squares'] = $this->squaresFilter;
+}
+$todayUrl = $this->url('frontend', [], ['query' => $todayUrlQuery]);
 
 ?>
 
@@ -29,6 +41,15 @@ $todayUrl = $this->url('frontend', [], ['query' => ['date' => $this->dateNow->fo
                     <input type="text" name="date" id="c-date" value="<?= $currentDay ?>"
                         class="inline-label-container datepicker datepicker-autosubmit" style="padding-left: 28px; width: 96px;">
                 </div>
+
+                <?php
+
+                if ($this->squaresFilter) {
+                    printf('<input type="hidden" name="squares" value="%s">',
+                        $this->squaresFilter);
+                }
+
+                ?>
 
                 <input type="submit" value="<?= $this->t('Show') ?>" id="calendar-toolbar-datepicker-submit" class="default-button">
             </form>
