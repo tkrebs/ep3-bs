@@ -23,6 +23,24 @@ class CellLogic extends AbstractHelper
             }
         }
 
+        $bookingRange = $square->get('range_book');
+
+        if ($bookingRange) {
+            $bookingRangeDate = $square->getExtra('range_book_date');
+
+            if (! $bookingRangeDate) {
+                $bookingRangeDate = clone $now;
+                $bookingRangeDate->modify('+' . $bookingRange . ' seconds');
+                $square->setExtra('range_book_date', $bookingRangeDate);
+            }
+
+            if ($walkingDate > $bookingRangeDate) {
+                if (! ($user && $user->can('calendar.see-past'))) {
+                    return $view->calendarCell($this->view->t('Too far'), 'cc-over');
+                }
+            }
+        }
+
         if ($walkingTime < $square->needExtra('time_start_sec') || $walkingTime >= $square->needExtra('time_end_sec')) {
             return $view->calendarCell($this->view->t('Closed'), 'cc-over');
         }

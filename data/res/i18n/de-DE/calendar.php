@@ -9,6 +9,7 @@ return array(
     'Afternoon' => 'Nachmittags',
 
     'Past' => 'Vorbei',
+    'Too far' => 'Zu fern',
     'Closed' => 'Geschlossen',
     'Free' => 'Frei',
     'Still free' => 'Noch frei',
