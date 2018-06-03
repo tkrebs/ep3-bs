@@ -39,15 +39,14 @@ class AccountController extends AbstractActionController
                             break;
                         case 'disabled':
                             $mailMessage .= $this->t('Unfortunately, your account has not yet been activated. If you did not receive an activation email yet, you can request a new one here:') . "\r\n\r\n";
-                            $mailMessage .= rtrim($this->option('service.website', false), '/') . $this->url()->fromRoute('user/activation-resend');
+                            $mailMessage .= $this->url()->fromRoute('user/activation-resend', [], ['force_canonical' => true]);
 
                             break;
                         case 'enabled':
                             $resetCode = base64_encode( substr($user->need('pw'), 16, 8) );
 
                             $mailMessage .= $this->t('Simply visit the following website to type your new password:') . "\r\n\r\n";
-                            $mailMessage .= rtrim($this->option('service.website', false), '/') .
-                                $this->url()->fromRoute('user/password-reset', [], ['query' => ['id' => $user->need('uid'), 'code' => $resetCode]]);
+                            $mailMessage .= $this->url()->fromRoute('user/password-reset', [], ['query' => ['id' => $user->need('uid'), 'code' => $resetCode], 'force_canonical' => true]);
 
                             break;
                         case 'assist':
@@ -211,8 +210,7 @@ class AccountController extends AbstractActionController
                     /* Activation code is "created" hash */
 
                     $activationCode = urlencode( sha1($user->need('created')) );
-                    $activationLink = rtrim($this->option('service.website', false), '/')
-                        . $this->url()->fromRoute('user/activation', [], ['query' => ['id' => $user->need('uid'), 'code' => $activationCode]]);
+                    $activationLink = $this->url()->fromRoute('user/activation', [], ['query' => ['id' => $user->need('uid'), 'code' => $activationCode], 'force_canonical' => true]);
 
                     $subject = sprintf($this->t('Your registration to the %s %s'),
                         $this->option('client.name.short', false), $this->option('service.name.full', false));
@@ -306,8 +304,7 @@ class AccountController extends AbstractActionController
                             /* Activation code is "created" hash */
 
                             $activationCode = urlencode( sha1($user->need('created')) );
-                            $activationLink = rtrim($this->option('service.website', false), '/')
-                                . $this->url()->fromRoute('user/activation', [], ['query' => ['id' => $user->need('uid'), 'code' => $activationCode]]);
+                            $activationLink = $this->url()->fromRoute('user/activation', [], ['query' => ['id' => $user->need('uid'), 'code' => $activationCode], 'force_canonical' => true]);
 
                             $mailMessage .= sprintf($this->t("Before you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"),
                                 $this->option('subject.square.type.plural', false), $activationLink);
@@ -478,8 +475,7 @@ class AccountController extends AbstractActionController
                     /* Activation code is "created" hash */
 
                     $activationCode = urlencode( sha1($user->need('created')) );
-                    $activationLink = rtrim($this->option('service.website', false), '/')
-                        . $this->url()->fromRoute('user/activation', [], ['query' => ['id' => $user->need('uid'), 'code' => $activationCode]]);
+                    $activationLink = $this->url()->fromRoute('user/activation', [], ['query' => ['id' => $user->need('uid'), 'code' => $activationCode], 'force_canonical' => true]);
 
                     $subject = sprintf($this->t('New email address at %s %s'),
                         $this->option('client.name.short', false), $this->option('service.name.full', false));
