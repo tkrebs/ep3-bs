@@ -72,8 +72,13 @@ class DetermineFilters extends AbstractPlugin
                     break;
                 }
 
-                $filters[] = sprintf('%s %s "%s"', $key, $operator, $value);
                 $filterParts[] = array($key, $operator, $value);
+
+                if ($key == str_replace(' ', '_', strtolower($controller->t('Billing total')))) {
+                    continue;
+                }
+
+                $filters[] = sprintf('%s %s "%s"', $key, $operator, $value);
             }
         }
 

@@ -46,8 +46,10 @@ class BookingController extends AbstractActionController
                     $bookings = $bookingManager->getByReservations($reservations, $filters['filters']);
                 } else {
                     $bookings = $bookingManager->getBy($filters['filters'], null, $limit);
-                    $reservations = $reservationManager->getByBookings($bookings);
                 }
+
+                $bookings = $this->complexFilterBookings($bookings, $filters);
+                $reservations = $reservationManager->getByBookings($bookings);
 
                 $userManager->getByBookings($bookings);
             } catch (\RuntimeException $e) {
@@ -63,6 +65,35 @@ class BookingController extends AbstractActionController
             'dateEnd' => $dateEnd,
             'search' => $search,
         );
+    }
+
+    protected function complexFilterBookings($bookings, $filters)
+    {
+        $serviceManager = $this->getServiceLocator();
+
+        foreach ($filters['filterParts'] as $filterPart) {
+
+            // Filter for billing total
+            if ($filterPart[0] == str_replace(' ', '_', strtolower($this->t('Billing total')))) {
+                $bookingBillManager = $serviceManager->get('Booking\Manager\Booking\BillManager');
+                $bookingBillManager->getByBookings($bookings);
+
+                $bookings = array_filter($bookings, function(Booking $booking) use ($filterPart) {
+                    switch ($filterPart[1]) {
+                        case '=':
+                            return $booking->getExtra('bills_total') == (int) $filterPart[2];
+                        case '>':
+                            return $booking->getExtra('bills_total') > (int) $filterPart[2];
+                        case '<':
+                            return $booking->getExtra('bills_total') < (int) $filterPart[2];
+                        default:
+                            return false;
+                    }
+                });
+            }
+        }
+
+        return $bookings;
     }
 
     public function editAction()

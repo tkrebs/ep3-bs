@@ -190,6 +190,11 @@ class BillManager extends AbstractManager
 
             $bookingBills[$bill->need('bbid')] = $bill;
             $booking->setExtra('bills', $bookingBills);
+
+            // Calculate total
+            $bookingBillsTotal = $booking->getExtra('bills_total');
+            $bookingBillsTotal += $bill->get('price') / 100;
+            $booking->setExtra('bills_total', $bookingBillsTotal);
         }
 
         return $bills;

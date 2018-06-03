@@ -43,7 +43,7 @@ where you can find stable and (latest) development releases.
 
 The current version (June, 2018) is 1.6.3.
 
-Version 1.6.3 introduced some GDPR compliance based changes.
+Version 1.6.3 introduced some GDPR compliance based changes and requested features.
 
 Version 1.6.2 changed the configuration behaviour and requires some manual changes (see data/docs/update.txt). Otherwise, the update will not work.
 
