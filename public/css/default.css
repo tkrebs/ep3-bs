@@ -74,6 +74,13 @@ code {
     border-bottom: solid 1px #666;
 }
 
+@media (max-width: 1024px) {
+    #header {
+        height: auto;
+        min-height: 75px;
+    }
+}
+
 #label {
     position: absolute;
     left: 0; top: 0;
@@ -143,6 +150,42 @@ a#logo:active { top: 1px; }
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+}
+
+@media (max-width: 1024px) {
+    #topbar {
+        margin-top: 90px;
+        position: relative;
+        height: auto;
+        white-space: normal;
+    }
+
+    #topbar > div:not(#topbar-contact):not(#topbar-separator) {
+        display: inline-block !important;
+        margin: 16px 16px 0 24px;
+        float: none;
+    }
+
+    #topbar-separator {
+        display: none;
+    }
+}
+
+@media (max-width: 512px) {
+    #topbar {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    #topbar > div {
+        padding: 0 32px;
+        background: none;
+    }
+
+    #topbar-i18n {
+        position: absolute;
+        left: 0; top: 0;
+    }
 }
 
 #content {

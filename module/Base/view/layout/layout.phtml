@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="format-detection" content="telephone=no">
         <meta name="generator" content="<?= $this->option('service.branding.name') ?>">
         <meta name="publisher" content="<?= $this->option('client.name.full') ?>">
         <meta name="description" content="<?= $this->option('service.meta.description') ?>">
@@ -59,7 +60,9 @@
                     <p>
                         <span class="light-gray"><?= $this->t('Information about') ?></span><br>
                         <span class="large-text">
-                            <a href="<?= $this->url('service/info') ?>" class="unlined white"><?= $this->option('subject.type') ?></a>
+                            <a href="<?= $this->url('service/info') ?>" class="unlined white">
+                                <?= $this->option('subject.type') ?>
+                            </a>
                         </span>
                     </p>
                 </div>
@@ -67,7 +70,11 @@
                 <div id="topbar-phone" class="responsive-pass-4">
                     <p>
                         <span class="light-gray"><?= $this->t('Book by phone') ?></span><br>
-                        <span class="large-text"><?= $this->option('client.contact.phone') ?></span>
+                        <span class="large-text">
+                            <a href="tel:<?= $this->option('client.contact.phone') ?>" class="unlined white">
+                                <?= $this->option('client.contact.phone') ?>
+                            </a>
+                        </span>
                     </p>
                 </div>
 
