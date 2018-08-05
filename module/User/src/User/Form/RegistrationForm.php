@@ -256,7 +256,7 @@ class RegistrationForm extends Form
 
         $bcrypt = new Bcrypt();
         $bcrypt->setCost(6);
-        $bcrypt->setSalt(php_uname());
+        $bcrypt->setSalt(str_pad(php_uname(), 16, '!'));
 
         $this->add(array(
             'name' => 'rf-csrf',
