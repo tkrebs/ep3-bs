@@ -6,7 +6,7 @@
  * If true, errors are displayed.
  * If false, errors are silently logged into the error file.
  *
- * If true, certain caches will be enabled.
+ * If false, certain caches will be enabled.
  *
  * Should be true during initial testing and false when actually using the system.
  */
