@@ -19,7 +19,7 @@ if (! ($this->dateStart || $this->dateEnd)) {
 
                     <div class="inline-element">
                         <label for="date-start" class="inline-label symbolic symbolic-date"><span><?= $this->t('Date start') ?></span></label>
-                        <input type="text" name="date-start" id="date-start" value="<?= $this->dateFormat($this->dateStart, IntlDateFormatter::MEDIUM) ?>"
+                        <input type="text" name="date-start" id="date-start" value="<?= $this->dateStart->format($this->t('Y-m-d')) ?>"
                                class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">
                     </div>
                 </td>
@@ -31,7 +31,7 @@ if (! ($this->dateStart || $this->dateEnd)) {
                 <td style="vertical-align: bottom;">
                     <div class="inline-element">
                         <label for="date-end" class="inline-label symbolic symbolic-date"><span><?= $this->t('Date end') ?></span></label>
-                        <input type="text" name="date-end" id="date-end" value="<?= $this->dateFormat($this->dateEnd, IntlDateFormatter::MEDIUM) ?>"
+                        <input type="text" name="date-end" id="date-end" value="<?= $this->dateEnd->format($this->t('Y-m-d')) ?>"
                                class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">
                     </div>
                 </td>

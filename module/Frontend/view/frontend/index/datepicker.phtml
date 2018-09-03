@@ -11,7 +11,7 @@ $previousDayUrl = $this->url('frontend', [], ['query' => $previousDayUrlQuery]);
 
 $dateStartClone->modify('+1 day');
 
-$currentDay = $this->dateFormat($dateStartClone, IntlDateFormatter::MEDIUM);
+$currentDay = $dateStartClone->format($this->t('Y-m-d'));
 
 $dateStartClone->modify('+1 day');
 

@@ -168,7 +168,7 @@ class TimeBlockChoice extends AbstractHelper
 
         $html .= '<div><div class="inline-element">';
         $html .= '<label for="sb-date-start-choice" class="inline-label symbolic symbolic-date"><span>' . $view->t('Start date') . '</span></label>';
-        $html .= '<input type="text" name="sb-date-start-choice" id="sb-date-start-choice" value="' . $view->dateFormat($dateTimeStart, IntlDateFormatter::MEDIUM) . '" class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">';
+        $html .= '<input type="text" name="sb-date-start-choice" id="sb-date-start-choice" value="' . $dateTimeStart->format($view->t('Y-m-d')) . '" class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">';
         $html .= '</div>';
         $html .= $this->renderDateBlockTimeChoice($square, 'sb-time-start-choice', $dateTimeStart);
         $html .= '</div>';
@@ -179,7 +179,7 @@ class TimeBlockChoice extends AbstractHelper
 
         $html .= '<div><div class="inline-element">';
         $html .= '<label for="sb-date-end-choice" class="inline-label symbolic symbolic-date"><span>' . $view->t('End date') . '</span></label>';
-        $html .= '<input type="text" name="sb-date-end-choice" id="sb-date-end-choice" value="' . $view->dateFormat($dateTimeEnd, IntlDateFormatter::MEDIUM) . '" class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">';
+        $html .= '<input type="text" name="sb-date-end-choice" id="sb-date-end-choice" value="' . $dateTimeEnd->format($view->t('Y-m-d')) . '" class="inline-label-container datepicker" style="padding-left: 28px; width: 96px;">';
         $html .= '</div>';
         $html .= $this->renderDateBlockTimeChoice($square, 'sb-time-end-choice', $dateTimeEnd);
         $html .= '</div>';

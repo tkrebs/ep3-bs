@@ -49,7 +49,7 @@ return array(
     'or' => 'vagy',
     'for' => 'részére',
 
-    'Y-m-d' => 'Év.Hónap.Nap',
+    'Y-m-d' => 'd.m.Y',
 
     'Page not found' => 'Oldal nem található',
     'Oops ... something went wrong here' => 'Hoppá ... valami hiba történt',
