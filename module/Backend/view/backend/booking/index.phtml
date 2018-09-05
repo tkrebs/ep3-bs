@@ -38,7 +38,7 @@ $this->setup(array(
                 <p><span class="red"><?= sprintf($this->t('%sNo bookings found%s for this search'), '<b>', '</b>') ?></span></p>
             <?php endif; ?>
 
-            <p><a href="<?= $this->url('backend/booking/edit') ?>" class="unlined gray"><span class="symbolic symbolic-plus"><?= $this->t('New booking') ?></span></a></p>
+            <p><a href="<?= $this->url('backend/booking/edit', [], ['query' => ['force' => 'new']]) ?>" class="unlined gray"><span class="symbolic symbolic-plus"><?= $this->t('New booking') ?></span></a></p>
 
         <?php endif; ?>
 

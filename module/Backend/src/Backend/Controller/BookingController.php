@@ -104,7 +104,7 @@ class BookingController extends AbstractActionController
 
         $reservation = $booking = null;
 
-        if (! $this->getRequest()->isPost()) {
+        if (! ($this->getRequest()->isPost() || $this->params()->fromQuery('force') == 'new')) {
             switch (count($params['reservations'])) {
                 case 0:
                     break;
