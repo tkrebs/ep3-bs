@@ -7,6 +7,6 @@
     "require": {
         "php": ">=5.4",
         "ext-intl": "*",
-        "zendframework/zendframework": "2.4.*"
+        "zendframework/zendframework": "^2.5.3"
     }
 }

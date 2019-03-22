@@ -26,7 +26,7 @@ ini_set('date.timezone', 'Europe/Berlin');
  * The following settings are more technical and can usually be ignored.
  */
 
-ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('error_reporting', E_ALL & ~E_USER_DEPRECATED);
 ini_set('error_log', getcwd() . '/data/log/errors.txt');
 
 ini_set('display_errors', EP3_BS_DEV_TAG ? 1 : 0);
