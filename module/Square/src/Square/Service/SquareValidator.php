@@ -108,6 +108,8 @@ class SquareValidator extends AbstractService
         /* Validate time range */
 
         $dateMin = new DateTime();
+        $dateMin->modify('+' . $square->get('min_range_book', 0) . ' sec');
+
         $dateMax = new DateTime();
         $dateMax->modify('+' . $square->get('range_book', 0) . ' sec');
 
@@ -117,6 +119,14 @@ class SquareValidator extends AbstractService
                 // Allow assist users with calendar.see-data privilege to see the entire day
                 if (! ($this->user && $this->user->can('calendar.see-data') && $dateEnd->format('Y-m-d') == $dateMin->format('Y-m-d'))) {
                     throw new RuntimeException('The passed time is already over');
+                }
+            }
+        }
+
+        if ($square->get('min_range_book')) {
+            if ($timeStart < $dateMin) {
+                if (! ($this->user && $this->user->can('calendar.create-single-bookings, calendar.create-subscription-bookings'))) {
+                    throw new RuntimeException('Dieses Datum ist zu kurzfristig');
                 }
             }
         }

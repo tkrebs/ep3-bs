@@ -207,6 +207,20 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-min-range-book',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'cf-min-range-book',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Buchungsvorlauf',
+                'notes' => 'Auf 0 setzen, um den nächsten freien Zeitblock buchen zu dürfen',
+                'postfix' => 'Minuten',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-range-book',
             'type' => 'Text',
             'attributes' => array(
@@ -419,6 +433,26 @@ class EditForm extends Form
                 ),
             ),
             'cf-time-block-bookable-max' => array(
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please type something here',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Digits',
+                        'options' => array(
+                            'message' => 'Please type a number here',
+                        ),
+                    ),
+                ),
+            ),
+            'cf-min-range-book' => array(
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),

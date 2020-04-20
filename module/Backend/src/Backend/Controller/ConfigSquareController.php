@@ -66,6 +66,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('time_block_bookable', max($editData['cf-time-block-bookable'], 10) * 60);
                 $square->setMeta('pseudo-time-block-bookable', $editData['cf-pseudo-time-block-bookable'] ? 'true' : 'false');
                 $square->set('time_block_bookable_max', max($editData['cf-time-block-bookable-max'], 10) * 60);
+                $square->set('min_range_book', (float) $editData['cf-min-range-book'] * 60);
                 $square->set('range_book', (float) $editData['cf-range-book'] * 60 * 60 * 24);
                 $square->set('max_active_bookings', $editData['cf-max-active-bookings']);
                 $square->set('range_cancel', $editData['cf-range-cancel'] * 60 * 60);
@@ -90,6 +91,19 @@ class ConfigSquareController extends AbstractActionController
                     $nameVisibility = null;
                 }
 
+                /*
+                 * Patch database structure on the fly
+                 */
+                if ($square->get('min_range_book') === null) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $dbAdapter->query('ALTER TABLE `bs_squares` ADD `min_range_book` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `time_block_bookable_max`;', 'execute');
+                }
+
+                if ($square->get('max_active_bookings') === null) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $dbAdapter->query('ALTER TABLE `bs_squares` ADD `max_active_bookings` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `range_book`;', 'execute');
+                }
+
                 $editForm->setData(array(
                     'cf-name' => $square->get('name'),
                     'cf-status' => $square->get('status'),
@@ -105,6 +119,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-time-block-bookable' => round($square->get('time_block_bookable') / 60),
                     'cf-pseudo-time-block-bookable' => $square->getMeta('pseudo-time-block-bookable', 'false') == 'true',
                     'cf-time-block-bookable-max' => round($square->get('time_block_bookable_max') / 60),
+                    'cf-min-range-book' => round($square->get('min_range_book') / 60),
                     'cf-range-book' => round($square->get('range_book') / 60 / 60 / 24),
                     'cf-max-active-bookings' => $square->get('max_active_bookings'),
                     'cf-range-cancel' => round($square->get('range_cancel') / 60 / 60, 2),
@@ -122,6 +137,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-time-block-bookable' => 30,
                     'cf-pseudo-time-block-bookable' => false,
                     'cf-time-block-bookable-max' => 180,
+                    'cf-min-range-book' => 0,
                     'cf-range-book' => 56,
                     'cf-max-active-bookings' => 0,
                     'cf-range-cancel' => 24,

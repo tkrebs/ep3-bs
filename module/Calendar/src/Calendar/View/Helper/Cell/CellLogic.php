@@ -23,6 +23,24 @@ class CellLogic extends AbstractHelper
             }
         }
 
+        $minBookingRange = $square->get('min_range_book');
+
+        if ($minBookingRange) {
+            $minBookingRangeDate = $square->getExtra('min_range_book_date');
+
+            if (! $minBookingRangeDate) {
+                $minBookingRangeDate = clone $now;
+                $minBookingRangeDate->modify('+' . $minBookingRange . ' seconds');
+                $square->setExtra('min_range_book_date', $minBookingRangeDate);
+            }
+
+            if ($walkingDate < $minBookingRangeDate) {
+                if (! ($user && $user->can('calendar.see-past'))) {
+                    return $view->calendarCell('Zu kurzfristig', 'cc-over');
+                }
+            }
+        }
+
         $bookingRange = $square->get('range_book');
 
         if ($bookingRange) {
