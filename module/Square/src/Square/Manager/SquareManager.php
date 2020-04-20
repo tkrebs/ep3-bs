@@ -176,6 +176,7 @@ class SquareManager extends AbstractManager
                     'time_block_bookable' => $square->need('time_block_bookable'),
                     'time_block_bookable_max' => $square->need('time_block_bookable_max'),
                     'range_book' => $square->need('range_book'),
+                    'max_active_bookings' => $square->need('max_active_bookings'),
                     'range_cancel' => $square->need('range_cancel'),
                 ));
 

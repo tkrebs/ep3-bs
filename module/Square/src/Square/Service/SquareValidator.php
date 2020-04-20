@@ -241,6 +241,8 @@ class SquareValidator extends AbstractService
         $square = $byproducts['square'];
         $user = $byproducts['user'];
 
+        $notBookableReason = null;
+
         /* Check for other reservations */
 
         $possibleReservations = $this->reservationManager->getInRange($dateStart, $dateEnd);
@@ -289,6 +291,37 @@ class SquareValidator extends AbstractService
             $bookable = false;
         }
 
+        /* Check for maximum active bookings limitation */
+
+        if ($user) {
+            $maxActiveBookings = $square->need('max_active_bookings');
+
+            if ($maxActiveBookings != 0) {
+                $activeBookings = $this->bookingManager->getByValidity([
+                    'uid' => $user->need('uid'),
+                ]);
+
+                $this->reservationManager->getByBookings($activeBookings);
+
+                $activeBookingsCount = 0;
+
+                foreach ($activeBookings as $activeBooking) {
+                    foreach ($activeBooking->getExtra('reservations') as $activeReservation) {
+                        $activeReservationDate = new DateTime($activeReservation->get('date') . ' ' . $activeReservation->get('time_start'));
+
+                        if ($activeReservationDate > new DateTime()) {
+                            $activeBookingsCount++;
+                        }
+                    }
+                }
+
+                if ($activeBookingsCount >= $maxActiveBookings) {
+                    $bookable = false;
+                    $notBookableReason = 'Sie können derzeit nur <b>' . $maxActiveBookings . ' aktive Buchung/en</b> gleichzeitig offen haben.';
+                }
+            }
+        }
+
         /* Check for blocking events */
 
         $events = $this->eventManager->getInRange($dateStart, $dateEnd);
@@ -305,6 +338,7 @@ class SquareValidator extends AbstractService
         $byproducts['bookingsFromUser'] = $bookingsFromUser;
         $byproducts['reservations'] = $reservations;
         $byproducts['bookable'] = $bookable;
+        $byproducts['notBookableReason'] = $notBookableReason;
         $byproducts['quantity'] = $quantity;
         $byproducts['events'] = $events;
 

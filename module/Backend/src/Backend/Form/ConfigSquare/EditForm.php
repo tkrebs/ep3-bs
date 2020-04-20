@@ -221,6 +221,20 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-max-active-bookings',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'cf-max-active-bookings',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Buchungen einschränken',
+                'notes' => 'Auf 0 setzen, um beliebig viele Buchungen zu erlauben',
+                'postfix' => 'gleichzeitige Buchung/en pro Benutzer',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-range-cancel',
             'type' => 'Text',
             'attributes' => array(
@@ -425,6 +439,26 @@ class EditForm extends Form
                 ),
             ),
             'cf-range-book' => array(
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please type something here',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Digits',
+                        'options' => array(
+                            'message' => 'Please type a number here',
+                        ),
+                    ),
+                ),
+            ),
+            'cf-max-active-bookings' => array(
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),

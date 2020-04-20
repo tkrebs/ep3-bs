@@ -67,6 +67,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->setMeta('pseudo-time-block-bookable', $editData['cf-pseudo-time-block-bookable'] ? 'true' : 'false');
                 $square->set('time_block_bookable_max', max($editData['cf-time-block-bookable-max'], 10) * 60);
                 $square->set('range_book', (float) $editData['cf-range-book'] * 60 * 60 * 24);
+                $square->set('max_active_bookings', $editData['cf-max-active-bookings']);
                 $square->set('range_cancel', $editData['cf-range-cancel'] * 60 * 60);
 	            $square->setMeta('label.free', $editData['cf-label-free'], $locale);
 
@@ -105,6 +106,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-pseudo-time-block-bookable' => $square->getMeta('pseudo-time-block-bookable', 'false') == 'true',
                     'cf-time-block-bookable-max' => round($square->get('time_block_bookable_max') / 60),
                     'cf-range-book' => round($square->get('range_book') / 60 / 60 / 24),
+                    'cf-max-active-bookings' => $square->get('max_active_bookings'),
                     'cf-range-cancel' => round($square->get('range_cancel') / 60 / 60, 2),
 	                'cf-label-free' => $square->getMeta('label.free'),
                 ));
@@ -121,6 +123,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-pseudo-time-block-bookable' => false,
                     'cf-time-block-bookable-max' => 180,
                     'cf-range-book' => 56,
+                    'cf-max-active-bookings' => 0,
                     'cf-range-cancel' => 24,
                 ));
             }

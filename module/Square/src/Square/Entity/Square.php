@@ -19,6 +19,7 @@ class Square extends AbstractLocaleEntity
     protected $time_block_bookable;
     protected $time_block_bookable_max;
     protected $range_book;
+    protected $max_active_bookings;
     protected $range_cancel;
 
     /**
