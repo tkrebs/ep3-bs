@@ -213,6 +213,15 @@ class BookingController extends AbstractActionController
                 $this->url()->fromRoute('backend/booking/players', ['bid' => $booking->need('bid')]),
                 $this->translate('Who?')));
             $editForm->get('bf-quantity')->setLabelOption('disable_html_escape', true);
+
+            $playerNameNotes = '';
+
+            foreach (unserialize($booking->getMeta('player-names')) as $i => $playerName) {
+                $playerNameNotes .= sprintf('<div>%s. %s</div>',
+                    $i + 2, $playerName['value']);
+            }
+
+            $editForm->get('bf-quantity')->setOption('notes', $playerNameNotes);
         }
 
         return $this->ajaxViewModel(array_merge($params, array(
