@@ -78,6 +78,15 @@ class NotificationListener extends AbstractListenerAggregate
             $square->need('name'),
             $dateRangerHelper($reservationStart, $reservationEnd));
 
+        if ($booking->getMeta('player-names')) {
+            $message .= "\n\nAngegebene Mitspieler:";
+
+            foreach (unserialize($booking->getMeta('player-names')) as $i => $playerName) {
+                $message .= sprintf("\n%s. %s",
+                    $i + 1, $playerName['value']);
+            }
+        }
+
         if ($user->getMeta('notification.bookings', 'true') == 'true') {
             $this->userMailService->send($user, $subject, $message);
         }
