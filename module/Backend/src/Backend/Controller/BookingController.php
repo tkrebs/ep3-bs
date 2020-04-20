@@ -218,7 +218,7 @@ class BookingController extends AbstractActionController
 
             foreach (unserialize($booking->getMeta('player-names')) as $i => $playerName) {
                 $playerNameNotes .= sprintf('<div>%s. %s</div>',
-                    $i + 2, $playerName['value']);
+                    $i + 1, $playerName['value']);
             }
 
             $editForm->get('bf-quantity')->setOption('notes', $playerNameNotes);
