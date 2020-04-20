@@ -230,7 +230,7 @@ class EditForm extends Form
             'options' => array(
                 'label' => 'Buchungen einschränken',
                 'notes' => 'Auf 0 setzen, um beliebig viele Buchungen zu erlauben',
-                'postfix' => 'gleichzeitige Buchung/en pro Benutzer',
+                'postfix' => 'gleichzeitige Buchung(en) pro Benutzer',
             ),
         ));
 
