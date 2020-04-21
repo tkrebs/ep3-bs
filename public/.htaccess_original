@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    #RewriteBase /   # Try to uncomment this if you experience redirect problems
+
+    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    #RewriteRule ^index\.php$ http://bookings.example.com/ [R=301,L]
+
+    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    #RewriteRule ^index\.php/(.*)$ http://bookings.example.com/$1 [R=301,L]
+
+    RewriteRule ^robots\.txt$ misc/robots.txt
+    RewriteRule ^favicon\.ico$ imgs-client/icons/fav.ico
+
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [L]
+    RewriteRule ^.*$ index.php [L]
+
+</IfModule>

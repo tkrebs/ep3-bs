@@ -1,0 +1,41 @@
+h2, h3, h4, h5, h6 { color: #547B97; }
+
+/* Layout - Calendar */
+
+a.cc-event:link,
+a.cc-event:visited { background-color: #975459; }
+a.cc-event:hover { background-color: #6A3333; }
+
+a.cc-own:link,
+a.cc-own:visited { background-color: #8BB243; }
+a.cc-own:hover { background-color: #5F8024; }
+
+a.cc-single:link,
+a.cc-single:visited { background-color: #808D96; }
+a.cc-single:hover { background-color: #4C5359; }
+
+a.cc-multiple:link,
+a.cc-multiple:visited { background-color: #547B97; }
+a.cc-multiple:hover { background-color: #334F6A; }
+
+a.cc-conflict:link,
+a.cc-conflict:visited { background-color: #334F6A; }
+a.cc-conflict:hover { background-color: #334F6A; }
+
+/* Layout - Alternate Calendar */
+
+.cc-range-member a {
+    border-color: #547B97 !important;
+    background-color: #547B97 !important;
+}
+
+/* General Purpose - Classes */
+
+.my-highlight { color: #5F8024; }
+
+.badge { background-color: #547B97; }
+.badge-label { color: #547B97; }
+
+/* Links */
+
+a:link, a:visited { color: #334F6A; }
