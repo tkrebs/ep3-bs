@@ -91,19 +91,6 @@ class ConfigSquareController extends AbstractActionController
                     $nameVisibility = null;
                 }
 
-                /*
-                 * Patch database structure on the fly
-                 */
-                if ($square->get('min_range_book') === null) {
-                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
-                    $dbAdapter->query('ALTER TABLE `bs_squares` ADD `min_range_book` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `time_block_bookable_max`;', 'execute');
-                }
-
-                if ($square->get('max_active_bookings') === null) {
-                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
-                    $dbAdapter->query('ALTER TABLE `bs_squares` ADD `max_active_bookings` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `range_book`;', 'execute');
-                }
-
                 $editForm->setData(array(
                     'cf-name' => $square->get('name'),
                     'cf-status' => $square->get('status'),
