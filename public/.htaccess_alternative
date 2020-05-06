@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    #RewriteBase /   # Try to uncomment this if you experience redirect problems
+
+    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    #RewriteRule ^index\.php$ http://bookings.example.com/ [R=301,L]
+
+    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    #RewriteRule ^index\.php/(.*)$ http://bookings.example.com/$1 [R=301,L]
+
+    RewriteRule ^robots\.txt$ misc/robots.txt
+    RewriteRule ^favicon\.ico$ imgs-client/icons/fav.ico
+
+    # The following rule tells Apache that if the requested filename exists, simply serve it
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [NC,L]
+
+    # The following rewrites all other queries to start.php.
+    # The condition ensures that if you are using Apache aliases to do mass virtual hosting,
+    # the base path will be prepended to allow proper resolution of the start.php file;
+    # it will work in non-aliased environments as well, providing a safe, one-size fits all solution.
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+    RewriteRule ^(.*)$ %{ENV:BASE}start.php [NC,L]
+
+</IfModule>

@@ -18,6 +18,7 @@ continue with installation.
    - edit the   local.php   and insert your database credentials
 
    - rename   public/.htaccess_original   to   .htaccess
+     (if you experience webserver problems, try instead renaming   public/.htacess_alternative   to   .htaccess)
 
 2. Enable (recursively) UNIX write permission for
    - data/cache/
