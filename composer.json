@@ -5,7 +5,7 @@
     "homepage": "http://bs.hbsys.de/",
 
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.4 <=7.2",
         "ext-intl": "*",
         "zendframework/zendframework": "^2.5.3"
     }
