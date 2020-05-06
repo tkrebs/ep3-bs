@@ -13,6 +13,12 @@ after the update. Otherwise, it's clearly your fault! :)
 
 
 
+--- Update to 1.6.4 ---
+
+There are no steps necessary when updating from version 1.6.3.
+
+
+
 --- Update to 1.6.3 ---
 
 Replace the following directories:
