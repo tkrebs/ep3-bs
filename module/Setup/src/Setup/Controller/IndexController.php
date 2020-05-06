@@ -129,7 +129,9 @@ class IndexController extends AbstractActionController
                         'time_block' => 3600,
                         'time_block_bookable' => 1800,
                         'time_block_bookable_max' => 10800,
+                        'min_range_book' => 0,
                         'range_book' => 4838400,
+                        'max_active_bookings' => 0,
                         'range_cancel' => 86400,
                     ));
 
