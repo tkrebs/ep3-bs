@@ -10,7 +10,7 @@ class SessionController extends AbstractActionController
 
     public function loginAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $userSessionManager = $serviceManager->get('User\Manager\UserSessionManager');
         $user = $userSessionManager->getSessionUser();
@@ -97,7 +97,7 @@ class SessionController extends AbstractActionController
 
     public function logoutAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $userSessionManager = $serviceManager->get('User\Manager\UserSessionManager');
         $user = $userSessionManager->getSessionUser();

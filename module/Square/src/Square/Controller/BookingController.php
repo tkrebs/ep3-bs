@@ -18,7 +18,7 @@ class BookingController extends AbstractActionController
         $timeEndParam = $this->params()->fromQuery('te');
         $squareParam = $this->params()->fromQuery('s');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareValidator = $serviceManager->get('Square\Service\SquareValidator');
 
         $byproducts = $squareValidator->isBookable($dateStartParam, $dateEndParam, $timeStartParam, $timeEndParam, $squareParam);
@@ -52,7 +52,7 @@ class BookingController extends AbstractActionController
         $productsParam = $this->params()->fromQuery('p', 0);
         $playerNamesParam = $this->params()->fromQuery('pn', 0);
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareValidator = $serviceManager->get('Square\Service\SquareValidator');
 
         $byproducts = $squareValidator->isBookable($dateStartParam, $dateEndParam, $timeStartParam, $timeEndParam, $squareParam);
@@ -198,7 +198,7 @@ class BookingController extends AbstractActionController
             throw new RuntimeException('This booking does not exist');
         }
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $squareValidator = $serviceManager->get('Square\Service\SquareValidator');
 

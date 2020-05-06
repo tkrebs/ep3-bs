@@ -14,7 +14,7 @@ class EventController extends AbstractActionController
     {
         $this->authorize('admin.event');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $eventManager = $serviceManager->get('Event\Manager\EventManager');
 
         $dateStartParam = $this->params()->fromQuery('date-start');
@@ -54,7 +54,7 @@ class EventController extends AbstractActionController
     {
         $this->authorize('admin.event');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $eventManager = $serviceManager->get('Event\Manager\EventManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -163,7 +163,7 @@ class EventController extends AbstractActionController
 
         $params = $this->backendBookingDetermineParams();
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $eventManager = $serviceManager->get('Event\Manager\EventManager');
 
         $events = $eventManager->getInRange($params['dateTimeStart'], $params['dateTimeEnd']);
@@ -179,7 +179,7 @@ class EventController extends AbstractActionController
     {
         $this->authorize('admin.event');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $eventManager = $serviceManager->get('Event\Manager\EventManager');
 
         $eid = $this->params()->fromRoute('eid');
@@ -204,7 +204,7 @@ class EventController extends AbstractActionController
     {
         $this->authorize('admin.event');
 
-        $db = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $db = @$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
 
         $stats = $db->query(sprintf('SELECT status, COUNT(status) AS count FROM %s GROUP BY status', EventTable::NAME),
             Adapter::QUERY_MODE_EXECUTE)->toArray();

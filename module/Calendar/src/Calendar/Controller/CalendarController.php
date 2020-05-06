@@ -10,7 +10,7 @@ class CalendarController extends AbstractActionController
 
     public function indexAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $eventManager = $serviceManager->get('Event\Manager\EventManager');

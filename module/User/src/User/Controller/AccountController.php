@@ -12,7 +12,7 @@ class AccountController extends AbstractActionController
 
     public function passwordAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $formElementManager = $serviceManager->get('FormElementManager');
 
         $passwordForm = $formElementManager->get('User\Form\PasswordForm');
@@ -85,7 +85,7 @@ class AccountController extends AbstractActionController
             throw new RuntimeException('Your token to reset your password is invalid or expired. Please request a new email.');
         }
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $userManager = $serviceManager->get('User\Manager\UserManager');
         $user = $userManager->get($resetUid, false);
@@ -135,7 +135,7 @@ class AccountController extends AbstractActionController
 
     public function registrationAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -247,7 +247,7 @@ class AccountController extends AbstractActionController
             throw new RuntimeException('Your activation code seems invalid. Please try again.');
         }
 
-        $userManager = $this->getServiceLocator()->get('User\Manager\UserManager');
+        $userManager = @$this->getServiceLocator()->get('User\Manager\UserManager');
         $user = $userManager->get($activationUid, false);
 
         if (! $user) {
@@ -273,7 +273,7 @@ class AccountController extends AbstractActionController
             throw new RuntimeException('You cannot manually activate your account currently');
         }
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -340,7 +340,7 @@ class AccountController extends AbstractActionController
 
     public function bookingsAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $bookingBillManager = $serviceManager->get('Booking\Manager\Booking\BillManager');
@@ -375,7 +375,7 @@ class AccountController extends AbstractActionController
     {
         $bid = $this->params()->fromRoute('bid');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $userSessionManager = $serviceManager->get('User\Manager\UserSessionManager');
         $user = $userSessionManager->getSessionUser();
@@ -411,7 +411,7 @@ class AccountController extends AbstractActionController
 
     public function settingsAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
 
         $userManager = $serviceManager->get('User\Manager\UserManager');
         $userSessionManager = $serviceManager->get('User\Manager\UserSessionManager');

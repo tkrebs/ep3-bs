@@ -28,7 +28,7 @@ class IndexController extends AbstractActionController
 
             $sqlContent = file_get_contents($sqlFile);
 
-            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $dbAdapter = @$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $db = $dbAdapter->getDriver()->getConnection()->getResource();
 
             if ($db instanceof \PDO) {
@@ -80,7 +80,7 @@ class IndexController extends AbstractActionController
 
                 /* Setup options */
 
-                $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
+                $optionManager = @$this->getServiceLocator()->get('Base\Manager\OptionManager');
 
                 foreach (TextForm::$definitions as $key => $value) {
                     $formKey = str_replace('.', '_', $key);
@@ -114,7 +114,7 @@ class IndexController extends AbstractActionController
 
                 /* Setup default squares */
 
-                $squareManager = $this->getServiceLocator()->get('Square\Manager\SquareManager');
+                $squareManager = @$this->getServiceLocator()->get('Square\Manager\SquareManager');
                 $squares = $squareManager->getAll();
 
                 if (! $squares) {
@@ -187,7 +187,7 @@ class IndexController extends AbstractActionController
                     $firstname,
                     $lastname);
 
-                $userManager = $this->getServiceLocator()->get('User\Manager\UserManager');
+                $userManager = @$this->getServiceLocator()->get('User\Manager\UserManager');
 
                 $user = $userManager->create($alias, 'admin', $email, $pw);
 

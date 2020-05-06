@@ -15,7 +15,7 @@ class UserController extends AbstractActionController
     {
         $this->authorize('admin.user');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $userManager = $serviceManager->get('User\Manager\UserManager');
 
         $users = array();
@@ -53,7 +53,7 @@ class UserController extends AbstractActionController
     {
         $sessionUser = $this->authorize('admin.user');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $userManager = $serviceManager->get('User\Manager\UserManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -205,7 +205,7 @@ class UserController extends AbstractActionController
         $uid = $this->params()->fromRoute('uid');
         $search = $this->params()->fromQuery('search');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $userManager = $serviceManager->get('User\Manager\UserManager');
 
@@ -248,7 +248,7 @@ class UserController extends AbstractActionController
     {
         $this->authorize('admin.user, admin.booking, calendar.see-data');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $userManager = $serviceManager->get('User\Manager\UserManager');
 
         $term = $this->params()->fromQuery('term');
@@ -274,7 +274,7 @@ class UserController extends AbstractActionController
     {
         $this->authorize('admin.user');
 
-        $db = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $db = @$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
 
         $stats = $db->query(sprintf('SELECT status, COUNT(status) AS count FROM %s GROUP BY status', UserTable::NAME),
             Adapter::QUERY_MODE_EXECUTE)->toArray();

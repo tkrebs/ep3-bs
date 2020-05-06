@@ -16,7 +16,7 @@ class SquareController extends AbstractActionController
         $squareParam = $this->params()->fromQuery('s');
         $flagParam = $this->params()->fromQuery('f');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareProductManager = $serviceManager->get('Square\Manager\SquareProductManager');
         $squareValidator = $serviceManager->get('Square\Service\SquareValidator');
 

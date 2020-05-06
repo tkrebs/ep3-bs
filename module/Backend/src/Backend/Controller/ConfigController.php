@@ -17,7 +17,7 @@ class ConfigController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $optionManager = $serviceManager->get('Base\Manager\OptionManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -74,7 +74,7 @@ class ConfigController extends AbstractActionController
             $info = $this->params()->fromPost('cf-info');
 
             if ($info && strlen($info) > 32) {
-                $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
+                $optionManager = @$this->getServiceLocator()->get('Base\Manager\OptionManager');
                 $optionManager->set('subject.about', $info, $this->config('i18n.locale'));
 
                 $this->flashMessenger()->addSuccessMessage('Info page has been saved');
@@ -94,7 +94,7 @@ class ConfigController extends AbstractActionController
             $help = $this->params()->fromPost('cf-help');
 
             if ($help && strlen($help) > 32) {
-                $optionManager = $this->getServiceLocator()->get('Base\Manager\OptionManager');
+                $optionManager = @$this->getServiceLocator()->get('Base\Manager\OptionManager');
                 $optionManager->set('subject.help', $help, $this->config('i18n.locale'));
 
                 $this->flashMessenger()->addSuccessMessage('Help page has been saved');
@@ -110,7 +110,7 @@ class ConfigController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $optionManager = $serviceManager->get('Base\Manager\OptionManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -165,7 +165,7 @@ class ConfigController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $optionManager = $serviceManager->get('Base\Manager\OptionManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -266,7 +266,7 @@ class ConfigController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $formElementManager = $serviceManager->get('FormElementManager');
 
         $statusColorsForm = $formElementManager->get('Backend\Form\Config\BehaviourStatusColorsForm');

@@ -13,7 +13,7 @@ class ConfigSquareController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $squareManager = $this->getServiceLocator()->get('Square\Manager\SquareManager');
+        $squareManager = @$this->getServiceLocator()->get('Square\Manager\SquareManager');
         $squares = $squareManager->getAll();
 
         return array(
@@ -25,7 +25,7 @@ class ConfigSquareController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -142,7 +142,7 @@ class ConfigSquareController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -214,7 +214,7 @@ class ConfigSquareController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $optionManager = $serviceManager->get('Base\Manager\OptionManager');
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
         $squarePricingManager = $serviceManager->get('Square\Manager\SquarePricingManager');
@@ -283,7 +283,7 @@ class ConfigSquareController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $squareProductManager = $this->getServiceLocator()->get('Square\Manager\SquareProductManager');
+        $squareProductManager = @$this->getServiceLocator()->get('Square\Manager\SquareProductManager');
         $squareProducts = $squareProductManager->getAll('priority ASC');
 
         return array(
@@ -295,7 +295,7 @@ class ConfigSquareController extends AbstractActionController
     {
         $this->authorize('admin.config');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareProductManager = $serviceManager->get('Square\Manager\SquareProductManager');
         $formElementManager = $serviceManager->get('FormElementManager');
 
@@ -398,7 +398,7 @@ class ConfigSquareController extends AbstractActionController
 
         $spid = $this->params()->fromRoute('spid');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $squareProductManager = $serviceManager->get('Square\Manager\SquareProductManager');
 
         $squareProduct = $squareProductManager->get($spid);
@@ -428,7 +428,7 @@ class ConfigSquareController extends AbstractActionController
 
         $sid = $this->params()->fromRoute('sid');
 
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
 

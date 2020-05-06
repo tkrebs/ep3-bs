@@ -9,7 +9,7 @@ class EventController extends AbstractActionController
 
     public function indexAction()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager = @$this->getServiceLocator();
         $eventManager = $serviceManager->get('Event\Manager\EventManager');
         $squareManager = $serviceManager->get('Square\Manager\SquareManager');
 
