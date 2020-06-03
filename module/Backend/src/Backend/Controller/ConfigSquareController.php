@@ -60,6 +60,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('capacity_heterogenic', $editData['cf-capacity-heterogenic']);
                 $square->setMeta('private_names', $editData['cf-name-visibility'] == 'private' ? 'true' : 'false');
                 $square->setMeta('public_names', $editData['cf-name-visibility'] == 'public' ? 'true' : 'false');
+                $square->set('allow_notes', $editData['cf-allow-notes']);
                 $square->set('time_start', $editData['cf-time-start']);
                 $square->set('time_end', $editData['cf-time-end']);
                 $square->set('time_block', max($editData['cf-time-block'], 10) * 60);
@@ -100,6 +101,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-capacity-ask-names' => $square->getMeta('capacity-ask-names'),
                     'cf-capacity-heterogenic' => $square->get('capacity_heterogenic'),
                     'cf-name-visibility' => $nameVisibility,
+                    'cf-allow-notes' => $square->get('allow_notes'),
                     'cf-time-start' => substr($square->get('time_start'), 0, 5),
                     'cf-time-end' => substr($square->get('time_end'), 0, 5),
                     'cf-time-block' => round($square->get('time_block') / 60),
@@ -118,6 +120,7 @@ class ConfigSquareController extends AbstractActionController
                     'cf-priority' => 1,
                     'cf-capacity' => 1,
                     'cf-capacity-heterogenic' => false,
+                    'cf-allow-notes' => false,
                     'cf-time-start' => '08:00',
                     'cf-time-end' => '23:00',
                     'cf-time-block' => 60,

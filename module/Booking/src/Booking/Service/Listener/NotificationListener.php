@@ -87,6 +87,11 @@ class NotificationListener extends AbstractListenerAggregate
             }
         }
 
+        if ($square->get('allow_notes') && $booking->getMeta('notes')) {
+            $message .= "\n\nAnmerkungen:";
+            $message .= "\n" . $booking->getMeta('notes');
+        }
+
         if ($user->getMeta('notification.bookings', 'true') == 'true') {
             $this->userMailService->send($user, $subject, $message);
         }

@@ -69,6 +69,14 @@ $this->setup(array(
 
         <?php endif; ?>
 
+        <?php if ($square->get('allow_notes')): ?>
+
+            <textarea name="bf-user-notes" placeholder="Optionale Anmerkungen" style="width: 100%; height: 3.1rem"></textarea>
+
+            <div class="separator separator-line"></div>
+
+        <?php endif; ?>
+
         <div class="centered-text small-text gray" style="margin-bottom: 12px;">
 	        <?php
 
