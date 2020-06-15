@@ -108,7 +108,7 @@ class SquareValidator extends AbstractService
         /* Validate time range */
 
         $dateMin = new DateTime();
-        $dateMin->modify('+' . $square->get('min_range_book', 0) . ' sec');
+        $dateMin->modify('-' . $square->get('time_block') . ' seconds');
 
         $dateMax = new DateTime();
         $dateMax->modify('+' . $square->get('range_book', 0) . ' sec');
@@ -402,6 +402,11 @@ class SquareValidator extends AbstractService
 
         $reservationCancelDate = new DateTime();
         $reservationCancelDate->modify('+' . $squareCancelRange . ' sec');
+        $current_time_block_cancelable = $square->getMeta('current-time-block-cancelable', 'false');
+
+        if ($current_time_block_cancelable == 'true') {
+            $reservationCancelDate->modify('-' .  $square->get('time_block') . ' seconds');
+        }
 
         if ($reservationStartDate > $reservationCancelDate) {
             return true;

@@ -262,6 +262,30 @@ class EditForm extends Form
             ),
         ));
 
+        $this->add(array(
+            'name' => 'cf-current-time-block-bookable',
+            'type' => 'Checkbox',
+            'attributes' => array(
+                'id' => 'cf-current-time-block-bookable',
+            ),
+            'options' => array(
+                'label' => 'Allow booking of current time block',
+                'notes' => 'The time block that is already running can also be booked',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cf-current-time-block-cancelable',
+            'type' => 'Checkbox',
+            'attributes' => array(
+                'id' => 'cf-current-time-block-cancelable',
+            ),
+            'options' => array(
+                'label' => 'Allow cancellation of the current time block',
+                'notes' => 'The time block that is already running can also be canceled',
+            ),
+        ));
+
 	    $this->add(array(
             'name' => 'cf-label-free',
             'type' => 'Text',
