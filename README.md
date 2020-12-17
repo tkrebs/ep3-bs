@@ -24,7 +24,7 @@ data/docs/
 
 ## Architecture
 
-The system is based on the well-known LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.4+) and the popular and powerful
+The system is based on the well-known LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.6+) and the popular and powerful
 [Zend Framework 2](http://framework.zend.com/) (2.5).
 
 It is compatible with PHP version up to and including 7.2 - bot not PHP 7.3+. We are currently working on an upgrade of the underlying Zend Framework to make it compatible with PHP 7.3+.
