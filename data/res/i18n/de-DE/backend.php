@@ -392,4 +392,9 @@ return array(
     'Booked by' => 'Gebucht von',
 
     'User matched by' => 'Benutzer ermittelt nach',
+    'Allow booking of current time block' => 'Buchung des aktuellen Zeitblocks zulassen',
+    'Allow cancellation of the current time block' => 'Stornierung des aktuellen Zeitblocks zulassen',
+    'The time block that is already running can also be booked' => 'Auch der bereits laufende Zeitblock kann gebucht werden',
+    'The time block that is already running can also be canceled' => 'Auch der bereits laufende Zeitblock kann storniert werden',
+
 );
