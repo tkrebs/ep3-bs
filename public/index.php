@@ -1,15 +1,6 @@
 <?php
 /**
- * Welcome to the famous*, beloved*, highly respected*
- *
- * ep-3 Bookingsystem
- *
- * (c) 2018 Tobias Krebs
- *
- * Website: http://bs.hbsys.de/
- * License: MIT
- *
- * (* Not yet, but maybe some day ...)
+ * ep-3 Bookingsystem Entry Point
  */
 
 ob_start();
@@ -19,8 +10,8 @@ chdir(dirname(__DIR__));
 /**
  * Quickly check the current PHP version.
  */
-if (version_compare(PHP_VERSION, '5.4.0') < 0) {
-    exit('PHP 5.4+ is required (currently running PHP ' . PHP_VERSION . ')');
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+    exit('PHP 5.6+ is required (currently running PHP ' . PHP_VERSION . ')');
 }
 
 /**

@@ -16,7 +16,7 @@ The project generally follows the [PSR-4 coding standards](http://www.php-fig.or
 Regarding the architecture, this project is heavily based on ZF2 architecture and philosophy, so the ZF2 documentation
 will also be a valuable source of information.
 
-Since the system requires PHP 5.4+, everyone is encouraged to use all the new features that version has to offer.
+Since the system requires PHP 5.6+, everyone is encouraged to use all the new features that version has to offer.
 
 ## License
 
