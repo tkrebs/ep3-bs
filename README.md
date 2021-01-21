@@ -24,10 +24,11 @@ data/docs/
 
 ## Architecture
 
-The system is based on the well-known LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.6+) and the popular and powerful
+The system is based on the well-known LAMP stack (Linux, Apache 2, MySQL 5+, PHP 5.6+) and the powerful
 [Zend Framework 2](http://framework.zend.com/) (2.5).
 
-It is compatible with PHP version up to and including 7.2 - bot not PHP 7.3+. We are currently working on an upgrade of the underlying Zend Framework to make it compatible with PHP 7.3+.
+It is compatible with PHP version up to and including 7.4. We are currently working on an upgrade of the underlying
+Zend Framework to make it compatible with PHP 8.0.
 
 Dependencies are managed with [composer](https://getcomposer.org/).
 
@@ -43,7 +44,9 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (May, 2020) is 1.6.4.
+The current version is 1.7.0 from January, 2021.
+
+Version 1.7.0 provides compatibility with PHP 7.4 by overriding and fixing some of the Zend Framework 2 components.
 
 Version 1.6.4 introduced some features required during the COVID-19 pandemic, including limits to active concurrent bookings and minimum booking ranges. It also includes minor bug fixes and improvements.
 
