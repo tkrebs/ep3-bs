@@ -53,6 +53,11 @@ class SquareManager extends AbstractManager
         if ($this->squares) {
             $referenceSquare = current($this->squares);
 
+            if ($referenceSquare->get('allow_notes') === null) {
+                $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `allow_notes` tinyint(1) NOT NULL DEFAULT \'0\' AFTER `capacity_heterogenic`;', 'execute');
+                $loadSquares();
+            }
+
             if ($referenceSquare->get('min_range_book') === null) {
                 $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `min_range_book` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `time_block_bookable_max`;', 'execute');
                 $loadSquares();

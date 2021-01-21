@@ -78,13 +78,24 @@ class NotificationListener extends AbstractListenerAggregate
             $square->need('name'),
             $dateRangerHelper($reservationStart, $reservationEnd));
 
-        if ($booking->getMeta('player-names')) {
-            $message .= "\n\nAngegebene Mitspieler:";
+        $playerNames = $booking->getMeta('player-names');
 
-            foreach (unserialize($booking->getMeta('player-names')) as $i => $playerName) {
-                $message .= sprintf("\n%s. %s",
-                    $i + 1, $playerName['value']);
+        if ($playerNames) {
+            $playerNamesUnserialized = @unserialize($playerNames);
+
+            if (is_iterable($playerNamesUnserialized)) {
+                $message .= "\n\nAngegebene Mitspieler:";
+
+                foreach ($playerNamesUnserialized as $i => $playerName) {
+                    $message .= sprintf("\n%s. %s",
+                        $i + 1, $playerName['value']);
+                }
             }
+        }
+
+        if ($square->get('allow_notes') && $booking->getMeta('notes')) {
+            $message .= "\n\nAnmerkungen:";
+            $message .= "\n" . $booking->getMeta('notes');
         }
 
         if ($user->getMeta('notification.bookings', 'true') == 'true') {

@@ -108,7 +108,12 @@ class SquareValidator extends AbstractService
         /* Validate time range */
 
         $dateMin = new DateTime();
-        $dateMin->modify('+' . $square->get('min_range_book', 0) . ' sec');
+
+        if ($square->get('min_range_book', 0) == 0) {
+            $dateMin->modify('-' . ($square->get('time_block_bookable') / 2) . ' sec');
+        } else {
+            $dateMin->modify('+' . $square->get('min_range_book', 0) . ' sec');
+        }
 
         $dateMax = new DateTime();
         $dateMax->modify('+' . $square->get('range_book', 0) . ' sec');

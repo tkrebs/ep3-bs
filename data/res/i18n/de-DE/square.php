@@ -104,8 +104,8 @@ return array(
     'Check new period' => 'Neuen Zeitraum prüfen',
 
     'The names of the other players are <b>optional</b>' => 'Die Namen der anderen Spieler sind <b>optional</b>',
-    'The names of the other players are <b>required</b>' => 'Die Namen der anderen Spieler sind <b>erforderlich</b>',
-    'Player\'s name' => 'Spieler Name',
+    'The names of the other players are <b>required</b>' => 'Die <b>Vor- und Nachnamen</b> der anderen Spieler sind <b>erforderlich</b>',
+    'Player\'s name' => 'Spieler Vor-/Nachname',
     'and email address' => 'und E-Mail Adresse',
     'and phone number' => 'und Telefonnummer',
 

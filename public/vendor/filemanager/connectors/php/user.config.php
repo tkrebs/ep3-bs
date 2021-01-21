@@ -40,9 +40,9 @@ function auth() {
 
   if (isset($_COOKIE[$sessionName])) {
 
-    require 'vendor/zendframework/zendframework/library/Zend/Stdlib/Exception/ExceptionInterface.php';
-    require 'vendor/zendframework/zendframework/library/Zend/Stdlib/Exception/InvalidArgumentException.php';
-    require 'vendor/zendframework/zendframework/library/Zend/Stdlib/ArrayObject.php';
+    require 'vendor/zendframework/zend-stdlib/src/Exception/ExceptionInterface.php';
+    require 'vendor/zendframework/zend-stdlib/src/Exception/InvalidArgumentException.php';
+    require 'vendor/zendframework/zend-stdlib/src/ArrayObject.php';
 
     session_name($sessionName);
     session_save_path($sessionPath);

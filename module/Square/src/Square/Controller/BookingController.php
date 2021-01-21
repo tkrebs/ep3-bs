@@ -134,6 +134,12 @@ class BookingController extends AbstractActionController
 
         if ($playerNamesParam) {
             $playerNames = Json::decode($playerNamesParam, Json::TYPE_ARRAY);
+
+            foreach ($playerNames as $playerName) {
+                if (strlen(trim($playerName['value'])) < 5 || strpos(trim($playerName['value']), ' ') === false) {
+                    throw new \RuntimeException('Die <b>vollständigen Vor- und Nachnamen</b> der anderen Spieler sind erforderlich');
+                }
+            }
         } else {
             $playerNames = null;
         }
@@ -175,9 +181,16 @@ class BookingController extends AbstractActionController
                     ));
                 }
 
+                if ($square->get('allow_notes')) {
+                    $userNotes = "Anmerkungen des Benutzers:\n" . $this->params()->fromPost('bf-user-notes');
+                } else {
+                    $userNotes = '';
+                }
+
                 $bookingService = $serviceManager->get('Booking\Service\BookingService');
                 $bookingService->createSingle($user, $square, $quantityParam, $byproducts['dateStart'], $byproducts['dateEnd'], $bills, array(
                     'player-names' => serialize($playerNames),
+                    'notes' => $userNotes,
                 ));
 
                 $this->flashMessenger()->addSuccessMessage(sprintf($this->t('%sCongratulations:%s Your %s has been booked!'),

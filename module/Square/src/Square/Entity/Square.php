@@ -13,6 +13,7 @@ class Square extends AbstractLocaleEntity
     protected $priority;
     protected $capacity;
     protected $capacity_heterogenic;
+    protected $allow_notes;
     protected $time_start;
     protected $time_end;
     protected $time_block;

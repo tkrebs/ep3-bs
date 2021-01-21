@@ -166,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `bs_squares` (
   `priority` float NOT NULL DEFAULT '1',
   `capacity` int(10) unsigned NOT NULL,
   `capacity_heterogenic` tinyint(1) NOT NULL,
+  `allow_notes` tinyint(1) NOT NULL,
   `time_start` time NOT NULL,
   `time_end` time NOT NULL,
   `time_block` int(10) unsigned NOT NULL,

@@ -130,6 +130,17 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-allow-notes',
+            'type' => 'Checkbox',
+            'attributes' => array(
+                'id' => 'cf-allow-notes',
+            ),
+            'options' => array(
+                'label' => 'Erlaube optionale Anmerkungen bei der Buchung',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-time-start',
             'type' => 'Text',
             'attributes' => array(
