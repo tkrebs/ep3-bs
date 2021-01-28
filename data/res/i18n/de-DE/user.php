@@ -25,7 +25,7 @@ return array(
     'Your token to reset your password is invalid or expired. Please request a new email.'
         => 'Der Code zum Ändern Ihres Passwortes ist ungültig oder abgelaufen. Bitte lassen Sie sich eine neue E-Mail zusenden.',
     'All right, your password has been changed. You can now log into your account.'
-        => 'In Ordnung, Ihr Passwort wurde geändert. Sie können Sie nun wieder anmelden.',
+        => 'In Ordnung, Ihr Passwort wurde geändert. Sie können sich nun wieder anmelden.',
 
     'New registration waiting for activation' => 'Neuer Benutzer wartet auf Aktivierung',
     'A new user has registered to your %s. According to your configuration, this user will not be able to book %s until you manually activate him.'
