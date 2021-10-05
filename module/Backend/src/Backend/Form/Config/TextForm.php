@@ -13,6 +13,7 @@ class TextForm extends Form
         'client.name.short' => array('Your abbreviation', 'Short form or abbreviation of your name.<br>Displayed in emails, for example.'),
         'client.contact.email' => array('Your email address', 'Will be used for system notifications.<br>Might also be displayed to users for help.'),
 	    'client.contact.email.user-notifications' => array('Send user emails like booking/cancel confirmation to this address as well', null, 'Checkbox'),
+        'client.contact.email.admin-notifications' => array('Also generate emails in case an admin/staff member creates/cancels booking', null, 'Checkbox'),
         'client.contact.phone' => array('Your phone number', 'Displayed for booking by phone.'),
         'client.website' => array('Your website', 'The address of your website.<br>Displayed in the header, for example.'),
         'client.website.contact' => array('Your contact page', 'The address of your website\'s contact page.<br>Displayed in the header, for example.'),
