@@ -53,7 +53,7 @@ class NotificationListener extends AbstractListenerAggregate
 
     public function validateUser(User $user)
     {
-        if($user->getStatus() == 'Placeholder')
+        if($user->get('email', null) == null)
             return false;
 
         //need to check if we are admins or assists and want to receive notifications
@@ -153,6 +153,9 @@ class NotificationListener extends AbstractListenerAggregate
         $lastReservation = end($reservations);
         $square = $this->squareManager->get($booking->need('sid'));
         $user = $this->userManager->get($booking->need('uid'));
+
+        if(!$this->validateUser($user))
+            return;
 
         $dateRangerHelper = $this->dateRangeHelper;
 
