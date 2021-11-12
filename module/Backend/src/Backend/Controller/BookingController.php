@@ -301,6 +301,8 @@ class BookingController extends AbstractActionController
                         $bookingManager->save($booking);
                     }
 
+                    $bookingService->getEventManager()->trigger('create.booking', $booking);
+
                     $this->flashMessenger()->addSuccessMessage('Booking has been saved');
 
                     return $this->redirect()->toRoute('frontend');
