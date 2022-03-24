@@ -2,6 +2,7 @@
 
 namespace Backend\Form\Event;
 
+use Event\Entity\Event;
 use Square\Manager\SquareManager;
 use Zend\Form\Form;
 use Zend\InputFilter\Factory;
@@ -128,6 +129,32 @@ class EditForm extends Form
             'options' => array(
                 'label' => 'Capacity',
                 'notes' => 'How many people can participate?',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'ef-repeat',
+            'type' => 'Select',
+            'attributes' => array(
+                'id' => 'ef-repeat',
+                'style' => 'width: 124px',
+            ),
+            'options' => array(
+                'label' => 'Repeat',
+                'value_options' => Event::$repeatOptions,
+            ),
+        ));    
+        
+        $this->add(array(
+            'name' => 'ef-repeat-end',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'ef-repeat-end',
+                'class' => 'datepicker',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Date (End)',
             ),
         ));
 
@@ -296,6 +323,37 @@ class EditForm extends Form
                         'name' => 'Digits',
                         'options' => array(
                             'message' => 'Please type a number here',
+                        ),
+                    ),
+                ),
+            ),
+
+            'ef-repeat-end' => array(
+                'required' => false,
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'message' => 'Please type something here',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                    array(
+                        'name' => 'Callback',
+                        'options' => array(
+                            'callback' => function($value) {
+                                    try {
+                                        new \DateTime($value);
+
+                                        return true;
+                                    } catch (\Exception $e) {
+                                        return false;
+                                    }
+                                },
+                            'message' => 'Invalid date',
                         ),
                     ),
                 ),

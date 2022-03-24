@@ -1,7 +1,7 @@
 <?php
 // only for debug
-// error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-// ini_set('display_errors', '1');
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+ini_set('display_errors', '1');
 /**
  *	Filemanager PHP connector
  *

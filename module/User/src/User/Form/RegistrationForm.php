@@ -41,6 +41,7 @@ class RegistrationForm extends Form
                 'label' => 'Email address',
                 'label_attributes' => array(
                     'class' => 'symbolic symbolic-email',
+                    'style' => 'font-weight: bold;',
                 ),
                 'notes' => 'Please provide your email address',
             ),
@@ -70,6 +71,7 @@ class RegistrationForm extends Form
                 'label' => 'Password',
                 'label_attributes' => array(
                     'class' => 'symbolic symbolic-pw',
+                    'style' => 'font-weight: bold;',
                 ),
                 'notes' => 'Your password will be safely encrypted',
             ),
@@ -99,7 +101,9 @@ class RegistrationForm extends Form
             'options' => array(
                 'label' => 'Salutation',
                 'value_options' => User::$genderOptions,
-            ),
+                'label_attributes' => array(
+                    'style' => 'font-weight: bold;',
+            )),
         ));
 
         $this->add(array(
@@ -111,6 +115,9 @@ class RegistrationForm extends Form
             ),
             'options' => array(
                 'label' => 'First & Last name',
+                'label_attributes' => array(
+                    'style' => 'font-weight: bold;',
+                ),
             ),
         ));
 
@@ -184,6 +191,9 @@ class RegistrationForm extends Form
             'options' => array(
                 'label' => 'Phone number',
                 'notes' => 'We only use this to inform you<br>about changes to your bookings',
+                'label_attributes' => array(
+                    'style' => 'font-weight: bold;',
+                ),
             ),
         ));
 
@@ -456,6 +466,7 @@ class RegistrationForm extends Form
                 ),
             ),
             'rf-street' => array(
+                'required' => false,                
                 'filters' => array(
                     array('name' => 'StringTrim'),
                     array('name' => 'Callback', 'options' => array('callback' => function($name) { return ucfirst($name); })),
@@ -485,6 +496,7 @@ class RegistrationForm extends Form
                 ),
             ),
             'rf-number' => array(
+                'required' => false,                
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),
@@ -506,6 +518,7 @@ class RegistrationForm extends Form
                 ),
             ),
             'rf-zip' => array(
+                'required' => false,
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),
@@ -527,6 +540,7 @@ class RegistrationForm extends Form
                 ),
             ),
             'rf-city' => array(
+                'required' => false,
                 'filters' => array(
                     array('name' => 'StringTrim'),
                     array('name' => 'Callback', 'options' => array('callback' => function($name) { return ucfirst($name); })),

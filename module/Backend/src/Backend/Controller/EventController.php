@@ -24,7 +24,7 @@ class EventController extends AbstractActionController
         $dateEnd = null;
 
         $events = array();
-
+        error_log($dateStartParam, 3, "/var/tmp/my-errors.log" );
         if ($dateStartParam && $dateEndParam) {
             try {
                 $dateStart = new \DateTime($dateStartParam);
@@ -75,50 +75,96 @@ class EventController extends AbstractActionController
 
             if ($editForm->isValid()) {
                 $data = $editForm->getData();
+                
+                $repeat = $data['ef-repeat'];
+                
+                $dateStart = new \DateTime($data['ef-date-start']);
+                $dateEnd = new \DateTime($data['ef-date-end']);
+
+                $walkingDate = clone $dateStart;
+                $walkingDate->setTime(0, 0, 0);
+                if ($repeat > 0) {
+                    $walkingDateLimit = new \DateTime($data['ef-repeat-end']);
+                } else {
+                    $walkingDateLimit = clone $dateStart;
+                }
+                $walkingDateLimit->setTime(0, 0, 0);
 
                 if (! $event) {
                     $event = new Event();
                 }
 
-                $locale = $this->config('i18n.locale');
+                while ($walkingDate <= $walkingDateLimit) {
 
-                $event->setMeta('name', $data['ef-name'], $locale);
-                $event->setMeta('description', $data['ef-description'], $locale);
 
-                $dateStart = new \DateTime($data['ef-date-start']);
 
-                $timeStartParts = explode(':', $data['ef-time-start']);
+                    $locale = $this->config('i18n.locale');
 
-                $dateStart->setTime($timeStartParts[0], $timeStartParts[1], 0);
+                    $event->setMeta('name', $data['ef-name'], $locale);
+                    $event->setMeta('description', $data['ef-description'], $locale);
 
-                $dateEnd = new \DateTime($data['ef-date-end']);
+                    $dateStart = new \DateTime($data['ef-date-start']);
 
-                $timeEndParts = explode(':', $data['ef-time-end']);
+                    $timeStartParts = explode(':', $data['ef-time-start']);
 
-                $dateEnd->setTime($timeEndParts[0], $timeEndParts[1], 0);
+                    $dateStart->setTime($timeStartParts[0], $timeStartParts[1], 0);
 
-                $event->set('datetime_start', $dateStart->format('Y-m-d H:i:s'));
-                $event->set('datetime_end', $dateEnd->format('Y-m-d H:i:s'));
+                    $dateEnd = new \DateTime($data['ef-date-end']);
 
-                $sid = $data['ef-sid'];
+                    $timeEndParts = explode(':', $data['ef-time-end']);
 
-                if ($sid == 'null') {
-                    $sid = null;
+                    $dateEnd->setTime($timeEndParts[0], $timeEndParts[1], 0);
+
+                    $event->set('datetime_start', $dateStart->format('Y-m-d H:i:s'));
+                    $event->set('datetime_end', $dateEnd->format('Y-m-d H:i:s'));
+
+                    $sid = $data['ef-sid'];
+
+                    if ($sid == 'null') {
+                        $sid = null;
+                    }
+
+                    $event->set('sid', $sid);
+
+                    $capacity = $data['ef-capacity'];
+
+                    if (! $capacity) {
+                        $capacity = null;
+                    }
+
+                    $event->set('capacity', $capacity);
+
+                    $event->setMeta('notes', $data['ef-notes']);
+                    
+                    $eventManager->save($event);
+
+                    if ($repeat > 0) {
+                            $data['ef-date-start'] = $dateStart->modify('+' . $repeat. ' day')->format('Y-m-d H:i:s');
+                            $data['ef-date-end'] = $dateEnd->modify('+' . $repeat. ' day')->format('Y-m-d H:i:s');                        
+            
+                            $walkingDate->modify('+' . $repeat. ' day');
+                            $event = new Event();
+                    } else {
+                        $walkingDate->modify('+' . 1 . ' day');
+                    }
+
                 }
 
-                $event->set('sid', $sid);
-
-                $capacity = $data['ef-capacity'];
-
-                if (! $capacity) {
-                    $capacity = null;
+                $repeat = $data['ef-repeat'];
+                if ($repeat > 0) {
+                    $walkingDate = clone $dateStart;
+                    $walkingDate->setTime(0, 0, 0);
+                    $walkingDateLimit = new \DateTime($data['ef-repeat-end']);
+                    $walkingDateLimit->setTime(0, 0, 0);
+        
+                    while ($walkingDate <= $walkingDateLimit) {
+                        $eventManager->save($event);
+                        $event->set('datetime_start', $dateStart->modify('+' . $repeat. ' day')->format('Y-m-d H:i:s'));
+                        $event->set('datetime_end', $dateEnd->modify('+' . $repeat. ' day')->format('Y-m-d H:i:s'));                        
+        
+                        $walkingDate->modify('+' . $repeat. ' day');
+                    }
                 }
-
-                $event->set('capacity', $capacity);
-
-                $event->setMeta('notes', $data['ef-notes']);
-
-                $eventManager->save($event);
 
                 $this->flashMessenger()->addSuccessMessage('Event has been saved');
 
@@ -135,6 +181,7 @@ class EventController extends AbstractActionController
                     'ef-time-end' => $event->needExtra('datetime_end')->format('H:i'),
                     'ef-sid' =>  $event->get('sid'),
                     'ef-capacity' =>  $event->get('capacity', 0),
+                    'ef-repeat-end' => $this->dateFormat(new \DateTime(), \IntlDateFormatter::MEDIUM),
                     'ef-notes' =>  $event->getMeta('notes'),
                 ));
             } else {
@@ -147,6 +194,7 @@ class EventController extends AbstractActionController
                     'ef-time-end' => $params['dateTimeEnd']->format('H:i'),
                     'ef-sid' =>  $params['square']->get('sid'),
                     'ef-capacity' => 0,
+                    'ef-repeat-end' => $this->dateFormat(new \DateTime(), \IntlDateFormatter::MEDIUM),
                 ));
             }
         }

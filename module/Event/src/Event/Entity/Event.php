@@ -41,4 +41,11 @@ class Event extends AbstractLocaleEntity
         }
     }
 
+    public static $repeatOptions = array(
+        '0' => 'Only once',
+        '1' => 'Daily',
+        '7' => 'Weekly',
+        '28' => 'Monthly',
+    );
+
 }

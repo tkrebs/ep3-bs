@@ -200,7 +200,7 @@ class BookingController extends AbstractActionController
                 $editForm->setData(array(
                     'bf-sid' => $params['square']->get('sid'),
                     'bf-date-start' => $this->dateFormat($params['dateTimeStart'], \IntlDateFormatter::MEDIUM),
-                    'bf-date-end' => $this->dateFormat($params['dateTimeEnd'], \IntlDateFormatter::MEDIUM),
+                    'bf-date-end' => $this->dateFormat($params['dateTimeEnd'], \IntlDateFormatter::MEDIUM), 
                     'bf-time-start' => $params['dateTimeStart']->format('H:i'),
                     'bf-time-end' => $timeEnd,
                 ));
