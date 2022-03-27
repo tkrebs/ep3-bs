@@ -24,7 +24,7 @@ class EventController extends AbstractActionController
         $dateEnd = null;
 
         $events = array();
-        error_log($dateStartParam, 3, "/var/tmp/my-errors.log" );
+        
         if ($dateStartParam && $dateEndParam) {
             try {
                 $dateStart = new \DateTime($dateStartParam);
@@ -68,6 +68,7 @@ class EventController extends AbstractActionController
             $event = null;
         }
 
+        error_log('eid=' . $eid, 3, "/var/tmp/my-errors.log" );
         $editForm = $formElementManager->get('Backend\Form\Event\EditForm');
 
         if ($this->getRequest()->isPost()) {
@@ -75,9 +76,15 @@ class EventController extends AbstractActionController
 
             if ($editForm->isValid()) {
                 $data = $editForm->getData();
+                error_log('eid2=' . $eid, 3, "/var/tmp/my-errors.log" );
                 
-                $repeat = $data['ef-repeat'];
+                if (!$eid) {
+                    $repeat = $data['ef-repeat'];
+                } else {
+                    $repeat = 0;
+                }
                 
+                error_log('repeat=' . $repeat   , 3, "/var/tmp/my-errors.log" );
                 $dateStart = new \DateTime($data['ef-date-start']);
                 $dateEnd = new \DateTime($data['ef-date-end']);
 
@@ -150,28 +157,37 @@ class EventController extends AbstractActionController
 
                 }
 
-                $repeat = $data['ef-repeat'];
-                if ($repeat > 0) {
-                    $walkingDate = clone $dateStart;
-                    $walkingDate->setTime(0, 0, 0);
-                    $walkingDateLimit = new \DateTime($data['ef-repeat-end']);
-                    $walkingDateLimit->setTime(0, 0, 0);
-        
-                    while ($walkingDate <= $walkingDateLimit) {
-                        $eventManager->save($event);
-                        $event->set('datetime_start', $dateStart->modify('+' . $repeat. ' day')->format('Y-m-d H:i:s'));
-                        $event->set('datetime_end', $dateEnd->modify('+' . $repeat. ' day')->format('Y-m-d H:i:s'));                        
-        
-                        $walkingDate->modify('+' . $repeat. ' day');
-                    }
-                }
-
                 $this->flashMessenger()->addSuccessMessage('Event has been saved');
 
                 return $this->redirectBack()->toOrigin();
             }
         } else {
             if ($event) {
+                $editForm->add(array(
+                    'name' => 'ef-repeat',
+                    'type' => 'Select',
+                    'attributes' => array(
+                        'id' => 'ef-repeat',
+                        'style' => 'width: 124px; display: none;',
+                    ),
+                    'options' => array(
+                        'label' => 'Repeat',
+                        'value_options' => Event::$repeatOptions,
+                    ),
+                ));    
+                
+                $editForm->add(array(
+                    'name' => 'ef-repeat-end',
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'ef-repeat-end',
+                        'class' => 'datepicker',
+                        'style' => 'width: 80px; display: none;',
+                    ),
+                    'options' => array(
+                        'label' => 'Date (End)',
+                    ),
+                ));                      
                 $editForm->setData(array(
                     'ef-name' => $event->getMeta('name'),
                     'ef-description' => $event->getMeta('description'),
@@ -181,16 +197,16 @@ class EventController extends AbstractActionController
                     'ef-time-end' => $event->needExtra('datetime_end')->format('H:i'),
                     'ef-sid' =>  $event->get('sid'),
                     'ef-capacity' =>  $event->get('capacity', 0),
-                    'ef-repeat-end' => $this->dateFormat(new \DateTime(), \IntlDateFormatter::MEDIUM),
+                    // 'ef-repeat-end' => $this->dateFormat(new \DateTime(), \IntlDateFormatter::MEDIUM),
                     'ef-notes' =>  $event->getMeta('notes'),
                 ));
             } else {
                 $params = $this->backendBookingDetermineParams();
 
                 $editForm->setData(array(
-                    'ef-date-start' => $this->dateFormat($params['dateTimeStart'], \IntlDateFormatter::MEDIUM),
+                    'ef-date-start' => $this->dateFormat(new \DateTime(), \IntlDateFormatter::MEDIUM),
                     'ef-time-start' => $params['dateTimeStart']->format('H:i'),
-                    'ef-date-end' => $this->dateFormat($params['dateTimeEnd'], \IntlDateFormatter::MEDIUM),
+                    'ef-date-end' => $this->dateFormat(new \DateTime(), \IntlDateFormatter::MEDIUM),
                     'ef-time-end' => $params['dateTimeEnd']->format('H:i'),
                     'ef-sid' =>  $params['square']->get('sid'),
                     'ef-capacity' => 0,
