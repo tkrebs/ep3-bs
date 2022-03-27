@@ -4,6 +4,7 @@ namespace Calendar\View\Helper\Cell\Render;
 
 use Square\Entity\Square;
 use Zend\View\Helper\AbstractHelper;
+use Square\Manager\SquarePricingManager;
 
 class FreeForPrivileged extends AbstractHelper
 {
@@ -14,8 +15,20 @@ class FreeForPrivileged extends AbstractHelper
 
         $reservationsCount = count($reservations);
 
+        $serviceManager = $view->getHelperPluginManager()->getServiceLocator();
+        
+        $squarePricingManager = $serviceManager->get('Square\Manager\SquarePricingManager');
+        $dateTimeStart = new \DateTime($cellLinkParams["query"]["ds"] . ' ' . $cellLinkParams["query"]["ts"]);
+        $dateTimeEnd = new \DateTime($cellLinkParams["query"]["ds"] . ' ' . $cellLinkParams["query"]["te"]);
+        $pricing = $squarePricingManager->
+            getFinalPricingInRange($dateTimeStart, $dateTimeEnd, $square, 1);
+
         if ($reservationsCount == 0) {
 	        $labelFree = $square->getMeta('label.free', $this->view->t('Free'));
+            if ($pricing) {
+                $price = $pricing["price"];
+                $labelFree = $view->currencyFormat($price / 100);
+            }
 
             return $view->calendarCellLink($labelFree, $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free');
         } else if ($reservationsCount == 1) {

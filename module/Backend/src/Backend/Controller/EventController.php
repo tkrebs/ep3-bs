@@ -68,7 +68,6 @@ class EventController extends AbstractActionController
             $event = null;
         }
 
-        error_log('eid=' . $eid, 3, "/var/tmp/my-errors.log" );
         $editForm = $formElementManager->get('Backend\Form\Event\EditForm');
 
         if ($this->getRequest()->isPost()) {
@@ -76,7 +75,6 @@ class EventController extends AbstractActionController
 
             if ($editForm->isValid()) {
                 $data = $editForm->getData();
-                error_log('eid2=' . $eid, 3, "/var/tmp/my-errors.log" );
                 
                 if (!$eid) {
                     $repeat = $data['ef-repeat'];
@@ -84,7 +82,6 @@ class EventController extends AbstractActionController
                     $repeat = 0;
                 }
                 
-                error_log('repeat=' . $repeat   , 3, "/var/tmp/my-errors.log" );
                 $dateStart = new \DateTime($data['ef-date-start']);
                 $dateEnd = new \DateTime($data['ef-date-end']);
 
