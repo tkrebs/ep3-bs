@@ -506,4 +506,53 @@ class SquarePricingManager extends AbstractManager
         return $finalPricingInRange;
     }
 
+/**
+     * Determines the minimal and maximal calculated pricing for the passed square and datetime interval.
+     *
+     * @param DateTime $dateTimeStart
+     * @param DateTime $dateTimeEnd
+     * @param Square $square
+     * @param int $quantity
+     * @return array
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     */
+    public function getMinMaxPricingInRange(DateTime $dateTimeStart, DateTime $dateTimeEnd, Square $square, $quantity)
+    {
+        if ($dateTimeStart > $dateTimeEnd) {
+            throw new InvalidArgumentException('The passed date range is invalid');
+        }
+
+        $minMaxPricingInRange = array();
+        $minMaxPricingInRange["minPrice"] = 9999999999;
+        $minMaxPricingInRange["maxPrice"] = 0;
+
+        $days = $dateTimeEnd->format('z') - $dateTimeStart->format('z');
+
+        $walkingDate = clone $dateTimeStart;
+        $walkingDate->setTime(0, 0, 0);
+        $walkingDateLimit = clone $dateTimeEnd;
+        $walkingDateLimit->setTime(22, 0, 0);
+
+        while ($walkingDate <= $walkingDateLimit) {
+            $walkingTimeStart = $walkingDate->format('H:i');
+            $walkingDateClone = clone $walkingDate;
+            $walkingTimeEnd = $walkingDateClone->modify('+1 hour')->format('H:i');
+
+            $finalPricing = $this->getFinalPricing($walkingDate, $walkingTimeStart, $walkingTimeEnd, $square, $quantity);
+
+            if ($finalPricing) {
+                if ($minMaxPricingInRange['minPrice'] > $finalPricing['price']) {
+                    $minMaxPricingInRange['minPrice'] = $finalPricing['price'];
+                }
+                if ($minMaxPricingInRange['maxPrice'] < $finalPricing['price']) {
+                    $minMaxPricingInRange['maxPrice'] = $finalPricing['price'];
+                }
+            }
+            $walkingDate->modify('+1 hour');
+        }
+
+        return $minMaxPricingInRange;
+    }
+    
 }

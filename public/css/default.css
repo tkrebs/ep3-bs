@@ -278,6 +278,24 @@ a.cc-free:hover { background-color: #CCC; }
 
 a.cc-free-partially { text-decoration: underline; }
 
+a.cc-free-min:link,
+a.cc-free-min:visited { opacity: 1.0; color: #333; background-color: #EEE; }
+a.cc-free-min:hover { background-color: #CCC; }
+
+a.cc-free-min-partially { text-decoration: underline; }
+
+a.cc-free-max:link,
+a.cc-free-max:visited { opacity: 1.0; color: #333; background-color: #EEE; }
+a.cc-free-max:hover { background-color: #CCC; }
+
+a.cc-free-max-partially { text-decoration: underline; }
+
+a.cc-free-hidden:link,
+a.cc-free-hidden:visited { opacity: 1.0; color: #333; background-color: #EEE; display: none;}
+a.cc-free-hidden:hover { background-color: #CCC; display: none;}
+
+a.cc-free-hidden-partially { text-decoration: underline; }
+
 a.cc-own:link,
 a.cc-own:visited { opacity: 1.0; color: #FFF; background-color: #8BB243; }
 a.cc-own:hover { background-color: #5F8024; }
