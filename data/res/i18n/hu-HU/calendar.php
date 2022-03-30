@@ -16,7 +16,7 @@ return array(
     'Conflict' => 'Konfliktus',
     'Occupied' => 'Foglalt',
 
-    'Your Booking' => 'Foglalásai',
+    'Your Booking' => 'Foglalásom',
 
     'Loading' => 'Töltés',
     'Please wait' => 'Kérem várjon',

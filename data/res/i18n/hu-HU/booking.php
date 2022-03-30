@@ -6,7 +6,7 @@ return array(
     '%s-Booking' => '%s-Foglalás',
 
     'Single' => 'Egyedi',
-    'Subscription' => 'Előfizetéses',
+    'Subscription' => 'Bérletes',
     'Cancelled' => 'Lemondott',
 
     'Pending' => 'Függőben lévő',

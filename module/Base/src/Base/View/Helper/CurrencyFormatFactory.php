@@ -19,6 +19,7 @@ class CurrencyFormatFactory implements FactoryInterface
         $currencyFormat = new CurrencyFormat();
         $currencyFormat->setCurrencyCode($currency);
         $currencyFormat->setLocale($locale);
+        if ($currency == 'HUF') $currencyFormat->setShouldShowDecimals(false);
 
         return $currencyFormat;
     }
