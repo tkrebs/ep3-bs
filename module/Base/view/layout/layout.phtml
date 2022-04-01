@@ -49,19 +49,8 @@
                     <p>
                         <span class="light-gray"><?= $this->t('Our website') ?></span><br>
                         <span class="large-text">
-                            <a href="<?= $this->option('client.website') ?>" target="_blank" class="unlined white">
+                            <a href="<?= $this->option('client.website') ?>" class="unlined white">
                                 <?= $this->shortUrl($this->option('client.website')) ?>
-                            </a>
-                        </span>
-                    </p>
-                </div>
-
-                <div id="topbar-infos" class="responsive-pass-3">
-                    <p>
-                        <span class="light-gray"><?= $this->t('Information about') ?></span><br>
-                        <span class="large-text">
-                            <a href="<?= $this->url('service/info') ?>" class="unlined white">
-                                <?= $this->option('subject.type') ?>
                             </a>
                         </span>
                     </p>
@@ -98,7 +87,7 @@
             <div class="centered-text">
                 <span class="no-wrap">&copy; <?= date('Y') ?> <a href="<?= $this->option('client.website') ?>"><?= $this->option('client.name.full') ?></a></span>
                 (<a href="<?= $this->option('client.website.imprint') ?>"><?= $this->t('Imprint') ?></a><?php if ($this->option('client.website.privacy')): ?> &ndash; <a href="<?= $this->option('client.website.privacy') ?>"><?= $this->t('Privacy') ?></a><?php endif; ?>)
-                <span class="no-wrap">&amp; <a href="<?= $this->option('service.branding.website') ?>"><?= $this->option('service.branding.name') ?></a> (<?= $this->t('Software') ?>)</span>
+                <?php if ($this->option('service.branding', 'true') == 'true'): ?><span class="no-wrap">&amp; <a href="<?= $this->option('service.branding.website') ?>"><?= $this->option('service.branding.name') ?></a> (<?= $this->t('Software') ?>)</span><?php endif; ?>
             </div>
         </div>
 
