@@ -160,31 +160,7 @@ class EventController extends AbstractActionController
             }
         } else {
             if ($event) {
-                $editForm->add(array(
-                    'name' => 'ef-repeat',
-                    'type' => 'Select',
-                    'attributes' => array(
-                        'id' => 'ef-repeat',
-                        'style' => 'width: 124px; display: none;',
-                    ),
-                    'options' => array(
-                        'label' => 'Repeat',
-                        'value_options' => Event::$repeatOptions,
-                    ),
-                ));    
-                
-                $editForm->add(array(
-                    'name' => 'ef-repeat-end',
-                    'type' => 'Text',
-                    'attributes' => array(
-                        'id' => 'ef-repeat-end',
-                        'class' => 'datepicker',
-                        'style' => 'width: 80px; display: none;',
-                    ),
-                    'options' => array(
-                        'label' => 'Date (End)',
-                    ),
-                ));                      
+                   
                 $editForm->setData(array(
                     'ef-name' => $event->getMeta('name'),
                     'ef-description' => $event->getMeta('description'),
