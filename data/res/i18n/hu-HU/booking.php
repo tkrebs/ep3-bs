@@ -34,10 +34,10 @@ return array(
     'This reservation does not exist' => 'Ez a foglalás nem létezik',
 
     'Your %s-booking for %s' => 'Pályafoglalás visszaigazolása',
-    'we have reserved %s %s, %s for you. Thank you for your booking.'
-        => 'Foglalásának részletei:\r\n\r\n%s %s\nIdőpont: %s. \r\nKöszönjük a foglalást.',
-    'we have just cancelled %s %s, %s for you.'
-        => 'Lemondott foglalásának részletei:\r\n\r\n%s %s\r\nIdőpont: %s.',
+    "we have reserved %s %s, %s for you. Thank you for your booking."
+        => "Foglalásának részletei:\r\n\r\n%s %s\nIdőpont: %s. \r\nKöszönjük a foglalást.",
+    "we have just cancelled %s %s, %s for you."
+        => "Lemondott foglalásának részletei:\r\n\r\n%s %s\r\nIdőpont: %s.",
 
     '%s\'s %s-booking for %s' => '%s\'s %s-foglalás %s',
     '%s\'s %s-booking has been cancelled' => '%s\'s %s-foglalás lemondva',

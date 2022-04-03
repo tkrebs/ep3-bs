@@ -34,7 +34,7 @@ return array(
     'Your registration to the %s %s' => 'A regisztrációja a %s %s - hoz',
 
     "welcome to the %s %s!\r\n\r\nThank you for your registration to our service.\r\n\r\nBefore you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"
-        => "Üdvözöljük Önt!\r\n\r\nKöszönjük a regisztrációját.\r\n\r\nMielött foglalni tudna az új felhasználói fiókjávak %s, aktiválnia kell a következő linken!\r\n\r\n%s",
+        => "Üdvözöljük Önt!\r\n\r\nKöszönjük a regisztrációját.\r\n\r\nMielőtt foglalni tudna az új felhasználói fiókjával, aktiválnia kell a következő linken!\r\n\r\n%s",
 
     'Your activation code seems invalid. Please try again.' => 'Az aktivációs kódja nem érvényes. Kérjük próbálja meg újra.',
 
