@@ -5,7 +5,7 @@ return array(
     'You are not logged in (anymore)' => 'Nincs bejelentkezve',
     'You have no permission for this' => 'Ehhez nincs jogosultsága',
 
-    'Forgot password?' => 'Elfelejtette a jelszót?',
+    'Forgot password?' => 'Elfelejtette a jelszavát?',
     'Forgot your password?' => 'Elfelejtette a jelszavát?',
 
     'We have just received your request to reset your password.' => 'Megkaptuk a jelszóvisszaállítási kérését.',
@@ -34,7 +34,7 @@ return array(
     'Your registration to the %s %s' => 'A regisztrációja a %s %s - hoz',
 
     "welcome to the %s %s!\r\n\r\nThank you for your registration to our service.\r\n\r\nBefore you can completely use your new user account to book spare %s online, you have to activate it by simply clicking the following link. That's all!\r\n\r\n%s"
-        => "Üdvözöljük a %s %s -hoz!\r\n\r\nKöszönjük a regisztrációját.\r\n\r\nMielött foglalni tudna ez új felhasználói fiókjávak %s, aktiválnia kell a következő linken!\r\n\r\n%s",
+        => "Üdvözöljük Önt!\r\n\r\nKöszönjük a regisztrációját.\r\n\r\nMielött foglalni tudna az új felhasználói fiókjávak %s, aktiválnia kell a következő linken!\r\n\r\n%s",
 
     'Your activation code seems invalid. Please try again.' => 'Az aktivációs kódja nem érvényes. Kérjük próbálja meg újra.',
 
@@ -71,7 +71,7 @@ return array(
 
     'User' => 'Felhasználó',
 
-    'Placeholder' => 'Helykitöltés',
+    'Placeholder' => 'Pályahasználó',
     'Deleted user' => 'Törölt felhasználó',
     'Blocked user' => 'Blokkolt felhasználó',
     'Waiting for activation' => 'Aktiválásra vár',
@@ -102,7 +102,7 @@ return array(
     'Resend activation email' => 'Aktivációs email újraküldése',
 
     'Were you not happy with our service? Please tell us why you leave. Thank you!'
-        => 'Nem volt elégedett a szolgáltatásunkkal?<br>Kérjük mondja meg miért nem. Köszönjük!',
+        => 'Nem volt elégedett a szolgáltatásunkkal? <br>Kérjük mondja meg miért nem. Köszönjük!',
     'Delete account' => 'Felhasználó törlése',
 
     'Your current password' => 'Jelenlegi jelszava',
@@ -124,7 +124,7 @@ return array(
     'Your new password should be at least %min% characters long' => 'Az új jelszava minimum %min% karakter hosszú kell hogy legyen',
 
     'Notify on bookings and cancellations' => 'Figyelmeztessen foglalásoknál és lemondásoknál',
-    'We can send you confirmations per email' => 'Tudunk megerősítéseket küldeni email-enként',
+    'We can send you confirmations per email' => 'Engdeélyezi a megerősítő emailek küldését',
 
     'Update phone number' => 'Telefonszám frissítése',
     'Update email address' => 'Email cím frissítése',
@@ -156,7 +156,7 @@ return array(
 
     'Please type your name here' => 'Adja meg a nevét',
     'Your name is somewhat short ...' => 'A név túl rövid',
-    'Your name contains invalid characters - sorry' => 'A név nem érvényes karaktereket',
+    'Your name contains invalid characters - sorry' => 'A név nem érvényes karaktereket tartalmaz',
     'Your last name is somewhat short ...' => 'A vezetéknév rövid',
     'Your last name contains invalid characters - sorry' => 'A vezetéknév érvénytelen karaktereket tartalmaz',
     'Please type your street name here' => 'Adja meg az utca nevet itt',
@@ -184,7 +184,7 @@ return array(
     'You have already booked %s %s.' => 'Ön már foglalt %s %s.',
 
     'If you did not receive an activation email from us after registration, you can request a new one here.'
-        => 'Ha nem kapott aktivációs email a regisztrálás után, akkor itt tud újat kérni.',
+        => 'Ha nem kapott aktivációs emailt a regisztrálás után, akkor itt tud újat kérni.',
     'Therefore, please type the email adress you used for registration.' => 'Ezért kérem adja meg az email címet amit a regisztrációhoz használt.',
 
     'Your user account has been activated. You can now login with your email address and password. Have fun!'
@@ -201,28 +201,28 @@ return array(
     'You can now login with your email address and password. Have fun!'
         => 'Most már be tud jelentkezni az email címével és a jelszavával!',
     'However, your user account is %snot yet activated%s.'
-        => 'A felhasználói fiókja %smég nem aktivált%s.',
+        => 'A felhasználói fiókját %smég nem aktivált%s.',
     'This will happen during a quick manual verification of your user account data.'
         => 'Ez meg fog történni egy gyors manuális felhasználói fiók ellenőrzés során.',
     'Please be patient, this will be done soon.'
         => 'Kérem legyen türelemmel, hamarosan kész.',
     'The only step remaining is to %sactivate your user account%s.'
-        => 'Ez utolsó hátralevő lépés %shogy aktiválhassa a felhasználói fiókját%s.',
+        => 'Még egy utolsó lépésre van szükség, %shogy aktiválhassa a felhasználói fiókját%s.',
     'For this, we just sent you an email with an activation link within. Please check.'
-        => 'Elküldtünk egy aktivációs email-t.Kérjük ellenőrizze.',
+        => 'Elküldtünk egy aktivációs email-t. Kérjük ellenőrizze.',
     'If you did not receive an email from us, you can always %srequest a new one%s.'
-        => 'Ha nem kapta meg az aktivációs email-t %sakkor tud újat kérni%s.',
+        => 'Ha nem kapta meg az aktivációs email-t %sakkor itt tud újat kérni%s.',
 
     'Register now' => 'Regisztrálás',
     'Registration' => 'Regisztráció',
     'Activation' => 'Aktiválás',
-    'Welcome to our %s' => 'Üdvözöljük a %s-ben',
+    'Welcome to our %s' => 'Üdvözöljük Önt!',
 
     'You probably guessed it: To use our service, that is to book spare %s online, you need to create your own user account first.'
         => 'Bizonyára már kitalálta: Hogy szolgáltatásunkat online igénybe tudja venni, először regisztrálnia kell.',
     'The registration is of course free of cost and nonbinding.' => 'Természetesen a regisztráció ingyenes és nem kötelez semmire, valamint bármikor megszüntetheti.',
 
-    'We are very sorry, but the registration is currently not possible.' => 'Sajnáljuk a regisztrálás jelenleg nem lehetséges.',
+    'We are very sorry, but the registration is currently not possible.' => 'Sajnáljuk a regisztráció jelenleg nem lehetséges.',
 
     'Login data' => 'Belépési adatok',
     'Account data' => 'Felhasználói adatok',
@@ -257,6 +257,6 @@ return array(
     'This was an automated message from the system.' => 'Ez egy rendszerünk által előállított automatikus üzenet volt.',
 	'Originally sent to %s (%s).' => 'Eredetileg elküldve erre a címre %s (%s).',
     'Sincerely' => 'Üdvözlettel',
-    'Your' => 'Az ön',
+    'Your' => '',
 
 );
