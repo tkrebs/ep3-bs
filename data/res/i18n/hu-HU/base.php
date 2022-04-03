@@ -30,14 +30,14 @@ return array(
     'Saturday' => 'Szombat',
     'Sunday' => 'Vasárnap',
 
-    'Second' => 'Másodperc',
-    'Seconds' => 'Másodperc',
-    'Minute' => 'Perc',
-    'Minutes' => 'Perc',
-    'Hour' => 'Óra',
-    'Hours' => 'Óra',
-    'Day' => 'Nap',
-    'Days' => 'Nap',
+    'Second' => 'másodperc',
+    'Seconds' => 'másodperc',
+    'Minute' => 'perc',
+    'Minutes' => 'perc',
+    'Hour' => 'óra',
+    'Hours' => 'óra',
+    'Day' => 'nap',
+    'Days' => 'nap',
 
     'Calendar' => 'Naptár',
 

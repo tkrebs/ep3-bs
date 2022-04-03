@@ -37,8 +37,8 @@ return array(
     'This booking does contain multiple distinct reservations (please contact our support)'
         => 'Ez a foglalás nem tartalmaz pontosan kivehető lefoglalásokat, kérjük lépjen kapcsolatba az operátorunkkal',
 
-    'incl.' => 'tartalmazza',
-    'including' => 'tartalmazza',
+    'incl.' => 'tartalmazza a ',
+    'including' => 'tartalmazza a ',
     'plus' => 'plusz',
     'VAT' => 'Áfát',
 
