@@ -158,6 +158,8 @@ return array(
 
     'To provide language dependent content here, simply switch the global system language.'
         => 'Nyelvfüggő tartalom megadásához egyszerűen változtassa meg a globális rendszer nyelvet.',
+    
+    'System' => 'Rendszer',
 
     'New %s' => 'Új %s',
     'New product' => 'Új termék',
@@ -274,9 +276,16 @@ return array(
 
     'Optional message when readonly' => 'Opcionális üzenet csak olvasható módban',
 
+    'Name' => 'Név',
+    'Status' => 'Státusz',
     'Priority' => 'Prioritás',
     'Capacity' => 'Kapacitás',
     'How many players fit into one square?' => 'Hány játékos fér el egy pályán?',
+    'Erlaube optionale Anmerkungen bei der Buchung' => 'Foglaláskor engedélyezze az opcionális megjegyzéseket',
+    'Buchungsvorlauf' => 'Előfoglalás',
+    'Buchungen einschränken' => 'Foglalások korlátozása',
+    'gleichzeitige Buchung(en) pro Benutzer' => 'felhasználónként egyidejűleg',
+    'Auf 0 setzen, um beliebig viele Buchungen zu erlauben' => '0 esetén nincs korlátozás',
     'Don\'t ask for other player\'s names' => 'Ne kérjen további játékos neveket',
     'Ask for other player\'s names (optional)' => 'Opcionálisan megadhatóak további játékos nevek',
     'Ask for other player\'s names and email address (optional)' => 'Opcionálisan megadhatóak további játékos nevek és email címek',

@@ -39,7 +39,7 @@ return array(
     "we have just cancelled %s %s, %s for you."
         => "Lemondott foglalásának részletei:\r\n\r\n%s %s\r\nIdőpont: %s.",
 
-    '%s\'s %s-booking for %s' => '%s\'s %s-foglalás %s',
-    '%s\'s %s-booking has been cancelled' => '%s\'s %s-foglalás lemondva',
+    '%s\'s %s-booking for %s' => '%s\'s %sfoglalás %s',
+    '%s\'s %s-booking has been cancelled' => '%s\'s %sfoglalás lemondva',
 
 );

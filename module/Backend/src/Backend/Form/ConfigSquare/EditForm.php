@@ -227,7 +227,7 @@ class EditForm extends Form
             'options' => array(
                 'label' => 'Buchungsvorlauf',
                 'notes' => 'Auf 0 setzen, um den nächsten freien Zeitblock buchen zu dürfen',
-                'postfix' => 'Minuten',
+                'postfix' => 'Minutes',
             ),
         ));
 
