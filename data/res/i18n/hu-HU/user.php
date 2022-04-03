@@ -257,6 +257,6 @@ return array(
     'This was an automated message from the system.' => 'Ez egy rendszerünk által előállított automatikus üzenet volt.',
 	'Originally sent to %s (%s).' => 'Eredetileg elküldve erre a címre %s (%s).',
     'Sincerely' => 'Üdvözlettel',
-    'Your' => '',
+    'Your' => ' ',
 
 );

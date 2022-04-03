@@ -11,7 +11,7 @@ return array(
 
     'This booking cannot be cancelled anymore online.' => 'Ezt a foglalást nem lehet online lemondani.',
     'Your booking has been %scancelled%s.' => 'Az ön foglalása %slemondva%s.',
-    'Your %s-booking has been cancelled' => 'Az ön %s-foglalása lemondva',
+    'Your %s-booking has been cancelled' => 'Az ön foglalása lemondva',
 
     'Disabled' => 'Letiltva',
     'Read-Only' => 'Csak olvasható',
