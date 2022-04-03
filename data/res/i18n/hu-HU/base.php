@@ -41,9 +41,9 @@ return array(
 
     'Calendar' => 'Naptár',
 
-    'from %s to %s' => '%s -tól %s -ig',
+    'from %s to %s' => '%s-tól %s-ig',
     'from' => 'tól',
-    '%s to %s' => '%s ig %s',
+    '%s to %s' => '%s-tól %s-ig',
     'to' => '-',
     'and' => 'és',
     'or' => 'vagy',

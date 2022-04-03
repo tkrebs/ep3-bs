@@ -7,7 +7,7 @@ return array(
     '%sNote:%s Please read and accept our rules and notes.' => '%sSegédlet:%s Kérem olvassa el és fogadja el a szabályokat és a segédletet.',
     '%We are sorry:%s This did not work somehow. Please try again.'
         => '%sSajnáljuk:%s Ez valamiért nem működott. Kérem próbálja meg újra.',
-    '%sCongratulations:%s Your %s has been booked!' => '%sGratulálunk:%s A ön %s lefoglalva.',
+    '%sCongratulations:%s Your %s has been booked!' => '%sGratulálunk:%s A ön számára a %s lefoglalva.',
 
     'This booking cannot be cancelled anymore online.' => 'Ezt a foglalást nem lehet online lemondani.',
     'Your booking has been %scancelled%s.' => 'Az ön foglalása %slemondva%s.',
@@ -37,10 +37,10 @@ return array(
     'This booking does contain multiple distinct reservations (please contact our support)'
         => 'Ez a foglalás nem tartalmaz pontosan kivehető lefoglalásokat, kérjük lépjen kapcsolatba az operátorunkkal',
 
-    'incl.' => 'beleértve',
-    'including' => 'beleértve',
-    'plus' => 'plus',
-    'VAT' => 'Áfa',
+    'incl.' => 'tartalmazza',
+    'including' => 'tartalmazza',
+    'plus' => 'plusz',
+    'VAT' => 'Áfát',
 
     'Summary of your booking:' => 'A foglalások összegzése:',
     '%s items' => '%s példány',
@@ -58,7 +58,8 @@ return array(
 
 	'Your booking will be binding.' => 'A foglalása kötelező érvényű lesz.',
     'Your booking will be binding, however, you can cancel it up to %s before it takes place.'
-        => 'A foglalása kötelező érvényű lesz, azonban lemondhatja a foglalás előtt %s-ig',
+        => 'A foglalása kötelező érvényű lesz, azonban lemondhatja a foglalást megelőző %s-ig',
+    'Complete booking' => 'Foglalás megerősítése',
 
     'Cancel this booking' => 'Ezen foglalás lemondása',
     'Cancel booking' => 'Foglalás lemondása',
@@ -83,7 +84,7 @@ return array(
     'Book now' => 'Foglalás most',
     'Book more' => 'További foglalás',
     'You can %slogin%s or %sregister%s, %s to book this %s' => 'Ön %sbejelentkezhet%s vagy %sregisztrálhat%s, %s hogy lefoglalja a következőt %s',
-    'This %s has been %sbooked to you%s.' => 'Ez %s le lett foglalva %sönnek%s.',
+    'This %s has been %sbooked to you%s.' => 'Ez a %s le lett foglalva %sönnek%s.',
     'This %s is already occupied.' => 'Ez már %s foglalt.',
 
     '%s-Check' => '%s-Ellenőrzés',

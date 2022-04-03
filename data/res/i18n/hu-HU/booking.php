@@ -35,9 +35,9 @@ return array(
 
     'Your %s-booking for %s' => 'Az ön foglalásai %s a %s-hoz',
     'we have reserved %s %s, %s for you. Thank you for your booking.'
-        => 'Lefoglaltuk önnek %s %s am %s .Köszönjük a foglalást.',
+        => 'Foglalásának részletei:\n%s %s\nIdőpont: %s. \nKöszönjük a foglalást.',
     'we have just cancelled %s %s, %s for you.'
-        => 'Lemondtuk a foglalását %s %s, %s.',
+        => 'Lemondott foglalásának részletei:\n%s %s\nIdőpont: %s.',
 
     '%s\'s %s-booking for %s' => '%s\'s %s-foglalás %s',
     '%s\'s %s-booking has been cancelled' => '%s\'s %s-foglalás lemondva',
