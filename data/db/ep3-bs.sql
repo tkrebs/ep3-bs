@@ -378,3 +378,29 @@ ALTER TABLE `bs_squares_products`
 --
 ALTER TABLE `bs_users_meta`
   ADD CONSTRAINT `bs_users_meta_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `bs_users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `bs_square_groups` (
+  `sgid` tinyint NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Indexek a kiírt táblákhoz
+--
+
+--
+-- A tábla indexei `bs_square_groups`
+--
+ALTER TABLE `bs_square_groups`
+  ADD PRIMARY KEY (`sgid`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `bs_square_groups`
+--
+ALTER TABLE `bs_square_groups`
+  MODIFY `sgid` tinyint NOT NULL AUTO_INCREMENT;
+COMMIT;

@@ -23,6 +23,7 @@ class Square extends AbstractLocaleEntity
     protected $range_book;
     protected $max_active_bookings;
     protected $range_cancel;
+    protected $square_group;
 
     /**
      * The possible status options.

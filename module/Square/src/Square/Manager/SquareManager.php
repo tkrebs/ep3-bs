@@ -67,6 +67,11 @@ class SquareManager extends AbstractManager
                 $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `max_active_bookings` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `range_book`;', 'execute');
                 $loadSquares();
             }
+
+            if ($referenceSquare->get('square_group') === null) {
+                $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `square_group` tinyint(1) NOT NULL DEFAULT \'0\' AFTER `range_cancel`;', 'execute');
+                $loadSquares();
+            }
         }
 
         /* Load square meta data */
@@ -205,6 +210,7 @@ class SquareManager extends AbstractManager
                     'range_book' => $square->need('range_book'),
                     'max_active_bookings' => $square->get('max_active_bookings'),
                     'range_cancel' => $square->need('range_cancel'),
+                    'square_group' => $square->get('square_group'),
                 ));
 
                 $sid = $this->squareTable->getLastInsertValue();

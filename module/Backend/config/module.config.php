@@ -420,6 +420,8 @@ return array(
 
             'Backend\Form\ConfigSquare\EditProductForm' => 'Backend\Form\ConfigSquare\EditProductFormFactory',
 
+            'Backend\Form\ConfigSquare\EditForm' => 'Backend\Form\ConfigSquare\EditFormFactory',
+
             'Backend\Form\User\EditForm' => 'Backend\Form\User\EditFormFactory',
         ),
     ),
