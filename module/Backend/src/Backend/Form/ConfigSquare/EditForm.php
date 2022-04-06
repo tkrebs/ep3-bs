@@ -52,8 +52,11 @@ class EditForm extends Form
             ),
         ));
 
-        $squaregroups = [];
-        // if ($this->$squareGroupManager != null) $squaregroups = $this->$squareGroupManager->getAll();
+        $groupoptions[0] = "";
+        if ($this->squareGroupManager != null) $squaregroups = $this->squareGroupManager->getAll();
+        foreach ($squaregroups as $squaregroup) {
+            $groupoptions[$squaregroup->get("sgid")] = $squaregroup->get("description");
+        }
         
 
         $this->add(array(
@@ -65,7 +68,7 @@ class EditForm extends Form
             ),
             'options' => array(
                 'label' => 'Group',
-                'value_options' => $squaregroups,
+                'value_options' => $groupoptions,
             ),
         ));
 

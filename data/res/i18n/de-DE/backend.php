@@ -274,6 +274,7 @@ return array(
 
     'Optional message when readonly' => 'Optionale Nachricht wenn schreibgeschützt',
 
+    'Group' => 'Gruppe',
     'Priority' => 'Priorität',
     'Capacity' => 'Kapazität',
     'How many players fit into one square?' => 'Wieviele Spieler passen auf einen Platz?',

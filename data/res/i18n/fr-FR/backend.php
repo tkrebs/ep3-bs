@@ -262,6 +262,7 @@ return array(
 
     'Optional message when readonly' => 'Message optionnel en mode lecture seule',
 
+    'Group' => 'Grouper',
     'Priority' => 'Priorité',
     'Capacity' => 'Capacité',
     'How many players fit into one square?' => 'Combien de joueurs peuvent utiliser un court ?',

@@ -82,6 +82,20 @@ $this->setup(array(
 
             <tr>
                 <td>
+                    <a href="<?= $this->url('backend/config/square/squaregroup') ?>" class="default-button" style="width: 160px; text-align: left;">
+                        <span class="symbolic symbolic-config"><?= $this->t('Squaeregroup') ?></span>
+                    </a>
+                </td>
+
+                <td>
+                    <p class="gray">
+                        <?= sprintf($this->t('Which %s-groups do you have? What are their names?'), $this->option('subject.square.type')) ?>
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     <a href="<?= $this->url('backend/config/square/pricing') ?>" class="default-button" style="width: 160px; text-align: left;">
                         <span class="symbolic symbolic-config"><?= $this->t('Pricing') ?></span>
                     </a>

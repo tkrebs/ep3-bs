@@ -4,6 +4,7 @@ namespace Backend\Controller;
 
 use Square\Entity\Square;
 use Square\Entity\SquareProduct;
+use Square\Entity\SquareGroup;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class ConfigSquareController extends AbstractActionController
@@ -72,6 +73,7 @@ class ConfigSquareController extends AbstractActionController
                 $square->set('max_active_bookings', $editData['cf-max-active-bookings']);
                 $square->set('range_cancel', $editData['cf-range-cancel'] * 60 * 60);
 	            $square->setMeta('label.free', $editData['cf-label-free'], $locale);
+                $square->set('square_group', $editData['cf-group']);
 
                 $squareManager->save($square);
 
@@ -95,6 +97,7 @@ class ConfigSquareController extends AbstractActionController
                 $editForm->setData(array(
                     'cf-name' => $square->get('name'),
                     'cf-status' => $square->get('status'),
+                    'cf-group' => $square->get('square_group'),
                     'cf-readonly-message' => $square->getMeta('readonly.message'),
                     'cf-priority' => $square->get('priority'),
                     'cf-capacity' => $square->get('capacity'),
@@ -117,6 +120,7 @@ class ConfigSquareController extends AbstractActionController
             } else {
                 $editForm->setData(array(
                     'cf-status' => 'enabled',
+                    'cf-group' => 0,
                     'cf-priority' => 1,
                     'cf-capacity' => 1,
                     'cf-capacity-heterogenic' => false,
@@ -212,6 +216,95 @@ class ConfigSquareController extends AbstractActionController
             'editForm' => $editForm,
         );
     }
+
+    public function squareGroupAction()
+    {
+        $this->authorize('admin.config');
+
+        $squareGroupManager = @$this->getServiceLocator()->get('Square\Manager\SquareGroupManager');
+        $squareGroups = $squareGroupManager->getAll('sgid ASC');
+
+        return array(
+            'squareGroups' => $squareGroups,
+        );
+    }
+
+    public function squareGroupEditAction()
+    {
+        $this->authorize('admin.config');
+
+        $serviceManager = @$this->getServiceLocator();
+        $squareGroupManager = $serviceManager->get('Square\Manager\SquareGroupManager');
+        $formElementManager = $serviceManager->get('FormElementManager');
+
+        $sgid = $this->params()->fromRoute('sgid');
+
+        if ($sgid) {
+            $squareGroup = $squareGroupManager->get($sgid);
+        } else {
+            $squareGroup = null;
+        }
+
+        $editForm = $formElementManager->get('Backend\Form\ConfigSquare\EditSquareGroupForm');
+
+        if ($this->getRequest()->isPost()) {
+            $editForm->setData($this->params()->fromPost());
+
+            if ($editForm->isValid()) {
+                $editData = $editForm->getData();
+
+                if (! $squareGroup) {
+                    $squareGroup = new SquareGroup();
+                }
+
+                $squareGroup->set('description', $editData['cf-description']);
+
+                $squareGroupManager->save($squareGroup);
+
+                $this->flashMessenger()->addSuccessMessage('Group has been saved');
+
+                return $this->redirect()->toRoute('backend/config/square/squaregroup');
+            }
+        } else {
+            if ($squareGroup) {
+                $editForm->setData(array(
+                    'cf-sgid' => $squareGroup->get('sgid'),
+                    'cf-description' => $squareGroup->get('description'),
+                ));
+            }
+        }
+
+        return array(
+            'squareGroup' => $squareGroup,
+            'editForm' => $editForm,
+        );
+    }    
+
+    public function squareGroupDeleteAction()
+    {
+        $this->authorize('admin.config');
+
+        $sgid = $this->params()->fromRoute('sgid');
+
+        $serviceManager = @$this->getServiceLocator();
+        $squareGroupManager = $serviceManager->get('Square\Manager\SquareGroupManager');
+
+        $squareGroup = $squareGroupManager->get($sgid);
+
+        if ($this->params()->fromQuery('confirmed') == 'true') {
+
+            $squareGroupManager->delete($squareGroup);
+
+            $this->flashMessenger()->addSuccessMessage('Group has been deleted');
+
+            return $this->redirect()->toRoute('backend/config/square/squaregroup');
+        }
+
+        return array(
+            'sgid' => $sgid,
+        );
+    }    
+
 
     public function pricingAction()
     {

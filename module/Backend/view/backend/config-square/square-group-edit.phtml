@@ -1,0 +1,33 @@
+<?php
+
+if ($this->squareGroup) {
+    $sgid = $this->squareGroup->need('sgid');
+} else {
+    $sgid = null;
+}
+
+$this->setup(array(
+    'title' => 'Groups',
+    'panel' => 'centered-panel large-sized',
+    'back' => array(
+        'Groups' => $this->url('backend/config/square/squaregroup'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Groups') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p><?= sprintf($this->t('Which %s-groups do you have? What are their names?'), $this->option('subject.square.type')) ?></p>
+ 
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?= $this->formDefault($this->editForm, $this->url('backend/config/square/squaregroup/edit', ['sgid' => $sgid])) ?>
+
+    </div>
+</div>
