@@ -93,6 +93,8 @@ class CalendarController extends AbstractActionController
         $squaresCount = count($squares);
         $squaresFilter = $this->params()->fromQuery('squares');
 
+        $group = $this->params()->fromQuery('group-select');
+
         $reservations = $reservationManager->getInRange($dateStart, $dateEnd);
         $bookings = $bookingManager->getByReservations($reservations);
         $events = $eventManager->getInRange($dateStart, $dateEnd);

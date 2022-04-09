@@ -22,6 +22,12 @@ return array(
         ),
     ),
 
+    'view_helpers' => array(
+        'factories' => array (
+            'FrontendSquareGroupList' => 'Frontend\View\Helper\SquareGroupListFactory',
+        ),
+    ),
+
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__ . '/../view',

@@ -472,6 +472,7 @@ return array(
 
             'BackendSquareProductsFormat' => 'Backend\View\Helper\Square\ProductsFormat',
             'BackendSquareGroupsFormat' => 'Backend\View\Helper\Square\SquareGroupsFormat',
+            'BackendSquareGroupFormat' => 'Backend\View\Helper\Square\SquareGroupFormat',
             'BackendSquareFormat' => 'Backend\View\Helper\Square\SquareFormat',
             'BackendSquaresFormat' => 'Backend\View\Helper\Square\SquaresFormat',
 
@@ -489,7 +490,6 @@ return array(
 
             'BackendSquareProductFormat' => 'Backend\View\Helper\Square\ProductFormatFactory',
 
-            'BackendSquareGroupFormat' => 'Backend\View\Helper\Square\SquareGroupFormatFactory',
         ),
     ),
 

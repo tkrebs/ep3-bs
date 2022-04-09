@@ -52,12 +52,9 @@ class EditForm extends Form
             ),
         ));
 
+        $groupoptions = $this->squareGroupManager->getOptions();
         $groupoptions[0] = "";
-        if ($this->squareGroupManager != null) $squaregroups = $this->squareGroupManager->getAll();
-        foreach ($squaregroups as $squaregroup) {
-            $groupoptions[$squaregroup->get("sgid")] = $squaregroup->get("description");
-        }
-        
+       
 
         $this->add(array(
             'name' => 'cf-group',

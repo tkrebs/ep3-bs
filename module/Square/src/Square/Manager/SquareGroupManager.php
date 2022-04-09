@@ -161,6 +161,18 @@ class SquareGroupManager extends AbstractManager
         return $this->getBy(null, $order, $limit, $offset);
     }
 
+    public function getOptions()
+    {
+        $squaregroups = $this->getAll();
+        $groupoptions = [];
+        foreach ($squaregroups as $squaregroup) {
+            $groupoptions[$squaregroup->get("sgid")] = $squaregroup->get("description");
+        }  
+        
+        return $groupoptions;
+        
+    }
+
     /**
      * Deletes one square group.
      *

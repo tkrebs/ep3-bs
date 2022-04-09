@@ -3,18 +3,10 @@
 namespace Backend\View\Helper\Square;
 
 use Square\Entity\SquareGroup;
-use Square\Manager\SquareManager;
 use Zend\View\Helper\AbstractHelper;
 
 class SquareGroupFormat extends AbstractHelper
 {
-
-    protected $squareManager;
-
-    public function __construct(SquareManager $squareManager)
-    {
-        $this->squareManager = $squareManager;
-    }
 
     public function __invoke(SquareGroup $squareGroup)
     {
