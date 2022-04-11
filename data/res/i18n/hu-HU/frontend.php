@@ -21,6 +21,7 @@ return array(
 
     'Get additional %shelp and information%s' => 'Több %ssegítség és információ%s kérése',
 
+    'Court types' => 'Pályatípusok',
     'Online as %s' => 'Belépve mint %s',
 
     'Administration' => 'Adminisztráció',

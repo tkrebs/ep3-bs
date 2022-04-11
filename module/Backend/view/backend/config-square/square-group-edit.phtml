@@ -7,21 +7,21 @@ if ($this->squareGroup) {
 }
 
 $this->setup(array(
-    'title' => 'Groups',
+    'title' => 'Court group',
     'panel' => 'centered-panel large-sized',
     'back' => array(
-        'Groups' => $this->url('backend/config/square/squaregroup'),
+        'Court groups' => $this->url('backend/config/square/squaregroup'),
     ),
 ));
 
 ?>
 
 <div>
-    <h1><?= $this->t('Groups') ?></h1>
+    <h1><?= $this->t('Court group') ?></h1>
 
     <div class="separator-small"></div>
 
-    <p><?= sprintf($this->t('Which %s-groups do you have? What are their names?'), $this->option('subject.square.type')) ?></p>
+    <p><?= sprintf($this->t('Here you can add description to %s-group'), $this->option('subject.square.type')) ?></p>
  
     <div class="separator separator-line"></div>
 

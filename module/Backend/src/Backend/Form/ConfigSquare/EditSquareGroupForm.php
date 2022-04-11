@@ -33,7 +33,7 @@ class EditSquareGroupForm extends Form
             ),
             'options' => array(
                 'label' => 'Description',
-                'notes' => 'Optional description of this product',
+                'notes' => 'Description of this group',
             ),
         ));
 
@@ -55,7 +55,7 @@ class EditSquareGroupForm extends Form
         $this->setInputFilter($factory->createInputFilter(array(
 
             'cf-description' => array(
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),

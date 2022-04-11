@@ -21,6 +21,8 @@ return array(
 
     'Get additional %shelp and information%s' => 'Hier erhalten Sie zusätzliche %sHilfe und Infos%s',
 
+    'Court types' => 'Platzgruppen',
+
     'Online as %s' => 'Angemeldet als %s',
 
     'Administration' => 'Verwaltung',
