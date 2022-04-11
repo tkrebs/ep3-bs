@@ -44,7 +44,9 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version is 1.7.0 from January, 2021.
+The current version is 1.8.0 from April, 2022.
+
+Version 1.8.0 corrects bug by language selector. Introducing new function court-types, to be able to handle unlimited number of courts. (Géza Várszegi)
 
 Version 1.7.0 provides compatibility with PHP 7.4 by overriding and fixing some of the Zend Framework 2 components.
 
