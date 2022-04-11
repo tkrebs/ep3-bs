@@ -84,15 +84,18 @@ class CalendarController extends AbstractActionController
         $dateEnd->setTime(23, 59, 59);
         $dateNow = new DateTime();
 
+        $group = $this->params()->fromQuery('group-select');
+        if (!$group) $group = $squareManager->getMinSquareGroup();
+        $squares = $this->calendarDetermineSquares($group);
         $timeStart = $squareManager->getMinStartTime();
         $timeEnd = $squareManager->getMaxEndTime();
         $timeBlock = $squareManager->getMinTimeBlock();
         $timeBlockCount = ceil(($timeEnd - $timeStart) / $timeBlock);
 
-        $squares = $this->calendarDetermineSquares();
         $squaresCount = count($squares);
         $squaresFilter = $this->params()->fromQuery('squares');
 
+        
         $reservations = $reservationManager->getInRange($dateStart, $dateEnd);
         $bookings = $bookingManager->getByReservations($reservations);
         $events = $eventManager->getInRange($dateStart, $dateEnd);

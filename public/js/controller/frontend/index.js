@@ -4,6 +4,12 @@
 
         $("#calendar-toolbar-datepicker-submit").hide();
 
+        $("#group-select").change(function () {
+            var optionValue = $(this).val();
+            var url = window.location.origin;
+            window.location = url + '?group-select=' + optionValue;
+        });
+
         /* Beautify messages panel */
 
         var messagesPanel = $(".messages-panel");

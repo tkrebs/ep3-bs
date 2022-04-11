@@ -70,6 +70,7 @@ return array(
             'Square\Manager\SquareManager' => 'Square\Manager\SquareManagerFactory',
             'Square\Manager\SquarePricingManager' => 'Square\Manager\SquarePricingManagerFactory',
             'Square\Manager\SquareProductManager' => 'Square\Manager\SquareProductManagerFactory',
+            'Square\Manager\SquareGroupManager' => 'Square\Manager\SquareGroupManagerFactory',
 
             'Square\Service\SquareValidator' => 'Square\Service\SquareValidatorFactory',
 
@@ -78,6 +79,7 @@ return array(
 
             'Square\Table\SquarePricingTable' => 'Square\Table\SquarePricingTableFactory',
             'Square\Table\SquareProductTable' => 'Square\Table\SquareProductTableFactory',
+            'Square\Table\SquareGroupTable' => 'Square\Table\SquareGroupTableFactory',
         ),
     ),
 

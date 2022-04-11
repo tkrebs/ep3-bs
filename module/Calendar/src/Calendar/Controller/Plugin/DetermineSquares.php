@@ -17,11 +17,11 @@ class DetermineSquares extends AbstractPlugin
         $this->squareManager = $squareManager;
     }
 
-    public function __invoke()
+    public function __invoke($group)
     {
         $controller = $this->getController();
 
-        $visibleSquares = $this->squareManager->getAllVisible();
+        $visibleSquares = $this->squareManager->getAllVisible($group);
 
         try {
             $passedSquares = $controller->params()->fromQuery('squares');

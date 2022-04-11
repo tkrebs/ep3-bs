@@ -144,6 +144,15 @@ return array(
     'Help page text is too short' => 'Der Text der Hilfeseite ist zu kurz',
     'Which text should appear on the help page?' => 'Welcher Text soll auf der Hilfeseite erscheinen?',
     'Which %s do you have? What are their names?' => 'Welche %s haben Sie? Wie sollen diese heißen?',
+
+    'Squaregroup' => 'Platzgruppen',
+    'Which %s-groups do you have? What are their names?' => 'Welche %s-gruppen haben wir? Wie heissen die?',
+    'Court groups' => 'Platzgruppen',
+    'Court group' => 'Platzgruppe',
+    'New group' => 'Neue Gruppe',
+    'Here you can add description to %s-group' => 'Hier kannst Du eune Gruppebeschreibung eingeben',
+    'Description of this group' => 'Beschreibung der Gruppe',
+
     'Pricing' => 'Preise',
     'Pricing rules' => 'Preisregeln',
     'Pricing rules have been saved' => 'Preisregeln wurden gespeichert',
@@ -274,6 +283,7 @@ return array(
 
     'Optional message when readonly' => 'Optionale Nachricht wenn schreibgeschützt',
 
+    'Group' => 'Gruppe',
     'Priority' => 'Priorität',
     'Capacity' => 'Kapazität',
     'How many players fit into one square?' => 'Wieviele Spieler passen auf einen Platz?',

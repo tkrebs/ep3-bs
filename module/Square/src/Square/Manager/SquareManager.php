@@ -21,6 +21,7 @@ class SquareManager extends AbstractManager
 
     protected $squares = array();
     protected $activeSquares = array();
+    protected $group;
 
     /**
      * Creates a new square manager object.
@@ -67,6 +68,11 @@ class SquareManager extends AbstractManager
                 $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `max_active_bookings` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `range_book`;', 'execute');
                 $loadSquares();
             }
+
+            if ($referenceSquare->get('square_group') === null) {
+                $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `square_group` tinyint(1) NOT NULL DEFAULT \'0\' AFTER `range_cancel`;', 'execute');
+                $loadSquares();
+            }
         }
 
         /* Load square meta data */
@@ -100,7 +106,8 @@ class SquareManager extends AbstractManager
 
             /* Prepare active squares */
 
-            $this->activeSquares = $this->getAllVisible();
+            $group = $this->getMinSquareGroup();
+            $this->activeSquares = $this->getAllVisible($group);
         }
     }
 
@@ -205,6 +212,7 @@ class SquareManager extends AbstractManager
                     'range_book' => $square->need('range_book'),
                     'max_active_bookings' => $square->get('max_active_bookings'),
                     'range_cancel' => $square->need('range_cancel'),
+                    'square_group' => $square->get('square_group'),
                 ));
 
                 $sid = $this->squareTable->getLastInsertValue();
@@ -306,13 +314,20 @@ class SquareManager extends AbstractManager
      *
      * @return array
      */
-    public function getAllVisible()
+    public function getAllVisible($group)
     {
+        if ($this->group != $group) 
+        {
+            $this->activeSquares = array();
+            $this->group = $group;
+        }
         if (! $this->activeSquares) {
             $this->activeSquares = array();
 
             foreach ($this->squares as $square) {
-                if ($square->need('status') == 'enabled' || $square->need('status') == 'readonly') {
+                if ($square->need('square_group') == $group && 
+                    ($square->need('status') == 'enabled' || $square->need('status') == 'readonly')) 
+                {
                     $this->activeSquares[$square->need('sid')] = $square;
                 }
             }
@@ -353,6 +368,7 @@ class SquareManager extends AbstractManager
         $minStartTime = 86400;
 
         foreach ($this->activeSquares as $square) {
+                    
             $currentTimeParts = explode(':', $square->need('time_start'));
             $currentTime = $currentTimeParts[0] * 3600 + $currentTimeParts[1] * 60;
 
@@ -547,4 +563,20 @@ class SquareManager extends AbstractManager
         return $deletion;
     }
 
+/**
+     * Gets min squaregroup
+     *
+     * @return int
+     */
+    public function getMinSquareGroup()
+    {
+        $min = 9999999;
+        foreach ($this->squares as $square) 
+        {
+            if ($square->get('square_group') < $min) {
+                $min = $square->get('square_group');
+            }
+        }
+        return $min;
+    }
 }

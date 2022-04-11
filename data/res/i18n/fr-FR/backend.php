@@ -140,6 +140,15 @@ return array(
     'Help page text is too short' => 'Le texte de la page aide est trop court',
     'Which text should appear on the help page?' => 'Quel texte doit apparaître dans la page aide?',
     'Which %s do you have? What are their names?' => 'De combien de %s disposez-vous? Quels sont leur noms?',
+
+    'Squaregroup' => 'Courtgroupes',
+    'Which %s-groups do you have? What are their names?' => 'Quels %s-groupes avez-vous? Quels sont leurs noms?',
+    'Court groups' => 'Courtgroupes',
+    'Court group' => 'Courtgrouper',
+    'New group' => 'Nouveau groupe',
+    'Here you can add description to %s-group' => 'Ici, vous pouvez ajouter une description au groupe %s',
+    'Description of this group' => 'Description de ce groupe',
+
     'Pricing' => 'Tarifs',
     'Pricing rules' => 'Politiques tarifaires',
     'Pricing rules have been saved' => 'Politiques tarifaires sauvegardés',
@@ -262,6 +271,7 @@ return array(
 
     'Optional message when readonly' => 'Message optionnel en mode lecture seule',
 
+    'Group' => 'Grouper',
     'Priority' => 'Priorité',
     'Capacity' => 'Capacité',
     'How many players fit into one square?' => 'Combien de joueurs peuvent utiliser un court ?',

@@ -3,14 +3,28 @@
 namespace Backend\Form\ConfigSquare;
 
 use Square\Entity\Square;
+use Square\Entity\SquareGroup;
+use Square\Manager\SquareGroupManager;
 use Zend\Form\Form;
 use Zend\InputFilter\Factory;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class EditForm extends Form
 {
 
+    protected $squareGroupManager;
+
+    public function __construct(SquareGroupManager $squareGroupManager)
+    {
+        parent::__construct();
+
+         $this->squareGroupManager = $squareGroupManager;
+    }
+
     public function init()
     {
+
         $this->setName('cf');
 
         $this->add(array(
@@ -35,6 +49,23 @@ class EditForm extends Form
             'options' => array(
                 'label' => 'Status',
                 'value_options' => Square::$statusOptions,
+            ),
+        ));
+
+        $groupoptions = $this->squareGroupManager->getOptions();
+        $groupoptions[0] = "";
+       
+
+        $this->add(array(
+            'name' => 'cf-group',
+            'type' => 'Select',
+            'attributes' => array(
+                'id' => 'cf-group',
+                'style' => 'width: 160px',
+            ),
+            'options' => array(
+                'label' => 'Group',
+                'value_options' => $groupoptions,
             ),
         ));
 
@@ -552,5 +583,6 @@ class EditForm extends Form
             ),
         )));
     }
+
 
 }

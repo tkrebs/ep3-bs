@@ -212,11 +212,23 @@ a#logo:active { top: 1px; }
 
 /* Layout - Calendar */
 
+@media screen and (min-width: 1280px)
+{
+    #calendar-toolbar {
+        display: flex;
+        justify-content: space-between;   
+    }
+
+}
 #calendar-toolbar table td { padding-right: 8px; }
 #calendar-toolbar table td:last-child { padding-right: 0; }
 
+
+
 #calendar-toolbar-datepicker { float: left; }
 #calendar-toolbar-userpanel { float: right; }
+#calendar-toolbar-groupselector { display: inline-block; }
+
 #calendar { clear: both; }
 
 .calendar-table, .calendar-table table, .calendar-table td { text-align: center; }

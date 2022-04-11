@@ -276,6 +276,42 @@ return array(
                                             ),
                                         ),
                                     ),
+                                    'squaregroup' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/squaregroup',
+                                            'defaults' => array(
+                                                'action' => 'squaregroup',
+                                            ),
+                                        ),
+                                        'may_terminate' => true,
+                                        'child_routes' => array(
+                                            'edit' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/edit[/:sgid]',
+                                                    'defaults' => array(
+                                                        'action' => 'squareGroupEdit',
+                                                    ),
+                                                    'constraints' => array(
+                                                        'sgid' => '[0-9]+',
+                                                    ),
+                                                ),
+                                            ),
+                                            'delete' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/delete/:sgid',
+                                                    'defaults' => array(
+                                                        'action' => 'squareGroupDelete',
+                                                    ),
+                                                    'constraints' => array(
+                                                        'sgid' => '[0-9]+',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),                                    
                                     'pricing' => array(
                                         'type' => 'Literal',
                                         'options' => array(
@@ -420,6 +456,10 @@ return array(
 
             'Backend\Form\ConfigSquare\EditProductForm' => 'Backend\Form\ConfigSquare\EditProductFormFactory',
 
+            'Backend\Form\ConfigSquare\EditSquareGroupForm' => 'Backend\Form\ConfigSquare\EditSquareGroupFormFactory',
+
+            'Backend\Form\ConfigSquare\EditForm' => 'Backend\Form\ConfigSquare\EditFormFactory',
+
             'Backend\Form\User\EditForm' => 'Backend\Form\User\EditFormFactory',
         ),
     ),
@@ -431,7 +471,8 @@ return array(
             'BackendEventsFormat' => 'Backend\View\Helper\Event\EventsFormat',
 
             'BackendSquareProductsFormat' => 'Backend\View\Helper\Square\ProductsFormat',
-
+            'BackendSquareGroupsFormat' => 'Backend\View\Helper\Square\SquareGroupsFormat',
+            'BackendSquareGroupFormat' => 'Backend\View\Helper\Square\SquareGroupFormat',
             'BackendSquareFormat' => 'Backend\View\Helper\Square\SquareFormat',
             'BackendSquaresFormat' => 'Backend\View\Helper\Square\SquaresFormat',
 
@@ -448,6 +489,7 @@ return array(
             'BackendEventFormat' => 'Backend\View\Helper\Event\EventFormatFactory',
 
             'BackendSquareProductFormat' => 'Backend\View\Helper\Square\ProductFormatFactory',
+
         ),
     ),
 

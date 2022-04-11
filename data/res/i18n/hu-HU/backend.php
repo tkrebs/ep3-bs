@@ -144,6 +144,14 @@ return array(
     'Help page text is too short' => 'A segítség oldalon a szöveg túl rövid',
     'Which text should appear on the help page?' => 'Melyik szöveg jelenjen meg a segítség oldalon?',
     'Which %s do you have? What are their names?' => 'Melyik %s vannak? Mik a neveik?',
+    'Squaregroup' => 'Pályacsoportok',
+    'Which %s-groups do you have? What are their names?' => 'Milyen %s-csoportok vannak? Mi a nevük?',
+    'New group' => 'Új csoport',
+    'Court groups' => 'Pálya csoportok',
+    'Court group' => 'Pálya csoport',
+    'Here you can add description to %s-group' => 'Itt adhat meg leírást a %s-csoporthoz',
+    'Description of this group' => 'A csoport leírása',
+
     'Pricing' => 'Árak',
     'Pricing rules' => 'Ár szabályok',
     'Pricing rules have been saved' => 'Ár szabályok elmentve',
@@ -278,6 +286,7 @@ return array(
 
     'Name' => 'Név',
     'Status' => 'Státusz',
+    'Group' => 'Csoport',
     'Priority' => 'Prioritás',
     'Capacity' => 'Kapacitás',
     'How many players fit into one square?' => 'Hány játékos fér el egy pályán?',

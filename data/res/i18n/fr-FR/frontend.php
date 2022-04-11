@@ -21,6 +21,10 @@ return array(
 
     'Get additional %shelp and information%s' => 'Obtenir %sune aide ou des Infos supplémentaires%s',
 
+    'Court types' => 'Type de court',
+
+
+
     'Online as %s' => 'Connecté en %s',
 
     'Administration' => 'Administration',

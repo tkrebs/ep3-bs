@@ -35,6 +35,8 @@ class HeaderLocaleChoice extends AbstractHelper
             $uriString = $this->uri->toString();
             $localePattern = '/locale=[^&]+/';
 
+            $loc = $this->configManager->need('i18n.locale');
+
             if (preg_match($localePattern, $uriString)) {
                 $href = preg_replace($localePattern, 'locale=' . $locale, $uriString);
             } else {
@@ -45,8 +47,10 @@ class HeaderLocaleChoice extends AbstractHelper
                 }
             }
 
-            $html .= sprintf('<div><a href="%1$s" title="%2$s" class="unlined white"><img src="%3$s" alt="%2$s"></a></div>',
-                $href, $title, $view->basePath('imgs/icons/locale/' . $locale . '.png'));
+            if ($loc != $locale) {
+                $html .= sprintf('<div><a href="%1$s" title="%2$s" class="unlined white"><img src="%3$s" alt="%2$s"></a></div>',
+                    $href, $title, $view->basePath('imgs/icons/locale/' . $locale . '.png'));
+            }
         }
 
         $html .= '</div>';
