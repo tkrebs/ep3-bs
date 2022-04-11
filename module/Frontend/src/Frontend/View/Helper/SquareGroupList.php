@@ -29,7 +29,6 @@ class SquareGroupList extends AbstractHelper
 
         foreach ($squareGroups as $squareGroup) {
             $html .= '<option value="' . $squareGroup->get('sgid') . '"';
-            error_log('group cycle=' . $squareGroup->get('sgid'), 3, '/tmp/booking.log');
             if ($squareGroup->get('sgid') == $group) $html .= ' selected';
             $html .= '>' . $squareGroup->get('description') . '</option>';
         }
