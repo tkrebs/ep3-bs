@@ -227,7 +227,7 @@ a#logo:active { top: 1px; }
 
 #calendar-toolbar-datepicker { float: left; }
 #calendar-toolbar-userpanel { float: right; }
-#calendar-toolbar-groupselector { display: inline-block; }
+#calendar-toolbar-groupselector { display: inline-block; background-color: #96bd42; }
 
 #calendar { clear: both; }
 
