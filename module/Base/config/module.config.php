@@ -94,6 +94,8 @@ return array(
 
             'Tabs' => 'Base\View\Helper\TabsFactory',
 
+            'Version' => 'Base\View\Helper\VersionFactory',
+
             /* Layout */
 
             'HeaderLocaleChoice' => 'Base\View\Helper\Layout\HeaderLocaleChoiceFactory',

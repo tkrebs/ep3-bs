@@ -24,4 +24,5 @@ return array(
         'use_cookies' => true,
         'use_only_cookies' => true,
     ),
+    'version' => '1.8.1',
 );

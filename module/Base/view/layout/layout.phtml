@@ -74,7 +74,7 @@
 
         <div id="footer">
             <div class="centered-text">
-                <span class="no-wrap">&copy; <?= date('Y') ?> <a href="<?= $this->option('client.website') ?>"><?= $this->option('client.name.full') ?></a></span>
+                <span class="no-wrap">v<?= $this->version() ?> &copy; <?= date('Y') ?> <a href="<?= $this->option('client.website') ?>"><?= $this->option('client.name.full') ?></a></span>
                 (<a href="<?= $this->option('client.website.imprint') ?>"><?= $this->t('Imprint') ?></a><?php if ($this->option('client.website.privacy')): ?> &ndash; <a href="<?= $this->option('client.website.privacy') ?>"><?= $this->t('Privacy') ?></a><?php endif; ?>)
                 <?php if ($this->option('service.branding', 'true') == 'true'): ?><span class="no-wrap">&amp; <a href="<?= $this->option('service.branding.website') ?>"><?= $this->option('service.branding.name') ?></a> (<?= $this->t('Software') ?>)</span><?php endif; ?>
             </div>

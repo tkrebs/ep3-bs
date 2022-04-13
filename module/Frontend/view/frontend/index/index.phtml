@@ -8,11 +8,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/frontend/index.mi
     <div id="calendar-toolbar-datepicker" class="panel">
         <?= $this->partial('frontend/index/datepicker.phtml', ['dateStart' => $this->dateStart, 'dateNow' => $this->dateNow, 'squaresFilter' => $this->squaresFilter]) ?>
     </div>
-    <?php if ($this->frontendSquareGroupCheck()): ?>
-    <div id="calendar-toolbar-groupselector" class="panel">
-        <?= $this->partial('frontend/index/groupselect.phtml') ?>
-    </div>
-    <?php endif; ?>
+    <?= $this->frontendSquareGroupList() ?>
     <div id="calendar-toolbar-userpanel" class="panel">
         <?php if ($this->user): ?>
             <?= $this->partial('frontend/index/userpanel.online.phtml', ['user' => $this->user]) ?>

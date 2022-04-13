@@ -12,6 +12,7 @@ class SquareGroupListFactory implements FactoryInterface
     {
         return new SquareGroupList(
             $sm->getServiceLocator()->get('Square\Manager\SquareGroupManager'), 
+            $sm->getServiceLocator()->get('Square\Manager\SquareManager'),
             $sm->getServiceLocator()->get('Request'));
     }
 
