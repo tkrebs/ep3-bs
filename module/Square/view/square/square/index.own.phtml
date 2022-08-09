@@ -28,3 +28,27 @@ if ($this->bookable) {
     echo sprintf('<p><a href="%s" class="default-button squarebox-internal-link"><span class="symbolic symbolic-plus">%s</span></a></p>',
         $url, $this->t('Book more'));
 }
+
+if ($user !== null) {
+    $reservation = current($reservations);
+    $booking = $reservation->needExtra('booking');
+    $playerNames = $booking->getMeta('player-names');
+    $outputPlayerNames = null;
+    if ($playerNames) {
+        $playerNames = @unserialize($playerNames);
+        if ($playerNames) {
+            foreach ($playerNames as $playerData) {
+                $nameData = $playerData['value'];
+                if ($nameData !== "") {
+                    if ($outputPlayerNames === null) {
+                        $outputPlayerNames = $nameData;
+                    } else {
+                        $outputPlayerNames .= sprintf('
+                        %1$s', $nameData);
+                    }
+                }
+            }
+        }
+    }
+    echo sprintf('Mitspieler:%s', $outputPlayerNames);
+}
