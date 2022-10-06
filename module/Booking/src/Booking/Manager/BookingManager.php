@@ -147,6 +147,7 @@ class BookingManager extends AbstractManager
 
             if ($transaction) {
                 $connection->commit();
+                $transaction = false;
             }
 
             $this->getEventManager()->trigger('save', $booking);

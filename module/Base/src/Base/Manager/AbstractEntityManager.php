@@ -122,6 +122,7 @@ abstract class AbstractEntityManager extends AbstractManager
 
             if ($transaction) {
                 $connection->commit();
+                $transaction = false;
             }
 
             $this->getEventManager()->trigger('save', $entity);

@@ -70,6 +70,7 @@ class SquarePricingManager extends AbstractManager
                 }
 
                 $statement->execute($rule);
+                $transaction = false;
             }
 
             $connection->commit();

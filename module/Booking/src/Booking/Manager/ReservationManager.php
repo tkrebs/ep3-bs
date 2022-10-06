@@ -165,6 +165,7 @@ class ReservationManager extends AbstractManager
 
             if ($transaction) {
                 $connection->commit();
+                $transaction = false;
             }
 
             $this->getEventManager()->trigger('createByRange', $reservations);
@@ -260,6 +261,7 @@ class ReservationManager extends AbstractManager
 
             if ($transaction) {
                 $connection->commit();
+                $transaction = false;
             }
 
             $this->getEventManager()->trigger('createRange', $reservations);
@@ -382,6 +384,7 @@ class ReservationManager extends AbstractManager
 
             if ($transaction) {
                 $connection->commit();
+                $transaction = false;
             }
 
             $this->getEventManager()->trigger('save', $reservation);
