@@ -17,9 +17,6 @@ return array(
     'Booking-Statistic' => 'Buchungs-Statistik',
     'Event-Statistic' => 'Veranstaltungs-Statistik',
 
-    'File manager' => 'Dateimanager',
-    'Manage the images and files on your server' => 'Verwalten Sie die Bilder und Dateien auf Ihrem Server',
-
     'Configuration' => 'Einstellungen',
     'Configuration has been saved' => 'Einstellungen wurden gespeichert',
     'Configuration has been updated' => 'Einstellungen wurden aktualisiert',

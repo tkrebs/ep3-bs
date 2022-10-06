@@ -17,9 +17,6 @@ return array(
     'Booking-Statistic' => 'Foglalás-statisztikák',
     'Event-Statistic' => 'Esemény-statisztikák',
 
-    'File manager' => 'File kezelő',
-    'Manage the images and files on your server' => 'A képek és file-ok kezelése a szerveren',
-
     'Configuration' => 'Beállítás',
     'Configuration has been saved' => 'Beállítás elmentve',
     'Configuration has been updated' => 'Beállítás frissítve',

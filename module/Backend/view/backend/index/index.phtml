@@ -46,13 +46,6 @@ $this->setup(array(
         <a href="<?= $this->url('backend/event/stats') ?>" class="unlined gray"><span class="symbolic symbolic-stats"><?= $this->t('Statistic') ?></span></a>
     </div>
 
-    <div style="margin-bottom: 8px;">
-        <a href="<?= $this->basePath('vendor/filemanager') . '?langCode=' . $this->config('i18n.locale') ?>" target="_blank" class="default-button popup-link" style="width: 150px; text-align: left;"><span class="symbolic symbolic-attachment"><?= $this->t('File manager') ?></span></a>
-        <span class="no-ajax gray" style="margin-left: 16px;">
-            <?= $this->t('Manage the images and files on your server') ?>
-        </span>
-    </div>
-
     <div>
         <a href="<?= $this->url('backend/config') ?>" class="default-button" style="width: 150px; text-align: left;"><span class="symbolic symbolic-config"><?= $this->t('Configuration') ?></span></a>
         <span class="no-ajax gray" style="margin-left: 16px;">

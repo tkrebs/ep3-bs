@@ -1,9 +1,0 @@
-- connectors/php/filemanager.php (line 87)
-- connectors/php/user.config.php
-- scripts/languages/de.js to de-DE.js
-- scripts/filemanager.config.js
-- scripts/filemanager.config.js.default (same content)
-- scripts/filemanager.js (line 1570)
-- index.html: filemanager.min.js to filemanager.js
-
-- Various cleanups of unrequired files and folders
