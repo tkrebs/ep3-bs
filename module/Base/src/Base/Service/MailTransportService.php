@@ -4,6 +4,8 @@ namespace Base\Service;
 
 use Base\Manager\ConfigManager;
 use RuntimeException;
+use Zend\Mail\Transport\File;
+use Zend\Mail\Transport\FileOptions;
 use Zend\Mail\Transport\Sendmail;
 use Zend\Mail\Transport\Smtp;
 use Zend\Mail\Transport\SmtpOptions;
@@ -55,6 +57,11 @@ class MailTransportService extends AbstractService
 
                     $this->transport = new Smtp();
                     $this->transport->setOptions($options);
+                    break;
+                case 'file':
+                    $this->transport = new File(new FileOptions([
+                        'path' => $this->configManager->get('mail.file.path', getcwd() . '/data/mails'),
+                    ]));
                     break;
                 default:
                     throw new RuntimeException(sprintf($this->translate('Invalid mail type %s specified'), $mailType));
