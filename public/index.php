@@ -10,8 +10,8 @@ chdir(dirname(__DIR__));
 /**
  * Quickly check the current PHP version.
  */
-if (version_compare(PHP_VERSION, '5.6.0') < 0) {
-    exit('PHP 5.6+ is required (currently running PHP ' . PHP_VERSION . ')');
+if (version_compare(PHP_VERSION, '8.1.0') < 0) {
+    exit('PHP 8.1+ is required (currently running PHP ' . PHP_VERSION . ')');
 }
 
 /**
