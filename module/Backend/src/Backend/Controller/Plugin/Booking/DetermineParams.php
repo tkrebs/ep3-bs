@@ -39,15 +39,20 @@ class DetermineParams extends AbstractPlugin
 
         /* Determine dates (or set to default) */
 
-        $dateTimeStart = new \DateTime($dateStartParam);
+        if ($dateStartParam) {
+            $dateTimeStart = new \DateTime($dateStartParam);
+        } else {
+            $dateTimeStart = new \DateTime();
+        }
 
         if (! $dateStartParam) {
             $dateTimeStart->modify('+1 month');
         }
 
-        $dateTimeEnd = new \DateTime($dateEndParam);
 
-        if (! $dateEndParam) {
+        if ($dateEndParam) {
+            $dateTimeEnd = new \DateTime($dateEndParam);
+        } else {
             $dateTimeEnd = clone $dateTimeStart;
         }
 

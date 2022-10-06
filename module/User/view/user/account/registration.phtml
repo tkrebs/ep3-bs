@@ -146,10 +146,11 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/registration
 
                     foreach (['terms', 'privacy'] as $option) {
                         $optionFile = $this->option('service.user.registration.' . $option . '.file');
-                        $optionName = $this->option('service.user.registration.' . $option . '.name',
-                            basename($optionFile));
 
                         if ($optionFile) {
+                            $optionName = $this->option('service.user.registration.' . $option . '.name',
+                                basename($optionFile));
+
                             $html .= sprintf('<div>%s %s</div> <div style="margin: 0 0 8px 8px;">%s</div>',
                                 $this->formElement($form->get('rf-' . $option)),
                                 sprintf($this->formLabel($form->get('rf-' . $option)),

@@ -4,7 +4,7 @@ $this->setup(array(
     'title' => 'Login',
     'panel' => 'centered-panel',
     'messages' => array(
-        'error' => sprintf($this->loginMessage, $this->loginDetent ? $this->timeFormat($this->loginDetent) : null),
+        'error' => sprintf($this->loginMessage ?: '', $this->loginDetent ? $this->timeFormat($this->loginDetent) : ''),
     ),
     'back' => true,
     'links' => array(

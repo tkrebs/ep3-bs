@@ -2,19 +2,51 @@
     "name": "tkrebs/ep3-bs",
     "description": "Online booking system for courts",
     "license": "MIT",
-    "homepage": "http://bs.hbsys.de/",
+    "homepage": "https://bs.hbsys.de/",
 
     "require": {
-        "php": ">=5.6 <=7.4.14",
+        "php": ">=8.1",
         "ext-intl": "*",
-        "zendframework/zendframework": "^2.5.3"
+
+        "zendframework/zend-authentication": "^2.7.0",
+        "zendframework/zend-cache": "^2.9.0",
+        "zendframework/zend-console": "^2.8.0",
+        "zendframework/zend-debug": "^2.6.0",
+        "zendframework/zend-di": "^2.6.1",
+        "zendframework/zend-diactoros": "^2.2.1",
+        "zendframework/zend-file": "^2.8.3",
+        "zendframework/zend-i18n-resources": "^2.6.1",
+        "zendframework/zend-log": "^2.12.0",
+        "zendframework/zend-version": "^2.5.1"
     },
 
     "autoload": {
         "psr-4": {
-            "Zend\\I18n\\": "module/Zend/I18n/src/",
-            "Zend\\Stdlib\\": "module/Zend/Stdlib/src/",
-            "Zend\\View\\": "module/Zend/View/src/"
+            "Zend\\Config\\": "src/Zend/Config/src/",
+            "Zend\\Crypt\\": "src/Zend/Crypt/src/",
+            "Zend\\Db\\": "src/Zend/Db/src/",
+            "Zend\\Escaper\\": "src/Zend/Escaper/src/",
+            "Zend\\EventManager\\": "src/Zend/EventManager/src/",
+            "Zend\\Filter\\": "src/Zend/Filter/src/",
+            "Zend\\Form\\": "src/Zend/Form/src/",
+            "Zend\\Http\\": "src/Zend/Http/src/",
+            "Zend\\Hydrator\\": "src/Zend/Hydrator/src/",
+            "Zend\\I18n\\": "src/Zend/I18n/src/",
+            "Zend\\InputFilter\\": "src/Zend/InputFilter/src/",
+            "Zend\\Json\\": "src/Zend/Json/src/",
+            "Zend\\Loader\\": "src/Zend/Loader/src/",
+            "Zend\\Mail\\": "src/Zend/Mail/src/",
+            "Zend\\Math\\": "src/Zend/Math/src/",
+            "Zend\\Mime\\": "src/Zend/Mime/src/",
+            "Zend\\ModuleManager\\": "src/Zend/ModuleManager/src/",
+            "Zend\\Mvc\\": "src/Zend/Mvc/src/",
+            "Zend\\Serializer\\": "src/Zend/Serializer/src/",
+            "Zend\\ServiceManager\\": "src/Zend/ServiceManager/src/",
+            "Zend\\Session\\": "src/Zend/Session/src/",
+            "Zend\\Stdlib\\": "src/Zend/Stdlib/src/",
+            "Zend\\Uri\\": "src/Zend/Uri/src/",
+            "Zend\\Validator\\": "src/Zend/Validator/src/",
+            "Zend\\View\\": "src/Zend/View/src/"
         }
     }
 }
