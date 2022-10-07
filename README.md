@@ -24,13 +24,12 @@ data/docs/
 
 ## Architecture
 
-The system is based on the well-known LAMP stack (Linux, Apache 2, MySQL 5+, PHP 5.6+) and the powerful
+The system is based on the well-known LAMP stack (Linux, Apache 2, MySQL 5+, PHP 8.1+) and the powerful
 [Zend Framework 2](http://framework.zend.com/) (2.5).
 
-It is compatible with PHP version up to and including 7.4. We are currently working on an upgrade of the underlying
-Zend Framework to make it compatible with PHP 8.0.
+Since version 1.8.0, it is compatible with (and requires) PHP version 8.1 or higher.
 
-Dependencies are managed with [composer](https://getcomposer.org/).
+Dependencies are managed with [Composer](https://getcomposer.org/).
 
 The source code is version controlled with [Git](http://git-scm.com/) and hosted at [GitHub](https://github.com/).
 
@@ -44,7 +43,10 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version is 1.7.0 from January, 2021.
+The current version is 1.8.0 from October 2022.
+
+Version 1.8.0 provides compatibility with PHP 8.1 by overriding and fixing the essential Zend Framework 2 components.
+It also fixes some bugs, added a file-storage-only mail option and removes some legacy code (mainly, the file manager).
 
 Version 1.7.0 provides compatibility with PHP 7.4 by overriding and fixing some of the Zend Framework 2 components.
 

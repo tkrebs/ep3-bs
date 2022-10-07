@@ -1,1 +1,0 @@
-Simply copy custom or (third party) extra modules in the modulex directory and they will be loaded automatically.
