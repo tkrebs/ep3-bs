@@ -14,9 +14,12 @@ looking nice on mobile devices as well).
 More features may be explored via our website (http://bs.hbsys.de/) or simply by downloading and trying the system
 yourself.
 
-## Documentation and installation
+## Documentation
 
-Documentation and installation instructions can be found in the following directory:
+- Installation instructions can be found in [INSTALL.md](https://github.com/tkrebs/ep3-bs/blob/master/INSTALL.md)
+- Update instructions can be found in [UPDATE.md](https://github.com/tkrebs/ep3-bs/blob/master/UPDATE.md)
+
+Further documentation and technical details can be found in the following directory:
 
 ```
 data/docs/
