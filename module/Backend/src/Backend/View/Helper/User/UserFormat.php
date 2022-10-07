@@ -28,7 +28,7 @@ class UserFormat extends AbstractHelper
             $user->need('uid'));
 
         $html .= sprintf('<td>%s</td>',
-            $user->need('alias'));
+            $view->escapeHtml($user->need('alias')));
 
         $html .= sprintf('<td>%s</td>',
             $view->t($user->getStatus()));

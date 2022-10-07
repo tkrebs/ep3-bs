@@ -18,7 +18,7 @@ $this->setup(array(
     printf('<p>%s <a href="%s">%s</a></p>',
         $this->translate('Booked by'),
         $this->url('backend/user/edit', ['uid' => $this->user->need('uid')]),
-        $this->user->need('alias'));
+        $this->escapeHtml($this->user->need('alias')));
 
     echo '<div class="separator separator-line"></div>';
 
@@ -63,7 +63,7 @@ $this->setup(array(
                 $this->translate('User matched by'),
                 $this->translate(ucfirst($userMatch)),
                 $this->url('backend/user/edit', ['uid' => $user->need('uid')]),
-                $user->need('alias'));
+                $this->escapeHtml($user->need('alias')));
         } else {
             echo '<td></td>';
         }

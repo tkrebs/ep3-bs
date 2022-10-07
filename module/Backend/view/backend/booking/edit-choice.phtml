@@ -19,7 +19,7 @@ $this->setup(array(
                     <span class="symbolic symbolic-booking">
                         <b><?= $this->timeRange($reservation->get('time_start'), $reservation->get('time_end'), '%s to %s') ?></b>
 
-                        <?= $this->t('from') ?> <?= $reservation->getExtra('booking')->getExtra('user')->get('alias') ?>
+                        <?= $this->t('from') ?> <?= $this->escapeHtml($reservation->getExtra('booking')->getExtra('user')->get('alias')) ?>
                     </span>
                 </a>
             </p>

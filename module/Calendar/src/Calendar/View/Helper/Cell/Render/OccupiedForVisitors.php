@@ -36,13 +36,13 @@ class OccupiedForVisitors extends AbstractHelper
                         $cellLabel = $this->view->t('Occupied');
                     }
 
-                    return $view->calendarCellLink($cellLabel, $view->url('square', [], $cellLinkParams), 'cc-single' . $cellGroup);
+                    return $view->calendarCellLink($view->escapeHtml($cellLabel), $view->url('square', [], $cellLinkParams), 'cc-single' . $cellGroup);
                 case 'subscription':
                     if (! $cellLabel) {
                         $cellLabel = $this->view->t('Subscription');
                     }
 
-                    return $view->calendarCellLink($cellLabel, $view->url('square', [], $cellLinkParams), 'cc-multiple' . $cellGroup);
+                    return $view->calendarCellLink($view->escapeHtml($cellLabel), $view->url('square', [], $cellLinkParams), 'cc-multiple' . $cellGroup);
             }
         }
     }

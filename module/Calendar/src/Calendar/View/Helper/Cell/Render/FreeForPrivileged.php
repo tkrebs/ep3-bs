@@ -25,7 +25,7 @@ class FreeForPrivileged extends AbstractHelper
             $cellLabel = $booking->needExtra('user')->need('alias');
             $cellGroup = ' cc-group-' . $booking->need('bid');
 
-            return $view->calendarCellLink($cellLabel, $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free cc-free-partially' . $cellGroup);
+            return $view->calendarCellLink($view->escapeHtml($cellLabel), $view->url('backend/booking/edit', [], $cellLinkParams), 'cc-free cc-free-partially' . $cellGroup);
         } else {
 	        $labelFree = $square->getMeta('label.free', 'Still free');
 
