@@ -44,9 +44,11 @@ https://github.com/tkrebs/ep3-bs
 
 where you can find stable and (latest) development releases.
 
-## Version
+## Versions
 
-The current version is 1.8.0 from October 2022.
+The current version is 1.8.1 from November 2022.
+
+Version 1.8.1 fixes an email sending related bug.
 
 Version 1.8.0 provides compatibility with PHP 8.1 by overriding and fixing the essential Zend Framework 2 components.
 It also fixes some bugs, added a file-storage-only mail option and removes some legacy code (mainly, the file manager).

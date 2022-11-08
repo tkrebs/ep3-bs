@@ -17,7 +17,12 @@ If you haven't made any changes to the core files, your configuration, customiza
 after the update.
 
 
-## Update to `1.8.0`
+## Update from 1.8.0 to `1.8.1`
+
+- Replace the `vendor/` directory
+
+
+## Update from 1.7.0 to `1.8.0`
 
 🚨 Warnings:
 
@@ -56,7 +61,7 @@ Update steps:
     - `README` (without file extension)
 
 
-## Update to `1.7.0`
+## Update from 1.6.4 to `1.7.0`
 
 Replace the following directories:
 
@@ -64,12 +69,12 @@ Replace the following directories:
 - `vendor/`
 
 
-## Update to `1.6.4`
+## Update from 1.6.3 to `1.6.4`
 
 There are no steps necessary when updating from version `1.6.3`.
 
 
-## Update to `1.6.3`
+## Update from 1.6.2 to `1.6.3`
 
 Replace the following directories:
 
@@ -86,7 +91,7 @@ Replace the following directories:
 - All single files in the project root directory
 
 
-## Update to `1.6.2`
+## Update from 1.6 to `1.6.2`
 
 There have been some internal changes to the configuration directory. Replace the following files:
 
@@ -104,7 +109,7 @@ There have been some internal changes to the configuration directory. Replace th
 - All single files in the project root directory
 
 
-## Update to `1.6`
+## Update from 1.4 or 1.5 to `1.6`
 
 Replace the following directories and files with the new ones:
 
@@ -122,7 +127,7 @@ Replace the following directories and files with the new ones:
 - `public/index.php`
 
 
-## Update to `1.4 / 1.5`
+## Update from older versions to `1.4` or `1.5`
 
 Replace the following directories and files with the new ones:
 

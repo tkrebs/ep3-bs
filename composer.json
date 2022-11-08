@@ -17,7 +17,9 @@
         "zendframework/zend-file": "^2.8.3",
         "zendframework/zend-i18n-resources": "^2.6.1",
         "zendframework/zend-log": "^2.12.0",
-        "zendframework/zend-version": "^2.5.1"
+        "zendframework/zend-version": "^2.5.1",
+
+        "true/punycode": "^2.1"
     },
 
     "autoload": {
