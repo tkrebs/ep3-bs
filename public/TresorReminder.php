@@ -29,7 +29,6 @@ $dateEnd->setTime(23, 59, 59);
 
 $reservations = $reservationManager->getInRange($dateStart, $dateEnd);
 $bookings = $bookingManager->getByReservations($reservations);
-$events = $eventManager->getInRange($dateStart, $dateEnd);
 
 $usersToNotify = $userManager->getByBookings($bookings);
 
