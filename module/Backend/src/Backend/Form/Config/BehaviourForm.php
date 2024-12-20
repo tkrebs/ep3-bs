@@ -126,6 +126,19 @@ class BehaviourForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-tresor-pin',
+            'type' => 'Textarea',
+            'attributes' => array(
+                'id' => 'cf-tresor-pin',
+                'style' => 'width: 96px; min-height: 10px',
+            ),
+            'options' => array(
+                'label' => 'Tresor Pin',
+                'notes' => 'Enter the current Tresor Pin here.',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-submit',
             'type' => 'Submit',
             'attributes' => array(

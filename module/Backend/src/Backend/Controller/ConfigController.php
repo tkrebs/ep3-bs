@@ -129,6 +129,7 @@ class ConfigController extends AbstractActionController
                 $activation = $data['cf-activation'];
                 $calendarDays = $data['cf-calendar-days'];
                 $calendarDayExceptions = $data['cf-calendar-day-exceptions'];
+                $calendarTresorPin = $data['cf-tresor-pin'];
 
                 $locale = $this->config('i18n.locale');
 
@@ -139,6 +140,7 @@ class ConfigController extends AbstractActionController
                 $optionManager->set('service.user.activation', $activation);
                 $optionManager->set('service.calendar.days', $calendarDays);
                 $optionManager->set('service.calendar.day-exceptions', $calendarDayExceptions);
+                $optionManager->set('service.calendar.tresor-pin', $calendarTresorPin);
 
                 $this->flashMessenger()->addSuccessMessage('Configuration has been saved');
             } else {
@@ -154,6 +156,7 @@ class ConfigController extends AbstractActionController
             $behaviourForm->get('cf-activation')->setValue($optionManager->get('service.user.activation', 'email'));
             $behaviourForm->get('cf-calendar-days')->setValue($optionManager->get('service.calendar.days', '4'));
             $behaviourForm->get('cf-calendar-day-exceptions')->setValue($optionManager->get('service.calendar.day-exceptions'));
+            $behaviourForm->get('cf-tresor-pin')->setValue($optionManager->get('service.calendar.tresor-pin'));
         }
 
         return array(
