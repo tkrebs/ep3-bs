@@ -31,10 +31,7 @@ $reservations = $reservationManager->getInRange($dateStart, $dateEnd);
 $bookings = $bookingManager->getByReservations($reservations);
 $events = $eventManager->getInRange($dateStart, $dateEnd);
 
-print_r($bookings);
 $usersToNotify = $userManager->getByBookings($bookings);
-
-print_r($usersToNotify);
 
 foreach ($usersToNotify as $user) {
   $subject = "Seminarraum Pin";
