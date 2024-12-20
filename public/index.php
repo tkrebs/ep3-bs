@@ -63,4 +63,9 @@ require $init;
 /**
  * Initialize our application with the provided configuration file and ruuuuun!
  */
-Zend\Mvc\Application::init(require 'config/application.php')->run();
+$application = Zend\Mvc\Application::init(require 'config/application.php');
+
+if(!defined('_CRONJOB_') || _CRONJOB_ == false)
+{
+  $application->run();
+}
