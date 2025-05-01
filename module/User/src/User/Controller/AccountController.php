@@ -165,11 +165,6 @@ class AccountController extends AbstractActionController
                     $alias = $meta['name'];
                 }
 
-                $meta['street'] = $registrationData['rf-street'] . ' ' . $registrationData['rf-number'];
-                $meta['zip'] = $registrationData['rf-zip'];
-                $meta['city'] = $registrationData['rf-city'];
-                $meta['phone'] = $registrationData['rf-phone'];
-
                 if (! (isset($registrationData['rf-birthdate']) && preg_match('/^([ \,\-\.0-9\x{00c0}-\x{01ff}a-zA-Z]){4,}$/u', $registrationData['rf-birthdate']))) {
                     $registrationData['rf-birthdate'] = null;
                 }

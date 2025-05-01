@@ -95,30 +95,6 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/registration
                             <?= $this->formElementErrors($form->get('rf-lastname')) ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="default-form-label-row">
-                            <?= $this->formLabel($form->get('rf-street')) ?>
-                        </td>
-                        <td>
-                            <?= $this->formElement($form->get('rf-street')) ?>
-                            <?= $this->formElement($form->get('rf-number')) ?>
-                            <?= $this->formElementErrors($form->get('rf-street')) ?>
-                            <?= $this->formElementErrors($form->get('rf-number')) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="default-form-label-row">
-                            <?= $this->formLabel($form->get('rf-zip')) ?>
-                        </td>
-                        <td>
-                            <?= $this->formElement($form->get('rf-zip')) ?>
-                            <?= $this->formElement($form->get('rf-city')) ?>
-                            <?= $this->formElementErrors($form->get('rf-zip')) ?>
-                            <?= $this->formElementErrors($form->get('rf-city')) ?>
-                        </td>
-                    </tr>
-
-                    <?= $this->formRowDefault($form, 'rf-phone') ?>
                 </table>
             </div>
 
