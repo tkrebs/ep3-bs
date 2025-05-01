@@ -20,7 +20,6 @@ return array(
     ),
     'session_config' => array(
         'name' => 'ep3-bs-session',
-        'save_path' => getcwd() . '/data/session/',
         'use_cookies' => true,
         'use_only_cookies' => true,
     ),
