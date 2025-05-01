@@ -118,7 +118,10 @@ class SquareValidator extends AbstractService
         $dateMax = new DateTime();
         $dateMax->modify('+' . $square->get('range_book', 0) . ' sec');
 
-        if ($timeStart < $dateMin) {
+        // allow to book the current hour, too
+        $dateMinBooking = clone $dateMin;
+        $dateMinBooking->modify('- 1 hour');
+        if ($timeStart < $dateMinBooking) {
             if (! ($this->user && $this->user->can('calendar.see-past'))) {
 
                 // Allow assist users with calendar.see-data privilege to see the entire day
