@@ -14,9 +14,9 @@ use Zend\Db\Sql\Platform\AbstractPlatform;
 class IbmDb2 extends AbstractPlatform
 {
     /**
-     * @param SelectDecorator $selectDecorator
+     * @param SelectDecorator|null $selectDecorator
      */
-    public function __construct(SelectDecorator $selectDecorator = null)
+    public function __construct(?SelectDecorator $selectDecorator = null)
     {
         $this->setTypeDecorator('Zend\Db\Sql\Select', ($selectDecorator) ?: new SelectDecorator());
     }

@@ -81,10 +81,9 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Create a new resource
      *
-     * @param  mixed $data
      * @return mixed
      */
-    public function create($data)
+    public function create()
     {
         $this->response->setStatusCode(405);
 
@@ -96,10 +95,9 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Delete an existing resource
      *
-     * @param  mixed $id
      * @return mixed
      */
-    public function delete($id)
+    public function delete()
     {
         $this->response->setStatusCode(405);
 
@@ -116,7 +114,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @return mixed
      */
-    public function deleteList($data)
+    public function deleteList()
     {
         $this->response->setStatusCode(405);
 
@@ -128,10 +126,9 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Return single resource
      *
-     * @param  mixed $id
      * @return mixed
      */
-    public function get($id)
+    public function get()
     {
         $this->response->setStatusCode(405);
 
@@ -160,10 +157,9 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @param  null|mixed $id
      * @return mixed
      */
-    public function head($id = null)
+    public function head()
     {
         $this->response->setStatusCode(405);
 
@@ -198,11 +194,9 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @param  $id
-     * @param  $data
      * @return array
      */
-    public function patch($id, $data)
+    public function patch()
     {
         $this->response->setStatusCode(405);
 
@@ -217,10 +211,9 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @param  mixed $data
      * @return mixed
      */
-    public function replaceList($data)
+    public function replaceList()
     {
         $this->response->setStatusCode(405);
 
@@ -235,10 +228,9 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.2.0); instead, raises an exception if not implemented.
      *
-     * @param  mixed $data
      * @return mixed
      */
-    public function patchList($data)
+    public function patchList()
     {
         $this->response->setStatusCode(405);
 
@@ -250,11 +242,9 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Update an existing resource
      *
-     * @param  mixed $id
-     * @param  mixed $data
      * @return mixed
      */
-    public function update($id, $data)
+    public function update()
     {
         $this->response->setStatusCode(405);
 
@@ -286,11 +276,11 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @events dispatch.pre, dispatch.post
      * @param  Request $request
-     * @param  null|Response $response
+     * @param Response|null $response
      * @return mixed|Response
      * @throws Exception\InvalidArgumentException
      */
-    public function dispatch(Request $request, Response $response = null)
+    public function dispatch(Request $request, ?Response $response = null)
     {
         if (! $request instanceof HttpRequest) {
             throw new Exception\InvalidArgumentException(
@@ -351,19 +341,19 @@ abstract class AbstractRestfulController extends AbstractController
 
                 if ($id !== false) {
                     $action = 'delete';
-                    $return = $this->delete($id);
+                    $return = $this->delete();
                     break;
                 }
 
                 $action = 'deleteList';
-                $return = $this->deleteList($data);
+                $return = $this->deleteList();
                 break;
             // GET
             case 'get':
                 $id = $this->getIdentifier($routeMatch, $request);
                 if ($id !== false) {
                     $action = 'get';
-                    $return = $this->get($id);
+                    $return = $this->get();
                     break;
                 }
                 $action = 'getList';
@@ -376,7 +366,7 @@ abstract class AbstractRestfulController extends AbstractController
                     $id = null;
                 }
                 $action = 'head';
-                $headResult = $this->head($id);
+                $headResult = $this->head();
                 $response = ($headResult instanceof Response) ? clone $headResult : $e->getResponse();
                 $response->setContent('');
                 $return = $response;
@@ -394,7 +384,7 @@ abstract class AbstractRestfulController extends AbstractController
 
                 if ($id !== false) {
                     $action = 'patch';
-                    $return = $this->patch($id, $data);
+                    $return = $this->patch();
                     break;
                 }
 
@@ -403,8 +393,8 @@ abstract class AbstractRestfulController extends AbstractController
                 // instead of going to patchList
                 try {
                     $action = 'patchList';
-                    $return = $this->patchList($data);
-                } catch (Exception\RuntimeException $ex) {
+                    $return = $this->patchList();
+                } catch (Exception\RuntimeException) {
                     $response = $e->getResponse();
                     $response->setStatusCode(405);
                     return $response;
@@ -422,12 +412,12 @@ abstract class AbstractRestfulController extends AbstractController
 
                 if ($id !== false) {
                     $action = 'update';
-                    $return = $this->update($id, $data);
+                    $return = $this->update();
                     break;
                 }
 
                 $action = 'replaceList';
-                $return = $this->replaceList($data);
+                $return = $this->replaceList();
                 break;
             // All others...
             default:
@@ -455,7 +445,7 @@ abstract class AbstractRestfulController extends AbstractController
             $data = $request->getPost()->toArray();
         }
 
-        return $this->create($data);
+        return $this->create();
     }
 
     /**
@@ -474,7 +464,7 @@ abstract class AbstractRestfulController extends AbstractController
         }
 
         $requestedContentType = $headerContentType->getFieldValue();
-        if (strstr($requestedContentType, ';')) {
+        if (str_contains($requestedContentType, ';')) {
             $headerData = explode(';', $requestedContentType);
             $requestedContentType = array_shift($headerData);
         }

@@ -167,7 +167,7 @@ class MysqlMetadata extends AbstractSource
                 'character_octet_length'    => $row['CHARACTER_OCTET_LENGTH'],
                 'numeric_precision'         => $row['NUMERIC_PRECISION'],
                 'numeric_scale'             => $row['NUMERIC_SCALE'],
-                'numeric_unsigned'          => (false !== strpos($row['COLUMN_TYPE'], 'unsigned')),
+                'numeric_unsigned'          => (str_contains($row['COLUMN_TYPE'], 'unsigned')),
                 'erratas'                   => $erratas,
             ];
         }

@@ -169,8 +169,8 @@ class Insert extends AbstractPreparableSql
 
     protected function processInsert(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->select) {
             return;
@@ -212,8 +212,8 @@ class Insert extends AbstractPreparableSql
 
     protected function processSelect(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if (! $this->select) {
             return;

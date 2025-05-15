@@ -335,7 +335,7 @@ class Select extends AbstractPreparableSql
     public function order($order)
     {
         if (is_string($order)) {
-            if (strpos($order, ',') !== false) {
+            if (str_contains($order, ',')) {
                 $order = preg_split('#,\s+#', $order);
             } else {
                 $order = (array) $order;
@@ -505,21 +505,13 @@ class Select extends AbstractPreparableSql
         return $this->tableReadOnly;
     }
 
-    protected function processStatementStart(
-        PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
-    ) {
+    protected function processStatementStart() {
         if ($this->combine !== []) {
             return ['('];
         }
     }
 
-    protected function processStatementEnd(
-        PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
-    ) {
+    protected function processStatementEnd() {
         if ($this->combine !== []) {
             return [')'];
         }
@@ -529,18 +521,18 @@ class Select extends AbstractPreparableSql
      * Process the select part
      *
      * @param PlatformInterface $platform
-     * @param DriverInterface $driver
-     * @param ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @return null|array
      */
     protected function processSelect(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         $expr = 1;
 
-        list($table, $fromTable) = $this->resolveTable($this->table, $platform, $driver, $parameterContainer);
+        [$table, $fromTable] = $this->resolveTable($this->table, $platform, $driver, $parameterContainer);
         // process table columns
         $columns = [];
         foreach ($this->columns as $columnIndexOrAs => $column) {
@@ -616,16 +608,16 @@ class Select extends AbstractPreparableSql
 
     protected function processJoins(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         return $this->processJoin($this->joins, $platform, $driver, $parameterContainer);
     }
 
     protected function processWhere(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->where->count() == 0) {
             return;
@@ -637,8 +629,8 @@ class Select extends AbstractPreparableSql
 
     protected function processGroup(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->group === null) {
             return;
@@ -662,8 +654,8 @@ class Select extends AbstractPreparableSql
 
     protected function processHaving(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->having->count() == 0) {
             return;
@@ -675,8 +667,8 @@ class Select extends AbstractPreparableSql
 
     protected function processOrder(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if (empty($this->order)) {
             return;
@@ -690,8 +682,8 @@ class Select extends AbstractPreparableSql
                 continue;
             }
             if (is_int($k)) {
-                if (strpos($v, ' ') !== false) {
-                    list($k, $v) = preg_split('# #', $v, 2);
+                if (str_contains($v, ' ')) {
+                    [$k, $v] = explode(' ', $v, 2);
                 } else {
                     $k = $v;
                     $v = self::ORDER_ASCENDING;
@@ -708,8 +700,8 @@ class Select extends AbstractPreparableSql
 
     protected function processLimit(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->limit === null) {
             return;
@@ -724,8 +716,8 @@ class Select extends AbstractPreparableSql
 
     protected function processOffset(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->offset === null) {
             return;
@@ -741,8 +733,8 @@ class Select extends AbstractPreparableSql
 
     protected function processCombine(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->combine == []) {
             return;
@@ -797,15 +789,15 @@ class Select extends AbstractPreparableSql
     /**
      * @param string|TableIdentifier|Select $table
      * @param PlatformInterface $platform
-     * @param DriverInterface $driver
-     * @param ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @return string
      */
     protected function resolveTable(
         $table,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         $alias = null;
 

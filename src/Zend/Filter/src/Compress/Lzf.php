@@ -19,10 +19,9 @@ class Lzf implements CompressionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param  null $options
      * @throws Exception\ExtensionNotLoadedException if lzf extension missing
      */
-    public function __construct($options = null)
+    public function __construct()
     {
         if (! extension_loaded('lzf')) {
             throw new Exception\ExtensionNotLoadedException('This filter needs the lzf extension');

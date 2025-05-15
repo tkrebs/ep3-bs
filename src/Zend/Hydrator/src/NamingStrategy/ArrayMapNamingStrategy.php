@@ -14,12 +14,12 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
     /**
      * @var string[]
      */
-    private $extractionMap = [];
+    private $extractionMap;
 
     /**
      * @var string[]
      */
-    private $hydrationMap = [];
+    private $hydrationMap;
 
     /**
      * Constructor
@@ -38,7 +38,7 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        return isset($this->hydrationMap[$name]) ? $this->hydrationMap[$name] : $name;
+        return $this->hydrationMap[$name] ?? $name;
     }
 
     /**
@@ -46,6 +46,6 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        return isset($this->extractionMap[$name]) ? $this->extractionMap[$name] : $name;
+        return $this->extractionMap[$name] ?? $name;
     }
 }

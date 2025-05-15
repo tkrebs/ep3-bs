@@ -8,7 +8,7 @@ if (version_compare(PHP_VERSION, '5.4.0') < 0) {
 
 /* Setup PHP */
 
-ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('error_reporting', E_ALL);
 ini_set('default_charset', 'UTF-8');
 
 ini_set('display_errors', 1);
@@ -17,11 +17,11 @@ ini_set('log_errors', 0);
 
 ini_set('date.timezone', 'Europe/Berlin');
 
-chdir(dirname(dirname(dirname(__DIR__))));
+chdir(dirname(__DIR__, 3));
 
 /* Setup constants */
 
-define('EP3_BS_DEV', true);
+const EP3_BS_DEV = true;
 
 /* Setup autoloader */
 

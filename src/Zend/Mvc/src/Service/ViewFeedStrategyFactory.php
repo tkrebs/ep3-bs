@@ -26,10 +26,10 @@ class ViewFeedStrategyFactory implements FactoryInterface
      *
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return FeedStrategy
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         return new FeedStrategy($container->get('ViewFeedRenderer'));
     }

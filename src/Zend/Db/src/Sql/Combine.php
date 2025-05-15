@@ -69,8 +69,8 @@ class Combine extends AbstractPreparableSql
 
                 $this->combine(
                     $combine[0],
-                    isset($combine[1]) ? $combine[1] : $type,
-                    isset($combine[2]) ? $combine[2] : $modifier
+                    $combine[1] ?? $type,
+                    $combine[2] ?? $modifier
                 );
             }
             return $this;
@@ -133,15 +133,15 @@ class Combine extends AbstractPreparableSql
      * Build sql string
      *
      * @param PlatformInterface  $platform
-     * @param DriverInterface    $driver
-     * @param ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      *
      * @return string
      */
     protected function buildSqlString(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if (! $this->combine) {
             return;
@@ -183,9 +183,7 @@ class Combine extends AbstractPreparableSql
             $combineColumns = $combine['select']->getRawState(self::COLUMNS);
             $aligned = [];
             foreach ($allColumns as $alias => $column) {
-                $aligned[$alias] = isset($combineColumns[$alias])
-                    ? $combineColumns[$alias]
-                    : new Predicate\Expression('NULL');
+                $aligned[$alias] = $combineColumns[$alias] ?? new Predicate\Expression('NULL');
             }
             $combine['select']->columns($aligned, false);
         }

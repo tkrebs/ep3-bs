@@ -101,7 +101,7 @@ class UriNormalize extends AbstractFilter
             if ($this->enforcedScheme && ! $uri->getScheme()) {
                 $this->enforceScheme($uri);
             }
-        } catch (UriException $ex) {
+        } catch (UriException) {
             // We are unable to parse / enfore scheme with the given config and input
             return $value;
         }
@@ -126,8 +126,8 @@ class UriNormalize extends AbstractFilter
     protected function enforceScheme(Uri $uri)
     {
         $path = $uri->getPath();
-        if (strpos($path, '/') !== false) {
-            list($host, $path) = explode('/', $path, 2);
+        if (str_contains($path, '/')) {
+            [$host, $path] = explode('/', $path, 2);
             $path = '/' . $path;
         } else {
             $host = $path;

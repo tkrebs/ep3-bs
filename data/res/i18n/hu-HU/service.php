@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'System status' => 'Rendszer státusz',
     'Maintenance' => 'Karbantartás',
@@ -15,4 +15,4 @@ return array(
 
     'The system is available' => 'A rendszer elérhető',
 
-);
+];

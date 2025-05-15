@@ -302,7 +302,7 @@ class ServiceListener implements ServiceListenerInterface
 
         // Merge all of the things!
         $serviceConfig = [];
-        foreach ($this->serviceManagers[$key]['configuration'] as $name => $configs) {
+        foreach ($this->serviceManagers[$key]['configuration'] as $configs) {
             if (isset($configs['configuration_classes'])) {
                 foreach ($configs['configuration_classes'] as $class) {
                     $configs = ArrayUtils::merge($configs, $this->serviceConfigToArray($class));

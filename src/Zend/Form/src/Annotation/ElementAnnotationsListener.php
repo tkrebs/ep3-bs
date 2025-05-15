@@ -167,7 +167,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             }
 
             if (isset($elementSpec['spec']['options'])) {
-                $specification['options'] = isset($specification['options']) ? $specification['options'] : [];
+                $specification['options'] = $specification['options'] ?? [];
                 $specification['options'] = array_merge($elementSpec['spec']['options'], $specification['options']);
             }
 

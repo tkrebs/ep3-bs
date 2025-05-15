@@ -12,6 +12,7 @@ namespace Zend\Mvc\Service;
 use Interop\Container\ContainerInterface;
 use Zend\Mvc\Exception;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
+use Zend\ServiceManager\Di\DiServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
@@ -29,11 +30,11 @@ class DiAbstractServiceFactoryFactory implements FactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $name
-     * @param null|array $options
+     * @param array|null $options
      * @return DiAbstractServiceFactory
      * @throws Exception\RuntimeException if zend-servicemanager v3 is in use.
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         if (! class_exists(DiAbstractServiceFactory::class)) {
             throw new Exception\RuntimeException(sprintf(
@@ -44,7 +45,7 @@ class DiAbstractServiceFactoryFactory implements FactoryInterface
             ));
         }
 
-        $factory = new DiAbstractServiceFactory($container->get('Di'), DiAbstractServiceFactory::USE_SL_BEFORE_DI);
+        $factory = new DiAbstractServiceFactory($container->get('Di'), DiServiceFactory::USE_SL_BEFORE_DI);
 
         if ($container instanceof ServiceManager) {
             $container->addAbstractFactory($factory, false);

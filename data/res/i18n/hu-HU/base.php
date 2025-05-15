@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'Back to' => 'Vissza',
     'Related pages' => 'Kapcsolódó oldalak',
@@ -82,4 +82,4 @@ return array(
     'Visibility' => 'Láthatóság',
     'Quantity' => 'Mennyiség',
 
-);
+];

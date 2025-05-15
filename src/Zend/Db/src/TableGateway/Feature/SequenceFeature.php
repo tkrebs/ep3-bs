@@ -67,10 +67,8 @@ class SequenceFeature extends AbstractFeature
     }
 
     /**
-     * @param StatementInterface $statement
-     * @param ResultInterface $result
      */
-    public function postInsert(StatementInterface $statement, ResultInterface $result)
+    public function postInsert()
     {
         $this->tableGateway->lastInsertValue = $this->sequenceValue;
     }

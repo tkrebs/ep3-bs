@@ -15,7 +15,6 @@ use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Uri;
-use Zend\View;
 use Zend\View\Exception;
 
 /**
@@ -30,14 +29,14 @@ class Sitemap extends AbstractHelper
      *
      * @var string
      */
-    const SITEMAP_NS = 'http://www.sitemaps.org/schemas/sitemap/0.9';
+    const SITEMAP_NS = 'https://www.sitemaps.org/schemas/sitemap/0.9';
 
     /**
      * Schema URL
      *
      * @var string
      */
-    const SITEMAP_XSD = 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd';
+    const SITEMAP_XSD = 'https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd';
 
     /**
      * Whether XML output should be formatted
@@ -118,7 +117,7 @@ class Sitemap extends AbstractHelper
     /**
      * Returns a DOMDocument containing the Sitemap XML for the given container
      *
-     * @param  AbstractContainer                 $container  [optional] container to get
+     * @param AbstractContainer|null $container  [optional] container to get
      *                                               breadcrumbs from, defaults
      *                                               to what is registered in the
      *                                               helper
@@ -131,7 +130,7 @@ class Sitemap extends AbstractHelper
      *                                               validators are used and the
      *                                               loc element fails validation
      */
-    public function getDomSitemap(AbstractContainer $container = null)
+    public function getDomSitemap(?AbstractContainer $container = null)
     {
         // Reset the urls
         $this->urls = [];

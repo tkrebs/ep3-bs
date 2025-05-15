@@ -12,8 +12,8 @@ use Zend\Validator\Hostname;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-define('IANA_URL', 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt');
-define('ZF2_HOSTNAME_VALIDATOR_FILE', __DIR__.'/../src/Hostname.php');
+const IANA_URL = 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt';
+const ZF2_HOSTNAME_VALIDATOR_FILE = __DIR__ . '/../src/Hostname.php';
 
 
 if (! file_exists(ZF2_HOSTNAME_VALIDATOR_FILE) || ! is_readable(ZF2_HOSTNAME_VALIDATOR_FILE)) {
@@ -29,7 +29,7 @@ if (! is_writable(ZF2_HOSTNAME_VALIDATOR_FILE)) {
 $newFileContent   = [];     // new file content
 $insertDone       = false; // becomes 'true' when we find start of $validTlds declaration
 $insertFinish     = false; // becomes 'true' when we find end of $validTlds declaration
-$checkOnly        = isset($argv[1]) ? $argv[1] === '--check-only' : false;
+$checkOnly        = isset($argv[1]) && $argv[1] === '--check-only';
 $response         = getOfficialTLDs();
 $ianaVersion      = getVersionFromString('Version', strtok($response->getBody(), "\n"));
 $validatorVersion = getVersionFromString('IanaVersion', file_get_contents(ZF2_HOSTNAME_VALIDATOR_FILE));
@@ -188,7 +188,7 @@ function getPunycodeDecoder()
     $decodePunyCode->setAccessible(true);
 
     return function ($encode) use ($hostnameValidator, $decodePunyCode) {
-        if (strpos($encode, 'xn--') === 0) {
+        if (str_starts_with($encode, 'xn--')) {
             return $decodePunyCode->invokeArgs($hostnameValidator, [substr($encode, 4)]);
         }
         return $encode;

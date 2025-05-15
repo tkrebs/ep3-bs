@@ -12,6 +12,7 @@ namespace Zend\Db\Sql\Predicate;
 use Countable;
 use ReturnTypeWillChange;
 use Zend\Db\Sql\Exception;
+use Zend\Db\Sql\Expression;
 
 class PredicateSet implements PredicateInterface, Countable
 {
@@ -27,10 +28,10 @@ class PredicateSet implements PredicateInterface, Countable
     /**
      * Constructor
      *
-     * @param  null|array $predicates
+     * @param array|null $predicates
      * @param  string $defaultCombination
      */
-    public function __construct(array $predicates = null, $defaultCombination = self::COMBINED_BY_AND)
+    public function __construct(?array $predicates = null, $defaultCombination = self::COMBINED_BY_AND)
     {
         $this->defaultCombination = $defaultCombination;
         if ($predicates) {
@@ -85,7 +86,7 @@ class PredicateSet implements PredicateInterface, Countable
         }
         if (is_string($predicates)) {
             // String $predicate should be passed as an expression
-            $predicate = (strpos($predicates, Expression::PLACEHOLDER) !== false)
+            $predicate = (str_contains($predicates, Expression::PLACEHOLDER))
                 ? new Expression($predicates) : new Literal($predicates);
             $this->addPredicate($predicate, $combination);
             return $this;
@@ -94,7 +95,7 @@ class PredicateSet implements PredicateInterface, Countable
             foreach ($predicates as $pkey => $pvalue) {
                 // loop through predicates
                 if (is_string($pkey)) {
-                    if (strpos($pkey, '?') !== false) {
+                    if (str_contains($pkey, '?')) {
                         // First, process strings that the abstraction replacement character ?
                         // as an Expression predicate
                         $predicate = new Expression($pkey, $pvalue);
@@ -118,7 +119,7 @@ class PredicateSet implements PredicateInterface, Countable
                     $predicate = $pvalue;
                 } else {
                     // must be an array of expressions (with int-indexed array)
-                    $predicate = (strpos($pvalue, Expression::PLACEHOLDER) !== false)
+                    $predicate = (str_contains($pvalue, Expression::PLACEHOLDER))
                         ? new Expression($pvalue) : new Literal($pvalue);
                 }
                 $this->addPredicate($predicate, $combination);

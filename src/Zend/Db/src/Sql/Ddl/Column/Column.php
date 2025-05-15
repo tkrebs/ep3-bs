@@ -52,7 +52,7 @@ class Column implements ColumnInterface
      * @param null|string $name
      * @param bool        $nullable
      * @param mixed|null  $default
-     * @param mixed[]     $options
+     * @param array $options
      */
     public function __construct($name = null, $nullable = false, $default = null, array $options = [])
     {

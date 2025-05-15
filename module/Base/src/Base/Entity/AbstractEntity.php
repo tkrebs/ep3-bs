@@ -97,7 +97,7 @@ abstract class AbstractEntity
 
             if ($value || is_numeric($value) || is_array($value)) {
                 if ($type) {
-                    if (strpos($type, '\\') === false) {
+                    if (! str_contains($type, '\\')) {
                         $assertion = 'is_' . $type;
 
                         if (! $assertion($value)) {
@@ -204,7 +204,7 @@ abstract class AbstractEntity
 
             if ($value || is_numeric($value)) {
                 if ($type) {
-                    if (strpos($type, '\\') === false) {
+                    if (! str_contains($type, '\\')) {
                         $assertion = 'is_' . $type;
 
                         if (! $assertion($value)) {
@@ -276,7 +276,7 @@ abstract class AbstractEntity
 
             if ($value || is_numeric($value) || is_array($value)) {
                 if ($type) {
-                    if (strpos($type, '\\') === false) {
+                    if (! str_contains($type, '\\')) {
                         $assertion = 'is_' . $type;
 
                         if (! $assertion($value)) {

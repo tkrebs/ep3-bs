@@ -38,9 +38,9 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
      * Creates an instance of the ModuleAutoloader and injects the module paths
      * into it.
      *
-     * @param  ListenerOptions $options
+     * @param ListenerOptions|null $options
      */
-    public function __construct(ListenerOptions $options = null)
+    public function __construct(?ListenerOptions $options = null)
     {
         parent::__construct($options);
 
@@ -111,9 +111,8 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
      *
      * Unregisters the ModuleLoader and generates the module class map cache.
      *
-     * @param  ModuleEvent $event
      */
-    public function onLoadModulesPost(ModuleEvent $event)
+    public function onLoadModulesPost()
     {
         $this->moduleLoader->unregister();
         $this->writeArrayToFile(

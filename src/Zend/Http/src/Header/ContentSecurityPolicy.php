@@ -67,7 +67,7 @@ class ContentSecurityPolicy implements HeaderInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a valid directive name; received "%s"',
                 __METHOD__,
-                (string) $name
+                $name
             ));
         }
         if (empty($sources)) {

@@ -38,10 +38,10 @@ class ConsoleAdapterFactory implements FactoryInterface
      *
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return AdapterInterface|stdClass
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         // First, check if we're actually in a Console environment
         if (! Console::isConsole()) {

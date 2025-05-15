@@ -75,17 +75,17 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
         }
 
         foreach (range(0, 3) as $i) {
-            $insertStart[$i] = isset($insertStart[$i]) ? $insertStart[$i] : $sqlLength;
+            $insertStart[$i] = $insertStart[$i] ?? $sqlLength;
         }
 
         return $insertStart;
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param PlatformInterface|null $adapterPlatform
      * @return array
      */
-    protected function processAddColumns(PlatformInterface $adapterPlatform = null)
+    protected function processAddColumns(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
 
@@ -137,7 +137,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
                 }
 
                 if ($insert) {
-                    $j = isset($j) ? $j : 0;
+                    $j = $j ?? 0;
                     $sql = substr_replace($sql, $insert, $insertStart[$j], 0);
                     $insertStartCount = count($insertStart);
                     for (; $j < $insertStartCount; ++$j) {
@@ -151,10 +151,10 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param PlatformInterface|null $adapterPlatform
      * @return array
      */
-    protected function processChangeColumns(PlatformInterface $adapterPlatform = null)
+    protected function processChangeColumns(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
         foreach ($this->changeColumns as $name => $column) {
@@ -202,7 +202,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
                 }
 
                 if ($insert) {
-                    $j = isset($j) ? $j : 0;
+                    $j = $j ?? 0;
                     $sql = substr_replace($sql, $insert, $insertStart[$j], 0);
                     $insertStartCount = count($insertStart);
                     for (; $j < $insertStartCount; ++$j) {
@@ -239,12 +239,10 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     private function compareColumnOptions($columnA, $columnB)
     {
         $columnA = $this->normalizeColumnOption($columnA);
-        $columnA = isset($this->columnOptionSortOrder[$columnA])
-            ? $this->columnOptionSortOrder[$columnA] : count($this->columnOptionSortOrder);
+        $columnA = $this->columnOptionSortOrder[$columnA] ?? count($this->columnOptionSortOrder);
 
         $columnB = $this->normalizeColumnOption($columnB);
-        $columnB = isset($this->columnOptionSortOrder[$columnB])
-            ? $this->columnOptionSortOrder[$columnB] : count($this->columnOptionSortOrder);
+        $columnB = $this->columnOptionSortOrder[$columnB] ?? count($this->columnOptionSortOrder);
 
         return $columnA - $columnB;
     }

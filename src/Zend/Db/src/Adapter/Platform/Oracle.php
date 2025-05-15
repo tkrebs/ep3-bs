@@ -12,7 +12,7 @@ namespace Zend\Db\Adapter\Platform;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Oci8\Oci8;
 use Zend\Db\Adapter\Driver\Pdo\Pdo;
-use \Zend\Db\Adapter\Exception\InvalidArgumentException;
+use Zend\Db\Adapter\Exception\InvalidArgumentException;
 
 class Oracle extends AbstractPlatform
 {
@@ -28,7 +28,7 @@ class Oracle extends AbstractPlatform
     public function __construct($options = [], $driver = null)
     {
         if (isset($options['quote_identifiers'])
-            && ($options['quote_identifiers'] == false
+            && (! $options['quote_identifiers']
             || $options['quote_identifiers'] === 'false')
         ) {
             $this->quoteIdentifiers = false;

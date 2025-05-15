@@ -116,7 +116,7 @@ class LoaderPluginManager extends AbstractPluginManager
     {
         try {
             $this->validate($plugin);
-        } catch (InvalidServiceException $e) {
+        } catch (InvalidServiceException) {
             throw new Exception\RuntimeException(sprintf(
                 'Plugin of type %s is invalid; must implement %s\Loader\FileLoaderInterface '
                 . 'or %s\Loader\RemoteLoaderInterface',

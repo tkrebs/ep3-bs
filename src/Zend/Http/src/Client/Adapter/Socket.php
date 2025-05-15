@@ -257,11 +257,7 @@ class Socket implements HttpAdapter, StreamInterface
                 $flags |= STREAM_CLIENT_PERSISTENT;
             }
 
-            if (isset($this->config['connecttimeout'])) {
-                $connectTimeout = $this->config['connecttimeout'];
-            } else {
-                $connectTimeout = $this->config['timeout'];
-            }
+            $connectTimeout = $this->config['connecttimeout'] ?? $this->config['timeout'];
 
             if ($connectTimeout !== null && ! is_numeric($connectTimeout)) {
                 throw new AdapterException\InvalidArgumentException(sprintf(
@@ -431,7 +427,7 @@ class Socket implements HttpAdapter, StreamInterface
         $gotStatus = false;
 
         while (($line = fgets($this->socket)) !== false) {
-            $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
+            $gotStatus = $gotStatus || (str_contains($line, 'HTTP'));
             if ($gotStatus) {
                 $response .= $line;
                 if (rtrim($line) === '') {

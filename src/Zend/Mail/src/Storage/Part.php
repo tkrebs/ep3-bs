@@ -92,7 +92,7 @@ class Part implements RecursiveIterator, Part\PartInterface
             $this->messageNum = $params['id'];
         }
 
-        $params['strict'] = isset($params['strict']) ? $params['strict'] : false;
+        $params['strict'] = $params['strict'] ?? false;
 
         if (isset($params['raw'])) {
             Mime\Decode::splitMessage(
@@ -129,7 +129,7 @@ class Part implements RecursiveIterator, Part\PartInterface
     {
         try {
             return stripos($this->contentType, 'multipart/') === 0;
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface) {
             return false;
         }
     }

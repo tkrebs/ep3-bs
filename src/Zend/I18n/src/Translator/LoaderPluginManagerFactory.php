@@ -26,10 +26,10 @@ class LoaderPluginManagerFactory implements FactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $name
-     * @param null|array $options
+     * @param array|null $options
      * @return LoaderPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $options = $options ?: [];
         $pluginManager = new LoaderPluginManager($container, $options);

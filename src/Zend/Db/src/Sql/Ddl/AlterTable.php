@@ -178,12 +178,12 @@ class AlterTable extends AbstractSql implements SqlInterface
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
-    protected function processTable(PlatformInterface $adapterPlatform = null)
+    protected function processTable(?PlatformInterface $adapterPlatform = null)
     {
         return [$this->resolveTable($this->table, $adapterPlatform)];
     }
 
-    protected function processAddColumns(PlatformInterface $adapterPlatform = null)
+    protected function processAddColumns(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
         foreach ($this->addColumns as $column) {
@@ -193,7 +193,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         return [$sqls];
     }
 
-    protected function processChangeColumns(PlatformInterface $adapterPlatform = null)
+    protected function processChangeColumns(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
         foreach ($this->changeColumns as $name => $column) {
@@ -206,7 +206,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         return [$sqls];
     }
 
-    protected function processDropColumns(PlatformInterface $adapterPlatform = null)
+    protected function processDropColumns(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
         foreach ($this->dropColumns as $column) {
@@ -216,7 +216,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         return [$sqls];
     }
 
-    protected function processAddConstraints(PlatformInterface $adapterPlatform = null)
+    protected function processAddConstraints(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
         foreach ($this->addConstraints as $constraint) {
@@ -226,7 +226,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         return [$sqls];
     }
 
-    protected function processDropConstraints(PlatformInterface $adapterPlatform = null)
+    protected function processDropConstraints(?PlatformInterface $adapterPlatform = null)
     {
         $sqls = [];
         foreach ($this->dropConstraints as $constraint) {

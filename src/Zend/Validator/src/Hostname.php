@@ -1887,10 +1887,10 @@ class Hostname extends AbstractValidator
 
     /**
      *
-     * @param Ip $ipValidator OPTIONAL
+     * @param Ip|null $ipValidator OPTIONAL
      * @return Hostname;
      */
-    public function setIpValidator(Ip $ipValidator = null)
+    public function setIpValidator(?Ip $ipValidator = null)
     {
         if ($ipValidator === null) {
             $ipValidator = new Ip();
@@ -1987,8 +1987,8 @@ class Hostname extends AbstractValidator
 
         $this->setValue($value);
         // Check input against IP address schema
-        if (((preg_match('/^[0-9.]*$/', $value) && strpos($value, '.') !== false)
-                || (preg_match('/^[0-9a-f:.]*$/i', $value) && strpos($value, ':') !== false))
+        if (((preg_match('/^[0-9.]*$/', $value) && str_contains($value, '.'))
+                || (preg_match('/^[0-9a-f:.]*$/i', $value) && str_contains($value, ':')))
             && $this->getIpValidator()->setTranslator($this->getTranslator())->isValid($value)
         ) {
             if (! ($this->getAllow() & self::ALLOW_IP)) {
@@ -2001,9 +2001,9 @@ class Hostname extends AbstractValidator
 
         // Local hostnames are allowed to be partial (ending '.')
         if ($this->getAllow() & self::ALLOW_LOCAL) {
-            if (substr($value, -1) === '.') {
+            if (str_ends_with($value, '.')) {
                 $value = substr($value, 0, -1);
-                if (substr($value, -1) === '.') {
+                if (str_ends_with($value, '.')) {
                     // Empty hostnames (ending '..') are not allowed
                     $this->error(self::INVALID_LOCAL_NAME);
                     return false;
@@ -2044,7 +2044,7 @@ class Hostname extends AbstractValidator
 
                     $this->tld = $matches[1];
                     // Decode Punycode TLD to IDN
-                    if (strpos($this->tld, 'xn--') === 0) {
+                    if (str_starts_with($this->tld, 'xn--')) {
                         $this->tld = $this->decodePunycode(substr($this->tld, 4));
                         if ($this->tld === false) {
                             return false;
@@ -2091,7 +2091,7 @@ class Hostname extends AbstractValidator
                     }
                     foreach ($domainParts as $domainPart) {
                         // Decode Punycode domain names to IDN
-                        if (strpos($domainPart, 'xn--') === 0) {
+                        if (str_starts_with($domainPart, 'xn--')) {
                             $domainPart = $this->decodePunycode(substr($domainPart, 4));
                             if ($domainPart === false) {
                                 return false;

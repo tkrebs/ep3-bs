@@ -179,7 +179,7 @@ class ServerUrl extends AbstractHelper
         }
 
         $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
-        if (strpos($host, ',') !== false) {
+        if (str_contains($host, ',')) {
             $hosts = explode(',', $host);
             $host = trim(array_pop($hosts));
         }

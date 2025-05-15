@@ -442,19 +442,6 @@ class Headers implements Countable, Iterator
     }
 
     /**
-     * By calling this, it will force parsing and loading of all headers, after this count() will be accurate
-     *
-     * @return bool
-     */
-    public function forceLoading()
-    {
-        foreach ($this as $item) {
-            // $item should now be loaded
-        }
-        return true;
-    }
-
-    /**
      * @param $index
      * @param bool $isGeneric
      * @return mixed|void
@@ -472,7 +459,7 @@ class Headers implements Countable, Iterator
 
         try {
             $headers = $class::fromString($current['line']);
-        } catch (Exception\InvalidArgumentException $exception) {
+        } catch (Exception\InvalidArgumentException) {
             return $this->lazyLoadHeader($index, true);
         }
         if (is_array($headers)) {

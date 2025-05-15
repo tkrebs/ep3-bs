@@ -137,7 +137,7 @@ class ModuleAutoloader implements SplAutoloader
     public function autoload($class)
     {
         // Limit scope of this autoloader
-        if (substr($class, -7) !== '\Module') {
+        if (! str_ends_with($class, '\Module')) {
             return false;
         }
 
@@ -161,7 +161,7 @@ class ModuleAutoloader implements SplAutoloader
 
         if (count($this->namespacedPaths) >= 1) {
             foreach ($this->namespacedPaths as $namespace => $path) {
-                if (false === strpos($moduleName, $namespace)) {
+                if (! str_contains($moduleName, $namespace)) {
                     continue;
                 }
 
@@ -190,7 +190,7 @@ class ModuleAutoloader implements SplAutoloader
         foreach ($this->paths as $path) {
             $path = $path . $moduleClassPath;
 
-            if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
+            if ($path == '.' || str_starts_with($path, './') || str_starts_with($path, '.\\')) {
                 if (! $basePath = $this->pharBasePath) {
                     $basePath = realpath('.');
                 }
@@ -241,7 +241,7 @@ class ModuleAutoloader implements SplAutoloader
     protected function loadModuleFromDir($dirPath, $class)
     {
         $modulePath = $dirPath . '/Module.php';
-        if (substr($modulePath, 0, 7) === 'phar://') {
+        if (str_starts_with($modulePath, 'phar://')) {
             $file = new PharFileInfo($modulePath);
         } else {
             $file = new SplFileInfo($modulePath);
@@ -279,7 +279,7 @@ class ModuleAutoloader implements SplAutoloader
         $fileRealPath = $file->getRealPath();
 
         // Phase 0: Check for executable phar with Module class in stub
-        if (strpos($fileRealPath, '.phar') !== false) {
+        if (str_contains($fileRealPath, '.phar')) {
             // First see if the stub makes the Module class available
             require_once $fileRealPath;
             if (class_exists($class)) {

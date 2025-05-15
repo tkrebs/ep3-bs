@@ -50,15 +50,15 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param array|Connection|\oci8 $connection
-     * @param null|Statement $statementPrototype
-     * @param null|Result $resultPrototype
+     * @param Statement|null $statementPrototype
+     * @param Result|null $resultPrototype
      * @param array $options
      * @param string $features
      */
     public function __construct(
         $connection,
-        Statement $statementPrototype = null,
-        Result $resultPrototype = null,
+        ?Statement $statementPrototype = null,
+        ?Result $resultPrototype = null,
         array $options = [],
         $features = self::FEATURES_DEFAULT
     ) {
@@ -66,7 +66,6 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
             $connection = new Connection($connection);
         }
 
-        $options = array_intersect_key(array_merge($this->options, $options), $this->options);
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());

@@ -86,7 +86,7 @@ class Catchall implements RouteInterface
      */
     public static function factory($options = [])
     {
-        return new static(isset($options['defaults']) ? $options['defaults'] : []);
+        return new static($options['defaults'] ?? []);
     }
 
     /**

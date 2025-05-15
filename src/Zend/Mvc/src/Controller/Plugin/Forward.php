@@ -110,12 +110,12 @@ class Forward extends AbstractPlugin
      * Dispatch another controller
      *
      * @param  string $name Controller name; either a class name or an alias used in the controller manager
-     * @param  null|array $params Parameters with which to seed a custom RouteMatch object for the new controller
+     * @param array|null $params Parameters with which to seed a custom RouteMatch object for the new controller
      * @return mixed
      * @throws Exception\DomainException if composed controller does not define InjectApplicationEventInterface
      *         or Locator aware; or if the discovered controller is not dispatchable
      */
-    public function dispatch($name, array $params = null)
+    public function dispatch($name, ?array $params = null)
     {
         $event   = clone($this->getEvent());
 

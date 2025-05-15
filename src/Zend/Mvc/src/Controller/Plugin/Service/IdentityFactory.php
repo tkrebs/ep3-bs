@@ -22,7 +22,7 @@ class IdentityFactory implements FactoryInterface
      *
      * @return Identity
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $helper = new Identity();
         if ($container->has(AuthenticationService::class)) {

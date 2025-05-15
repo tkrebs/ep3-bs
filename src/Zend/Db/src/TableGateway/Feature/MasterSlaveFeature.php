@@ -35,7 +35,7 @@ class MasterSlaveFeature extends AbstractFeature
      * @param AdapterInterface $slaveAdapter
      * @param Sql|null $slaveSql
      */
-    public function __construct(AdapterInterface $slaveAdapter, Sql $slaveSql = null)
+    public function __construct(AdapterInterface $slaveAdapter, ?Sql $slaveSql = null)
     {
         $this->slaveAdapter = $slaveAdapter;
         if ($slaveSql) {

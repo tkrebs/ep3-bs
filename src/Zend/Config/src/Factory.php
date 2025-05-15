@@ -198,7 +198,7 @@ class Factory
 
         $content = $writer->processConfig($config);
 
-        return (bool) (file_put_contents($filename, $content) !== false);
+        return file_put_contents($filename, $content) !== false;
     }
 
     /**

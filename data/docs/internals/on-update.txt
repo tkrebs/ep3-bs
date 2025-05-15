@@ -6,4 +6,4 @@
     - VERSION
 - Update package
 
-- Update demo
+~ Update demo

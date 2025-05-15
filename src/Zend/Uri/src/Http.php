@@ -159,7 +159,7 @@ class Http extends Uri
         }
 
         // If no ':' separator, we only have a username
-        if (false === strpos($this->userInfo, ':')) {
+        if (! str_contains($this->userInfo, ':')) {
             $this->setUser($this->userInfo);
             $this->setPassword(null);
             return;

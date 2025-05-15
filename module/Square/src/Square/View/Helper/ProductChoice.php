@@ -33,7 +33,7 @@ class ProductChoice extends AbstractHelper
 
             if ($product->get('date_start')) {
                 $productDateStart = new \DateTime($product->get('date_start'));
-                $productDateStart->setTime(0, 0, 0);
+                $productDateStart->setTime(0, 0);
 
                 if ($dateStart <= $productDateStart) {
                     continue;

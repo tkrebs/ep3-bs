@@ -101,59 +101,51 @@ class FeatureSet
     }
 
     /**
-     * @param string $property
      * @return bool
      */
-    public function canCallMagicGet($property)
+    public function canCallMagicGet()
     {
         return false;
     }
 
     /**
-     * @param string $property
      * @return mixed
      */
-    public function callMagicGet($property)
+    public function callMagicGet()
     {
         $return = null;
         return $return;
     }
 
     /**
-     * @param string $property
      * @return bool
      */
-    public function canCallMagicSet($property)
+    public function canCallMagicSet()
     {
         return false;
     }
 
     /**
-     * @param $property
-     * @param $value
      * @return mixed
      */
-    public function callMagicSet($property, $value)
+    public function callMagicSet()
     {
         $return = null;
         return $return;
     }
 
     /**
-     * @param string $method
      * @return bool
      */
-    public function canCallMagicCall($method)
+    public function canCallMagicCall()
     {
         return false;
     }
 
     /**
-     * @param string $method
-     * @param array $arguments
      * @return mixed
      */
-    public function callMagicCall($method, $arguments)
+    public function callMagicCall()
     {
         $return = null;
         return $return;

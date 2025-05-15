@@ -44,7 +44,7 @@ abstract class Factory
             ));
         }
 
-        $type = isset($spec['type']) ? $spec['type'] : 'sendmail';
+        $type = $spec['type'] ?? 'sendmail';
 
         $normalizedType = strtolower($type);
 

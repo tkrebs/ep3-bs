@@ -26,10 +26,10 @@ class DiStrictAbstractServiceFactoryFactory implements FactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $name
-     * @param null|array $options
+     * @param array|null $options
      * @return DiStrictAbstractServiceFactory
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $diAbstractFactory = new DiStrictAbstractServiceFactory(
             $container->get('Di'),

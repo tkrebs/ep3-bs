@@ -106,16 +106,16 @@ class Application implements
      *
      * @param mixed $configuration
      * @param ServiceManager $serviceManager
-     * @param null|EventManagerInterface $events
-     * @param null|RequestInterface $request
-     * @param null|ResponseInterface $response
+     * @param EventManagerInterface|null $events
+     * @param RequestInterface|null $request
+     * @param ResponseInterface|null $response
      */
     public function __construct(
         $configuration,
         ServiceManager $serviceManager,
-        EventManagerInterface $events = null,
-        RequestInterface $request = null,
-        ResponseInterface $response = null
+        ?EventManagerInterface $events = null,
+        ?RequestInterface $request = null,
+        ?ResponseInterface $response = null
     ) {
         $this->configuration  = $configuration;
         $this->serviceManager = $serviceManager;
@@ -261,7 +261,7 @@ class Application implements
     public static function init($configuration = [])
     {
         // Prepare the service manager
-        $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : [];
+        $smConfig = $configuration['service_manager'] ?? [];
         $smConfig = new Service\ServiceManagerConfig($smConfig);
 
         $serviceManager = new ServiceManager();
@@ -272,9 +272,9 @@ class Application implements
         $serviceManager->get('ModuleManager')->loadModules();
 
         // Prepare list of listeners to bootstrap
-        $listenersFromAppConfig     = isset($configuration['listeners']) ? $configuration['listeners'] : [];
+        $listenersFromAppConfig     = $configuration['listeners'] ?? [];
         $config                     = $serviceManager->get('config');
-        $listenersFromConfigService = isset($config['listeners']) ? $config['listeners'] : [];
+        $listenersFromConfigService = $config['listeners'] ?? [];
 
         $listeners = array_unique(array_merge($listenersFromConfigService, $listenersFromAppConfig));
 

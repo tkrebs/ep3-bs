@@ -122,13 +122,11 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Constructor
      *
-     * @param ConfigInterface $config
+     * @param ConfigInterface|null $config
      */
-    public function __construct(ConfigInterface $config = null)
+    public function __construct(?ConfigInterface $config = null)
     {
-        if ($config) {
-            $config->configureServiceManager($this);
-        }
+        $config?->configureServiceManager($this);
     }
 
     /**
@@ -324,7 +322,7 @@ class ServiceManager implements ServiceLocatorInterface
         if ($topOfStack) {
             array_unshift($this->abstractFactories, $factory);
         } else {
-            array_push($this->abstractFactories, $factory);
+            $this->abstractFactories[] = $factory;
         }
         return $this;
     }
@@ -373,7 +371,7 @@ class ServiceManager implements ServiceLocatorInterface
         if ($topOfStack) {
             array_unshift($this->initializers, $initializer);
         } else {
-            array_push($this->initializers, $initializer);
+            $this->initializers[] = $initializer;
         }
         return $this;
     }
@@ -492,11 +490,7 @@ class ServiceManager implements ServiceLocatorInterface
     public function get($name, $usePeeringServiceManagers = true)
     {
         // inlined code from ServiceManager::canonicalizeName for performance
-        if (isset($this->canonicalNames[$name])) {
-            $cName = $this->canonicalNames[$name];
-        } else {
-            $cName = $this->canonicalizeName($name);
-        }
+        $cName = $this->canonicalNames[$name] ?? $this->canonicalizeName($name);
 
         $isAlias = false;
 
@@ -578,7 +572,7 @@ class ServiceManager implements ServiceLocatorInterface
     public function create($name)
     {
         if (is_array($name)) {
-            list($cName, $rName) = $name;
+            [$cName, $rName] = $name;
         } else {
             $rName = $name;
 
@@ -698,13 +692,9 @@ class ServiceManager implements ServiceLocatorInterface
             $rName = $name;
 
             // inlined code from ServiceManager::canonicalizeName for performance
-            if (isset($this->canonicalNames[$rName])) {
-                $cName = $this->canonicalNames[$rName];
-            } else {
-                $cName = $this->canonicalizeName($name);
-            }
+            $cName = $this->canonicalNames[$rName] ?? $this->canonicalizeName($name);
         } elseif (is_array($name) && count($name) >= 2) {
-            list($cName, $rName) = $name;
+            [$cName, $rName] = $name;
         } else {
             return false;
         }

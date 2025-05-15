@@ -26,7 +26,7 @@ class TimeFormat extends AbstractHelper
                 switch (count($timeParts)) {
                     case 2:
                         $time = new DateTime();
-                        $time->setTime($timeParts[0], $timeParts[1], 0);
+                        $time->setTime($timeParts[0], $timeParts[1]);
                         break;
                     case 3:
                         $time = new DateTime();

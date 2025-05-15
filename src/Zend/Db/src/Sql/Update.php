@@ -172,8 +172,8 @@ class Update extends AbstractPreparableSql
 
     protected function processUpdate(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         return sprintf(
             $this->specifications[static::SPECIFICATION_UPDATE],
@@ -183,8 +183,8 @@ class Update extends AbstractPreparableSql
 
     protected function processSet(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         $setSql = [];
         $i      = 0;
@@ -227,8 +227,8 @@ class Update extends AbstractPreparableSql
 
     protected function processWhere(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this->where->count() == 0) {
             return;
@@ -241,8 +241,8 @@ class Update extends AbstractPreparableSql
 
     protected function processJoins(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         return $this->processJoin($this->joins, $platform, $driver, $parameterContainer);
     }

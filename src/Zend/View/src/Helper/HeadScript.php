@@ -9,6 +9,7 @@
 
 namespace Zend\View\Helper;
 
+use ReturnTypeWillChange;
 use stdClass;
 use Zend\View\Exception;
 
@@ -507,6 +508,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @throws Exception\InvalidArgumentException
      * @return void
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($index, $value)
     {
         if (! $this->isValid($value)) {

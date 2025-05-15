@@ -42,11 +42,11 @@ class SeparatorToSeparatorFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         return new SeparatorToSeparator(
-            isset($options['search_separator']) ? $options['search_separator'] : ' ',
-            isset($options['replacement_separator']) ? $options['replacement_separator'] : '-'
+            $options['search_separator'] ?? ' ',
+            $options['replacement_separator'] ?? '-'
         );
     }
 

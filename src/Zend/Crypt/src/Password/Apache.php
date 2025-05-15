@@ -125,12 +125,12 @@ class Apache implements PasswordInterface
      */
     public function verify($password, $hash)
     {
-        if (substr($hash, 0, 5) === '{SHA}') {
+        if (str_starts_with($hash, '{SHA}')) {
             $hash2 = '{SHA}' . base64_encode(sha1($password, true));
             return Utils::compareStrings($hash, $hash2);
         }
 
-        if (substr($hash, 0, 6) === '$apr1$') {
+        if (str_starts_with($hash, '$apr1$')) {
             $token = explode('$', $hash);
             if (empty($token[2])) {
                 throw new Exception\InvalidArgumentException(
@@ -263,7 +263,7 @@ class Apache implements PasswordInterface
                 );
             }
             for ($i = 0; $i < 8; $i++) {
-                if (strpos(self::ALPHA64, $salt[$i]) === false) {
+                if (! str_contains(self::ALPHA64, $salt[$i])) {
                     throw new Exception\InvalidArgumentException(
                         'The salt value must be a string in the alphabet "./0-9A-Za-z"'
                     );

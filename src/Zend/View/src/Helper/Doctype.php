@@ -95,7 +95,7 @@ class Doctype extends AbstractHelper
                     $this->setDoctype($doctype);
                     break;
                 default:
-                    if (0 !== strpos($doctype, '<!DOCTYPE')) {
+                    if (! str_starts_with($doctype, '<!DOCTYPE')) {
                         throw new Exception\DomainException('The specified doctype is malformed');
                     }
                     if (stristr($doctype, 'xhtml')) {

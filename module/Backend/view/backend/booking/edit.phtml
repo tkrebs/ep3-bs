@@ -150,18 +150,18 @@ $this->setup(array(
 
                             <?php if ($this->booking->getMeta('creator')): ?>
                                 <?= sprintf($this->t('Booking created:<br>%s by %s'),
-                                    $this->prettyDate(new \DateTime($this->booking->get('created'))),
+                                    $this->prettyDate(new DateTime($this->booking->get('created'))),
                                     $this->booking->getMeta('creator')) ?>
                             <?php else: ?>
                                 <?= sprintf($this->t('Booking created:<br>%s'),
-                                    $this->prettyDate(new \DateTime($this->booking->get('created')))) ?>
+                                    $this->prettyDate(new DateTime($this->booking->get('created')))) ?>
                             <?php endif; ?>
 
                             <?php if ($this->booking->getMeta('cancellor') && $this->booking->getMeta('cancelled')): ?>
                                 <br>
 
                                 <?= sprintf($this->t('Booking cancelled:<br>%s by %s'),
-                                    $this->prettyDate(new \DateTime($this->booking->get('cancelled'))),
+                                    $this->prettyDate(new DateTime($this->booking->get('cancelled'))),
                                     $this->booking->getMeta('cancellor')) ?>
                             <?php endif; ?>
                         </div>

@@ -30,11 +30,11 @@ class Factory
     protected $formElementManager;
 
     /**
-     * @param FormElementManager $formElementManager
+     * @param FormElementManager|null $formElementManager
      */
     public function __construct(
-        FormElementManager $formElementManager = null,
-        InputFilterFactory $inputFilterFactory = null
+        ?FormElementManager $formElementManager = null,
+        ?InputFilterFactory $inputFilterFactory = null
     ) {
         if ($formElementManager) {
             $this->setFormElementManager($formElementManager);
@@ -346,8 +346,8 @@ class Factory
                 continue;
             }
 
-            $flags = isset($elementSpecification['flags']) ? $elementSpecification['flags'] : [];
-            $spec  = isset($elementSpecification['spec']) ? $elementSpecification['spec'] : [];
+            $flags = $elementSpecification['flags'] ?? [];
+            $spec  = $elementSpecification['spec'] ?? [];
 
             if (! isset($spec['type'])) {
                 $spec['type'] = 'Zend\Form\Element';
@@ -371,8 +371,8 @@ class Factory
         $fieldsets = $this->validateSpecification($fieldsets, $method);
 
         foreach ($fieldsets as $fieldsetSpecification) {
-            $flags = isset($fieldsetSpecification['flags']) ? $fieldsetSpecification['flags'] : [];
-            $spec  = isset($fieldsetSpecification['spec']) ? $fieldsetSpecification['spec'] : [];
+            $flags = $fieldsetSpecification['flags'] ?? [];
+            $spec  = $fieldsetSpecification['spec'] ?? [];
 
             $fieldset = $this->createFieldset($spec);
             $masterFieldset->add($fieldset, $flags);

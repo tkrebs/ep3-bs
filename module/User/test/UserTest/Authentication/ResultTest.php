@@ -3,6 +3,7 @@
 namespace UserTest\Authentication;
 
 use User\Authentication\Result;
+use Zend\Authentication\Result as ResultAlias;
 
 class ResultTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +23,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 
     public function testExtraData()
     {
-        $result = new Result(Result::SUCCESS, 'Someone');
+        $result = new Result(ResultAlias::SUCCESS, 'Someone');
 
         $result->setExtra('date', '1970-01-01');
 
@@ -36,7 +37,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
      */
     public function testExtraDataInvalidArrayKey()
     {
-        $result = new Result(Result::SUCCESS, 'Someone');
+        $result = new Result(ResultAlias::SUCCESS, 'Someone');
 
         $result->setExtra(array(), 'Something');
     }
@@ -46,7 +47,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
      */
     public function testExtraDataInvalidObjectKey()
     {
-        $result = new Result(Result::SUCCESS, 'Someone');
+        $result = new Result(ResultAlias::SUCCESS, 'Someone');
 
         $result->setExtra(new \stdClass(), 'Something');
     }
@@ -56,7 +57,7 @@ class ResultTest extends \PHPUnit_Framework_TestCase
      */
     public function testExtraDataInvalidNullKey()
     {
-        $result = new Result(Result::SUCCESS, 'Someone');
+        $result = new Result(ResultAlias::SUCCESS, 'Someone');
 
         $result->setExtra(null, 'Something');
     }

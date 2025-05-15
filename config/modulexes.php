@@ -1,12 +1,12 @@
 <?php
 
-$extraModules = array();
+$extraModules = [];
 
 foreach (glob(getcwd() . '/modulex/*/') as $extraModule) {
 
     $extraModuleName = basename($extraModule);
 
-    if (strpos($extraModuleName, '!') !== 0) {
+    if (! str_starts_with($extraModuleName, '!')) {
 
         $extraModules[] = $extraModuleName;
     }

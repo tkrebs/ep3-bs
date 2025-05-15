@@ -130,7 +130,7 @@ class Hostname implements RouteInterface
                     throw new Exception\RuntimeException('Found empty parameter name');
                 }
 
-                $levelParts[$level][] = ['parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null];
+                $levelParts[$level][] = ['parameter', $matches['name'], $matches['delimiters'] ?? null ];
 
                 $currentPos += strlen($matches[0]);
             } elseif ($matches['token'] === '[') {

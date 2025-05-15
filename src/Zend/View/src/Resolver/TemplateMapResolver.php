@@ -172,10 +172,10 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      * Resolve a template/pattern name to a resource the renderer can consume
      *
      * @param  string $name
-     * @param  null|Renderer $renderer
+     * @param Renderer|null $renderer
      * @return string
      */
-    public function resolve($name, Renderer $renderer = null)
+    public function resolve($name, ?Renderer $renderer = null)
     {
         return $this->get($name);
     }

@@ -203,7 +203,7 @@ class Request extends AbstractMessage implements RequestInterface
                 $uri = new HttpUri($uri);
             } catch (UriException\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid URI passed as string (%s)', (string) $uri),
+                    sprintf('Invalid URI passed as string (%s)', $uri),
                     $e->getCode(),
                     $e
                 );
@@ -524,7 +524,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function renderRequestLine()
     {
-        return $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version;
+        return $this->method . ' ' . $this->uri . ' HTTP/' . $this->version;
     }
 
     /**

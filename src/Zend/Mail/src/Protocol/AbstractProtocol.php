@@ -333,7 +333,7 @@ abstract class AbstractProtocol
 
         do {
             $this->response[] = $result = $this->_receive($timeout);
-            list($cmd, $more, $msg) = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
+            [$cmd, $more, $msg] = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
 
             if ($errMsg !== '') {
                 $errMsg .= ' ' . $msg;
@@ -342,7 +342,7 @@ abstract class AbstractProtocol
             }
 
         // The '-' message prefix indicates an information string instead of a response string.
-        } while (strpos($more, '-') === 0);
+        } while (str_starts_with($more, '-'));
 
         if ($errMsg !== '') {
             throw new Exception\RuntimeException($errMsg);

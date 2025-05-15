@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'This %s is already occupied' => 'Ez a pálya %s már foglalt',
     '%sNote:%s Please read and accept the "%s".' => '%sSegédlet:%s Kérem olvassa el és fogadja el a "%s".',
@@ -108,4 +108,4 @@ return array(
     'and email address' => 'és email címe',
     'and phone number' => 'és telefonszáma',
 
-);
+];

@@ -109,7 +109,7 @@ class Json
         // Pre-encoding look for Zend\Json\Expr objects and replacing by tmp ids
         $javascriptExpressions = [];
         if (isset($options['enableJsonExprFinder'])
-           && ($options['enableJsonExprFinder'] == true)
+           && $options['enableJsonExprFinder']
         ) {
             $valueToEncode = static::_recursiveJsonExprFinder($valueToEncode, $javascriptExpressions);
         }

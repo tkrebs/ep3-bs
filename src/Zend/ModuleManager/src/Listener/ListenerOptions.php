@@ -244,7 +244,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheKey()
     {
-        return (string) $this->configCacheKey;
+        return $this->configCacheKey;
     }
 
     /**
@@ -328,7 +328,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getModuleMapCacheKey()
     {
-        return (string) $this->moduleMapCacheKey;
+        return $this->moduleMapCacheKey;
     }
 
     /**

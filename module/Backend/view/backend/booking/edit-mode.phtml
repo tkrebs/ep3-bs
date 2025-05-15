@@ -19,8 +19,8 @@ $booking = $reservation->getExtra('booking');
     <div class="sandbox" style="margin-bottom: 16px;">
         <?php
 
-        $dateStart = new \DateTime($booking->getMeta('date_start'));
-        $dateEnd = new \DateTime($booking->getMeta('date_end'));
+        $dateStart = new DateTime($booking->getMeta('date_start'));
+        $dateEnd = new DateTime($booking->getMeta('date_end'));
 
         echo sprintf('<b>%s</b> ',
             $this->t($booking->getRepeat()));

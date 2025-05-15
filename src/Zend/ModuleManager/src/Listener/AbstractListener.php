@@ -20,9 +20,9 @@ abstract class AbstractListener
     /**
      * __construct
      *
-     * @param  ListenerOptions $options
+     * @param ListenerOptions|null $options
      */
-    public function __construct(ListenerOptions $options = null)
+    public function __construct(?ListenerOptions $options = null)
     {
         $options = $options ?: new ListenerOptions;
         $this->setOptions($options);

@@ -30,7 +30,7 @@ class Issn extends AbstractAdapter
     public function hasValidCharacters($value)
     {
         if (strlen($value) != 8) {
-            if (strpos($value, 'X') !== false) {
+            if (str_contains($value, 'X')) {
                 return false;
             }
         }

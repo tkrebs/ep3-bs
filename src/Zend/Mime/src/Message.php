@@ -43,7 +43,7 @@ class Message
      */
     public function addPart(Part $part)
     {
-        foreach ($this->getParts() as $key => $row) {
+        foreach ($this->getParts() as $row) {
             if ($part == $row) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Provided part %s already defined.',

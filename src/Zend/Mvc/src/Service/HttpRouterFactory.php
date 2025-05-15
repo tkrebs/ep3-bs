@@ -27,16 +27,16 @@ class HttpRouterFactory implements FactoryInterface
      *
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return RouteStackInterface
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $config       = $container->has('config') ? $container->get('config') : [];
 
         // Defaults
         $class  = 'Zend\Mvc\Router\Http\TreeRouteStack';
-        $config = isset($config['router']) ? $config['router'] : [];
+        $config = $config['router'] ?? [];
 
         return $this->createRouter($class, $config, $container);
     }

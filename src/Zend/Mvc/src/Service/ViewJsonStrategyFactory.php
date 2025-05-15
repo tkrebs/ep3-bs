@@ -26,10 +26,10 @@ class ViewJsonStrategyFactory implements FactoryInterface
      *
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return JsonStrategy
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $jsonRenderer = $container->get('ViewJsonRenderer');
         $jsonStrategy = new JsonStrategy($jsonRenderer);

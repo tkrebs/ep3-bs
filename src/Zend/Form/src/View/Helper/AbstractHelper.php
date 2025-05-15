@@ -259,7 +259,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
             try {
                 $escapedAttribute = $escapeAttr($value);
                 $strings[] = sprintf('%s="%s"', $escape($key), $escapedAttribute);
-            } catch (EscaperException $x) {
+            } catch (EscaperException) {
                 // If an escaper exception happens, escape only the key, and use a blank value.
                 $strings[] = sprintf('%s=""', $escape($key));
             }
@@ -570,7 +570,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
     protected function hasAllowedPrefix($attribute)
     {
         foreach ($this->validTagAttributePrefixes as $prefix) {
-            if (substr($attribute, 0, strlen($prefix)) === $prefix) {
+            if (str_starts_with($attribute, $prefix)) {
                 return true;
             }
         }

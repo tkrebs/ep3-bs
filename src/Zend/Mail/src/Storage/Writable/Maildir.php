@@ -120,25 +120,25 @@ class Maildir extends Folder\Maildir implements WritableInterface
         $exists = null;
         try {
             $exists = $this->getFolders($folder);
-        } catch (MailException\ExceptionInterface $e) {
+        } catch (MailException\ExceptionInterface) {
             // ok
         }
         if ($exists) {
             throw new StorageException\RuntimeException('folder already exists');
         }
 
-        if (strpos($folder, $this->delim . $this->delim) !== false) {
+        if (str_contains($folder, $this->delim . $this->delim)) {
             throw new StorageException\RuntimeException('invalid name - folder parts may not be empty');
         }
 
-        if (strpos($folder, 'INBOX' . $this->delim) === 0) {
+        if (str_starts_with($folder, 'INBOX' . $this->delim)) {
             $folder = substr($folder, 6);
         }
 
         $fulldir = $this->rootdir . '.' . $folder;
 
         // check if we got tricked and would create a dir outside of the rootdir or not as direct child
-        if (strpos($folder, DIRECTORY_SEPARATOR) !== false || strpos($folder, '/') !== false
+        if (str_contains($folder, DIRECTORY_SEPARATOR) || str_contains($folder, '/')
             || dirname($fulldir) . DIRECTORY_SEPARATOR != $this->rootdir
         ) {
             throw new StorageException\RuntimeException('invalid name - no directory separator allowed in folder name');
@@ -151,7 +151,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
             $parent = substr($folder, 0, strrpos($folder, $this->delim));
             try {
                 $this->getFolders($parent);
-            } catch (MailException\ExceptionInterface $e) {
+            } catch (MailException\ExceptionInterface) {
                 // does not - create parent folder
                 $this->createFolder($parent);
             }
@@ -196,7 +196,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
         }
 
         $name = trim($name, $this->delim);
-        if (strpos($name, 'INBOX' . $this->delim) === 0) {
+        if (str_starts_with($name, 'INBOX' . $this->delim)) {
             $name = substr($name, 6);
         }
 
@@ -267,16 +267,16 @@ class Maildir extends Folder\Maildir implements WritableInterface
         }
 
         $oldName = trim($oldName, $this->delim);
-        if (strpos($oldName, 'INBOX' . $this->delim) === 0) {
+        if (str_starts_with($oldName, 'INBOX' . $this->delim)) {
             $oldName = substr($oldName, 6);
         }
 
         $newName = trim($newName, $this->delim);
-        if (strpos($newName, 'INBOX' . $this->delim) === 0) {
+        if (str_starts_with($newName, 'INBOX' . $this->delim)) {
             $newName = substr($newName, 6);
         }
 
-        if (strpos($newName, $oldName . $this->delim) === 0) {
+        if (str_starts_with($newName, $oldName . $this->delim)) {
             throw new StorageException\RuntimeException('new folder cannot be a child of old folder');
         }
 
@@ -649,7 +649,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
 
         // NOTE: double dirname to make sure we always move to cur. if recent
         // flag has been set (message is in new) it will be moved to cur.
-        $newFilename = dirname(dirname($filedata['filename']))
+        $newFilename = dirname($filedata['filename'], 2)
             . DIRECTORY_SEPARATOR
             . 'cur'
             . DIRECTORY_SEPARATOR
@@ -892,7 +892,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
             }
             unset($maildirsize[0]);
             foreach ($maildirsize as $line) {
-                list($size, $count) = explode(' ', trim($line));
+                [$size, $count] = explode(' ', trim($line));
                 $totalSize += $size;
                 $messages += $count;
             }

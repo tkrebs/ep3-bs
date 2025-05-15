@@ -49,11 +49,7 @@ class Result extends ZendResult
      */
     public function getExtra($key)
     {
-        if (isset($this->extra[$key])) {
-            return $this->extra[$key];
-        } else {
-            return null;
-        }
+        return $this->extra[$key] ?? null;
     }
 
 }

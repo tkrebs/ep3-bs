@@ -135,7 +135,7 @@ class Bitwise extends AbstractValidator
                 // All the bits set in value must be set in control
                 $this->error(self::NOT_AND_STRICT);
 
-                return (bool) (($this->control & $value) == $value);
+                return ($this->control & $value) == $value;
             } else {
                 // At least one of the bits must be common between value and control
                 $this->error(self::NOT_AND);
@@ -145,7 +145,7 @@ class Bitwise extends AbstractValidator
         } elseif (self::OP_XOR === $this->operator) {
             $this->error(self::NOT_XOR);
 
-            return (bool) (($this->control ^ $value) === ($this->control | $value));
+            return ($this->control ^ $value) === ($this->control | $value);
         }
 
         return false;

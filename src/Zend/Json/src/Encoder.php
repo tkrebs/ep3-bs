@@ -160,7 +160,7 @@ class Encoder
      * @param mixed $value
      * @return bool
      */
-    protected function _wasVisited(&$value)
+    protected function _wasVisited($value)
     {
         if (in_array($value, $this->visited, true)) {
             return true;
@@ -308,7 +308,7 @@ class Encoder
             }
             $started = true;
 
-            $result .= '' . $method->getName(). ':function(';
+            $result .= $method->getName() . ':function(';
 
             if ('__construct' != $method->getName()) {
                 $parameters  = $method->getParameters();

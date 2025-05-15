@@ -16,8 +16,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceManager;
-use Zend\View\HelperPluginManager as ViewHelperManager;
-use Zend\View\Resolver as ViewResolver;
 use Zend\View\View;
 
 /**

@@ -11,30 +11,30 @@
  *
  * Should always be enabled during setup
  */
-define('EP3_BS_DEV', true);
+const EP3_BS_DEV = true;
 
 /**
  * Setup configuration array
  */
-return array(
-    'modules' => array(
+return [
+    'modules' => [
         'Base',
         'Setup',
         'Square',
         'User',
-    ),
-    'module_listener_options' => array(
-        'config_glob_paths' => array(
+    ],
+    'module_listener_options' => [
+        'config_glob_paths' => [
             'config/autoload/{,*.}{global,local}.php',
-        ),
-        'module_paths' => array(
+        ],
+        'module_paths' => [
             'module',
             'vendor',
-        ),
+        ],
         'config_cache_enabled' => ! EP3_BS_DEV,
         'config_cache_key' => 'ep3-bs-setup',
         'module_map_cache_enabled' => ! EP3_BS_DEV,
         'module_map_cache_key' => 'ep3-bs-setup',
         'cache_dir' => getcwd() . '/data/cache/',
-    ),
-);
+    ],
+];

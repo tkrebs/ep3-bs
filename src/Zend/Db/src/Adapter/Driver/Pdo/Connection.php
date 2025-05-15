@@ -168,7 +168,7 @@ class Connection extends AbstractConnection
                     break;
                 case 'driver':
                     $value = strtolower((string) $value);
-                    if (strpos($value, 'pdo') === 0) {
+                    if (str_starts_with($value, 'pdo')) {
                         $pdoDriver = str_replace(['-', '_', ' '], '', $value);
                         $pdoDriver = substr($pdoDriver, 3) ?: '';
                     }
@@ -371,15 +371,11 @@ class Connection extends AbstractConnection
             $this->connect();
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($sql);
-        }
+        $this->profiler?->profilerStart($sql);
 
         $resultResource = $this->resource->query($sql);
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish($sql);
-        }
+        $this->profiler?->profilerFinish($sql);
 
         if ($resultResource === false) {
             $errorInfo = $this->resource->errorInfo();
@@ -423,7 +419,7 @@ class Connection extends AbstractConnection
 
         try {
             return $this->resource->lastInsertId($name);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             // do nothing
         }
 

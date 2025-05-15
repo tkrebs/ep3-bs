@@ -231,16 +231,12 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($this);
-        }
+        $this->profiler?->profilerStart($this);
 
         try {
             $this->resource->execute();
         } catch (\PDOException $e) {
-            if ($this->profiler) {
-                $this->profiler->profilerFinish();
-            }
+            $this->profiler?->profilerFinish();
             throw new Exception\InvalidQueryException(
                 'Statement could not be executed (' . implode(' - ', $this->resource->errorInfo()) . ')',
                 null,
@@ -248,9 +244,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             );
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish();
-        }
+        $this->profiler?->profilerFinish();
 
         $result = $this->driver->createResult($this->resource, $this);
         return $result;

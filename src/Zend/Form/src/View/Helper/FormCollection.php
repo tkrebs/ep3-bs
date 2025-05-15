@@ -10,7 +10,6 @@
 namespace Zend\Form\View\Helper;
 
 use RuntimeException;
-use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
@@ -73,11 +72,11 @@ class FormCollection extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
+     * @param ElementInterface|null $element
      * @param  bool                  $wrap
      * @return string|FormCollection
      */
-    public function __invoke(ElementInterface $element = null, $wrap = true)
+    public function __invoke(?ElementInterface $element = null, $wrap = true)
     {
         if (! $element) {
             return $this;

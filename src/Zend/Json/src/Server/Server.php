@@ -226,7 +226,7 @@ class Server extends AbstractServer
      */
     public function getRequest()
     {
-        if (null === ($request = $this->request)) {
+        if (null === $this->request) {
             $this->setRequest(new Request\Http());
         }
         return $this->request;
@@ -251,7 +251,7 @@ class Server extends AbstractServer
      */
     public function getResponse()
     {
-        if (null === ($response = $this->response)) {
+        if (null === $this->response) {
             $this->setResponse(new Response\Http());
         }
         return $this->response;
@@ -425,7 +425,7 @@ class Server extends AbstractServer
                 } elseif (in_array($newType, $params[$key]['type'])) {
                     continue;
                 }
-                array_push($params[$key]['type'], $parameter->getType());
+                $params[$key]['type'][] = $parameter->getType();
             }
         }
         return $params;
@@ -484,7 +484,7 @@ class Server extends AbstractServer
                 if (!preg_match('/^(set|get)/', $method)) {
                     continue;
                 }
-                if (strstr($method, 'Service')) {
+                if (str_contains($method, 'Service')) {
                     continue;
                 }
                 $this->smdMethods[] = $method;

@@ -458,19 +458,6 @@ class Headers implements Countable, Iterator
     }
 
     /**
-     * By calling this, it will force parsing and loading of all headers, after this count() will be accurate
-     *
-     * @return bool
-     */
-    public function forceLoading()
-    {
-        foreach ($this as $item) {
-            // $item should now be loaded
-        }
-        return true;
-    }
-
-    /**
      * Create Header object from header line
      *
      * @param string $headerLine

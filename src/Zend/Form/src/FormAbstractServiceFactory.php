@@ -39,7 +39,7 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
      * @param array|null $options
      * @return ElementInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $config  = $this->getConfig($container);
         $config  = $config[$requestedName];

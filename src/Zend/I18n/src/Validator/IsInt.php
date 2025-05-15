@@ -155,22 +155,13 @@ class IsInt extends AbstractValidator
         $this->setValue($value);
 
         $locale = $this->getLocale();
-        try {
-            $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
-            if (intl_is_failure($format->getErrorCode())) {
-                throw new Exception\InvalidArgumentException("Invalid locale string given");
-            }
-        } catch (IntlException $intlException) {
-            throw new Exception\InvalidArgumentException("Invalid locale string given", 0, $intlException);
+        $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        if (intl_is_failure($format->getErrorCode())) {
+            throw new Exception\InvalidArgumentException("Invalid locale string given");
         }
 
-        try {
-            $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
-            if (intl_is_failure($format->getErrorCode())) {
-                $this->error(self::NOT_INT);
-                return false;
-            }
-        } catch (IntlException $intlException) {
+        $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
+        if (intl_is_failure($format->getErrorCode())) {
             $this->error(self::NOT_INT);
             return false;
         }

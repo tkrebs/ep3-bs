@@ -151,7 +151,7 @@ class Regex implements RouteInterface
         foreach ($mergedParams as $key => $value) {
             $spec = '%' . $key . '%';
 
-            if (strpos($url, $spec) !== false) {
+            if (str_contains($url, $spec)) {
                 $url = str_replace($spec, rawurlencode($value), $url);
 
                 $this->assembledParams[] = $key;

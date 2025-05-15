@@ -60,7 +60,7 @@ class ModuleRouteListener extends AbstractListenerAggregate
         }
 
         // Ensure the module namespace has not already been applied
-        if (0 === strpos($controller, $module)) {
+        if (str_starts_with($controller, $module)) {
             return;
         }
 

@@ -23,8 +23,8 @@ class TableGateway extends AbstractTableGateway
      * @param string|TableIdentifier|array                                              $table
      * @param AdapterInterface                                                          $adapter
      * @param Feature\AbstractFeature|Feature\FeatureSet|Feature\AbstractFeature[]|null $features
-     * @param ResultSetInterface|null                                                   $resultSetPrototype
-     * @param Sql|null                                                                  $sql
+     * @param ResultSetInterface|null $resultSetPrototype
+     * @param Sql|null $sql
      *
      * @throws Exception\InvalidArgumentException
      */
@@ -32,8 +32,8 @@ class TableGateway extends AbstractTableGateway
         $table,
         AdapterInterface $adapter,
         $features = null,
-        ResultSetInterface $resultSetPrototype = null,
-        Sql $sql = null
+        ?ResultSetInterface $resultSetPrototype = null,
+        ?Sql $sql = null
     ) {
         // table
         if (! (is_string($table) || $table instanceof TableIdentifier || is_array($table))) {

@@ -191,7 +191,7 @@ final class DataUnitFormatter extends AbstractFilter
     protected function getPrefixAt($index)
     {
         $prefixes = $this->getPrefixes();
-        return isset($prefixes[$index]) ? $prefixes[$index] : null;
+        return $prefixes[$index] ?? null;
     }
 
     /**

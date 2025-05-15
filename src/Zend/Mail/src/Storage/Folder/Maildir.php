@@ -61,7 +61,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
 
         $this->rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        $this->delim = isset($params->delim) ? $params->delim : '.';
+        $this->delim = $params->delim ?? '.';
 
         $this->buildFolderTree();
         $this->selectFolder(! empty($params->folder) ? $params->folder : 'INBOX');
@@ -110,16 +110,16 @@ class Maildir extends Storage\Maildir implements FolderInterface
 
         foreach ($dirs as $dir) {
             do {
-                if (strpos($dir, $parent) === 0) {
+                if (str_starts_with($dir, $parent)) {
                     $local = substr($dir, strlen($parent));
-                    if (strpos($local, $this->delim) !== false) {
+                    if (str_contains($local, $this->delim)) {
                         throw new Exception\RuntimeException('error while reading maildir');
                     }
-                    array_push($stack, $parent);
+                    $stack[] = $parent;
                     $parent = $dir . $this->delim;
                     $folder = new Storage\Folder($local, substr($dir, 1), true);
                     $parentFolder->$local = $folder;
-                    array_push($folderStack, $parentFolder);
+                    $folderStack[] = $parentFolder;
                     $parentFolder = $folder;
                     break;
                 } elseif ($stack) {
@@ -147,7 +147,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
         }
 
         // rootdir is same as INBOX in maildir
-        if (strpos($rootFolder, 'INBOX' . $this->delim) === 0) {
+        if (str_starts_with($rootFolder, 'INBOX' . $this->delim)) {
             $rootFolder = substr($rootFolder, 6);
         }
         $currentFolder = $this->rootFolder;
@@ -155,7 +155,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
 
         while ($currentFolder) {
             ErrorHandler::start(E_NOTICE);
-            list($entry, $subname) = explode($this->delim, $subname, 2);
+            [$entry, $subname] = explode($this->delim, $subname, 2);
             ErrorHandler::stop();
             $currentFolder = $currentFolder->$entry;
             if (! $subname) {

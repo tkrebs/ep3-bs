@@ -38,7 +38,7 @@ final class GpsPoint extends AbstractValidator
      */
     public function isValid($value)
     {
-        if (strpos($value, ',') === false) {
+        if (! str_contains($value, ',')) {
             $this->error(GpsPoint::INCOMPLETE_COORDINATE, $value);
             return false;
         }

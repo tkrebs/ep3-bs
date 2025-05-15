@@ -89,11 +89,11 @@ class ValidatorChain implements
      * Retrieve a validator by name
      *
      * @param  string     $name    Name of validator to return
-     * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
+     * @param array|null $options Options to pass to validator constructor (if not already instantiated)
      *
      * @return object
      */
-    public function plugin($name, array $options = null)
+    public function plugin($name, ?array $options = null)
     {
         $plugins = $this->getPluginManager();
         return $plugins->get($name, $options);

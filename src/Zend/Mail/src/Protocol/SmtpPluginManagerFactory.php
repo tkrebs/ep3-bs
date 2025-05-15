@@ -25,7 +25,7 @@ class SmtpPluginManagerFactory implements FactoryInterface
      *
      * @return SmtpPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         return new SmtpPluginManager($container, $options ?: []);
     }

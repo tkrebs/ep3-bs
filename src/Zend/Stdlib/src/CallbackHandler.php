@@ -161,7 +161,7 @@ class CallbackHandler
      */
     protected function validateStringCallbackFor54($callback)
     {
-        if (!strstr($callback, '::')) {
+        if (! str_contains($callback, '::')) {
             return true;
         }
 

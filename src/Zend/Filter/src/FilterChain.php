@@ -66,8 +66,8 @@ class FilterChain extends AbstractFilter implements Countable
             switch (strtolower($key)) {
                 case 'callbacks':
                     foreach ($value as $spec) {
-                        $callback = isset($spec['callback']) ? $spec['callback'] : false;
-                        $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
+                        $callback = $spec['callback'] ?? false;
+                        $priority = $spec['priority'] ?? static::DEFAULT_PRIORITY;
                         if ($callback) {
                             $this->attach($callback, $priority);
                         }
@@ -75,9 +75,9 @@ class FilterChain extends AbstractFilter implements Countable
                     break;
                 case 'filters':
                     foreach ($value as $spec) {
-                        $name     = isset($spec['name']) ? $spec['name'] : false;
-                        $options  = isset($spec['options']) ? $spec['options'] : [];
-                        $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
+                        $name     = $spec['name'] ?? false;
+                        $options  = $spec['options'] ?? [];
+                        $priority = $spec['priority'] ?? static::DEFAULT_PRIORITY;
                         if ($name) {
                             $this->attachByName($name, $options, $priority);
                         }

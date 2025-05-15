@@ -26,7 +26,7 @@ class DetermineDate extends AbstractPlugin
             }
 
             $dateStart = new DateTime($passedDate);
-            $dateStart->setTime(0, 0, 0);
+            $dateStart->setTime(0, 0);
 
             if ($dateStart) {
                 $controller->cookie()->set('calendar-date', $dateStart->format('Y-m-d'));

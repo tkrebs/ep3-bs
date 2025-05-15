@@ -298,7 +298,7 @@ class ContentType implements HeaderInterface
         $type    = array_shift($parts);
         $subtype = array_shift($parts);
         $format  = $subtype;
-        if (false !== strpos($subtype, '+')) {
+        if (str_contains($subtype, '+')) {
             $parts   = explode('+', $subtype, 2);
             $subtype = array_shift($parts);
             $format  = array_shift($parts);
@@ -333,7 +333,7 @@ class ContentType implements HeaderInterface
         }
 
         // Is the right side a partial wildcard?
-        if ('*' == substr($right->subtype, -1)) {
+        if (str_ends_with($right->subtype, '*')) {
             // validate partial-wildcard subtype
             if (! $this->validatePartialWildcard($right->subtype, $left->subtype)) {
                 return false;
@@ -393,7 +393,7 @@ class ContentType implements HeaderInterface
             return false;
         }
 
-        if (0 === strpos($left, $requiredSegment)) {
+        if (str_starts_with($left, $requiredSegment)) {
             return true;
         }
 

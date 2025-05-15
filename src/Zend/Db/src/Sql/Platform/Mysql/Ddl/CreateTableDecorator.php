@@ -75,7 +75,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
         }
 
         foreach (range(0, 3) as $i) {
-            $insertStart[$i] = isset($insertStart[$i]) ? $insertStart[$i] : $sqlLength;
+            $insertStart[$i] = $insertStart[$i] ?? $sqlLength;
         }
 
         return $insertStart;
@@ -84,7 +84,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     /**
      * {@inheritDoc}
      */
-    protected function processColumns(PlatformInterface $platform = null)
+    protected function processColumns(?PlatformInterface $platform = null)
     {
         if (! $this->columns) {
             return;
@@ -137,7 +137,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
                 }
 
                 if ($insert) {
-                    $j = isset($j) ? $j : 0;
+                    $j = $j ?? 0;
                     $sql = substr_replace($sql, $insert, $insertStart[$j], 0);
                     $insertStartCount = count($insertStart);
                     for (; $j < $insertStartCount; ++$j) {
@@ -172,12 +172,10 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     private function compareColumnOptions($columnA, $columnB)
     {
         $columnA = $this->normalizeColumnOption($columnA);
-        $columnA = isset($this->columnOptionSortOrder[$columnA])
-            ? $this->columnOptionSortOrder[$columnA] : count($this->columnOptionSortOrder);
+        $columnA = $this->columnOptionSortOrder[$columnA] ?? count($this->columnOptionSortOrder);
 
         $columnB = $this->normalizeColumnOption($columnB);
-        $columnB = isset($this->columnOptionSortOrder[$columnB])
-            ? $this->columnOptionSortOrder[$columnB] : count($this->columnOptionSortOrder);
+        $columnB = $this->columnOptionSortOrder[$columnB] ?? count($this->columnOptionSortOrder);
 
         return $columnA - $columnB;
     }

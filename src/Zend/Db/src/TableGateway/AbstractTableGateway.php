@@ -325,10 +325,10 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      *
      * @param  array $set
      * @param  string|array|\Closure $where
-     * @param  null|array $joins
+     * @param array|null $joins
      * @return int
      */
-    public function update($set, $where = null, array $joins = null)
+    public function update($set, $where = null, ?array $joins = null)
     {
         if (! $this->isInitialized) {
             $this->initialize();
@@ -342,7 +342,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
         if ($joins) {
             foreach ($joins as $join) {
-                $type = isset($join['type']) ? $join['type'] : Join::JOIN_INNER;
+                $type = $join['type'] ?? Join::JOIN_INNER;
                 $update->join($join['name'], $join['on'], $type);
             }
         }
@@ -499,8 +499,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             case 'table':
                 return $this->table;
         }
-        if ($this->featureSet->canCallMagicGet($property)) {
-            return $this->featureSet->callMagicGet($property);
+        if ($this->featureSet->canCallMagicGet()) {
+            return $this->featureSet->callMagicGet();
         }
         throw new Exception\InvalidArgumentException('Invalid magic property access in ' . __CLASS__ . '::__get()');
     }
@@ -513,8 +513,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      */
     public function __set($property, $value)
     {
-        if ($this->featureSet->canCallMagicSet($property)) {
-            return $this->featureSet->callMagicSet($property, $value);
+        if ($this->featureSet->canCallMagicSet()) {
+            return $this->featureSet->callMagicSet();
         }
         throw new Exception\InvalidArgumentException('Invalid magic property access in ' . __CLASS__ . '::__set()');
     }
@@ -550,7 +550,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             && count($this->table) == 1
             && is_object(reset($this->table))
         ) {
-            foreach ($this->table as $alias => &$tableObject) {
+            foreach ($this->table as &$tableObject) {
                 $tableObject = clone $tableObject;
             }
         }

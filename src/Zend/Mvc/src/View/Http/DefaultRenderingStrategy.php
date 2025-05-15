@@ -106,8 +106,6 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
             $view->render($viewModel);
         } catch (\Throwable $ex) {
             $caughtException = $ex;
-        } catch (\Exception $ex) {  // @TODO clean up once PHP 7 requirement is enforced
-            $caughtException = $ex;
         }
 
         if ($caughtException !== null) {

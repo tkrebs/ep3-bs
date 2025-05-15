@@ -108,7 +108,7 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
                 );
             }
             $name = $validator['name'];
-            $options = isset($validator['options']) ? $validator['options'] : [];
+            $options = $validator['options'] ?? [];
             $validator = $this->getValidatorPluginManager()->get($name, $options);
         }
 

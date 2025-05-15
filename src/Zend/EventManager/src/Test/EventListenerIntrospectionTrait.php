@@ -30,16 +30,6 @@ use Zend\Stdlib\PriorityQueue;
  */
 trait EventListenerIntrospectionTrait
 {
-    /**
-     * Retrieve a list of event names from an event manager.
-     *
-     * @param EventManager $events
-     * @return string[]
-     */
-    private function getEventsFromEventManager(EventManager $events)
-    {
-        return $events->getEvents();
-    }
 
     /**
      * Retrieve an interable list of listeners for an event.
@@ -63,56 +53,6 @@ trait EventListenerIntrospectionTrait
     {
         $listeners = $events->getListeners($event);
         return $this->traverseListeners($listeners, $withPriority);
-    }
-
-    /**
-     * Assert that a given listener exists at the specified priority.
-     *
-     * @param callable $expectedListener
-     * @param int $expectedPriority
-     * @param string $event
-     * @param EventManager $events
-     * @param string $message Failure message to use, if any.
-     */
-    private function assertListenerAtPriority(
-        callable $expectedListener,
-        $expectedPriority,
-        $event,
-        EventManager $events,
-        $message = ''
-    ) {
-        $message = $message ?: sprintf(
-            'Listener not found for event "%s" and priority %d',
-            $event,
-            $expectedPriority
-        );
-        $listeners = $this->getListenersForEvent($event, $events, true);
-        $found     = false;
-        foreach ($listeners as $priority => $listener) {
-            if ($listener === $expectedListener
-                && $priority === $expectedPriority
-            ) {
-                $found = true;
-                break;
-            }
-        }
-        Assert::assertTrue($found, $message);
-    }
-
-    /**
-     * Returns an indexed array of listeners for an event.
-     *
-     * Returns an indexed array of listeners for an event, in priority order.
-     * Priority values will not be included; use this only for testing if
-     * specific listeners are present, or for a count of listeners.
-     *
-     * @param string $event
-     * @param EventManager $events
-     * @return callable[]
-     */
-    private function getArrayOfListenersForEvent($event, EventManager $events)
-    {
-        return iterator_to_array($this->getListenersForEvent($event, $events));
     }
 
     /**

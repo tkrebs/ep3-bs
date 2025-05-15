@@ -230,7 +230,7 @@ class Mbox extends AbstractStorage
         $result = false;
 
         $line = fgets($file) ?: '';
-        if (strpos($line, 'From ') === 0) {
+        if (str_starts_with($line, 'From ')) {
             $result = true;
         }
 
@@ -274,7 +274,7 @@ class Mbox extends AbstractStorage
 
         $messagePos = ['start' => ftell($this->fh), 'separator' => 0, 'end' => 0];
         while (($line = fgets($this->fh)) !== false) {
-            if (strpos($line, 'From ') === 0) {
+            if (str_starts_with($line, 'From ')) {
                 $messagePos['end'] = ftell($this->fh) - strlen($line) - 2; // + newline
                 if (! $messagePos['separator']) {
                     $messagePos['separator'] = $messagePos['end'];

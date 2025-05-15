@@ -221,7 +221,7 @@ class SquareValidator extends AbstractService
                 in_array($this->t($dateStart->format('l')), $dayExceptions)) {
 
                 if (! in_array($dateStart->format($this->t('Y-m-d')), $dayExceptionsExceptions)) {
-                    throw new \RuntimeException('The passed date has been hidden from the calendar');
+                    throw new RuntimeException('The passed date has been hidden from the calendar');
                 }
             }
         }

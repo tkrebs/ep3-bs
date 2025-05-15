@@ -90,7 +90,7 @@ class Connection extends AbstractConnection
 
         $info = db2_server_info($this->resource);
 
-        return (isset($info->DB_NAME) ? $info->DB_NAME : '');
+        return ($info->DB_NAME ?? '');
     }
 
     /**
@@ -120,8 +120,8 @@ class Connection extends AbstractConnection
         $username     = $findParameterValue(['username', 'uid', 'UID']);
         $password     = $findParameterValue(['password', 'pwd', 'PWD']);
         $isPersistent = $findParameterValue(['persistent', 'PERSISTENT', 'Persistent']);
-        $options      = (isset($p['driver_options']) ? $p['driver_options'] : []);
-        $connect      = ((bool) $isPersistent) ? 'db2_pconnect' : 'db2_connect';
+        $options      = ($p['driver_options'] ?? []);
+        $connect      = ($isPersistent) ? 'db2_pconnect' : 'db2_connect';
 
         $this->resource = $connect($database, $username, $password, $options);
 
@@ -238,18 +238,14 @@ class Connection extends AbstractConnection
             $this->connect();
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($sql);
-        }
+        $this->profiler?->profilerStart($sql);
 
         set_error_handler(function () {
         }, E_WARNING); // suppress warnings
         $resultResource = db2_exec($this->resource, $sql);
         restore_error_handler();
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish($sql);
-        }
+        $this->profiler?->profilerFinish($sql);
 
         // if the returnValue is something other than a pg result resource, bypass wrapping it
         if ($resultResource === false) {

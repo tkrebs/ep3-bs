@@ -28,12 +28,12 @@ class SessionConfigFactory implements FactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $requestedName
-     * @param null|array $options
+     * @param array|null $options
      * @return ConfigInterface
      * @throws ServiceNotCreatedException if session_config is missing, or an
      *     invalid config_class is used
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $config = $container->get('config');
         if (! isset($config['session_config']) || ! is_array($config['session_config'])) {

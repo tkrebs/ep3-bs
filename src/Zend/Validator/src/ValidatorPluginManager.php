@@ -197,17 +197,14 @@ class ValidatorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $factories = [
-        I18nValidator\Alnum::class             => InvokableFactory::class,
-        I18nValidator\Alpha::class             => InvokableFactory::class,
         Barcode::class                         => InvokableFactory::class,
         Between::class                         => InvokableFactory::class,
         Bitwise::class                         => InvokableFactory::class,
         Callback::class                        => InvokableFactory::class,
         CreditCard::class                      => InvokableFactory::class,
         Csrf::class                            => InvokableFactory::class,
-        DateStep::class                        => InvokableFactory::class,
         Date::class                            => InvokableFactory::class,
-        I18nValidator\DateTime::class          => InvokableFactory::class,
+        DateStep::class                        => InvokableFactory::class,
         Db\NoRecordExists::class               => InvokableFactory::class,
         Db\RecordExists::class                 => InvokableFactory::class,
         Digits::class                          => InvokableFactory::class,
@@ -232,31 +229,32 @@ class ValidatorPluginManager extends AbstractPluginManager
         File\Upload::class                     => InvokableFactory::class,
         File\UploadFile::class                 => InvokableFactory::class,
         File\WordCount::class                  => InvokableFactory::class,
-        I18nValidator\IsFloat::class           => InvokableFactory::class,
         GpsPoint::class                        => InvokableFactory::class,
         GreaterThan::class                     => InvokableFactory::class,
         Hex::class                             => InvokableFactory::class,
         Hostname::class                        => InvokableFactory::class,
+        I18nValidator\Alnum::class             => InvokableFactory::class,
+        I18nValidator\Alpha::class             => InvokableFactory::class,
+        I18nValidator\DateTime::class          => InvokableFactory::class,
+        I18nValidator\IsFloat::class           => InvokableFactory::class,
+        I18nValidator\IsInt::class             => InvokableFactory::class,
+        I18nValidator\PhoneNumber::class       => InvokableFactory::class,
+        I18nValidator\PostCode::class          => InvokableFactory::class,
         Iban::class                            => InvokableFactory::class,
         Identical::class                       => InvokableFactory::class,
         InArray::class                         => InvokableFactory::class,
-        I18nValidator\IsInt::class             => InvokableFactory::class,
         Ip::class                              => InvokableFactory::class,
         Isbn::class                            => InvokableFactory::class,
-        I18nValidator\IsFloat::class           => InvokableFactory::class,
         IsInstanceOf::class                    => InvokableFactory::class,
-        I18nValidator\IsInt::class             => InvokableFactory::class,
         LessThan::class                        => InvokableFactory::class,
         NotEmpty::class                        => InvokableFactory::class,
-        I18nValidator\PhoneNumber::class       => InvokableFactory::class,
-        I18nValidator\PostCode::class          => InvokableFactory::class,
         Regex::class                           => InvokableFactory::class,
         Sitemap\Changefreq::class              => InvokableFactory::class,
         Sitemap\Lastmod::class                 => InvokableFactory::class,
         Sitemap\Loc::class                     => InvokableFactory::class,
         Sitemap\Priority::class                => InvokableFactory::class,
-        StringLength::class                    => InvokableFactory::class,
         Step::class                            => InvokableFactory::class,
+        StringLength::class                    => InvokableFactory::class,
         Timezone::class                        => InvokableFactory::class,
         Uri::class                             => InvokableFactory::class,
         Uuid::class                            => InvokableFactory::class,
@@ -467,10 +465,8 @@ class ValidatorPluginManager extends AbstractPluginManager
     public function injectValidatorPluginManager($first, $second)
     {
         if ($first instanceof ContainerInterface) {
-            $container = $first;
             $validator = $second;
         } else {
-            $container = $second;
             $validator = $first;
         }
         if ($validator instanceof ValidatorPluginManagerAwareInterface) {

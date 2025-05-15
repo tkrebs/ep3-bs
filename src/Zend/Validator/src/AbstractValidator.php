@@ -284,7 +284,7 @@ abstract class AbstractValidator implements
 
         $message = $this->abstractOptions['messageTemplates'][$messageKey];
 
-        $message = $this->translateMessage($messageKey, $message);
+        $message = $this->translateMessage($message);
 
         if (is_object($value) &&
             ! in_array('__toString', get_class_methods($value))
@@ -393,7 +393,7 @@ abstract class AbstractValidator implements
      * @return AbstractValidator
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator(Translator\TranslatorInterface $translator = null, $textDomain = null)
+    public function setTranslator(?Translator\TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->abstractOptions['translator'] = $translator;
         if (null !== $textDomain) {
@@ -464,7 +464,7 @@ abstract class AbstractValidator implements
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public static function setDefaultTranslator(Translator\TranslatorInterface $translator = null, $textDomain = null)
+    public static function setDefaultTranslator(?Translator\TranslatorInterface $translator = null, $textDomain = null)
     {
         static::$defaultTranslator = $translator;
         if (null !== $textDomain) {
@@ -558,11 +558,10 @@ abstract class AbstractValidator implements
     /**
      * Translate a validation message
      *
-     * @param  string $messageKey
      * @param  string $message
      * @return string
      */
-    protected function translateMessage($messageKey, $message)
+    protected function translateMessage($message)
     {
         $translator = $this->getTranslator();
         if (! $translator) {

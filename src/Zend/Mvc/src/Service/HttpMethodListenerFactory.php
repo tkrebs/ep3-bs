@@ -20,7 +20,7 @@ class HttpMethodListenerFactory implements FactoryInterface
      * {@inheritdoc}
      * @return HttpMethodListener
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $config = $container->get('config');
 

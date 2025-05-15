@@ -555,7 +555,7 @@ class BaseInputFilter implements
      */
     public function hasUnknown()
     {
-        return $this->getUnknown() ? true : false;
+        return (bool) $this->getUnknown();
     }
 
     /**

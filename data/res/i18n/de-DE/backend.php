@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'Users' => 'Benutzer',
     'Create, edit or delete the users of your system' => 'Erstellen, bearbeiten oder löschen Sie Benutzer Ihres Systems',
@@ -228,15 +228,15 @@ return array(
     'Sets how many days are displayed in the calendar' => 'Legt fest, wieviele Tage im Kalender<br>gleichzeitig angezeigt werden sollen',
 
     'Hide these days' => 'Folgende Tage verstecken',
-    'Day names (like Sunday) or concrete dates (like 2016-08-16);<br>Separated by line breaks or commas;<br>Force concrete dates to be shown by adding a plus (like +2016-08-30)'
-        => 'Name des Tages (z.B. Sonntag) oder konkrete Datumangaben (z.B. 16.08.2016);<br>Getrennt durch Zeilenumbrüche oder Kommata;<br>Ein versteckter Tag kann mit einem Plus wieder angezeigt werden (z.B. +30.08.2016)',
+    'Day names (like Sunday) or concrete dates (like 2016-08-16];<br>Separated by line breaks or commas;<br>Force concrete dates to be shown by adding a plus (like +2016-08-30)'
+        => 'Name des Tages (z. B. Sonntag) oder konkrete Datumangaben (z. B. 16.08.2016];<br>Getrennt durch Zeilenumbrüche oder Kommata;<br>Ein versteckter Tag kann mit einem Plus wieder angezeigt werden (z. B. +30.08.2016)',
 
     'Your name' => 'Ihr Name',
     'Will be shown as the operator of this site.<br>Displayed next to the logo, for example.'
-        => 'Wird Ihren Besuchern als Betreiber angezeigt.<br>Erscheint z.B. ganz oben neben dem Logo.',
+        => 'Wird Ihren Besuchern als Betreiber angezeigt.<br>Erscheint z. B. ganz oben neben dem Logo.',
     'Your abbreviation' => 'Ihr Kürzel',
     'Short form or abbreviation of your name.<br>Displayed in emails, for example.'
-        => 'Kurzform, Abkürzung oder Akronym Ihres Namens.<br>Erscheint z.B. in der Betreffzeile von E-Mails.',
+        => 'Kurzform, Abkürzung oder Akronym Ihres Namens.<br>Erscheint z. B. in der Betreffzeile von E-Mails.',
     'Your email address' => 'Ihre E-Mail Adresse',
     'Will be used for system notifications.<br>Might also be displayed to users for help.'
         => 'Wird für Benachrichtigungen des Systems benötigt.<br>Kann auch Benutzern für Hilfe angezeigt werden.',
@@ -244,30 +244,32 @@ return array(
 		=> 'Sende Benutzer-E-Mails wie Buchungs- oder Stornierungsbestätigungen als Kopie an diese Adresse',
     'Your phone number' => 'Ihre Telefonnummer',
     'Displayed for booking by phone.'
-        => 'Wird für die telefonische Buchung angezeigt.<br>Erscheint z.B. ganz oben in der Kopfleiste.',
+        => 'Wird für die telefonische Buchung angezeigt.<br>Erscheint z. B. ganz oben in der Kopfleiste.',
     'Your website' => 'Ihre Webseite',
     'The address of your website.<br>Displayed in the header, for example.'
-        => 'Die Internetadresse Ihrer Webseite.<br>Erscheint z.B. ganz oben in der Kopfleiste.',
+        => 'Die Internetadresse Ihrer Webseite.<br>Erscheint z. B. ganz oben in der Kopfleiste.',
     'Your contact page' => 'Ihre Kontaktseite',
     'The address of your website\'s contact page.<br>Displayed in the header, for example.'
-        => 'Die Internetadresse Ihrer Kontaktseite.<br>Erscheint z.B. ganz oben in der Kopfleiste.',
+        => 'Die Internetadresse Ihrer Kontaktseite.<br>Erscheint z. B. ganz oben in der Kopfleiste.',
     'Your imprint page' => 'Ihr Impressum',
     'Your privacy policy page' => 'Ihre Datenschutzerklärung',
     'The address of your website\'s imprint page.' => 'Die Internetadresse Ihres Impressums.',
     'The address of your website\'s privacy policy page.' => 'Die Internetadresse Ihrer Datenschutzerklärung.',
     'Name of the system' => 'Name des Systems',
+    'Bookingsystem' => 'Buchungssystem',
     'The system presents itself under this name.<br>Displayed next to the logo, for example.'
-        => 'Unter diesem Namen präsentiert sich das System.<br>Erscheint z.B. ganz oben neben dem Logo.',
+        => 'Unter diesem Namen präsentiert sich das System.<br>Erscheint z. B. ganz oben neben dem Logo.',
     'System abbreviation' => 'Kürzel des Systems',
     'Short form or abbreviation of the system name.<br>Displayed in emails, for example.'
-        => 'Kurzform, Abkürzung oder Akronym des System-Namens.<br>Erscheint z.B. in der Betreffzeile von E-Mails.',
+        => 'Kurzform, Abkürzung oder Akronym des System-Namens.<br>Erscheint z. B. in der Betreffzeile von E-Mails.',
     'Description of your service' => 'Beschreibung Ihres Angebotes',
     'One or two short sentences recommended.' => 'Am besten ein bis zwei Sätze über Ihr Angebot.',
     'Notation of your "squares"' => 'Bezeichnung Ihrer "Plätze"',
     'Notation of your "players"' => 'Bezeichnung Ihrer "Spieler"',
     'Name of your facility' => 'Name Ihrer Anlage',
+    'our Facility' => 'unsere Anlage',
     'Displayed in the header, for example.<br>Must start with a lower cased noun marker.'
-        => 'Erscheint z.B. in der Kopfleiste.<br>Bitte mit kleinem Artikelwort beginnen.',
+        => 'Erscheint z. B. in der Kopfleiste.<br>Bitte mit kleinem Artikelwort beginnen.',
 
     'Optional message when readonly' => 'Optionale Nachricht wenn schreibgeschützt',
 
@@ -323,7 +325,7 @@ return array(
     'Optional description of this product' => 'Optionale Beschreibung dieses Produktes',
     'Options' => 'Optionen',
     'Amount of products to choose from,<br>e.g. 1,2,3 to choose between 1 and 3 items'
-        => 'Auswahlmöglichkeiten der Anzahl dieses Produktes,<br>z.B. 1,2,3 um zwischen 1 und 3 Stück zu wählen',
+        => 'Auswahlmöglichkeiten der Anzahl dieses Produktes,<br>z. B. 1,2,3 um zwischen 1 und 3 Stück zu wählen',
 
     'New price' => 'Neuer Preis',
     'New time' => 'Neue Zeit',
@@ -389,4 +391,4 @@ return array(
     'Booked by' => 'Gebucht von',
 
     'User matched by' => 'Benutzer ermittelt nach',
-);
+];

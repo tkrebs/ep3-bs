@@ -136,7 +136,7 @@ class SessionConfig extends StandardConfig
 
         $iniGet       = ini_get($key);
         $storageValue = (string) $storageValue;
-        if (false !== $iniGet && (string) $iniGet === $storageValue) {
+        if (false !== $iniGet && $iniGet === $storageValue) {
             return $this;
         }
 
@@ -408,7 +408,7 @@ class SessionConfig extends StandardConfig
 
         $content = array_shift($matches);
 
-        $handlers = false !== strpos($content, '</td>')
+        $handlers = str_contains($content, '</td>')
             ? $this->parseSaveHandlersFromHtml($content)
             : $this->parseSaveHandlersFromPlainText($content);
 
@@ -538,7 +538,7 @@ class SessionConfig extends StandardConfig
      */
     private function parseSaveHandlersFromPlainText($content)
     {
-        list($prefix, $handlers) = explode('=>', $content);
+        list(, $handlers) = explode('=>', $content);
         $handlers = trim($handlers);
         return preg_split('#\s+#', $handlers);
     }

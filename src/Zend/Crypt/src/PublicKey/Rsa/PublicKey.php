@@ -55,7 +55,7 @@ class PublicKey extends AbstractKey
             );
         }
 
-        if (strpos($pemStringOrCertificate, self::CERT_START) !== false) {
+        if (str_contains($pemStringOrCertificate, self::CERT_START)) {
             $this->certificateString = $pemStringOrCertificate;
         } else {
             $this->pemString = $pemStringOrCertificate;

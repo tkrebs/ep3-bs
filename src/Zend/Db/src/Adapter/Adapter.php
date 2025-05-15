@@ -69,9 +69,9 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
      */
     public function __construct(
         $driver,
-        Platform\PlatformInterface $platform = null,
-        ResultSet\ResultSetInterface $queryResultPrototype = null,
-        Profiler\ProfilerInterface $profiler = null
+        ?Platform\PlatformInterface $platform = null,
+        ?ResultSet\ResultSetInterface $queryResultPrototype = null,
+        ?Profiler\ProfilerInterface $profiler = null
     ) {
         // first argument can be an array of parameters
         $parameters = [];
@@ -164,14 +164,14 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
      *
      * @param string $sql
      * @param string|array|ParameterContainer $parametersOrQueryMode
-     * @param \Zend\Db\ResultSet\ResultSetInterface $resultPrototype
-     * @throws Exception\InvalidArgumentException
+     * @param \Zend\Db\ResultSet\ResultSetInterface|null $resultPrototype
      * @return Driver\StatementInterface|ResultSet\ResultSet
+     *@throws Exception\InvalidArgumentException
      */
     public function query(
         $sql,
         $parametersOrQueryMode = self::QUERY_MODE_PREPARE,
-        ResultSet\ResultSetInterface $resultPrototype = null
+        ?ResultSet\ResultSetInterface $resultPrototype = null
     ) {
         if (is_string($parametersOrQueryMode)
             && in_array($parametersOrQueryMode, [self::QUERY_MODE_PREPARE, self::QUERY_MODE_EXECUTE])
@@ -320,7 +320,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
                 break;
             case 'pdo':
             default:
-                if ($driverName == 'pdo' || strpos($driverName, 'pdo') === 0) {
+                if ($driverName == 'pdo' || str_starts_with($driverName, 'pdo')) {
                     $driver = new Driver\Pdo\Pdo($parameters);
                 }
         }
@@ -403,7 +403,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         if ($parameters['profiler'] instanceof Profiler\ProfilerInterface) {
             $profiler = $parameters['profiler'];
         } elseif (is_bool($parameters['profiler'])) {
-            $profiler = ($parameters['profiler'] == true) ? new Profiler\Profiler : null;
+            $profiler = $parameters['profiler'] ? new Profiler\Profiler : null;
         } else {
             throw new Exception\InvalidArgumentException(
                 '"profiler" parameter must be an instance of ProfilerInterface or a boolean'

@@ -235,7 +235,7 @@ class Sendmail implements TransportInterface
         $from = $headers->get('From');
         if ($from) {
             foreach ($from->getAddressList() as $address) {
-                if (strpos($address->getEmail(), '\\"') !== false) {
+                if (str_contains($address->getEmail(), '\\"')) {
                     throw new Exception\RuntimeException('Potential code injection in From header');
                 }
             }
@@ -258,7 +258,7 @@ class Sendmail implements TransportInterface
             return;
         }
 
-        $parameters = (string) $this->parameters;
+        $parameters = $this->parameters;
 
         $sender = $message->getSender();
         if ($sender instanceof AddressInterface) {
@@ -309,14 +309,10 @@ class Sendmail implements TransportInterface
     /**
      * Temporary error handler for PHP native mail().
      *
-     * @param int    $errno
      * @param string $errstr
-     * @param string $errfile
-     * @param string $errline
-     * @param array  $errcontext
      * @return bool always true
      */
-    public function handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
+    public function handleMailErrors($errstr)
     {
         $this->errstr = $errstr;
         return true;

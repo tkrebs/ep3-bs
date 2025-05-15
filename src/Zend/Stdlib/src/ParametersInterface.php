@@ -24,9 +24,9 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
     /**
      * Constructor
      *
-     * @param array $values
+     * @param array|null $values
      */
-    public function __construct(array $values = null);
+    public function __construct(?array $values = null);
 
     /**
      * From array

@@ -11,10 +11,8 @@ namespace Zend\Mvc\Service;
 
 use Interop\Container\ContainerInterface;
 use ReflectionClass;
-use Zend\Config\Config;
 use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\Listener\ServiceListenerInterface;
-use Zend\Mvc\Application;
 use Zend\Mvc\View;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\FactoryInterface;
@@ -167,7 +165,7 @@ class ServiceListenerFactory implements FactoryInterface
      * @throws ServiceNotCreatedException for invalid ServiceListener service
      * @throws ServiceNotCreatedException For invalid configurations.
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $configuration   = $container->get('ApplicationConfig');
 

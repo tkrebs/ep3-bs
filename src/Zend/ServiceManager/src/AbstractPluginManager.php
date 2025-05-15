@@ -163,9 +163,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         // If creation options were provided, we want to force creation of a
         // new instance.
         if (! empty($this->creationOptions)) {
-            $cName = isset($this->canonicalNames[$name])
-                ? $this->canonicalNames[$name]
-                : $this->canonicalizeName($name);
+            $cName = $this->canonicalNames[$name] ?? $this->canonicalizeName($name);
 
             if (isset($this->instances[$cName])) {
                 $sharedInstance = $this->instances[$cName];
@@ -175,13 +173,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
 
         try {
             $instance = parent::get($name, $usePeeringServiceManagers);
-        } catch (Exception\ServiceNotFoundException $exception) {
-            if ($sharedInstance) {
-                $this->instances[$cName] = $sharedInstance;
-            }
-            $this->creationOptions = null;
-            $this->tryThrowingServiceLocatorUsageException($name, $isAutoInvokable, $exception);
-        } catch (Exception\ServiceNotCreatedException $exception) {
+        } catch (Exception\ServiceNotFoundException|Exception\ServiceNotCreatedException $exception) {
             if ($sharedInstance) {
                 $this->instances[$cName] = $sharedInstance;
             }

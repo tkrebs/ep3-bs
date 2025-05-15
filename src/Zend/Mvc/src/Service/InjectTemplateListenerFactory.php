@@ -23,7 +23,7 @@ class InjectTemplateListenerFactory implements FactoryInterface
      *
      * @return InjectTemplateListener
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $listener = new InjectTemplateListener();
         $config   = $container->get('config');

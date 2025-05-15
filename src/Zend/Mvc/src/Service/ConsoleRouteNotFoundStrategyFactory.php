@@ -21,10 +21,10 @@ class ConsoleRouteNotFoundStrategyFactory implements FactoryInterface
     /**
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return RouteNotFoundStrategy
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $strategy = new RouteNotFoundStrategy();
         $config   = $this->getConfig($container);

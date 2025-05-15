@@ -9,6 +9,7 @@
 
 namespace Zend\View\Helper;
 
+use ReturnTypeWillChange;
 use stdClass;
 use Zend\View\Exception;
 
@@ -72,11 +73,11 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Allows calling $helper->headLink(), but, more importantly, chaining calls
      * like ->appendStylesheet()->headLink().
      *
-     * @param  array  $attributes
+     * @param array|null $attributes
      * @param  string $placement
      * @return HeadLink
      */
-    public function headLink(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    public function headLink(?array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
         return call_user_func_array([$this, '__invoke'], func_get_args());
     }
@@ -87,24 +88,24 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Returns current object instance. Optionally, allows passing array of
      * values to build link.
      *
-     * @param  array  $attributes
+     * @param array|null $attributes
      * @param  string $placement
      * @return HeadLink
      */
-    public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    public function __invoke(?array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
         if (null !== $attributes) {
             $item = $this->createData($attributes);
             switch ($placement) {
                 case Placeholder\Container\AbstractContainer::SET:
-                    $this->set($item);
+                    $this->set((array) $item);
                     break;
                 case Placeholder\Container\AbstractContainer::PREPEND:
-                    $this->prepend($item);
+                    $this->prepend((array) $item);
                     break;
                 case Placeholder\Container\AbstractContainer::APPEND:
                 default:
-                    $this->append($item);
+                    $this->append((array) $item);
                     break;
             }
         }
@@ -234,6 +235,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * @throws Exception\InvalidArgumentException
      * @return void
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($index, $value)
     {
         if (! $this->isValid($value)) {
@@ -398,7 +400,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         if ($args) {
             $conditionalStylesheet = array_shift($args);
             if (! empty($conditionalStylesheet) && is_string($conditionalStylesheet)) {
-                $conditionalStylesheet = (string) $conditionalStylesheet;
+                $conditionalStylesheet = $conditionalStylesheet;
             } else {
                 $conditionalStylesheet = null;
             }

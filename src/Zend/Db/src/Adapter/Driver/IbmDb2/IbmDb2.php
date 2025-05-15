@@ -33,10 +33,10 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param array|Connection|resource $connection
-     * @param null|Statement            $statementPrototype
-     * @param null|Result               $resultPrototype
+     * @param Statement|null $statementPrototype
+     * @param Result|null $resultPrototype
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
+    public function __construct($connection, ?Statement $statementPrototype = null, ?Result $resultPrototype = null)
     {
         if (! $connection instanceof Connection) {
             $connection = new Connection($connection);

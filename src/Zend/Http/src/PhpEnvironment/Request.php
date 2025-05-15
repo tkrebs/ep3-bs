@@ -219,14 +219,14 @@ class Request extends HttpRequest
 
         foreach ($server as $key => $value) {
             if ($value || (! is_array($value) && strlen($value))) {
-                if (strpos($key, 'HTTP_') === 0) {
-                    if (strpos($key, 'HTTP_COOKIE') === 0) {
+                if (str_starts_with($key, 'HTTP_')) {
+                    if (str_starts_with($key, 'HTTP_COOKIE')) {
                         // Cookies are handled using the $_COOKIE superglobal
                         continue;
                     }
 
                     $headers[strtr(ucwords(strtolower(strtr(substr($key, 5), '_', ' '))), ' ', '-')] = $value;
-                } elseif (strpos($key, 'CONTENT_') === 0) {
+                } elseif (str_starts_with($key, 'CONTENT_')) {
                     $name = substr($key, 8); // Remove "Content-"
                     $headers['Content-' . (($name == 'MD5') ? $name : ucfirst(strtolower($name)))] = $value;
                 }
@@ -242,7 +242,7 @@ class Request extends HttpRequest
 
         // set HTTP version
         if (isset($this->serverParams['SERVER_PROTOCOL'])
-            && strpos($this->serverParams['SERVER_PROTOCOL'], self::VERSION_10) !== false
+            && str_contains($this->serverParams['SERVER_PROTOCOL'], self::VERSION_10)
         ) {
             $this->setVersion(self::VERSION_10);
         }
@@ -431,7 +431,6 @@ class Request extends HttpRequest
      */
     protected function detectRequestUri()
     {
-        $requestUri = null;
         $server     = $this->getServer();
 
         // IIS7 with URL Rewrite: make sure we get the unencoded url
@@ -490,7 +489,7 @@ class Request extends HttpRequest
             // matching PHP_SELF.
 
             $argv = $this->getServer()->get('argv', []);
-            if (isset($argv[0]) && strpos($filename, $argv[0]) === 0) {
+            if (isset($argv[0]) && str_starts_with($filename, $argv[0])) {
                 $filename = substr($filename, strlen($argv[0]));
             }
 
@@ -512,13 +511,13 @@ class Request extends HttpRequest
         $requestUri = $this->getRequestUri();
 
         // Full base URL matches.
-        if (0 === strpos($requestUri, $baseUrl)) {
+        if (str_starts_with($requestUri, $baseUrl)) {
             return $baseUrl;
         }
 
         // Directory portion of base path matches.
         $baseDir = str_replace('\\', '/', dirname($baseUrl));
-        if (0 === strpos($requestUri, $baseDir)) {
+        if (str_starts_with($requestUri, $baseDir)) {
             return $baseDir;
         }
 
@@ -531,7 +530,7 @@ class Request extends HttpRequest
         $basename = basename($baseUrl);
 
         // No match whatsoever
-        if (empty($basename) || false === strpos($truncatedRequestUri, $basename)) {
+        if (empty($basename) || ! str_contains($truncatedRequestUri, $basename)) {
             return '';
         }
 

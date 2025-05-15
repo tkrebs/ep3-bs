@@ -41,10 +41,10 @@ abstract class AbstractWord extends FormInput
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface $element
+     * @param ElementInterface|null $element
      * @return string
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(?ElementInterface $element = null)
     {
         if (! $element) {
             return $this;
@@ -88,7 +88,7 @@ abstract class AbstractWord extends FormInput
         }
 
         $hidden = $this->renderCaptchaHidden($captcha, $attributes);
-        $input  = $this->renderCaptchaInput($captcha, $attributes);
+        $input  = $this->renderCaptchaInput($attributes);
 
         return $hidden . $input;
     }
@@ -129,11 +129,10 @@ abstract class AbstractWord extends FormInput
     /**
      * Render the input for capturing the captcha value from the client
      *
-     * @param  CaptchaAdapter $captcha
      * @param  array          $attributes
      * @return string
      */
-    protected function renderCaptchaInput(CaptchaAdapter $captcha, array $attributes)
+    protected function renderCaptchaInput(array $attributes)
     {
         $attributes['type']  = 'text';
         $attributes['name'] .= '[input]';
@@ -166,7 +165,7 @@ abstract class AbstractWord extends FormInput
                 __METHOD__,
                 __CLASS__,
                 __CLASS__,
-                (string) $captchaPosition
+                $captchaPosition
             ));
         }
         $this->captchaPosition = $captchaPosition;

@@ -248,15 +248,11 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($this);
-        }
+        $this->profiler?->profilerStart($this);
 
         $return = $this->resource->execute();
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish();
-        }
+        $this->profiler?->profilerFinish();
 
         if ($return === false) {
             throw new Exception\RuntimeException($this->resource->error);
@@ -292,7 +288,8 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                         $type .= 'd';
                         break;
                     case ParameterContainer::TYPE_NULL:
-                        $value = null; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
+                        $value = null;
+                        break; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
                     case ParameterContainer::TYPE_INTEGER:
                         $type .= 'i';
                         break;

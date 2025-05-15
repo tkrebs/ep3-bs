@@ -80,7 +80,7 @@ class DispatchListener extends AbstractListenerAggregate
             ? $routeMatch->getParam('controller', 'not-found')
             : 'not-found';
         $application       = $e->getApplication();
-        $events            = $application->getEventManager();
+        $application->getEventManager();
         $controllerManager = $this->controllerManager;
 
 
@@ -92,12 +92,6 @@ class DispatchListener extends AbstractListenerAggregate
 
         try {
             $controller = $controllerManager->get($controllerName);
-        } catch (Exception\InvalidControllerException $exception) {
-            $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $e, $application, $exception);
-            return $this->complete($return, $e);
-        } catch (InvalidServiceException $exception) {
-            $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $e, $application, $exception);
-            return $this->complete($return, $e);
         } catch (\Throwable $exception) {
             $return = $this->marshalBadControllerEvent($controllerName, $e, $application, $exception);
             return $this->complete($return, $e);
@@ -117,8 +111,6 @@ class DispatchListener extends AbstractListenerAggregate
         try {
             $return = $controller->dispatch($request, $response);
         } catch (\Throwable $ex) {
-            $caughtException = $ex;
-        } catch (\Exception $ex) {  // @TODO clean up once PHP 7 requirement is enforced
             $caughtException = $ex;
         }
 
@@ -175,7 +167,7 @@ class DispatchListener extends AbstractListenerAggregate
      * @param  string $controllerName
      * @param  MvcEvent $event
      * @param  Application $application
-     * @param  \Exception $exception
+     * @param \Exception|null $exception
      * @return mixed
      */
     protected function marshalControllerNotFoundEvent(
@@ -183,7 +175,7 @@ class DispatchListener extends AbstractListenerAggregate
         $controllerName,
         MvcEvent $event,
         Application $application,
-        \Exception $exception = null
+        ?\Exception $exception = null
     ) {
         $event->setName(MvcEvent::EVENT_DISPATCH_ERROR);
         $event->setError($type);
@@ -205,20 +197,20 @@ class DispatchListener extends AbstractListenerAggregate
     /**
      * Marshal a controller not found exception event
      *
-     * @deprecated Use marshalControllerNotFoundEvent() instead
      * @param  string $type
      * @param  string $controllerName
      * @param  MvcEvent $event
      * @param  Application $application
-     * @param  \Exception $exception
+     * @param  \Exception|null $exception
      * @return mixed
+     *@deprecated Use marshalControllerNotFoundEvent() instead
      */
     protected function marshallControllerNotFoundEvent(
         $type,
         $controllerName,
         MvcEvent $event,
         Application $application,
-        \Exception $exception = null
+        ?\Exception $exception = null
     ) {
         trigger_error(sprintf(
             '%s is deprecated; please use %s::marshalControllerNotFoundEvent instead',

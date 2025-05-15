@@ -65,11 +65,11 @@ class MongoDB implements SaveHandlerInterface
      */
     public function __construct($mongoClient, MongoDBOptions $options)
     {
-        if (null === ($database = $options->getDatabase())) {
+        if (null === $options->getDatabase()) {
             throw new InvalidArgumentException('The database option cannot be empty');
         }
 
-        if (null === ($collection = $options->getCollection())) {
+        if (null === $options->getCollection()) {
             throw new InvalidArgumentException('The collection option cannot be empty');
         }
 

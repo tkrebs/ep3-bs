@@ -7,6 +7,7 @@ use Base\Manager\ConfigManager;
 use DateTime;
 use User\Authentication\Result;
 use User\Entity\User;
+use Zend\Authentication\Result as ResultAlias;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Session\Container;
 use Zend\Session\SessionManager;
@@ -108,11 +109,11 @@ class UserSessionManager extends AbstractManager
         ));
 
         if (count($users) == 0) {
-            return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, $email);
+            return new Result(ResultAlias::FAILURE_IDENTITY_NOT_FOUND, $email);
         }
 
         if (count($users) >= 2) {
-            return new Result(Result::FAILURE_IDENTITY_AMBIGUOUS, $email);
+            return new Result(ResultAlias::FAILURE_IDENTITY_AMBIGUOUS, $email);
         }
 
         $user = current($users);
@@ -178,7 +179,7 @@ class UserSessionManager extends AbstractManager
 
             $this->getEventManager()->trigger('login', $user);
 
-            return new Result(Result::SUCCESS, $user);
+            return new Result(ResultAlias::SUCCESS, $user);
         }
 
         /* Invalid password passed, prepare detent */
@@ -200,11 +201,11 @@ class UserSessionManager extends AbstractManager
         }
 
         $user->set('login_attempts', $loginAttempts);
-        $user->set('login_detent', $loginDetent ? $loginDetent->format('Y-m-d H:i:s') : null);
+        $user->set('login_detent', $loginDetent?->format('Y-m-d H:i:s'));
 
         $this->userManager->save($user);
 
-        return new Result(Result::FAILURE_CREDENTIAL_INVALID, $user);
+        return new Result(ResultAlias::FAILURE_CREDENTIAL_INVALID, $user);
     }
 
     /**

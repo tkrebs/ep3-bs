@@ -474,11 +474,7 @@ abstract class AbstractSessionArrayStorage implements
      */
     public function toArray($metaData = false)
     {
-        if (isset($_SESSION)) {
-            $values = $_SESSION;
-        } else {
-            $values = [];
-        }
+        $values = $_SESSION ?? [];
 
         if ($metaData) {
             return $values;

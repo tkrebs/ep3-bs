@@ -42,10 +42,10 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
      * @return HelperPluginManager
      * @throws ServiceNotCreatedException
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $options = $options ?: [];
-        $options['factories'] = isset($options['factories']) ? $options['factories'] : [];
+        $options['factories'] = $options['factories'] ?? [];
         $plugins = parent::__invoke($container, $requestedName, $options);
 
         // Configure default helpers from other components
@@ -167,7 +167,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
                 return $helper;
             }
 
-            if (isset($config['view_manager']) && isset($config['view_manager']['base_path'])) {
+            if (isset($config['view_manager']['base_path'])) {
                 $helper->setBasePath($config['view_manager']['base_path']);
                 return $helper;
             }
@@ -195,7 +195,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
     {
         return function () use ($services) {
             $config = $services->has('config') ? $services->get('config') : [];
-            $config = isset($config['view_manager']) ? $config['view_manager'] : [];
+            $config = $config['view_manager'] ?? [];
             $helper = new ViewHelper\Doctype;
             if (isset($config['doctype']) && $config['doctype']) {
                 $helper->setDoctype($config['doctype']);

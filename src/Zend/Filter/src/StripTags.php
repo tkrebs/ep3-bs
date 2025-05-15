@@ -282,7 +282,7 @@ class StripTags extends AbstractFilter
         }
 
         // Reconstruct tags ending with "/>" as backwards-compatible XHTML tag
-        if (strpos($tagEnd, '/') !== false) {
+        if (str_contains($tagEnd, '/')) {
             $tagEnd = " $tagEnd";
         }
 

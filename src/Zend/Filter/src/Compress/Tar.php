@@ -10,6 +10,7 @@
 namespace Zend\Filter\Compress;
 
 use Archive_Tar;
+use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Zend\Filter\Exception;
@@ -172,7 +173,7 @@ class Tar extends AbstractCompressionAlgorithm
         if (is_dir($content)) {
             // collect all file infos
             foreach (new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($content, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
+                new RecursiveDirectoryIterator($content, FilesystemIterator::KEY_AS_PATHNAME),
                 RecursiveIteratorIterator::SELF_FIRST
             ) as $directory => $info) {
                 if ($info->isFile()) {

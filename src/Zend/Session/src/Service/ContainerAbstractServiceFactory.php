@@ -95,7 +95,7 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
      * @param string $requestedName
      * @return Container
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $manager = $this->getSessionManager($container);
         return new Container($requestedName, $manager);

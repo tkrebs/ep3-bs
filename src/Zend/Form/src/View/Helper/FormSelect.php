@@ -78,10 +78,10 @@ class FormSelect extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
+     * @param ElementInterface|null $element
      * @return string|FormSelect
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(?ElementInterface $element = null)
     {
         if (! $element) {
             return $this;

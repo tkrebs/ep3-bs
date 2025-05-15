@@ -10,6 +10,7 @@
 namespace Zend\Filter;
 
 use DateTime;
+use DateTimeInterface;
 
 class DateTimeFormatter extends AbstractFilter
 {
@@ -18,7 +19,7 @@ class DateTimeFormatter extends AbstractFilter
      *
      * @var string
      */
-    protected $format = DateTime::ISO8601;
+    protected $format = DateTimeInterface::ISO8601;
 
     /**
      * Sets filter options

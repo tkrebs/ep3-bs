@@ -89,7 +89,7 @@ class StandardAutoloader implements SplAutoloader
                         $this->registerNamespace('Zend', dirname(__DIR__));
                         $this->registerNamespace(
                             'ZendXml',
-                            dirname(dirname((__DIR__))) . DIRECTORY_SEPARATOR .  'ZendXml'
+                            dirname((__DIR__), 2) . DIRECTORY_SEPARATOR .  'ZendXml'
                         );
                     }
                     break;
@@ -212,7 +212,7 @@ class StandardAutoloader implements SplAutoloader
     public function autoload($class)
     {
         $isFallback = $this->isFallbackAutoloader();
-        if (false !== strpos($class, self::NS_SEPARATOR)) {
+        if (str_contains($class, self::NS_SEPARATOR)) {
             if ($this->loadClass($class, self::LOAD_NS)) {
                 return $class;
             } elseif ($isFallback) {
@@ -220,7 +220,7 @@ class StandardAutoloader implements SplAutoloader
             }
             return false;
         }
-        if (false !== strpos($class, self::PREFIX_SEPARATOR)) {
+        if (str_contains($class, self::PREFIX_SEPARATOR)) {
             if ($this->loadClass($class, self::LOAD_PREFIX)) {
                 return $class;
             } elseif ($isFallback) {
@@ -295,7 +295,7 @@ class StandardAutoloader implements SplAutoloader
 
         // Namespace and/or prefix autoloading
         foreach ($this->$type as $leader => $path) {
-            if (0 === strpos($class, $leader)) {
+            if (str_starts_with($class, $leader)) {
                 // Trim off leader (namespace or prefix)
                 $trimmedClass = substr($class, strlen($leader));
 

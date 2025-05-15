@@ -21,6 +21,7 @@ class UserManager extends AbstractManager
 
     protected $userTable;
     protected $userMetaTable;
+    protected $buffer = [];
 
     /**
      * Creates a new user manager object.

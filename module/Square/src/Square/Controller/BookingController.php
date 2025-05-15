@@ -136,8 +136,8 @@ class BookingController extends AbstractActionController
             $playerNames = Json::decode($playerNamesParam, Json::TYPE_ARRAY);
 
             foreach ($playerNames as $playerName) {
-                if (strlen(trim($playerName['value'])) < 5 || strpos(trim($playerName['value']), ' ') === false) {
-                    throw new \RuntimeException('Die <b>vollständigen Vor- und Nachnamen</b> der anderen Spieler sind erforderlich');
+                if (strlen(trim($playerName['value'])) < 5 || ! str_contains(trim($playerName['value']), ' ')) {
+                    throw new RuntimeException('Die <b>vollständigen Vor- und Nachnamen</b> der anderen Spieler sind erforderlich');
                 }
             }
         } else {

@@ -23,10 +23,10 @@ class FormFileUploadProgress extends FormInput
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
+     * @param ElementInterface|null $element
      * @return string
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(?ElementInterface $element = null)
     {
         return $this->renderHiddenId();
     }

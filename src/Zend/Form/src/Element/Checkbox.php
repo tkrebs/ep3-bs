@@ -209,7 +209,7 @@ class Checkbox extends Element implements InputProviderInterface
     public function setValue($value)
     {
         // Cast to strings because POST data comes in string form
-        $checked = (string) $value === (string) $this->getCheckedValue();
+        $checked = (string) $value === $this->getCheckedValue();
         $this->value = $checked ? $this->getCheckedValue() : $this->getUncheckedValue();
         return $this;
     }

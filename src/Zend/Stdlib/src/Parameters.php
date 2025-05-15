@@ -20,9 +20,9 @@ class Parameters extends PhpArrayObject implements ParametersInterface
      * Enforces that we have an array, and enforces parameter access to array
      * elements.
      *
-     * @param  array $values
+     * @param array|null $values
      */
-    public function __construct(array $values = null)
+    public function __construct(?array $values = null)
     {
         if (null === $values) {
             $values = [];

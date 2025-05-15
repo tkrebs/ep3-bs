@@ -34,9 +34,9 @@ class Factory
     protected $inputFilterManager;
 
     /**
-     * @param InputFilterPluginManager $inputFilterManager
+     * @param InputFilterPluginManager|null $inputFilterManager
      */
-    public function __construct(InputFilterPluginManager $inputFilterManager = null)
+    public function __construct(?InputFilterPluginManager $inputFilterManager = null)
     {
         $this->defaultFilterChain    = new FilterChain();
         $this->defaultValidatorChain = new ValidatorChain();
@@ -381,7 +381,7 @@ class Factory
                     );
                 }
                 $name = $filter['name'];
-                $priority = isset($filter['priority']) ? $filter['priority'] : FilterChain::DEFAULT_PRIORITY;
+                $priority = $filter['priority'] ?? FilterChain::DEFAULT_PRIORITY;
                 $options = [];
                 if (isset($filter['options'])) {
                     $options = $filter['options'];
@@ -425,7 +425,7 @@ class Factory
                 if (isset($validator['break_chain_on_failure'])) {
                     $breakChainOnFailure = $validator['break_chain_on_failure'];
                 }
-                $priority = isset($validator['priority']) ? $validator['priority'] : ValidatorChain::DEFAULT_PRIORITY;
+                $priority = $validator['priority'] ?? ValidatorChain::DEFAULT_PRIORITY;
                 $chain->attachByName($name, $options, $breakChainOnFailure, $priority);
                 continue;
             }

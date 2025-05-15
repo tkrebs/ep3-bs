@@ -223,7 +223,7 @@ class NotEmpty extends AbstractValidator
 
         // SPACE ('   ')
         if ($type && self::SPACE) {
-            if (is_string($value) && (preg_match('/^\s+$/s', $value))) {
+            if (is_string($value) && (preg_match('/^\s+$/', $value))) {
                 $this->error(self::IS_EMPTY);
                 return false;
             }
@@ -281,7 +281,7 @@ class NotEmpty extends AbstractValidator
 
         // BOOLEAN (false)
         if ($type && self::BOOLEAN) {
-            if (is_bool($value) && ($value == false)) {
+            if (is_bool($value) && ! $value) {
                 $this->error(self::IS_EMPTY);
                 return false;
             }

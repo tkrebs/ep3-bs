@@ -255,7 +255,7 @@ class Result implements
     {
         $this->currentComplete = false;
 
-        if ($this->nextComplete == false) {
+        if (! $this->nextComplete) {
             $this->position++;
         }
 

@@ -57,7 +57,7 @@ abstract class AbstractAccept implements HeaderInterface
      */
     public function parseHeaderLine($headerLine)
     {
-        if (strpos($headerLine, ':') !== false) {
+        if (str_contains($headerLine, ':')) {
             [$name, $value] = GenericHeader::splitHeaderLine($headerLine);
             if (strtolower($name) !== strtolower($this->getFieldName())) {
                 $value = $headerLine; // This is just for preserve the BC.
@@ -142,7 +142,7 @@ abstract class AbstractAccept implements HeaderInterface
             'subtype'    => $subtype,
             'subtypeRaw' => $subtypeWhole,
             'format'     => $format,
-            'priority'   => isset($params['q']) ? $params['q'] : 1,
+            'priority'   => $params['q'] ?? 1,
             'params'     => $params,
             'raw'        => trim($raw),
         ];
@@ -157,7 +157,7 @@ abstract class AbstractAccept implements HeaderInterface
     protected function getParametersFromFieldValuePart($fieldValuePart)
     {
         $params = [];
-        if ((($pos = strpos($fieldValuePart, ';')) !== false)) {
+        if (((strpos($fieldValuePart, ';')) !== false)) {
             preg_match_all('/(?:[^;"]|"(?:[^\\\"]|\\\.)*")+/', $fieldValuePart, $paramsStrings);
 
             if (isset($paramsStrings[0])) {
@@ -174,7 +174,7 @@ abstract class AbstractAccept implements HeaderInterface
                     $value = null;
                 }
 
-                if (isset($value[0]) && $value[0] == '"' && substr($value, -1) == '"') {
+                if (isset($value[0]) && $value[0] == '"' && str_ends_with($value, '"')) {
                     $value = substr(substr($value, 1), 0, -1);
                 }
 
@@ -252,7 +252,7 @@ abstract class AbstractAccept implements HeaderInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a valid type; received "%s"',
                 __METHOD__,
-                (string) $type
+                $type
             ));
         }
 
@@ -262,7 +262,7 @@ abstract class AbstractAccept implements HeaderInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a numeric priority; received %s',
                 __METHOD__,
-                (string) $priority
+                $priority
             ));
         }
 

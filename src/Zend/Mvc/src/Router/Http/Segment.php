@@ -175,7 +175,7 @@ class Segment implements RouteInterface
                     throw new Exception\RuntimeException('Found empty parameter name');
                 }
 
-                $levelParts[$level][] = ['parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null];
+                $levelParts[$level][] = ['parameter', $matches['name'], $matches['delimiters'] ?? null ];
 
                 $currentPos += strlen($matches[0]);
             } elseif ($matches['token'] === '{') {
@@ -276,8 +276,8 @@ class Segment implements RouteInterface
             }
 
             $translator = $options['translator'];
-            $textDomain = (isset($options['text_domain']) ? $options['text_domain'] : 'default');
-            $locale     = (isset($options['locale']) ? $options['locale'] : null);
+            $textDomain = ($options['text_domain'] ?? 'default');
+            $locale     = ($options['locale'] ?? null);
         }
 
         $path      = '';
@@ -359,8 +359,8 @@ class Segment implements RouteInterface
             }
 
             $translator = $options['translator'];
-            $textDomain = (isset($options['text_domain']) ? $options['text_domain'] : 'default');
-            $locale     = (isset($options['locale']) ? $options['locale'] : null);
+            $textDomain = ($options['text_domain'] ?? 'default');
+            $locale     = ($options['locale'] ?? null);
 
             foreach ($this->translationKeys as $key) {
                 $regex = str_replace('#' . $key . '#', $translator->translate($key, $textDomain, $locale), $regex);
@@ -405,7 +405,7 @@ class Segment implements RouteInterface
             $this->parts,
             array_merge($this->defaults, $params),
             false,
-            (isset($options['has_child']) ? $options['has_child'] : false),
+            ($options['has_child'] ?? false),
             $options
         );
     }

@@ -430,7 +430,7 @@ class Menu extends AbstractHelper
      * ));
      * </code>
      *
-     * @param  AbstractContainer $container [optional] container to render.
+     * @param AbstractContainer|null $container [optional] container to render.
      *     Default is to render the container registered in the helper.
      * @param  string $ulClass [optional] CSS class to use for UL element.
      *     Default is to use the value from {@link getUlClass()}.
@@ -442,7 +442,7 @@ class Menu extends AbstractHelper
      * @return string
      */
     public function renderSubMenu(
-        AbstractContainer $container = null,
+        ?AbstractContainer $container = null,
         $ulClass = null,
         $indent = null,
         $liActiveClass = null

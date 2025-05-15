@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'Today' => 'Aujourd\'hui',
     'Date' => 'Date',
@@ -28,4 +28,4 @@ return array(
     'My bookings' => 'Mes Réservations',
     'My account' => 'Mon Compte',
 
-);
+];

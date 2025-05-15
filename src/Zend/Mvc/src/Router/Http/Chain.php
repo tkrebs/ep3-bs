@@ -41,9 +41,9 @@ class Chain extends TreeRouteStack implements RouteInterface
      *
      * @param  array              $routes
      * @param  RoutePluginManager $routePlugins
-     * @param  ArrayObject|null   $prototypes
+     * @param ArrayObject|null $prototypes
      */
-    public function __construct(array $routes, RoutePluginManager $routePlugins, ArrayObject $prototypes = null)
+    public function __construct(array $routes, RoutePluginManager $routePlugins, ?ArrayObject $prototypes = null)
     {
         $this->chainRoutes         = array_reverse($routes);
         $this->routePluginManager  = $routePlugins;
@@ -166,7 +166,7 @@ class Chain extends TreeRouteStack implements RouteInterface
 
         foreach ($routes as $key => $route) {
             $chainOptions = $options;
-            $hasChild     = isset($options['has_child']) ? $options['has_child'] : false;
+            $hasChild     = isset($options['has_child']) && $options['has_child'];
 
             $chainOptions['has_child'] = ($hasChild || $key !== $lastRouteKey);
 

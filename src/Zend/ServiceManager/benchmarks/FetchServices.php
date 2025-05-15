@@ -40,7 +40,7 @@ class FetchServices extends AthleticEvent
      */
     public function fetchFactoryService()
     {
-        $result = $this->sm->get('factory_' . rand(0, self::NUM_SERVICES));
+        $this->sm->get('factory_' . rand(0, self::NUM_SERVICES));
     }
 
     /**
@@ -50,7 +50,7 @@ class FetchServices extends AthleticEvent
      */
     public function fetchInvokableService()
     {
-        $result = $this->sm->get('invokable_' . rand(0, self::NUM_SERVICES));
+        $this->sm->get('invokable_' . rand(0, self::NUM_SERVICES));
     }
 
     /**
@@ -60,7 +60,7 @@ class FetchServices extends AthleticEvent
      */
     public function fetchService()
     {
-        $result = $this->sm->get('service_' . rand(0, self::NUM_SERVICES));
+        $this->sm->get('service_' . rand(0, self::NUM_SERVICES));
     }
 
     /**
@@ -70,7 +70,7 @@ class FetchServices extends AthleticEvent
      */
     public function fetchAliasService()
     {
-        $result = $this->sm->get('alias_' . rand(0, self::NUM_SERVICES));
+        $this->sm->get('alias_' . rand(0, self::NUM_SERVICES));
     }
 
     /**
@@ -80,6 +80,6 @@ class FetchServices extends AthleticEvent
      */
     public function fetchAbstractFactoryService()
     {
-        $result = $this->sm->get('foo');
+        $this->sm->get('foo');
     }
 }

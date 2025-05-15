@@ -120,7 +120,7 @@ abstract class AbstractAddressList implements HeaderInterface
         }
         try {
             return self::$punycode->encode($domainName);
-        } catch (OutOfBoundsException $e) {
+        } catch (OutOfBoundsException) {
             return $domainName;
         }
     }
@@ -134,7 +134,7 @@ abstract class AbstractAddressList implements HeaderInterface
             $email = $address->getEmail();
             $name  = $address->getName();
 
-            if (! empty($name) && false !== strstr($name, ',')) {
+            if (! empty($name) && str_contains($name, ',')) {
                 $name = sprintf('"%s"', $name);
             }
 

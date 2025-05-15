@@ -335,7 +335,7 @@ class Decoder
      */
     protected function _eatWhitespace()
     {
-        if (preg_match('/([\t\b\f\n\r ])*/s', $this->source, $matches, PREG_OFFSET_CAPTURE, $this->offset)
+        if (preg_match('/([\t\b\f\n\r ])*/', $this->source, $matches, PREG_OFFSET_CAPTURE, $this->offset)
             && $matches[0][1] == $this->offset) {
             $this->offset += strlen($matches[0][0]);
         }
@@ -469,7 +469,7 @@ class Decoder
 
         $chr = $str[$i];
         if ($chr == '-' || $chr == '.' || ($chr >= '0' && $chr <= '9')) {
-            if (preg_match('/-?([0-9])*(\.[0-9]*)?((e|E)((-|\+)?)[0-9]+)?/s', $str, $matches, PREG_OFFSET_CAPTURE, $start) && $matches[0][1] == $start) {
+            if (preg_match('/-?([0-9])*(\.[0-9]*)?((e|E)((-|\+)?)[0-9]+)?/', $str, $matches, PREG_OFFSET_CAPTURE, $start) && $matches[0][1] == $start) {
                 $datum = $matches[0][0];
 
                 if (is_numeric($datum)) {

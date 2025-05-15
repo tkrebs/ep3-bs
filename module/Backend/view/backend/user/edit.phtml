@@ -77,7 +77,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit
                         <?php
 
                         if ($this->user && $this->user->get('last_activity')) {
-                            echo $this->prettyDate(new \DateTime($this->user->need('last_activity')));
+                            echo $this->prettyDate(new DateTime($this->user->need('last_activity')));
                         } else {
                             echo '-';
                         }
@@ -105,7 +105,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit
                         <?php
 
                         if ($this->user && $this->user->get('created')) {
-                            echo $this->prettyDate(new \DateTime($this->user->need('created')));
+                            echo $this->prettyDate(new DateTime($this->user->need('created')));
                         } else {
                             echo '-';
                         }

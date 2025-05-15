@@ -10,7 +10,6 @@
 namespace Zend\Form\Element;
 
 use Traversable;
-use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\Fieldset;
@@ -261,11 +260,11 @@ class Collection extends Fieldset
      * Bind values to the object
      *
      * @param array $values
-     * @param array $validationGroup
+     * @param array|null $validationGroup
      *
      * @return array|mixed|void
      */
-    public function bindValues(array $values = [], array $validationGroup = null)
+    public function bindValues(array $values = [], ?array $validationGroup = null)
     {
         $collection = [];
         foreach ($values as $name => $value) {

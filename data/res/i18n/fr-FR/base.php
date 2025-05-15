@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'Back to' => 'Retour',
     'Related pages' => 'En lien',
@@ -76,4 +76,4 @@ return array(
     'Player' => 'Joueur',
     'Players' => 'Joueurs',
 
-);
+];

@@ -88,12 +88,12 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
     /**
      * setTranslator(): defined by TranslatorAwareInterface.
      *
-     * @see    TranslatorAwareInterface::setTranslator()
-     * @param  Translator $translator
+     * @param  Translator|null $translator
      * @param  string     $textDomain
-     * @return TreeRouteStack
+          * @return TreeRouteStack
+     *@see    TranslatorAwareInterface::setTranslator()
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(?Translator $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
 

@@ -176,8 +176,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         try {
             set_error_handler($this->createErrorHandler());
             $this->resource = db2_prepare($this->db2, $sql);
-        } catch (ErrorException $e) {
-            throw new Exception\RuntimeException($e->getMessage() . '. ' . db2_stmt_errormsg(), db2_stmt_error(), $e);
         } finally {
             restore_error_handler();
         }
@@ -227,18 +225,14 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($this);
-        }
+        $this->profiler?->profilerStart($this);
 
         set_error_handler(function () {
         }, E_WARNING); // suppress warnings
         $response = db2_execute($this->resource, $this->parameterContainer->getPositionalArray());
         restore_error_handler();
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish();
-        }
+        $this->profiler?->profilerFinish();
 
         if ($response === false) {
             throw new Exception\RuntimeException(db2_stmt_errormsg($this->resource));

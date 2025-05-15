@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'Booking' => 'Réservation',
     '%s-Booking' => '%s-Réservation',
@@ -42,4 +42,4 @@ return array(
     '%s\'s %s-booking for %s' => '%s\'s %s-Réservation pour %s',
     '%s\'s %s-booking has been cancelled' => '%s\'s %s-Réservation à été annulée',
 
-);
+];

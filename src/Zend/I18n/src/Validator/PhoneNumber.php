@@ -105,10 +105,10 @@ class PhoneNumber extends AbstractValidator
     /**
      * Allowed Types
      *
-     * @param  array|null $types
+     * @param array|null $types
      * @return self|array
      */
-    public function allowedTypes(array $types = null)
+    public function allowedTypes(?array $types = null)
     {
         if (null !== $types) {
             $this->allowedTypes = $types;
@@ -221,11 +221,11 @@ class PhoneNumber extends AbstractValidator
          *   2) International double-O prefix
          *   3) Bare country prefix
          */
-        if (0 === strpos($value, '+' . $countryPattern['code'])) {
+        if (str_starts_with($value, '+' . $countryPattern['code'])) {
             $valueNoCountry = substr($value, $codeLength + 1);
-        } elseif (0 === strpos($value, '00' . $countryPattern['code'])) {
+        } elseif (str_starts_with($value, '00' . $countryPattern['code'])) {
             $valueNoCountry = substr($value, $codeLength + 2);
-        } elseif (0 === strpos($value, $countryPattern['code'])) {
+        } elseif (str_starts_with($value, $countryPattern['code'])) {
             $valueNoCountry = substr($value, $codeLength);
         }
 

@@ -20,11 +20,11 @@ class AnnotationBuilderFactory implements FactoryInterface
     /**
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return AnnotationBuilder
      * @throws ServiceNotCreatedException for invalid listener configuration.
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         //setup a form factory which can use custom form elements
         $annotationBuilder = new AnnotationBuilder();
@@ -78,9 +78,7 @@ class AnnotationBuilderFactory implements FactoryInterface
         }
 
         $config = $container->get('config');
-        $config = isset($config['form_annotation_builder'])
-            ? $config['form_annotation_builder']
-            : [];
+        $config = $config['form_annotation_builder'] ?? [];
 
         return is_array($config) ? $config : [];
     }

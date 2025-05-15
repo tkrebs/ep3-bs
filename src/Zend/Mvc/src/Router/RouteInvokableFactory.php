@@ -80,10 +80,10 @@ class RouteInvokableFactory implements
      *
      * @param ContainerInterface $container
      * @param string $routeName
-     * @param null|array $options
+     * @param array|null $options
      * @return RouteInterface
      */
-    public function __invoke(ContainerInterface $container, $routeName, array $options = null)
+    public function __invoke(ContainerInterface $container, $routeName, ?array $options = null)
     {
         $options = $options ?: [];
 

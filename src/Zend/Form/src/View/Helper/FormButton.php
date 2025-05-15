@@ -50,11 +50,11 @@ class FormButton extends FormInput
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
+     * @param ElementInterface|null $element
      * @param  null|string           $buttonContent
      * @return string|FormButton
      */
-    public function __invoke(ElementInterface $element = null, $buttonContent = null)
+    public function __invoke(?ElementInterface $element = null, $buttonContent = null)
     {
         if (! $element) {
             return $this;

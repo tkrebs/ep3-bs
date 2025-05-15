@@ -160,7 +160,7 @@ class RemoteAddress
     {
         $header = strtoupper($header);
         $header = str_replace('-', '_', $header);
-        if (0 !== strpos($header, 'HTTP_')) {
+        if (! str_starts_with($header, 'HTTP_')) {
             $header = 'HTTP_' . $header;
         }
         return $header;

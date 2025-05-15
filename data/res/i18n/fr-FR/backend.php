@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'Users' => 'Utilisateurs',
     'Create, edit or delete the users of your system' => 'Créez, Editez ou supprimez un Utilisateur',
@@ -377,4 +377,4 @@ return array(
     'Booked by' => 'Réservé par',
 
     'User matched by' => 'Utilisateur déterminé par',
-);
+];

@@ -65,7 +65,7 @@ class Constant extends Token implements ProcessorInterface
     {
         if ($this->userOnly) {
             $constants = get_defined_constants(true);
-            $constants = isset($constants['user']) ? $constants['user'] : [];
+            $constants = $constants['user'] ?? [];
             $this->setTokens($constants);
         } else {
             $this->setTokens(get_defined_constants());

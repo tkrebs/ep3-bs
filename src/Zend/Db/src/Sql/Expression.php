@@ -46,7 +46,7 @@ class Expression extends AbstractExpression
             if (is_array($parameters)) {
                 foreach ($parameters as $i => $parameter) {
                     $parameters[$i] = [
-                        $parameter => isset($types[$i]) ? $types[$i] : self::TYPE_VALUE,
+                        $parameter => $types[$i] ?? self::TYPE_VALUE,
                     ];
                 }
             } elseif (is_scalar($parameters)) {

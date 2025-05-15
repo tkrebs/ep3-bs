@@ -151,7 +151,6 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         } catch (\Exception $e) {
             $msg = get_class($e) . ': ' . $e->getMessage();
             trigger_error($msg, E_USER_ERROR);
-            return '';
         }
     }
 
@@ -455,7 +454,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * @param  Acl\AclInterface $acl ACL object.
      * @return AbstractHelper
      */
-    public function setAcl(Acl\AclInterface $acl = null)
+    public function setAcl(?Acl\AclInterface $acl = null)
     {
         $this->acl = $acl;
         return $this;
@@ -827,7 +826,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      *                      sets no ACL object.
      * @return void
      */
-    public static function setDefaultAcl(Acl\AclInterface $acl = null)
+    public static function setDefaultAcl(?Acl\AclInterface $acl = null)
     {
         static::$defaultAcl = $acl;
     }

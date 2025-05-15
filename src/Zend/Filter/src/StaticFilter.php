@@ -21,10 +21,10 @@ class StaticFilter
     /**
      * Set plugin manager for resolving filter classes
      *
-     * @param  FilterPluginManager $manager
+     * @param FilterPluginManager|null $manager
      * @return void
      */
-    public static function setPluginManager(FilterPluginManager $manager = null)
+    public static function setPluginManager(?FilterPluginManager $manager = null)
     {
         static::$plugins = $manager;
     }

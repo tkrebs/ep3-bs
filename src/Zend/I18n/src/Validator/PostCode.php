@@ -380,7 +380,7 @@ class PostCode extends AbstractValidator
                     $this->error(self::SERVICE, $value);
                     return false;
                 }
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $this->error(self::SERVICEFAILURE, $value);
                 return false;
             }

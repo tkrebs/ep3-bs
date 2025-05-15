@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'System status' => 'Status des Systems',
     'Maintenance' => 'Wartungsarbeiten',
@@ -15,4 +15,4 @@ return array(
 
     'The system is available' => 'Das System ist verfügbar',
 
-);
+];

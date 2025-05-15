@@ -404,7 +404,7 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         // Treating basic auth headers in a special way
-        if (array_key_exists('Authorization', $headers) && 'Basic' == substr($headers['Authorization'], 0, 5)) {
+        if (array_key_exists('Authorization', $headers) && str_starts_with($headers['Authorization'], 'Basic')) {
             curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
             unset($headers['Authorization']);
@@ -441,7 +441,7 @@ class Curl implements HttpAdapter, StreamInterface
         if (isset($this->config['curloptions'])) {
             foreach ((array) $this->config['curloptions'] as $k => $v) {
                 if (! in_array($k, $this->invalidOverwritableCurlOptions)) {
-                    if (curl_setopt($this->curl, $k, $v) == false) {
+                    if (! curl_setopt($this->curl, $k, $v)) {
                         throw new AdapterException\RuntimeException(sprintf(
                             'Unknown or erroreous cURL option "%s" set',
                             $k
@@ -564,11 +564,10 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Header reader function for CURL
      *
-     * @param resource $curl
      * @param string $header
      * @return int
      */
-    public function readHeader($curl, $header)
+    public function readHeader($header)
     {
         $this->response .= $header;
         return strlen($header);

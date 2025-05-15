@@ -58,9 +58,9 @@ class ConfigListener extends AbstractListener implements
     /**
      * __construct
      *
-     * @param  ListenerOptions $options
+     * @param ListenerOptions|null $options
      */
-    public function __construct(ListenerOptions $options = null)
+    public function __construct(?ListenerOptions $options = null)
     {
         parent::__construct($options);
         if ($this->hasCachedConfig()) {
@@ -129,10 +129,9 @@ class ConfigListener extends AbstractListener implements
      *
      * This is only attached if config is not cached.
      *
-     * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function onMergeConfig(ModuleEvent $e)
+    public function onMergeConfig()
     {
         // Load the config files
         foreach ($this->paths as $path) {

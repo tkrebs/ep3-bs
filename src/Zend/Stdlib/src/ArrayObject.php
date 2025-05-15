@@ -129,7 +129,6 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      */
     public function &__get($key)
     {
-        $ret = null;
         if ($this->flag == self::ARRAY_AS_PROPS) {
             $ret =& $this->offsetGet($key);
 
@@ -359,7 +358,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
             return ;
         }
 
-        if (strpos($class, '\\') === 0) {
+        if (str_starts_with($class, '\\')) {
             $class = '\\' . $class;
             if (class_exists($class)) {
                 $this->iteratorClass = $class;

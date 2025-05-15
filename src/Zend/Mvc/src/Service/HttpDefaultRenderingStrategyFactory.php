@@ -22,10 +22,10 @@ class HttpDefaultRenderingStrategyFactory implements FactoryInterface
     /**
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return DefaultRenderingStrategy
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $strategy = new DefaultRenderingStrategy($container->get(View::class));
         $config   = $this->getConfig($container);
@@ -59,7 +59,7 @@ class HttpDefaultRenderingStrategyFactory implements FactoryInterface
      */
     private function injectLayoutTemplate(DefaultRenderingStrategy $strategy, array $config)
     {
-        $layout = isset($config['layout']) ? $config['layout'] : 'layout/layout';
+        $layout = $config['layout'] ?? 'layout/layout';
         $strategy->setLayoutTemplate($layout);
     }
 }

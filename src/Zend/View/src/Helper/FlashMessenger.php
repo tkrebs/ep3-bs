@@ -148,11 +148,7 @@ class FlashMessenger extends AbstractHelper
 
         // Prepare classes for opening tag
         if (empty($classes)) {
-            if (isset($this->classMessages[$namespace])) {
-                $classes = $this->classMessages[$namespace];
-            } else {
-                $classes = $this->classMessages['default'];
-            }
+            $classes = $this->classMessages[$namespace] ?? $this->classMessages['default'];
             $classes = [$classes];
         }
 

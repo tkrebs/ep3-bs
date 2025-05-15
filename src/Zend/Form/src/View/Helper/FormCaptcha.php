@@ -20,10 +20,10 @@ class FormCaptcha extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface $element
+     * @param ElementInterface|null $element
      * @return string|FormCaptcha
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(?ElementInterface $element = null)
     {
         if (! $element) {
             return $this;

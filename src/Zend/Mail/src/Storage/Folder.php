@@ -164,7 +164,7 @@ class Folder implements RecursiveIterator
      */
     public function __toString()
     {
-        return (string) $this->getGlobalName();
+        return $this->getGlobalName();
     }
 
     /**

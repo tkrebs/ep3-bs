@@ -73,9 +73,9 @@ class Ip extends AbstractValidator
         if ($this->options['allowipv4'] && $this->validateIPv4($value)) {
             return true;
         } else {
-            if ((bool) $this->options['allowliteral']) {
+            if ($this->options['allowliteral']) {
                 static $regex = '/^\[(.*)\]$/';
-                if ((bool) preg_match($regex, $value, $matches)) {
+                if (preg_match($regex, $value, $matches)) {
                     $value = $matches[1];
                 }
             }
@@ -142,7 +142,7 @@ class Ip extends AbstractValidator
             $value = substr($value, 0, $lastcolon) . ':0:0';
         }
 
-        if (strpos($value, '::') === false) {
+        if (! str_contains($value, '::')) {
             return preg_match('/\A(?:[a-f0-9]{1,4}:){7}[a-f0-9]{1,4}\z/i', $value);
         }
 

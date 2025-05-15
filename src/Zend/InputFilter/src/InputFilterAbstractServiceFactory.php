@@ -26,10 +26,10 @@ class InputFilterAbstractServiceFactory implements AbstractFactoryInterface
     /**
      * @param ContainerInterface      $services
      * @param string                  $rName
-     * @param array                   $options
+     * @param array|null $options
      * @return InputFilterInterface
      */
-    public function __invoke(ContainerInterface $services, $rName, array  $options = null)
+    public function __invoke(ContainerInterface $services, $rName, ?array $options = null)
     {
         $allConfig = $services->get('config');
         $config    = $allConfig['input_filter_specs'][$rName];

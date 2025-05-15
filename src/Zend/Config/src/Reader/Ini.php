@@ -127,7 +127,7 @@ class Ini implements ReaderInterface
 
         foreach ($data as $section => $value) {
             if (is_array($value)) {
-                if (strpos($section, $this->nestSeparator) !== false) {
+                if (str_contains($section, $this->nestSeparator)) {
                     $sections = explode($this->nestSeparator, $section);
                     $config = array_merge_recursive($config, $this->buildNestedSection($sections, $value));
                 } else {
@@ -190,7 +190,7 @@ class Ini implements ReaderInterface
      */
     protected function processKey($key, $value, array &$config)
     {
-        if (strpos($key, $this->nestSeparator) !== false) {
+        if (str_contains($key, $this->nestSeparator)) {
             $pieces = explode($this->nestSeparator, $key, 2);
 
             if (!strlen($pieces[0]) || !strlen($pieces[1])) {

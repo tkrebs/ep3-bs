@@ -26,7 +26,7 @@ class ValidatorPluginManagerFactory implements FactoryInterface
      *
      * @return ValidatorPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $pluginManager = new ValidatorPluginManager($container, $options ?: []);
 

@@ -34,7 +34,7 @@ class Bcmath implements AdapterInterface
      */
     public function init($operand, $base = null)
     {
-        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (str_starts_with($operand, '-')) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         if (null === $base) {
@@ -212,7 +212,7 @@ class Bcmath implements AdapterInterface
     public function intToBin($operand, $twoc = false)
     {
         $nb = chr(0);
-        $isNegative = (strpos($operand, '-') === 0);
+        $isNegative = (str_starts_with($operand, '-'));
         $operand    = ltrim($operand, '+-0');
 
         if (empty($operand)) {
@@ -301,7 +301,7 @@ class Bcmath implements AdapterInterface
             );
         }
 
-        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (str_starts_with($operand, '-')) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         $chars = self::BASE62_ALPHABET;

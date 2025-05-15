@@ -150,10 +150,10 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * @param Hostname $hostnameValidator OPTIONAL
+     * @param Hostname|null $hostnameValidator OPTIONAL
      * @return EmailAddress Provides a fluent interface
      */
-    public function setHostnameValidator(Hostname $hostnameValidator = null)
+    public function setHostnameValidator(?Hostname $hostnameValidator = null)
     {
         $this->options['hostnameValidator'] = $hostnameValidator;
 
@@ -490,7 +490,7 @@ class EmailAddress extends AbstractValidator
         $value = is_string($value) ? $value : '';
 
         // Split email address up and disallow '..'
-        if (strpos($value, '..') !== false
+        if (str_contains($value, '..')
             || ! preg_match('/^(.+)@([^@]+)$/', $value, $matches)
         ) {
             return false;

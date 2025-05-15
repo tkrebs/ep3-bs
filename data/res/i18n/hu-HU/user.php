@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'You are not logged in (anymore)' => 'Nincs bejelentkezve',
     'You have no permission for this' => 'Ehhez nincs jogosultsága',
@@ -259,4 +259,4 @@ return array(
     'Sincerely' => 'Üdvözlettel',
     'Your' => 'Az ön',
 
-);
+];

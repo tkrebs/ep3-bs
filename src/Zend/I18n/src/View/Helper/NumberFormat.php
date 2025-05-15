@@ -83,7 +83,7 @@ class NumberFormat extends AbstractHelper
      * @param  int       $formatType
      * @param  string    $locale
      * @param  int       $decimals
-     * @param  array|null $textAttributes
+     * @param array|null $textAttributes
      * @return string
      */
     public function __invoke(
@@ -92,7 +92,7 @@ class NumberFormat extends AbstractHelper
         $formatType = null,
         $locale = null,
         $decimals = null,
-        array $textAttributes = null
+        ?array $textAttributes = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();

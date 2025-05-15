@@ -212,7 +212,7 @@ class Result implements Iterator, ResultInterface
         if ($this->rowCount instanceof \Closure) {
             $this->rowCount = (int) call_user_func($this->rowCount);
         } else {
-            $this->rowCount = (int) $this->resource->rowCount();
+            $this->rowCount = $this->resource->rowCount();
         }
         return $this->rowCount;
     }

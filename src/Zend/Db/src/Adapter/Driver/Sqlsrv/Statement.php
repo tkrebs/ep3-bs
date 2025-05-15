@@ -265,15 +265,11 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->bindParametersFromContainer();
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($this);
-        }
+        $this->profiler?->profilerStart($this);
 
         $resultValue = sqlsrv_execute($this->resource);
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish();
-        }
+        $this->profiler?->profilerFinish();
 
         if ($resultValue === false) {
             $errors = sqlsrv_errors();

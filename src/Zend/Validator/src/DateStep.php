@@ -11,6 +11,7 @@ namespace Zend\Validator;
 
 use DateInterval;
 use DateTime;
+use DateTimeInterface;
 use DateTimeZone;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
@@ -19,7 +20,7 @@ class DateStep extends Date
 {
     const NOT_STEP       = 'dateStepNotStep';
 
-    const FORMAT_DEFAULT = DateTime::ISO8601;
+    const FORMAT_DEFAULT = DateTimeInterface::ISO8601;
 
     /**
      * @var array
@@ -163,7 +164,7 @@ class DateStep extends Date
     protected function convertString($value, $addErrors = true)
     {
         // Custom week format support
-        if (strpos($this->format, 'Y-\WW') === 0
+        if (str_starts_with($this->format, 'Y-\WW')
             && preg_match('/^([0-9]{4})\-W([0-9]{2})/', $value, $matches)
         ) {
             $date = new DateTime;
@@ -354,7 +355,7 @@ class DateStep extends Date
         array $diffParts,
         DateInterval $step
     ) {
-        list($minSteps, $requiredIterations) = $this->computeMinStepAndRequiredIterations($intervalParts, $diffParts);
+        [$minSteps, $requiredIterations] = $this->computeMinStepAndRequiredIterations($intervalParts, $diffParts);
         $minimumInterval                     = $this->computeMinimumInterval($intervalParts, $minSteps);
         $isIncrementalStepping               = $baseDate < $valueDate;
         $dateModificationOperation           = $isIncrementalStepping ? 'add' : 'sub';

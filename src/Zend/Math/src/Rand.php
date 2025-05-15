@@ -136,7 +136,7 @@ abstract class Rand
 
         $bits   = (int) max($bits, 1);
         $bytes  = (int) max(ceil($bits / 8), 1);
-        $filter = (int) ((1 << $bits) - 1);
+        $filter = (1 << $bits) - 1;
 
         do {
             $rnd  = hexdec(bin2hex(static::getBytes($bytes, $strong)));

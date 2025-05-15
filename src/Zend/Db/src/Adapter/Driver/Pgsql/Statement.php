@@ -222,15 +222,11 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($this);
-        }
+        $this->profiler?->profilerStart($this);
 
         $resultResource = pg_execute($this->pgsql, $this->statementName, (array) $parameters);
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish();
-        }
+        $this->profiler?->profilerFinish();
 
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_last_error());

@@ -6,22 +6,22 @@
  * and do not need to worry about its contents.
  */
 
-return array(
-    'db' => array(
+return [
+    'db' => [
         'driver' => 'pdo_mysql',
         'charset' => 'UTF8',
-    ),
-    'cookie_config' => array(
+    ],
+    'cookie_config' => [
         'cookie_name_prefix' => 'ep3-bs',
-    ),
-    'redirect_config' => array(
+    ],
+    'redirect_config' => [
         'cookie_name' => 'ep3-bs-origin',
         'default_origin' => 'frontend',
-    ),
-    'session_config' => array(
+    ],
+    'session_config' => [
         'name' => 'ep3-bs-session',
         'save_path' => getcwd() . '/data/session/',
         'use_cookies' => true,
         'use_only_cookies' => true,
-    ),
-);
+    ],
+];

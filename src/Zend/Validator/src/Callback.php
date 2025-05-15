@@ -140,7 +140,7 @@ class Callback extends AbstractValidator
                 $this->error(self::INVALID_VALUE);
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->error(self::INVALID_CALLBACK);
             return false;
         }

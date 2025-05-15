@@ -35,7 +35,7 @@ class FileOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a valid path in which to write mail files; received "%s"',
                 __METHOD__,
-                (string) $path
+                $path
             ));
         }
         $this->path = $path;

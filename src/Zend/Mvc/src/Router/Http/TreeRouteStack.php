@@ -39,6 +39,11 @@ class TreeRouteStack extends SimpleRouteStack
     protected $requestUri;
 
     /**
+     * Priority of the route.
+     */
+    public $priority;
+
+    /**
      * Prototype routes.
      *
      * We use an ArrayObject in this case so we can easily pass it down the tree
@@ -217,7 +222,7 @@ class TreeRouteStack extends SimpleRouteStack
                 'prototypes'    => $this->prototypes,
             ];
 
-            $priority = (isset($route->priority) ? $route->priority : null);
+            $priority = ($route->priority ?? null);
 
             $route = $this->routePluginManager->get('part', $options);
             $route->priority = $priority;

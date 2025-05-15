@@ -44,7 +44,7 @@ class Mailto extends Uri
             return false;
         }
 
-        if (0 === strpos($this->path, '/')) {
+        if (str_starts_with($this->path, '/')) {
             return false;
         }
 

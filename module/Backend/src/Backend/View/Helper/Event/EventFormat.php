@@ -21,7 +21,7 @@ class EventFormat extends AbstractHelper
         $view = $this->getView();
         $html = '';
 
-        $html .= sprintf('<tr>');
+        $html .= '<tr>';
 
         $html .= sprintf('<td>%s</td>',
             $event->need('eid'));

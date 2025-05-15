@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'The passed calendar date is invalid' => 'Ez a naptár dátum érvénytelen',
     'The passed calendar squares are invalid' => 'Ez a pályanaptár érvénytelen',
@@ -28,4 +28,4 @@ return array(
     'Invalid date choice' => 'Érvénytelen dátum választás',
     'Persons' => 'Személyek',
 
-);
+];

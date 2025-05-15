@@ -224,7 +224,7 @@ class DateTimeSelect extends DateSelect
         if (is_string($value)) {
             try {
                 $value = new PhpDateTime($value);
-            } catch (Exception $e) {
+            } catch (Exception) {
                 throw new InvalidArgumentException('Value should be a parsable string or an instance of \DateTime');
             }
         }

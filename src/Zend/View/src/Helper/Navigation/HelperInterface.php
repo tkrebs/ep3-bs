@@ -44,7 +44,7 @@ interface HelperInterface extends BaseHelperInterface
      * @param  Acl\AclInterface $acl [optional] ACL instance
      * @return HelperInterface
      */
-    public function setAcl(Acl\AclInterface $acl = null);
+    public function setAcl(?Acl\AclInterface $acl = null);
 
     /**
      * Returns ACL or null if it isn't set using {@link setAcl()} or

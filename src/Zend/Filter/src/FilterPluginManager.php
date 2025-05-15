@@ -234,11 +234,7 @@ class FilterPluginManager extends AbstractPluginManager
         File\UpperCase::class                  => InvokableFactory::class,
         HtmlEntities::class                    => InvokableFactory::class,
         Inflector::class                       => InvokableFactory::class,
-        ToInt::class                           => InvokableFactory::class,
-        ToFloat::class                         => InvokableFactory::class,
         MonthSelect::class                     => InvokableFactory::class,
-        ToNull::class                          => InvokableFactory::class,
-        UpperCaseWords::class                  => InvokableFactory::class,
         PregReplace::class                     => InvokableFactory::class,
         RealPath::class                        => InvokableFactory::class,
         StringPrefix::class                    => InvokableFactory::class,
@@ -248,8 +244,10 @@ class FilterPluginManager extends AbstractPluginManager
         StringTrim::class                      => InvokableFactory::class,
         StripNewlines::class                   => InvokableFactory::class,
         StripTags::class                       => InvokableFactory::class,
+        ToFloat::class                         => InvokableFactory::class,
         ToInt::class                           => InvokableFactory::class,
         ToNull::class                          => InvokableFactory::class,
+        UpperCaseWords::class                  => InvokableFactory::class,
         UriNormalize::class                    => InvokableFactory::class,
         Whitelist::class                       => InvokableFactory::class,
         Word\CamelCaseToDash::class            => InvokableFactory::class,
@@ -262,9 +260,9 @@ class FilterPluginManager extends AbstractPluginManager
         Word\SeparatorToDash::class            => InvokableFactory::class,
         Word\SeparatorToSeparator::class       => Word\Service\SeparatorToSeparatorFactory::class,
         Word\UnderscoreToCamelCase::class      => InvokableFactory::class,
-        Word\UnderscoreToStudlyCase::class     => InvokableFactory::class,
         Word\UnderscoreToDash::class           => InvokableFactory::class,
         Word\UnderscoreToSeparator::class      => InvokableFactory::class,
+        Word\UnderscoreToStudlyCase::class     => InvokableFactory::class,
 
         // v2 canonical FQCNs
 

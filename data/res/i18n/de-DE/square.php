@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'This %s is already occupied' => 'Dieser %s ist bereits belegt',
     '%sNote:%s Please read and accept the "%s".' => '%sHinweis:%s Bitte lesen und akzeptieren Sie die "%s".',
@@ -95,7 +95,7 @@ return array(
     'Check' => 'Prüfen',
 
     'You need to activate %sJavaScript%s in your web browser to proceed. If in doubt, switch to another web browser (e.g. Mozilla Firefox).'
-        => '%sJavaScript%s muss in Ihrem Webbrowser aktiviert sein um fortzufahren. Im Zweifelsfall benutzen Sie einfach einen anderen Webbrowser (z.B. Mozilla Firefox).',
+        => '%sJavaScript%s muss in Ihrem Webbrowser aktiviert sein um fortzufahren. Im Zweifelsfall benutzen Sie einfach einen anderen Webbrowser (z. B. Mozilla Firefox).',
 
     'until' => 'bis',
     'with' => 'mit',
@@ -109,4 +109,4 @@ return array(
     'and email address' => 'und E-Mail Adresse',
     'and phone number' => 'und Telefonnummer',
 
-);
+];

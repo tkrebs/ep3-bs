@@ -80,14 +80,14 @@ class FormRow extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  null|ElementInterface $element
+     * @param ElementInterface|null $element
      * @param  null|string           $labelPosition
      * @param  bool                  $renderErrors
      * @param  string|null           $partial
      * @return string|FormRow
      */
     public function __invoke(
-        ElementInterface $element = null,
+        ?ElementInterface $element = null,
         $labelPosition = null,
         $renderErrors = null,
         $partial = null
@@ -309,7 +309,7 @@ class FormRow extends AbstractHelper
                 __METHOD__,
                 __CLASS__,
                 __CLASS__,
-                (string) $labelPosition
+                $labelPosition
             ));
         }
         $this->labelPosition = $labelPosition;

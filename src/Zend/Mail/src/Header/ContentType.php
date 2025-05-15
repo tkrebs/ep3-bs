@@ -114,7 +114,7 @@ class ContentType implements UnstructuredInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a value in the format "type/subtype"; received "%s"',
                 __METHOD__,
-                (string) $type
+                $type
             ));
         }
         $this->type = $type;

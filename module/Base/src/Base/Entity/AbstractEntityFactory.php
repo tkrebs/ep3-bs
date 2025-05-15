@@ -19,10 +19,10 @@ abstract class AbstractEntityFactory
      * Creates entities from a Traversable, especially from a (database) result set.
      *
      * @param Traversable $resultSet
-     * @param Closure $closure
+     * @param Closure|null $closure
      * @return array
      */
-    public static function fromResultSet(Traversable $resultSet, Closure $closure = null)
+    public static function fromResultSet(Traversable $resultSet, ?Closure $closure = null)
     {
         $entities = array();
 

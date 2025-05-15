@@ -34,13 +34,13 @@ class FormLabel extends AbstractHelper
      * Always generates a "for" statement, as we cannot assume the form input
      * will be provided in the $labelContent.
      *
-     * @param  ElementInterface $element
+     * @param ElementInterface|null $element
      * @param  null|string      $labelContent
      * @param  string           $position
-     * @throws Exception\DomainException
      * @return string|FormLabel
+     *@throws Exception\DomainException
      */
-    public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)
+    public function __invoke(?ElementInterface $element = null, $labelContent = null, $position = null)
     {
         if (! $element) {
             return $this;

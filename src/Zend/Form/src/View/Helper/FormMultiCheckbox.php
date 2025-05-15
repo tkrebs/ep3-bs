@@ -73,11 +73,11 @@ class FormMultiCheckbox extends FormInput
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
+     * @param ElementInterface|null $element
      * @param  null|string           $labelPosition
      * @return string|FormMultiCheckbox
      */
-    public function __invoke(ElementInterface $element = null, $labelPosition = null)
+    public function __invoke(?ElementInterface $element = null, $labelPosition = null)
     {
         if (! $element) {
             return $this;
@@ -123,7 +123,7 @@ class FormMultiCheckbox extends FormInput
             : $this->useHiddenElement;
 
         if ($useHiddenElement) {
-            $rendered = $this->renderHiddenElement($element, $attributes) . $rendered;
+            $rendered = $this->renderHiddenElement($element) . $rendered;
         }
 
         return $rendered;
@@ -252,10 +252,9 @@ class FormMultiCheckbox extends FormInput
      * Render a hidden element for empty/unchecked value
      *
      * @param  MultiCheckboxElement $element
-     * @param  array                $attributes
      * @return string
      */
-    protected function renderHiddenElement(MultiCheckboxElement $element, array $attributes)
+    protected function renderHiddenElement(MultiCheckboxElement $element)
     {
         $closingBracket = $this->getInlineClosingBracket();
 
@@ -313,7 +312,7 @@ class FormMultiCheckbox extends FormInput
                 __METHOD__,
                 __CLASS__,
                 __CLASS__,
-                (string) $labelPosition
+                $labelPosition
             ));
         }
         $this->labelPosition = $labelPosition;

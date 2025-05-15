@@ -28,10 +28,10 @@ class ControllerManagerFactory implements FactoryInterface
      *
      * @param  ContainerInterface $container
      * @param  string $Name
-     * @param  null|array $options
+     * @param array|null $options
      * @return ControllerManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         if ($options) {
             return new ControllerManager($container, $options);

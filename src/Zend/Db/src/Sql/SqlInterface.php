@@ -16,9 +16,9 @@ interface SqlInterface
     /**
      * Get SQL string for statement
      *
-     * @param null|PlatformInterface $adapterPlatform
+     * @param PlatformInterface|null $adapterPlatform
      *
      * @return string
      */
-    public function getSqlString(PlatformInterface $adapterPlatform = null);
+    public function getSqlString(?PlatformInterface $adapterPlatform = null);
 }

@@ -192,7 +192,7 @@ class RsaOptions extends AbstractOptions
         $opensslConfig = array_replace(
             [
                 'private_key_type' => OPENSSL_KEYTYPE_RSA,
-                'private_key_bits' => Rsa\PrivateKey::DEFAULT_KEY_SIZE,
+                'private_key_bits' => Rsa\AbstractKey::DEFAULT_KEY_SIZE,
                 'digest_alg'       => $this->getHashAlgorithm()
             ],
             $opensslConfig

@@ -166,7 +166,7 @@ abstract class AbstractDate implements HeaderInterface
                 $date = new DateTime($date, new DateTimeZone('GMT'));
             } catch (\Exception $e) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid date passed as string (%s)', (string) $date),
+                    sprintf('Invalid date passed as string (%s)', $date),
                     $e->getCode(),
                     $e
                 );
@@ -220,7 +220,7 @@ abstract class AbstractDate implements HeaderInterface
                 $date = new DateTime($date, new DateTimeZone('GMT'));
             } catch (\Exception $e) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid Date passed as string (%s)', (string) $date),
+                    sprintf('Invalid Date passed as string (%s)', $date),
                     $e->getCode(),
                     $e
                 );

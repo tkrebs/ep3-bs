@@ -31,9 +31,9 @@ class File implements TransportInterface
     /**
      * Constructor
      *
-     * @param  null|FileOptions $options OPTIONAL (Default: null)
+     * @param FileOptions|null $options OPTIONAL (Default: null)
      */
-    public function __construct(FileOptions $options = null)
+    public function __construct(?FileOptions $options = null)
     {
         if (! $options instanceof FileOptions) {
             $options = new FileOptions();

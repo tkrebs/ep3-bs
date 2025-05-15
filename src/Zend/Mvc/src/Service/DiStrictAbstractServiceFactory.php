@@ -108,7 +108,7 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
      *
      * Allows creation of services only when in a whitelist
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         if (! isset($this->allowedServiceNames[$name])) {
             throw new Exception\InvalidServiceException(sprintf(

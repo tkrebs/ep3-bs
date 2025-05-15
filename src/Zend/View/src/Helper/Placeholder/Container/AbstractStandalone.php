@@ -16,7 +16,6 @@ use ReturnTypeWillChange;
 use Zend\Escaper\Escaper;
 use Zend\View\Exception;
 use Zend\View\Helper\AbstractHelper;
-use Zend\View\Renderer\RendererInterface;
 
 /**
  * Base class for targeted placeholder helpers

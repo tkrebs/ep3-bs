@@ -42,16 +42,16 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
     /**
      * @param PlatformInterface $platform
-     * @param DriverInterface $driver
-     * @param ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @param $sqls
      * @param $parameters
      * @return null
      */
     protected function processLimitOffset(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null,
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null,
         &$sqls,
         &$parameters
     ) {
@@ -96,17 +96,19 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $offsetParamName = $driver->formatParameterName('offset');
             $offsetForSumParamName = $driver->formatParameterName('offsetForSum');
             // @codingStandardsIgnoreStart
-            array_push($sqls, ') AS [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION] WHERE [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION].[__ZEND_ROW_NUMBER] BETWEEN '
-                . $offsetParamName . '+1 AND ' . $limitParamName . '+' . $offsetForSumParamName);
+            $sqls[]
+                = ') AS [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION] WHERE [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION].[__ZEND_ROW_NUMBER] BETWEEN '
+                . $offsetParamName . '+1 AND ' . $limitParamName . '+' . $offsetForSumParamName;
             // @codingStandardsIgnoreEnd
             $parameterContainer->offsetSet('offset', $this->offset);
             $parameterContainer->offsetSet('limit', $this->limit);
             $parameterContainer->offsetSetReference('offsetForSum', 'offset');
         } else {
             // @codingStandardsIgnoreStart
-            array_push($sqls, ') AS [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION] WHERE [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION].[__ZEND_ROW_NUMBER] BETWEEN '
+            $sqls[]
+                = ') AS [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION] WHERE [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION].[__ZEND_ROW_NUMBER] BETWEEN '
                 . (int) $this->offset . '+1 AND '
-                . (int) $this->limit . '+' . (int) $this->offset);
+                . (int) $this->limit . '+' . (int) $this->offset;
             // @codingStandardsIgnoreEnd
         }
 

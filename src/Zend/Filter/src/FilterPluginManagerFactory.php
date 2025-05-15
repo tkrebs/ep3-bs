@@ -26,7 +26,7 @@ class FilterPluginManagerFactory implements FactoryInterface
      *
      * @return FilterPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $pluginManager = new FilterPluginManager($container, $options ?: []);
 

@@ -47,14 +47,14 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
      * Constructor
      *
      * @param array|Connection|\mysqli $connection
-     * @param null|Statement $statementPrototype
-     * @param null|Result $resultPrototype
+     * @param Statement|null $statementPrototype
+     * @param Result|null $resultPrototype
      * @param array $options
      */
     public function __construct(
         $connection,
-        Statement $statementPrototype = null,
-        Result $resultPrototype = null,
+        ?Statement $statementPrototype = null,
+        ?Result $resultPrototype = null,
         array $options = []
     ) {
         if (! $connection instanceof Connection) {

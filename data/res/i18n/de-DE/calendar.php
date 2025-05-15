@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'The passed calendar date is invalid' => 'Dieses Kalenderdatum ist ungültig',
     'The passed calendar squares are invalid' => 'Diese Kalenderanzeige ist ungültig',
@@ -28,4 +28,4 @@ return array(
     'Invalid date choice' => 'Ungültige Auswahl',
     'Persons' => 'Personen',
 
-);
+];

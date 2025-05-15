@@ -42,11 +42,7 @@ class User extends AbstractEntity
     {
         $status = $this->need('status');
 
-        if (isset(self::$statusOptions[$status])) {
-            return self::$statusOptions[$status];
-        } else {
-            return 'Unknown';
-        }
+        return self::$statusOptions[$status] ?? 'Unknown';
     }
 
     /**
@@ -74,11 +70,7 @@ class User extends AbstractEntity
             return $default;
         }
 
-        if (isset(self::$genderOptions[$gender])) {
-            return self::$genderOptions[$gender];
-        } else {
-            return 'Unknown';
-        }
+        return self::$genderOptions[$gender] ?? 'Unknown';
     }
 
     /**

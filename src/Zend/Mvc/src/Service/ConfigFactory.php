@@ -26,10 +26,10 @@ class ConfigFactory implements FactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $name
-     * @param null|array $options
+     * @param array|null $options
      * @return array|\Traversable
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $moduleManager = $container->get('ModuleManager');
         $moduleManager->loadModules();

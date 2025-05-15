@@ -126,7 +126,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         $mm = null;
         try {
             $mm = $sm->get('ModuleManager');
-        } catch (ServiceNotFoundException $exception) {
+        } catch (ServiceNotFoundException) {
             // The application does not have or use module manager, so we cannot use it
         }
 
@@ -136,7 +136,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
             if (!$console instanceof ConsoleAdapter) {
                 throw new ServiceNotFoundException();
             }
-        } catch (ServiceNotFoundException $exception) {
+        } catch (ServiceNotFoundException) {
             // The application does not have console adapter
             throw new RuntimeException('Cannot access Console adapter - is it defined in ServiceManager?');
         }
@@ -168,11 +168,11 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      * Build Console application banner text by querying currently loaded
      * modules.
      *
-     * @param ModuleManagerInterface $moduleManager
+     * @param ModuleManagerInterface|null $moduleManager
      * @param ConsoleAdapter         $console
      * @return string
      */
-    protected function getConsoleBanner(ConsoleAdapter $console, ModuleManagerInterface $moduleManager = null)
+    protected function getConsoleBanner(ConsoleAdapter $console, ?ModuleManagerInterface $moduleManager = null)
     {
         /*
          * Loop through all loaded modules and collect banners
@@ -217,14 +217,14 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      *
      * @param ConsoleAdapter         $console
      * @param string                 $scriptName
-     * @param ModuleManagerInterface $moduleManager
+     * @param ModuleManagerInterface|null $moduleManager
      * @return string
      * @throws RuntimeException
      */
     protected function getConsoleUsage(
         ConsoleAdapter $console,
         $scriptName,
-        ModuleManagerInterface $moduleManager = null
+        ?ModuleManagerInterface $moduleManager = null
     ) {
         /*
          * Loop through all loaded modules and collect usage info

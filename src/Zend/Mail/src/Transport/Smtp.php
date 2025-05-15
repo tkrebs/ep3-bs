@@ -56,9 +56,9 @@ class Smtp implements TransportInterface
     /**
      * Constructor.
      *
-     * @param  SmtpOptions $options Optional
+     * @param SmtpOptions|null $options Optional
      */
-    public function __construct(SmtpOptions $options = null)
+    public function __construct(?SmtpOptions $options = null)
     {
         if (! $options instanceof SmtpOptions) {
             $options = new SmtpOptions();
@@ -160,10 +160,10 @@ class Smtp implements TransportInterface
      * Return an SMTP connection
      *
      * @param  string $name
-     * @param  array|null $options
+     * @param array|null $options
      * @return Protocol\Smtp
      */
-    public function plugin($name, array $options = null)
+    public function plugin($name, ?array $options = null)
     {
         return $this->getPluginManager()->get($name, $options);
     }
@@ -179,7 +179,7 @@ class Smtp implements TransportInterface
 
         try {
             $this->getConnection()->quit();
-        } catch (ProtocolException\ExceptionInterface $e) {
+        } catch (ProtocolException\ExceptionInterface) {
             // ignore
         }
 

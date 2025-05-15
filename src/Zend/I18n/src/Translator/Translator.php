@@ -159,7 +159,7 @@ class Translator implements TranslatorInterface
                     $pattern['type'],
                     $pattern['base_dir'],
                     $pattern['pattern'],
-                    isset($pattern['text_domain']) ? $pattern['text_domain'] : 'default'
+                    $pattern['text_domain'] ?? 'default'
                 );
             }
         }
@@ -185,8 +185,8 @@ class Translator implements TranslatorInterface
                 $translator->addTranslationFile(
                     $file['type'],
                     $file['filename'],
-                    isset($file['text_domain']) ? $file['text_domain'] : 'default',
-                    isset($file['locale']) ? $file['locale'] : null
+                    $file['text_domain'] ?? 'default',
+                    $file['locale'] ?? null
                 );
             }
         }
@@ -211,7 +211,7 @@ class Translator implements TranslatorInterface
 
                 $translator->addRemoteTranslations(
                     $remote['type'],
-                    isset($remote['text_domain']) ? $remote['text_domain'] : 'default'
+                    $remote['text_domain'] ?? 'default'
                 );
             }
         }
@@ -293,10 +293,10 @@ class Translator implements TranslatorInterface
     /**
      * Sets a cache
      *
-     * @param  CacheStorage $cache
+     * @param CacheStorage|null $cache
      * @return Translator
      */
-    public function setCache(CacheStorage $cache = null)
+    public function setCache(?CacheStorage $cache = null)
     {
         $this->cache = $cache;
 

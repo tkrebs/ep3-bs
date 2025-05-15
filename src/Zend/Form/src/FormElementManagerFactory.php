@@ -27,7 +27,7 @@ class FormElementManagerFactory implements FactoryInterface
      *
      * @return AbstractPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $pluginManager = $this->isV3Container()
             ? new FormElementManager\FormElementManagerV3Polyfill($container, $options ?: [])

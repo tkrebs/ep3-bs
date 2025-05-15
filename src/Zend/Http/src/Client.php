@@ -110,7 +110,7 @@ class Client implements Stdlib\DispatchableInterface
         'timeout'         => 10,
         'connecttimeout'  => null,
         'adapter'         => Socket::class,
-        'httpversion'     => Request::VERSION_11,
+        'httpversion'     => AbstractMessage::VERSION_11,
         'storeresponse'   => true,
         'keepalive'       => false,
         'outputstream'    => false,
@@ -722,7 +722,7 @@ class Client implements Stdlib\DispatchableInterface
         if (! is_string($this->streamName)) {
             // If name is not given, create temp name
             $this->streamName = tempnam(
-                isset($this->config['streamtmpdir']) ? $this->config['streamtmpdir'] : sys_get_temp_dir(),
+                $this->config['streamtmpdir'] ?? sys_get_temp_dir(),
                 Client::class
             );
         }
@@ -804,7 +804,7 @@ class Client implements Stdlib\DispatchableInterface
         switch (strtolower($type)) {
             case self::AUTH_BASIC:
                 // In basic authentication, the user name cannot contain ":"
-                if (strpos($user, ':') !== false) {
+                if (str_contains($user, ':')) {
                     throw new Exception\InvalidArgumentException(
                         'The user name cannot contain \':\' in Basic HTTP authentication'
                     );
@@ -852,7 +852,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param Stdlib\ResponseInterface $response
      * @return Stdlib\ResponseInterface
      */
-    public function dispatch(Stdlib\RequestInterface $request, Stdlib\ResponseInterface $response = null)
+    public function dispatch(Stdlib\RequestInterface $request, ?Stdlib\ResponseInterface $response = null)
     {
         $response = $this->send($request);
         return $response;
@@ -861,12 +861,12 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Send HTTP request
      *
-     * @param  Request $request
+     * @param Request|null $request
      * @return Response
      * @throws Exception\RuntimeException
      * @throws Client\Exception\RuntimeException
      */
-    public function send(Request $request = null)
+    public function send(?Request $request = null)
     {
         if ($request !== null) {
             $this->setRequest($request);
@@ -895,7 +895,7 @@ class Client implements Stdlib\DispatchableInterface
                         $queryString = str_replace('+', '%20', $queryString);
                     }
 
-                    if (strpos($newUri, '?') !== false) {
+                    if (str_contains($newUri, '?')) {
                         $newUri .= $this->getArgSeparator() . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
@@ -1007,15 +1007,15 @@ class Client implements Stdlib\DispatchableInterface
                     $this->setUri($location);
                 } else {
                     // Split into path and query and set the query
-                    if (strpos($location, '?') !== false) {
-                        list($location, $query) = explode('?', $location, 2);
+                    if (str_contains($location, '?')) {
+                        [$location, $query] = explode('?', $location, 2);
                     } else {
                         $query = '';
                     }
                     $this->getUri()->setQuery($query);
 
                     // Else, if we got just an absolute path, set it
-                    if (strpos($location, '/') === 0) {
+                    if (str_starts_with($location, '/')) {
                         $this->getUri()->setPath($location);
                         // Else, assume we have a relative path
                     } else {
@@ -1158,7 +1158,7 @@ class Client implements Stdlib\DispatchableInterface
         $headers = [];
 
         // Set the host header
-        if ($this->config['httpversion'] == Request::VERSION_11) {
+        if ($this->config['httpversion'] == AbstractMessage::VERSION_11) {
             $host = $uri->getHost();
             // If the port is not default, add it
             if (! (($uri->getScheme() == 'http' && $uri->getPort() == 80)
@@ -1475,7 +1475,7 @@ class Client implements Stdlib\DispatchableInterface
         switch ($type) {
             case self::AUTH_BASIC:
                 // In basic authentication, the user name cannot contain ":"
-                if (strpos($user, ':') !== false) {
+                if (str_contains($user, ':')) {
                     throw new Client\Exception\InvalidArgumentException(
                         'The user name cannot contain \':\' in \'Basic\' HTTP authentication'
                     );
@@ -1495,7 +1495,5 @@ class Client implements Stdlib\DispatchableInterface
                     $type
                 ));
         }
-
-        return;
     }
 }

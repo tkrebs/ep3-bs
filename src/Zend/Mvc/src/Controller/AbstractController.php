@@ -96,10 +96,10 @@ abstract class AbstractController implements
      *
      * @events dispatch.pre, dispatch.post
      * @param  Request $request
-     * @param  null|Response $response
+     * @param Response|null $response
      * @return Response|mixed
      */
-    public function dispatch(Request $request, Response $response = null)
+    public function dispatch(Request $request, ?Response $response = null)
     {
         $this->request = $request;
         if (!$response) {
@@ -284,10 +284,10 @@ abstract class AbstractController implements
      * Get plugin instance
      *
      * @param  string     $name    Name of plugin to return
-     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @param array|null $options Options to pass to plugin constructor (if not already instantiated)
      * @return mixed
      */
-    public function plugin($name, array $options = null)
+    public function plugin($name, ?array $options = null)
     {
         return $this->getPluginManager()->get($name, $options);
     }

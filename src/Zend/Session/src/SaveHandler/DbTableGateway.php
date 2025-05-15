@@ -153,7 +153,7 @@ class DbTableGateway implements SaveHandlerInterface
      */
     #[ReturnTypeWillChange] public function destroy($id)
     {
-        if (! (bool) $this->read($id, false)) {
+        if (! $this->read($id, false)) {
             return true;
         }
 

@@ -36,11 +36,7 @@ class Booking extends AbstractEntity
     {
         $status = $this->need('status');
 
-        if (isset(self::$statusOptions[$status])) {
-            return self::$statusOptions[$status];
-        } else {
-            return 'Unknown';
-        }
+        return self::$statusOptions[$status] ?? 'Unknown';
     }
 
     /**
@@ -72,11 +68,7 @@ class Booking extends AbstractEntity
     {
         $visibility = $this->need('visibility');
 
-        if (isset(self::$visibilityOptions[$visibility])) {
-            return self::$visibilityOptions[$visibility];
-        } else {
-            return 'Unknown';
-        }
+        return self::$visibilityOptions[$visibility] ?? 'Unknown';
     }
 
     /**
@@ -108,11 +100,7 @@ class Booking extends AbstractEntity
             return null;
         }
 
-        if (isset(self::$repeatOptions[$repeat])) {
-            return self::$repeatOptions[$repeat];
-        } else {
-            return sprintf('Every %s days', $repeat);
-        }
+        return self::$repeatOptions[$repeat] ?? sprintf('Every %s days', $repeat);
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace Base;
 
+use JetBrains\PhpStorm\NoReturn;
+
 class Charon
 {
 
@@ -12,6 +14,7 @@ class Charon
      * @param $cause
      * @param $coin
      */
+    #[NoReturn]
     public static function carry($subject, $cause, $coin)
     {
         ob_clean();

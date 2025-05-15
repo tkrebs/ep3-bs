@@ -192,7 +192,7 @@ class Uri implements UriInterface
     public function isValid()
     {
         if ($this->host) {
-            if (strlen($this->path) > 0 && 0 !== strpos($this->path, '/')) {
+            if (strlen($this->path) > 0 && ! str_starts_with($this->path, '/')) {
                 return false;
             }
             return true;
@@ -204,7 +204,7 @@ class Uri implements UriInterface
 
         if ($this->path) {
             // Check path-only (no host) URI
-            if (0 === strpos($this->path, '//')) {
+            if (str_starts_with($this->path, '//')) {
                 return false;
             }
             return true;
@@ -231,7 +231,7 @@ class Uri implements UriInterface
 
         if ($this->path) {
             // Check path-only (no host) URI
-            if (0 === strpos($this->path, '//')) {
+            if (str_starts_with($this->path, '//')) {
                 return false;
             }
             return true;
@@ -291,7 +291,7 @@ class Uri implements UriInterface
             $uri       = substr($uri, strlen($match[0]));
 
             // Split authority into userInfo and host
-            if (strpos($authority, '@') !== false) {
+            if (str_contains($authority, '@')) {
                 // The userInfo can also contain '@' symbols; split $authority
                 // into segments, and set it to the last segment.
                 $segments  = explode('@', $authority);
@@ -342,7 +342,7 @@ class Uri implements UriInterface
         }
 
         // All that's left is the fragment
-        if ($uri && 0 === strpos($uri, '#')) {
+        if ($uri && str_starts_with($uri, '#')) {
             $this->setFragment(substr($uri, 1));
         }
 
@@ -488,7 +488,7 @@ class Uri implements UriInterface
                     $this->setQuery($baseUri->getQuery());
                 }
             } else {
-                if (0 === strpos($relPath, '/')) {
+                if (str_starts_with($relPath, '/')) {
                     $this->setPath(static::removePathDotSegments($relPath));
                 } else {
                     if ($baseUri->getHost() && ! $basePath) {
@@ -827,7 +827,7 @@ class Uri implements UriInterface
     {
         try {
             return $this->toString();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return '';
         }
     }
@@ -1114,7 +1114,7 @@ class Uri implements UriInterface
                     }
                     $output = substr($output, 0, $lastSlashPos);
                     break;
-                case (0 === strpos($path, '/../')):
+                case (str_starts_with($path, '/../')):
                     $path   = '/' . substr($path, 4);
                     $lastSlashPos = strrpos($output, '/', -1);
                     if (false === $lastSlashPos) {
@@ -1122,13 +1122,11 @@ class Uri implements UriInterface
                     }
                     $output = substr($output, 0, $lastSlashPos);
                     break;
-                case (0 === strpos($path, '/./')):
+                case (str_starts_with($path, './')):
+                case (str_starts_with($path, '/./')):
                     $path = substr($path, 2);
                     break;
-                case (0 === strpos($path, './')):
-                    $path = substr($path, 2);
-                    break;
-                case (0 === strpos($path, '../')):
+                case (str_starts_with($path, '../')):
                     $path = substr($path, 3);
                     break;
                 default:

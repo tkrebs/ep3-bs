@@ -29,11 +29,11 @@ trait TranslatorAwareTrait
     /**
      * Sets translator to use in helper
      *
-     * @param TranslatorInterface $translator
+     * @param TranslatorInterface|null $translator
      * @param string              $textDomain
      * @return mixed
      */
-    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
+    public function setTranslator(?TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
 

@@ -87,7 +87,7 @@ class SqliteMetadata extends AbstractSource
                 // cid appears to be zero-based, ordinal position needs to be one-based
                 'ordinal_position'          => $row['cid'] + 1,
                 'column_default'            => $row['dflt_value'],
-                'is_nullable'               => ! ((bool) $row['notnull']),
+                'is_nullable'               => ! ($row['notnull']),
                 'data_type'                 => $row['type'],
                 'character_maximum_length'  => null,
                 'character_octet_length'    => null,
@@ -115,7 +115,7 @@ class SqliteMetadata extends AbstractSource
         $primaryKey = [];
 
         foreach ($this->data['sqlite_columns'][$schema][$table] as $col) {
-            if ((bool) $col['pk']) {
+            if ($col['pk']) {
                 $primaryKey[] = $col['name'];
             }
         }
@@ -126,7 +126,7 @@ class SqliteMetadata extends AbstractSource
         $constraints = [];
         $indexes = $this->fetchPragma('index_list', $table, $schema);
         foreach ($indexes as $index) {
-            if (! ((bool) $index['unique'])) {
+            if (! ($index['unique'])) {
                 continue;
             }
             $constraint = [

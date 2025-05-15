@@ -59,7 +59,7 @@ class SessionStorage extends ArrayStorage
      */
     public function __destruct()
     {
-        $_SESSION = (array) $this->getArrayCopy();
+        $_SESSION = $this->getArrayCopy();
     }
 
     /**

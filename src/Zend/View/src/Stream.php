@@ -49,13 +49,10 @@ class Stream
      * Opens the script file and converts markup.
      *
      * @param  string $path
-     * @param         $mode
-     * @param         $options
-     * @param         $opened_path
      * @return bool
      */
     // @codingStandardsIgnoreStart
-    public function stream_open($path, $mode, $options, &$opened_path)
+    public function stream_open($path)
     {
         // @codingStandardsIgnoreEnd
         // get the view script source
@@ -76,7 +73,7 @@ class Stream
          *
          */
         $this->data = preg_replace('/\<\?\=/', "<?php echo ", $this->data);
-        $this->data = preg_replace('/<\?(?!xml|php)/s', '<?php ', $this->data);
+        $this->data = preg_replace('/<\?(?!xml|php)/', '<?php ', $this->data);
 
         /**
          * file_get_contents() won't update PHP's stat cache, so we grab a stat
@@ -170,7 +167,6 @@ class Stream
                 } else {
                     return false;
                 }
-                break;
 
             case SEEK_CUR:
                 if ($offset >= 0) {
@@ -179,7 +175,6 @@ class Stream
                 } else {
                     return false;
                 }
-                break;
 
             case SEEK_END:
                 if (strlen($this->data) + $offset >= 0) {
@@ -188,7 +183,6 @@ class Stream
                 } else {
                     return false;
                 }
-                break;
 
             default:
                 return false;

@@ -28,7 +28,7 @@ class EventController extends AbstractActionController
         if ($dateStartParam && $dateEndParam) {
             try {
                 $dateStart = new \DateTime($dateStartParam);
-                $dateStart->setTime(0, 0, 0);
+                $dateStart->setTime(0, 0);
 
                 $dateEnd = new \DateTime($dateEndParam);
                 $dateEnd->setTime(23, 59, 59);
@@ -89,13 +89,13 @@ class EventController extends AbstractActionController
 
                 $timeStartParts = explode(':', $data['ef-time-start']);
 
-                $dateStart->setTime($timeStartParts[0], $timeStartParts[1], 0);
+                $dateStart->setTime($timeStartParts[0], $timeStartParts[1]);
 
                 $dateEnd = new \DateTime($data['ef-date-end']);
 
                 $timeEndParts = explode(':', $data['ef-time-end']);
 
-                $dateEnd->setTime($timeEndParts[0], $timeEndParts[1], 0);
+                $dateEnd->setTime($timeEndParts[0], $timeEndParts[1]);
 
                 $event->set('datetime_start', $dateStart->format('Y-m-d H:i:s'));
                 $event->set('datetime_end', $dateEnd->format('Y-m-d H:i:s'));

@@ -72,7 +72,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
         foreach ((array) $attribs as $key => $val) {
             $key = $escaper($key);
 
-            if (0 === strpos($key, 'on') || ('constraints' == $key)) {
+            if (str_starts_with($key, 'on') || ('constraints' == $key)) {
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (! is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
@@ -90,7 +90,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
                 $val = $this->normalizeId($val);
             }
 
-            if (strpos($val, '"') !== false) {
+            if (str_contains($val, '"')) {
                 $xhtml .= " $key='$val'";
             } else {
                 $xhtml .= " $key=\"$val\"";
@@ -108,8 +108,8 @@ abstract class AbstractHtmlElement extends AbstractHelper
      */
     protected function normalizeId($value)
     {
-        if (false !== strpos($value, '[')) {
-            if ('[]' == substr($value, -2)) {
+        if (str_contains($value, '[')) {
+            if (str_ends_with($value, '[]')) {
                 $value = substr($value, 0, strlen($value) - 2);
             }
             $value = trim($value, ']');

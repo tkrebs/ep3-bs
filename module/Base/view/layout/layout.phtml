@@ -27,7 +27,7 @@
                 <?php if ($this->option('service.branding', 'true') == 'true'): ?>
                     <div id="branding">&raquo; <?= sprintf($this->t('Powered by %s'), '<a href="' . $this->option('service.branding.website') .'" target="_blank">' . $this->option('service.branding.name') . '</a>') ?></div>
                 <?php else: ?>
-                    <style type="text/css"> #label-client { margin-top: 15px; } </style>
+                    <style> #label-client { margin-top: 15px; } </style>
                 <?php endif; ?>
             </div>
 

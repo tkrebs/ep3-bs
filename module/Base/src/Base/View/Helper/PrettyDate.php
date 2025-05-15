@@ -17,7 +17,7 @@ class PrettyDate extends AbstractHelper
     {
         $this->now = new DateTime();
         $this->today = new DateTime();
-        $this->today->setTime(0, 0, 0);
+        $this->today->setTime(0, 0);
     }
 
     public function __invoke($datetime, $time = true)
@@ -29,7 +29,7 @@ class PrettyDate extends AbstractHelper
             $date = new DateTime($datetime);
         } else if ($datetime instanceof DateTime) {
             $date = clone $datetime;
-            $date->setTime(0, 0, 0);
+            $date->setTime(0, 0);
         } else {
             throw new RuntimeException('Invalid datetime passed to pretty date');
         }

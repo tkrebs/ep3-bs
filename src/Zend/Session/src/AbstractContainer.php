@@ -10,7 +10,7 @@
 namespace Zend\Session;
 
 use ArrayIterator;
-use Iterator;
+use ReturnTypeWillChange;
 use Traversable;
 use Zend\Session\ManagerInterface as Manager;
 use Zend\Session\Storage\StorageInterface as Storage;
@@ -63,10 +63,10 @@ abstract class AbstractContainer extends ArrayObject
      * Provide a name ('Default' if none provided) and a ManagerInterface instance.
      *
      * @param  null|string                        $name
-     * @param  Manager                            $manager
+     * @param Manager|null $manager
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($name = 'Default', Manager $manager = null)
+    public function __construct($name = 'Default', ?Manager $manager = null)
     {
         if (! preg_match('/^[a-z0-9][a-z0-9_\\\\]+$/i', $name)) {
             throw new Exception\InvalidArgumentException(
@@ -86,10 +86,10 @@ abstract class AbstractContainer extends ArrayObject
     /**
      * Set the default ManagerInterface instance to use when none provided to constructor
      *
-     * @param  Manager $manager
+     * @param Manager|null $manager
      * @return void
      */
-    public static function setDefaultManager(Manager $manager = null)
+    public static function setDefaultManager(?Manager $manager = null)
     {
         static::$defaultManager = $manager;
     }
@@ -130,11 +130,11 @@ abstract class AbstractContainer extends ArrayObject
     /**
      * Set session manager
      *
-     * @param  null|Manager                       $manager
+     * @param Manager|null $manager
      * @return Container
      * @throws Exception\InvalidArgumentException
      */
-    protected function setManager(Manager $manager = null)
+    protected function setManager(?Manager $manager = null)
     {
         if (null === $manager) {
             $manager = static::getDefaultManager();
@@ -268,11 +268,9 @@ abstract class AbstractContainer extends ArrayObject
         }
 
         // Expire individual key
-        if ((null !== $key)
-            && is_array($metadata)
-            && isset($metadata['EXPIRE_KEYS'])
-            && isset($metadata['EXPIRE_KEYS'][$key])
-            && ($_SERVER['REQUEST_TIME'] > $metadata['EXPIRE_KEYS'][$key])
+        if (isset($metadata['EXPIRE_KEYS'][$key]) && null !== $key && is_array($metadata)
+            && $_SERVER['REQUEST_TIME']
+            > $metadata['EXPIRE_KEYS'][$key]
         ) {
             unset($metadata['EXPIRE_KEYS'][$key]);
             $storage->setMetadata($name, $metadata, true);
@@ -338,11 +336,9 @@ abstract class AbstractContainer extends ArrayObject
         }
 
         // Single key expiry
-        if ((null !== $key)
-            && is_array($metadata)
-            && isset($metadata['EXPIRE_HOPS_KEYS'])
-            && isset($metadata['EXPIRE_HOPS_KEYS'][$key])
-            && ($ts > $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'])
+        if (isset($metadata['EXPIRE_HOPS_KEYS'][$key]) && null !== $key && is_array($metadata)
+            && $ts
+            > $metadata['EXPIRE_HOPS_KEYS'][$key]['ts']
         ) {
             $metadata['EXPIRE_HOPS_KEYS'][$key]['hops']--;
             if (-1 === $metadata['EXPIRE_HOPS_KEYS'][$key]['hops']) {
@@ -390,6 +386,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  mixed  $value
      * @return void
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->expireKeys($key);
@@ -404,6 +401,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  string $key
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function offsetExists($key)
     {
         // If no container exists, we can't inspect it
@@ -428,6 +426,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  string $key
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($key)
     {
         if (! $this->offsetExists($key)) {
@@ -445,6 +444,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  string $key
      * @return void
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         if (! $this->offsetExists($key)) {
@@ -489,6 +489,7 @@ abstract class AbstractContainer extends ArrayObject
      *
      * @return Traversable
      */
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         $this->expireKeys();

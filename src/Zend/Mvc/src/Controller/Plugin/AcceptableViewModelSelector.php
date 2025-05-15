@@ -57,14 +57,14 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param array|null $matchAgainst (optional) The Array to match against
      * @param bool $returnDefault (optional) If no match is available. Return default instead
      * @param AbstractFieldValuePart|null $resultReference (optional) The object that was matched
-     * @throws InvalidArgumentException If the supplied and matched View Model could not be found
      * @return ModelInterface|null
+     *@throws InvalidArgumentException If the supplied and matched View Model could not be found
      */
     public function __invoke(
-        array $matchAgainst = null,
+        ?array $matchAgainst = null,
         $returnDefault = true,
         & $resultReference = null
     ) {
@@ -74,7 +74,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param array|null $matchAgainst (optional) The Array to match against
      * @param bool $returnDefault (optional) If no match is available. Return default instead
      * @param AbstractFieldValuePart|null $resultReference (optional) The object that was matched
      *
@@ -82,7 +82,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
      *@throws InvalidArgumentException If the supplied and matched View Model could not be found
      */
     public function getViewModel(
-        array $matchAgainst = null,
+        ?array $matchAgainst = null,
         $returnDefault = true,
         & $resultReference = null
     ) {
@@ -102,14 +102,14 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel name for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param array|null $matchAgainst (optional) The Array to match against
      * @param bool $returnDefault (optional) If no match is available. Return default instead
      * @param AbstractFieldValuePart|null $resultReference (optional) The object that was matched.
      *
      * @return string Returns null if $returnDefault = false and no match could be made
      */
     public function getViewModelName(
-        array $matchAgainst = null,
+        ?array $matchAgainst = null,
         $returnDefault = true,
         & $resultReference = null
     ) {
@@ -127,11 +127,11 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel name for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param array|null $matchAgainst (optional) The Array to match against
      *
      * @return void The object that was matched
      */
-    public function match(array $matchAgainst = null)
+    public function match(?array $matchAgainst = null)
     {
         $request        = $this->getRequest();
         $headers        = $request->getHeaders();
@@ -183,10 +183,10 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Set the default Accept Types and View Model combinations to match against if none are specified.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param array|null $matchAgainst (optional) The Array to match against
      * @return AcceptableViewModelSelector provides fluent interface
      */
-    public function setDefaultMatchAgainst(array $matchAgainst = null)
+    public function setDefaultMatchAgainst(?array $matchAgainst = null)
     {
         $this->defaultMatchAgainst = $matchAgainst;
         return $this;

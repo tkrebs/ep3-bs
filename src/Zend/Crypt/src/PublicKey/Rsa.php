@@ -52,7 +52,7 @@ class Rsa
         }
 
         $privateKey = null;
-        $passPhrase = isset($options['pass_phrase']) ? $options['pass_phrase'] : null;
+        $passPhrase = $options['pass_phrase'] ?? null;
         if (isset($options['private_key'])) {
             if (is_file($options['private_key'])) {
                 $privateKey = Rsa\PrivateKey::fromFile($options['private_key'], $passPhrase);
@@ -94,10 +94,10 @@ class Rsa
     /**
      * Class constructor
      *
-     * @param  RsaOptions $options
+     * @param RsaOptions|null $options
      * @throws Rsa\Exception\RuntimeException
      */
-    public function __construct(RsaOptions $options = null)
+    public function __construct(?RsaOptions $options = null)
     {
         if (!extension_loaded('openssl')) {
             throw new Exception\RuntimeException(
@@ -156,7 +156,7 @@ class Rsa
      * @return string
      * @throws Rsa\Exception\RuntimeException
      */
-    public function sign($data, Rsa\PrivateKey $privateKey = null)
+    public function sign($data, ?Rsa\PrivateKey $privateKey = null)
     {
         $signature = '';
         if (null === $privateKey) {
@@ -203,7 +203,7 @@ class Rsa
     public function verify(
         $data,
         $signature,
-        Rsa\PublicKey $publicKey = null,
+        ?Rsa\PublicKey $publicKey = null,
         $mode = self::MODE_AUTO
     ) {
         if (null === $publicKey) {
@@ -249,7 +249,7 @@ class Rsa
      * @return string
      * @throws Rsa\Exception\InvalidArgumentException
      */
-    public function encrypt($data, Rsa\AbstractKey $key = null, $padding = null)
+    public function encrypt($data, ?Rsa\AbstractKey $key = null, $padding = null)
     {
         if (null === $key) {
             $key = $this->options->getPublicKey();
@@ -291,7 +291,7 @@ class Rsa
      */
     public function decrypt(
         $data,
-        Rsa\AbstractKey $key = null,
+        ?Rsa\AbstractKey $key = null,
         $mode = self::MODE_AUTO,
         $padding = null
     ) {

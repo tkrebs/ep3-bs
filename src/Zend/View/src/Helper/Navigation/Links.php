@@ -710,7 +710,7 @@ class Links extends AbstractHelper
                 try {
                     $page = AbstractPage::factory($mixed);
                     return $page;
-                } catch (\Exception $e) {
+                } catch (\Exception) {
                 }
             }
         }

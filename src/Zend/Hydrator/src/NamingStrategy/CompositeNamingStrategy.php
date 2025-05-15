@@ -14,7 +14,7 @@ class CompositeNamingStrategy implements NamingStrategyInterface
     /**
      * @var array
      */
-    private $namingStrategies = [];
+    private $namingStrategies;
 
     /**
      * @var NamingStrategyInterface
@@ -25,7 +25,7 @@ class CompositeNamingStrategy implements NamingStrategyInterface
      * @param NamingStrategyInterface[]    $strategies            indexed by the name they translate
      * @param NamingStrategyInterface|null $defaultNamingStrategy
      */
-    public function __construct(array $strategies, NamingStrategyInterface $defaultNamingStrategy = null)
+    public function __construct(array $strategies, ?NamingStrategyInterface $defaultNamingStrategy = null)
     {
         $this->namingStrategies = array_map(
             function (NamingStrategyInterface $strategy) {
@@ -43,9 +43,7 @@ class CompositeNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        $strategy = isset($this->namingStrategies[$name])
-            ? $this->namingStrategies[$name]
-            : $this->defaultNamingStrategy;
+        $strategy = $this->namingStrategies[$name] ?? $this->defaultNamingStrategy;
 
         return $strategy->extract($name);
     }
@@ -55,9 +53,7 @@ class CompositeNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        $strategy = isset($this->namingStrategies[$name])
-            ? $this->namingStrategies[$name]
-            : $this->defaultNamingStrategy;
+        $strategy = $this->namingStrategies[$name] ?? $this->defaultNamingStrategy;
 
         return $strategy->hydrate($name);
     }

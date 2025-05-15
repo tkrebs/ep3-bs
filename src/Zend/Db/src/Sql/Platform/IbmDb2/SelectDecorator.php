@@ -93,15 +93,15 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
     /**
      * @param  PlatformInterface  $platform
-     * @param  DriverInterface    $driver
-     * @param  ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @param  array              $sqls
      * @param  array              $parameters
      */
     protected function processLimitOffset(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null,
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null,
         &$sqls,
         &$parameters
     ) {
@@ -118,11 +118,11 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
             $offset = (int) $this->offset;
             if ($offset) {
-                array_push($sqls, sprintf("LIMIT %s OFFSET %s", $limit, $offset));
+                $sqls[] = sprintf("LIMIT %s OFFSET %s", $limit, $offset);
                 return;
             }
 
-            array_push($sqls, sprintf("LIMIT %s", $limit));
+            $sqls[] = sprintf("LIMIT %s", $limit);
             return;
         }
 
@@ -159,13 +159,13 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $limitParamName        = $driver->formatParameterName('limit');
             $offsetParamName       = $driver->formatParameterName('offset');
 
-            array_push($sqls, sprintf(
-                // @codingStandardsIgnoreStart
+            $sqls[] = sprintf(
+            // @codingStandardsIgnoreStart
                 ") AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN %s AND %s",
                 // @codingStandardsIgnoreEnd
                 $offsetParamName,
                 $limitParamName
-            ));
+            );
 
             if ((int) $this->offset > 0) {
                 $parameterContainer->offsetSet('offset', (int) $this->offset + 1);
@@ -181,13 +181,13 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
                 $offset = (int) $this->offset;
             }
 
-            array_push($sqls, sprintf(
-                // @codingStandardsIgnoreStart
+            $sqls[] = sprintf(
+            // @codingStandardsIgnoreStart
                 ") AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN %d AND %d",
                 // @codingStandardsIgnoreEnd
                 $offset,
                 (int) $this->limit + (int) $this->offset
-            ));
+            );
         }
 
         if (isset($sqls[self::ORDER])) {

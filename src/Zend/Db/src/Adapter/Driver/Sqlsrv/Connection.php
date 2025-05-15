@@ -225,15 +225,11 @@ class Connection extends AbstractConnection
             throw new Exception\RuntimeException('Connection is missing an instance of Sqlsrv');
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($sql);
-        }
+        $this->profiler?->profilerStart($sql);
 
         $returnValue = sqlsrv_query($this->resource, $sql);
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish($sql);
-        }
+        $this->profiler?->profilerFinish($sql);
 
         // if the returnValue is something other than a Sqlsrv_result, bypass wrapping it
         if ($returnValue === false) {

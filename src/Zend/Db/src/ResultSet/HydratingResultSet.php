@@ -10,6 +10,7 @@
 namespace Zend\Db\ResultSet;
 
 use ArrayObject;
+use ReturnTypeWillChange;
 use Zend\Hydrator\ArraySerializable;
 use Zend\Hydrator\ArraySerializableHydrator;
 use Zend\Hydrator\HydratorInterface;
@@ -29,10 +30,10 @@ class HydratingResultSet extends AbstractResultSet
     /**
      * Constructor
      *
-     * @param  null|HydratorInterface $hydrator
+     * @param HydratorInterface|null $hydrator
      * @param  null|object $objectPrototype
      */
-    public function __construct(HydratorInterface $hydrator = null, $objectPrototype = null)
+    public function __construct(?HydratorInterface $hydrator = null, $objectPrototype = null)
     {
         $defaultHydratorClass = class_exists(ArraySerializableHydrator::class)
             ? ArraySerializableHydrator::class
@@ -96,6 +97,7 @@ class HydratingResultSet extends AbstractResultSet
      *
      * @return object
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         if ($this->buffer === null) {

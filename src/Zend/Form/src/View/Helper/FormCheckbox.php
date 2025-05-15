@@ -58,7 +58,7 @@ class FormCheckbox extends FormInput
 
         if ($element->useHiddenElement()) {
             $hiddenAttributes = [
-                'disabled' => isset($attributes['disabled']) ? $attributes['disabled'] : false,
+                'disabled' => $attributes['disabled'] ?? false,
                 'name'     => $attributes['name'],
                 'value'    => $element->getUncheckedValue(),
             ];

@@ -25,7 +25,7 @@ class StatementContainer implements StatementContainerInterface
      * @param string|null $sql
      * @param ParameterContainer|null $parameterContainer
      */
-    public function __construct($sql = null, ParameterContainer $parameterContainer = null)
+    public function __construct($sql = null, ?ParameterContainer $parameterContainer = null)
     {
         if ($sql) {
             $this->setSql($sql);

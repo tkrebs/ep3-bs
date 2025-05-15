@@ -18,7 +18,7 @@ final class PrefixPathStackResolver implements ResolverInterface
      *
      * @var string[]|string[][]|ResolverInterface[]
      */
-    private $prefixes = [];
+    private $prefixes;
 
     /**
      * Constructor
@@ -37,10 +37,10 @@ final class PrefixPathStackResolver implements ResolverInterface
     /**
      * {@inheritDoc}
      */
-    public function resolve($name, Renderer $renderer = null)
+    public function resolve($name, ?Renderer $renderer = null)
     {
         foreach ($this->prefixes as $prefix => & $resolver) {
-            if (strpos($name, $prefix) !== 0) {
+            if (! str_starts_with($name, $prefix)) {
                 continue;
             }
 

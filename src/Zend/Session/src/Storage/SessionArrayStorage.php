@@ -9,6 +9,8 @@
 
 namespace Zend\Session\Storage;
 
+use ReturnTypeWillChange;
+
 /**
  * Session storage in $_SESSION
  */
@@ -31,6 +33,7 @@ class SessionArrayStorage extends AbstractSessionArrayStorage
      * @param  mixed $key
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($key)
     {
         return $_SESSION[$key];

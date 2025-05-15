@@ -62,11 +62,7 @@ abstract class AbstractLocaleEntity extends AbstractEntity
      */
     public function getMetaLocale($key)
     {
-        if (isset($this->metaLocale[$key])) {
-            $locale = $this->metaLocale[$key];
-        } else {
-            $locale = null;
-        }
+        $locale = $this->metaLocale[$key] ?? null;
 
         return $locale;
     }

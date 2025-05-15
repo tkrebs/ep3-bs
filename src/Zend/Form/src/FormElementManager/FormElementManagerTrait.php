@@ -59,9 +59,7 @@ trait FormElementManagerTrait
      */
     public function getHydratorFromName($hydratorName)
     {
-        $services = isset($this->creationContext)
-            ? $this->creationContext // v3
-            : $this->serviceLocator; // v2
+        $services = $this->creationContext ?? $this->serviceLocator; // v2
 
         if ($services && $services->has('HydratorManager')) {
             $hydrators = $services->get('HydratorManager');
@@ -94,9 +92,7 @@ trait FormElementManagerTrait
      */
     public function getFactoryFromName($factoryName)
     {
-        $services = isset($this->creationContext)
-            ? $this->creationContext // v3
-            : $this->serviceLocator; // v2
+        $services = $this->creationContext ?? $this->serviceLocator; // v2
 
         if ($services && $services->has($factoryName)) {
             return $services->get($factoryName);

@@ -24,7 +24,7 @@ class HtmlQuicktime extends AbstractHtmlElement
     /**
      * Object Codebase
      */
-    const ATTRIB_CODEBASE = 'http://www.apple.com/qtactivex/qtplugin.cab';
+    const ATTRIB_CODEBASE = 'https://www.apple.com/qtactivex/qtplugin.cab';
 
     /**
      * Default attributes

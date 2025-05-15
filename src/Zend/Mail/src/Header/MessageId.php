@@ -99,19 +99,11 @@ class MessageId implements HeaderInterface
     {
         $time = time();
 
-        if (isset($_SERVER['REMOTE_ADDR'])) {
-            $user = $_SERVER['REMOTE_ADDR'];
-        } else {
-            $user = getmypid();
-        }
+        $user = $_SERVER['REMOTE_ADDR'] ?? getmypid();
 
         $rand = mt_rand();
 
-        if (isset($_SERVER["SERVER_NAME"])) {
-            $hostName = $_SERVER["SERVER_NAME"];
-        } else {
-            $hostName = php_uname('n');
-        }
+        $hostName = $_SERVER["SERVER_NAME"] ?? php_uname('n');
 
         return sha1($time . $user . $rand) . '@' . $hostName;
     }

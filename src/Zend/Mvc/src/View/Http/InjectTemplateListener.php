@@ -138,9 +138,9 @@ class InjectTemplateListener extends AbstractListenerAggregate
         foreach ($this->controllerMap as $namespace => $replacement) {
             if (// Allow disabling rule by setting value to false since config
                 // merging have no feature to remove entries
-                false == $replacement
+                ! $replacement
                 // Match full class or full namespace
-                || !($controller === $namespace || strpos($controller, $namespace . '\\') === 0)
+                || !($controller === $namespace || str_starts_with($controller, $namespace . '\\'))
             ) {
                 continue;
             }
@@ -191,7 +191,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
      */
     protected function deriveModuleNamespace($controller)
     {
-        if (!strstr($controller, '\\')) {
+        if (! str_contains($controller, '\\')) {
             return '';
         }
         $module = substr($controller, 0, strpos($controller, '\\'));
@@ -204,7 +204,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
      */
     protected function deriveControllerSubNamespace($namespace)
     {
-        if (!strstr($namespace, '\\')) {
+        if (! str_contains($namespace, '\\')) {
             return '';
         }
         $nsArray = explode('\\', $namespace);
@@ -227,12 +227,12 @@ class InjectTemplateListener extends AbstractListenerAggregate
      */
     protected function deriveControllerClass($controller)
     {
-        if (strstr($controller, '\\')) {
+        if (str_contains($controller, '\\')) {
             $controller = substr($controller, strrpos($controller, '\\') + 1);
         }
 
         if ((10 < strlen($controller))
-            && ('Controller' == substr($controller, -10))
+            && (str_ends_with($controller, 'Controller'))
         ) {
             $controller = substr($controller, 0, -10);
         }

@@ -10,7 +10,7 @@
  *
  * Should be true during initial testing and false when actually using the system.
  */
-define('EP3_BS_DEV_TAG', true);
+const EP3_BS_DEV_TAG = true;
 
 /**
  * Timezone of the people using the system

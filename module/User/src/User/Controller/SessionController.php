@@ -3,6 +3,7 @@
 namespace User\Controller;
 
 use User\Authentication\Result;
+use Zend\Authentication\Result as ResultAlias;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class SessionController extends AbstractActionController
@@ -34,7 +35,7 @@ class SessionController extends AbstractActionController
                 $loginResult = $userSessionManager->login($loginData['lf-email'], $loginData['lf-pw']);
 
                 switch ($loginResult->getCode()) {
-                    case Result::SUCCESS:
+                    case ResultAlias::SUCCESS:
 
                         $user = $loginResult->getIdentity();
 
@@ -70,11 +71,11 @@ class SessionController extends AbstractActionController
 
                         break;
 
-                    case Result::FAILURE_IDENTITY_NOT_FOUND:
-                    case Result::FAILURE_IDENTITY_AMBIGUOUS:
-                    case Result::FAILURE_CREDENTIAL_INVALID:
-                    case Result::FAILURE_UNCATEGORIZED:
-                    case Result::FAILURE:
+                    case ResultAlias::FAILURE_IDENTITY_NOT_FOUND:
+                    case ResultAlias::FAILURE_IDENTITY_AMBIGUOUS:
+                    case ResultAlias::FAILURE_CREDENTIAL_INVALID:
+                    case ResultAlias::FAILURE_UNCATEGORIZED:
+                    case ResultAlias::FAILURE:
                     default:
                         $loginMessage = 'Email address and/or password invalid';
                         break;

@@ -164,7 +164,7 @@ class Timezone extends AbstractValidator
         foreach ($types as $value) {
             if (is_int($value)) {
                 $detected |= $value;
-            } elseif (false !== ($position = array_search($value, $this->constants))) {
+            } elseif (false !== array_search($value, $this->constants)) {
                 $detected |= array_search($value, $this->constants);
             }
         }

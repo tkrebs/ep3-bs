@@ -26,10 +26,10 @@ class TranslatorServiceFactory implements FactoryInterface
     /**
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return MvcTranslator
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         // Assume that if a user has registered a service for the
         // TranslatorInterface, it must be valid

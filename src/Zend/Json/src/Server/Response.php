@@ -118,10 +118,10 @@ class Response
     /**
      * Set result error
      *
-     * @param  mixed $error
+     * @param Error|null $error
      * @return Response
      */
-    public function setError(Error $error = null)
+    public function setError(?Error $error = null)
     {
         $this->error = $error;
         return $this;

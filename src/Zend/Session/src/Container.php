@@ -9,6 +9,8 @@
 
 namespace Zend\Session;
 
+use ReturnTypeWillChange;
+
 /**
  * Session storage container
  *
@@ -25,6 +27,7 @@ class Container extends AbstractContainer
      * @param  string $key
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($key)
     {
         $ret = null;

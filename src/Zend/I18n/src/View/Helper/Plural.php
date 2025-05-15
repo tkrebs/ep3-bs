@@ -59,9 +59,7 @@ class Plural extends AbstractHelper
     public function __invoke($strings, $number)
     {
         if (null === $this->getPluralRule()) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'No plural rule was set'
-            ));
+            throw new Exception\InvalidArgumentException('No plural rule was set');
         }
 
         if (! is_array($strings)) {

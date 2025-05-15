@@ -279,7 +279,7 @@ class CreditCard extends AbstractValidator
         $foundl = false;
         foreach ($types as $type) {
             foreach ($this->cardType[$type] as $prefix) {
-                if (0 === strpos($value, $prefix)) {
+                if (str_starts_with($value, $prefix)) {
                     $foundp = true;
                     if (in_array($length, $this->cardLength[$type])) {
                         $foundl = true;
@@ -289,12 +289,12 @@ class CreditCard extends AbstractValidator
             }
         }
 
-        if ($foundp == false) {
+        if (! $foundp) {
             $this->error(self::PREFIX, $value);
             return false;
         }
 
-        if ($foundl == false) {
+        if (! $foundl) {
             $this->error(self::LENGTH, $value);
             return false;
         }
@@ -322,7 +322,7 @@ class CreditCard extends AbstractValidator
                     $this->error(self::SERVICE, $value);
                     return false;
                 }
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $this->error(self::SERVICEFAILURE, $value);
                 return false;
             }

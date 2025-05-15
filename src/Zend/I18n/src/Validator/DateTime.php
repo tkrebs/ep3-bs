@@ -277,25 +277,15 @@ class DateTime extends AbstractValidator
 
         $this->setValue($value);
 
-        try {
-            $formatter = $this->getIntlDateFormatter();
+        $formatter = $this->getIntlDateFormatter();
 
-            if (intl_is_failure($formatter->getErrorCode())) {
-                throw new ValidatorException\InvalidArgumentException($formatter->getErrorMessage());
-            }
-        } catch (IntlException $intlException) {
-            throw new ValidatorException\InvalidArgumentException($intlException->getMessage(), 0, $intlException);
+        if (intl_is_failure($formatter->getErrorCode())) {
+            throw new ValidatorException\InvalidArgumentException($formatter->getErrorMessage());
         }
 
-        try {
-            $timestamp = $formatter->parse($value);
+        $timestamp = $formatter->parse($value);
 
-            if (intl_is_failure($formatter->getErrorCode()) || $timestamp === false) {
-                $this->error(self::INVALID_DATETIME);
-                $this->invalidateFormatter = true;
-                return false;
-            }
-        } catch (IntlException $intlException) {
+        if (intl_is_failure($formatter->getErrorCode()) || $timestamp === false) {
             $this->error(self::INVALID_DATETIME);
             $this->invalidateFormatter = true;
             return false;

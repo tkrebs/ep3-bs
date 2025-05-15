@@ -135,7 +135,7 @@ class Imap
     protected function assumedNextLine($start)
     {
         $line = $this->nextLine();
-        return strpos($line, $start) === 0;
+        return str_starts_with($line, $start);
     }
 
     /**
@@ -187,7 +187,7 @@ class Imap
                 continue;
             }
             while ($token[0] == '(') {
-                array_push($stack, $tokens);
+                $stack[] = $tokens;
                 $tokens = [];
                 $token = substr($token, 1);
             }
@@ -368,7 +368,7 @@ class Imap
     public function escapeString($string)
     {
         if (func_num_args() < 2) {
-            if (strpos($string, "\n") !== false) {
+            if (str_contains($string, "\n")) {
                 return ['{' . strlen($string) . '}', $string];
             } else {
                 return '"' . str_replace(['\\', '"'], ['\\\\', '\\"'], $string) . '"';
@@ -423,7 +423,7 @@ class Imap
         if ($this->socket) {
             try {
                 $result = $this->requestAndResponse('LOGOUT', [], true);
-            } catch (Exception\ExceptionInterface $e) {
+            } catch (Exception\ExceptionInterface) {
                 // ignoring exception
             }
             fclose($this->socket);

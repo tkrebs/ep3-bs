@@ -248,7 +248,7 @@ class Mime
      */
     private static function getNextQuotedPrintableToken($str)
     {
-        if (0 === strpos($str, '=')) {
+        if (str_starts_with($str, '=')) {
             $token = substr($str, 0, 3);
         } else {
             $token = substr($str, 0, 1);

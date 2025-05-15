@@ -106,11 +106,11 @@ class Cache implements SaveHandlerInterface
     #[ReturnTypeWillChange] public function destroy($id)
     {
         $this->getCacheStorage()->getItem($id, $exists);
-        if (! (bool) $exists) {
+        if (! $exists) {
             return true;
         }
 
-        return (bool) $this->getCacheStorage()->removeItem($id);
+        return $this->getCacheStorage()->removeItem($id);
     }
 
     /**

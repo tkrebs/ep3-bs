@@ -14,7 +14,6 @@ use Zend\Mvc\Exception;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * @deprecated Since 2.7.9. The factory is now defined in zend-servicemanager-di,
@@ -29,10 +28,10 @@ class DiServiceInitializerFactory implements FactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $name
-     * @param null|array $options
+     * @param array|null $options
      * @return DiServiceInitializer
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         if (! class_exists(DiServiceInitializer::class)) {
             throw new Exception\RuntimeException(sprintf(

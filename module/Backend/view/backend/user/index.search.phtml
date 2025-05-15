@@ -4,7 +4,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/user/inde
 
 ?>
 
-<div style="padding: 10px 0px 16px 0px;">
+<div style="padding: 10px 0 16px 0;">
     <form method="get" action="<?= $this->url('backend/user') ?>">
         <table class="default-table">
             <tr>
@@ -27,7 +27,7 @@ $this->headScript()->appendFile($this->basePath('js/controller/backend/user/inde
         </table>
     </form>
 
-    <div id="usf-filters-box" class="sandbox" style="display: none; margin: 26px auto 0px auto;">
+    <div id="usf-filters-box" class="sandbox" style="display: none; margin: 26px auto 0 auto;">
         <div class="sandbox-arrow"></div>
 
         <p><?= $this->t('You can use filters like these to narrow your search:') ?></p>

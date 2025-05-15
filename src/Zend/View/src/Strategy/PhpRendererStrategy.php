@@ -83,10 +83,9 @@ class PhpRendererStrategy extends AbstractListenerAggregate
      * Select the PhpRenderer; typically, this will be registered last or at
      * low priority.
      *
-     * @param  ViewEvent $e
      * @return PhpRenderer
      */
-    public function selectRenderer(ViewEvent $e)
+    public function selectRenderer()
     {
         return $this->renderer;
     }

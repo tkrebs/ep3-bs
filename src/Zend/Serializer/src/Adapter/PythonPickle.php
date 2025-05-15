@@ -949,7 +949,7 @@ class PythonPickle extends AbstractAdapter
      */
     protected function loadString()
     {
-        $this->stack[] = $this->unquoteString((string) $this->readline());
+        $this->stack[] = $this->unquoteString($this->readline());
     }
 
     /**
@@ -963,7 +963,7 @@ class PythonPickle extends AbstractAdapter
             $bin = strrev($bin);
         }
         list(, $len)   = unpack('l', $bin);
-        $this->stack[] = (string) $this->read($len);
+        $this->stack[] = $this->read($len);
     }
 
     /**
@@ -973,7 +973,7 @@ class PythonPickle extends AbstractAdapter
     protected function loadShortBinString()
     {
         $len           = ord($this->read(1));
-        $this->stack[] = (string) $this->read($len);
+        $this->stack[] = $this->read($len);
     }
 
     /**

@@ -7,7 +7,6 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Json\Json as ZendJson;
 use Zend\Serializer\Exception;
 
 class PhpSerializeOptions extends AdapterOptions

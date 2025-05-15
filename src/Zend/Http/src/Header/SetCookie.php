@@ -8,6 +8,7 @@
 namespace Zend\Http\Header;
 
 use DateTime;
+use DateTimeInterface;
 use Zend\Uri\UriFactory;
 
 /**
@@ -150,7 +151,7 @@ class SetCookie implements MultipleHeaderInterface
             };
         }
 
-        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        [$name, $value] = GenericHeader::splitHeaderLine($headerLine);
         HeaderValue::assertValid($value);
 
         // some sites return set-cookie::value, this is to get rid of the second :
@@ -381,7 +382,7 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         if ($expires instanceof DateTime) {
-            $expires = $expires->format(DateTime::COOKIE);
+            $expires = $expires->format(DateTimeInterface::COOKIE);
         }
 
         $tsExpires = $expires;
@@ -561,7 +562,7 @@ class SetCookie implements MultipleHeaderInterface
             return false;
         }
 
-        if ($this->getPath() && (strpos($path, $this->getPath()) !== 0)) {
+        if ($this->getPath() && (! str_starts_with($path, $this->getPath()))) {
             return false;
         }
 
@@ -647,7 +648,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookiePath($cookiePath, $path)
     {
-        return (strpos($path, $cookiePath) === 0);
+        return (str_starts_with($path, $cookiePath));
     }
 
     public function toString()

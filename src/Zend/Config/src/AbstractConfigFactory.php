@@ -94,10 +94,10 @@ class AbstractConfigFactory implements AbstractFactoryInterface
      *
      * @param ContainerInterface $container
      * @param string $requestedName
-     * @param array $options
+     * @param array|null $options
      * @return string|mixed|array
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         if (isset($this->configs[$requestedName])) {
             return $this->configs[$requestedName];

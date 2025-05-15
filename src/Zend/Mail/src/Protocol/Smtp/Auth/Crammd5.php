@@ -127,10 +127,9 @@ class Crammd5 extends Smtp
      *
      * @param  string $key   Challenge key (usually password)
      * @param  string $data  Challenge data
-     * @param  int    $block Length of blocks (deprecated; unused)
      * @return string
      */
-    protected function hmacMd5($key, $data, $block = 64)
+    protected function hmacMd5($key, $data)
     {
         return Hmac::compute($key, 'md5', $data);
     }

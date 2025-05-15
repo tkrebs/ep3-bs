@@ -93,15 +93,15 @@ class RealPath extends AbstractFilter
         if (stripos(PHP_OS, 'WIN') === 0) {
             $path = preg_replace('/[\\\\\/]/', DIRECTORY_SEPARATOR, $path);
             if (preg_match('/([a-zA-Z]\:)(.*)/', $path, $matches)) {
-                list(, $drive, $path) = $matches;
+                [, $drive, $path] = $matches;
             } else {
                 $cwd   = getcwd();
                 $drive = substr($cwd, 0, 2);
-                if (strpos($path, DIRECTORY_SEPARATOR) !== 0) {
+                if (!str_starts_with($path, DIRECTORY_SEPARATOR)) {
                     $path = substr($cwd, 3) . DIRECTORY_SEPARATOR . $path;
                 }
             }
-        } elseif (strpos($path, DIRECTORY_SEPARATOR) !== 0) {
+        } elseif (!str_starts_with($path, DIRECTORY_SEPARATOR)) {
             $path = getcwd() . DIRECTORY_SEPARATOR . $path;
         }
 

@@ -41,13 +41,13 @@ trait TranslatorAwareTrait
     /**
      * Sets translator to use in helper
      *
-     * @param  Translator $translator  [optional] translator.
+     * @param Translator|null $translator  [optional] translator.
      *                                 Default is null, which sets no translator.
      * @param  string     $textDomain  [optional] text domain
      *                                 Default is null, which skips setTranslatorTextDomain
      * @return HeadTitle
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(?Translator $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
         if (null !== $textDomain) {

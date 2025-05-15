@@ -40,11 +40,7 @@ class Square extends AbstractLocaleEntity
     {
         $status = $this->need('status');
 
-        if (isset(self::$statusOptions[$status])) {
-            return self::$statusOptions[$status];
-        } else {
-            return 'Unknown';
-        }
+        return self::$statusOptions[$status] ?? 'Unknown';
     }
 
 }

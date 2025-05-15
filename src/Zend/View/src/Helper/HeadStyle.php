@@ -9,6 +9,7 @@
 
 namespace Zend\View\Helper;
 
+use ReturnTypeWillChange;
 use stdClass;
 use Zend\View;
 use Zend\View\Exception;
@@ -288,7 +289,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
                     continue;
                 }
                 if ('media' == $key) {
-                    if (false === strpos($value, ',')) {
+                    if (! str_contains($value, ',')) {
                         if (! in_array($value, $this->mediaTypes)) {
                             continue;
                         }
@@ -361,6 +362,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * @throws Exception\InvalidArgumentException
      * @return void
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($index, $value)
     {
         if (! $this->isValid($value)) {

@@ -141,8 +141,7 @@ class Connection extends AbstractConnection
         if ($useSSL && ! $socket) {
             $this->resource->ssl_set($clientKey, $clientCert, $caCert, $caPath, $cipher);
             //MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT is not valid option, needs to be set as flag
-            if (isset($p['driver_options'])
-                && isset($p['driver_options'][MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT])
+            if (isset($p['driver_options'][MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT])
             ) {
                 $flags = MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
             }
@@ -151,7 +150,7 @@ class Connection extends AbstractConnection
 
         try {
             $this->resource->real_connect($hostname, $username, $password, $database, $port, $socket, $flags);
-        } catch (GenericException $e) {
+        } catch (GenericException) {
             throw new Exception\RuntimeException(
                 'Connection error',
                 null,
@@ -255,15 +254,11 @@ class Connection extends AbstractConnection
             $this->connect();
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($sql);
-        }
+        $this->profiler?->profilerStart($sql);
 
         $resultResource = $this->resource->query($sql);
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish($sql);
-        }
+        $this->profiler?->profilerFinish($sql);
 
         // if the returnValue is something other than a mysqli_result, bypass wrapping it
         if ($resultResource === false) {

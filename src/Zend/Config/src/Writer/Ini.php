@@ -147,7 +147,7 @@ class Ini extends AbstractWriter
             return $value;
         } elseif (is_bool($value)) {
             return ($value ? 'true' : 'false');
-        } elseif (false === strpos($value, '"')) {
+        } elseif (! str_contains($value, '"')) {
             return '"' . $value .  '"';
         } else {
             throw new Exception\RuntimeException('Value can not contain double quotes');

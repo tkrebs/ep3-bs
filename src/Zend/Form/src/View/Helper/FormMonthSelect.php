@@ -67,12 +67,12 @@ class FormMonthSelect extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface $element
+     * @param ElementInterface|null $element
      * @param  int              $dateType
      * @param  null|string      $locale
      * @return FormDateSelect
      */
-    public function __invoke(ElementInterface $element = null, $dateType = IntlDateFormatter::LONG, $locale = null)
+    public function __invoke(?ElementInterface $element = null, $dateType = IntlDateFormatter::LONG, $locale = null)
     {
         if (! $element) {
             return $this;

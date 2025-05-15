@@ -8,7 +8,6 @@
 namespace Zend\Form;
 
 use Interop\Container\ContainerInterface;
-use Zend\Form\Exception;
 use Zend\Form\FormElementManager\FormElementManagerTrait;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
@@ -172,7 +171,7 @@ class FormElementManager extends AbstractPluginManager
     {
         // Provide default initializers, ensuring correct order
         array_unshift($this->initializers, [$this, 'injectFactory']);
-        array_push($this->initializers, [$this, 'callElementInit']);
+        $this->initializers[] = [ $this, 'callElementInit' ];
 
         parent::__construct($configInstanceOrParentLocator, $v3config);
     }
@@ -205,9 +204,8 @@ class FormElementManager extends AbstractPluginManager
      * Call init() on any element that implements InitializableInterface
      *
      * @param mixed $instance Instance to inspect and optionally initialize.
-     * @param ContainerInterface $container
      */
-    public function callElementInit($instance, ContainerInterface $container)
+    public function callElementInit($instance)
     {
         if ($instance instanceof InitializableInterface) {
             $instance->init();
@@ -281,7 +279,7 @@ class FormElementManager extends AbstractPluginManager
         parent::addInitializer($initializer, $topOfStack);
 
         array_unshift($this->initializers, $firstInitializer);
-        array_push($this->initializers, $lastInitializer);
+        $this->initializers[] = $lastInitializer;
 
         return $this;
     }

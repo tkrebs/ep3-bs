@@ -7,7 +7,6 @@
 
 namespace Zend\Http;
 
-use Zend\Http\Exception\RuntimeException;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\ResponseInterface;
 
@@ -259,7 +258,7 @@ class Response extends AbstractMessage implements ResponseInterface
 
         $this->version = $matches['version'];
         $this->setStatusCode($matches['status']);
-        $this->setReasonPhrase((isset($matches['reason']) ? $matches['reason'] : ''));
+        $this->setReasonPhrase(($matches['reason'] ?? ''));
     }
 
     /**
@@ -527,7 +526,7 @@ class Response extends AbstractMessage implements ResponseInterface
         $offset = 0;
 
         while (true) {
-            if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m, 0, $offset)) {
+            if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/m", $body, $m, 0, $offset)) {
                 if (trim(substr($body, $offset))) {
                     // Message was not consumed completely!
                     throw new Exception\RuntimeException(

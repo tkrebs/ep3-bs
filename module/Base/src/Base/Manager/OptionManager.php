@@ -9,6 +9,7 @@ use RuntimeException;
 use Zend\Db\Sql\Predicate\IsNull;
 use Zend\Db\Sql\Predicate\Operator;
 use Zend\Db\Sql\Predicate\Predicate;
+use Zend\Db\Sql\Predicate\PredicateSet;
 
 class OptionManager extends AbstractManager
 {
@@ -40,7 +41,7 @@ class OptionManager extends AbstractManager
         $select->where(array(
             new IsNull('locale'),
             new Operator('locale', '=', $locale),
-        ), Predicate::COMBINED_BY_OR);
+        ), PredicateSet::COMBINED_BY_OR);
 
         $select->order('locale DESC');
 
@@ -153,7 +154,7 @@ class OptionManager extends AbstractManager
 
             if ($value || is_numeric($value)) {
                 if ($type) {
-                    if (strpos($type, '\\') === false) {
+                    if (! str_contains($type, '\\')) {
                         $assertion = 'is_' . $type;
 
                         if (! $assertion($value)) {

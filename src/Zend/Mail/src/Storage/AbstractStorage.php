@@ -63,9 +63,9 @@ abstract class AbstractStorage implements
      */
     public function __get($var)
     {
-        if (strpos($var, 'has') === 0) {
+        if (str_starts_with($var, 'has')) {
             $var = strtolower(substr($var, 3));
-            return isset($this->has[$var]) ? $this->has[$var] : null;
+            return $this->has[$var] ?? null;
         }
 
         throw new Exception\InvalidArgumentException($var . ' not found');
@@ -205,7 +205,7 @@ abstract class AbstractStorage implements
             if ($this->getMessage($id)) {
                 return true;
             }
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface) {
         }
 
         return false;

@@ -122,9 +122,9 @@ class Connection extends AbstractConnection
         $isUnique = $findParameterValue(['unique']);
         $isPersistent = $findParameterValue(['persistent']);
 
-        if ($isUnique == true) {
+        if ($isUnique) {
             $this->resource = oci_new_connect($username, $password, $connectionString, $characterSet, $sessionMode);
-        } elseif ($isPersistent == true) {
+        } elseif ($isPersistent) {
             $this->resource = oci_pconnect($username, $password, $connectionString, $characterSet, $sessionMode);
         } else {
             $this->resource = oci_connect($username, $password, $connectionString, $characterSet, $sessionMode);
@@ -231,9 +231,7 @@ class Connection extends AbstractConnection
             $this->connect();
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($sql);
-        }
+        $this->profiler?->profilerStart($sql);
 
         $ociStmt = oci_parse($this->resource, $sql);
 
@@ -243,9 +241,7 @@ class Connection extends AbstractConnection
             $valid = @oci_execute($ociStmt, OCI_COMMIT_ON_SUCCESS);
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish($sql);
-        }
+        $this->profiler?->profilerFinish($sql);
 
         if ($valid === false) {
             $e = oci_error($ociStmt);

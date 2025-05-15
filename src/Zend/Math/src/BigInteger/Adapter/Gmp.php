@@ -25,7 +25,7 @@ class Gmp implements AdapterInterface
      */
     public function init($operand, $base = null)
     {
-        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (str_starts_with($operand, '-')) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         if (null === $base) {
@@ -203,7 +203,7 @@ class Gmp implements AdapterInterface
     public function intToBin($int, $twoc = false)
     {
         $nb         = chr(0);
-        $isNegative = (strpos($int, '-') === 0);
+        $isNegative = (str_starts_with($int, '-'));
         $int        = ltrim($int, '+-0');
 
         if (empty($int)) {
@@ -288,7 +288,7 @@ class Gmp implements AdapterInterface
             return gmp_strval(gmp_init($operand, $fromBase), $toBase);
         }
 
-        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (str_starts_with($operand, '-')) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         $chars = self::BASE62_ALPHABET;
@@ -311,7 +311,7 @@ class Gmp implements AdapterInterface
         // convert decimal to base
         $result = '';
         do {
-            list($decimal, $remainder) = gmp_div_qr($decimal, $toBase);
+            [$decimal, $remainder] = gmp_div_qr($decimal, $toBase);
             $pos    = gmp_strval($remainder);
             $result = $chars[$pos] . $result;
         } while (gmp_cmp($decimal, '0'));

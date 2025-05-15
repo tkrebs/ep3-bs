@@ -53,7 +53,7 @@ class Connection implements HeaderInterface
      */
     public function setPersistent($flag)
     {
-        $this->value = (bool) $flag
+        $this->value = $flag
             ? self::CONNECTION_KEEP_ALIVE
             : self::CONNECTION_CLOSE;
         return $this;

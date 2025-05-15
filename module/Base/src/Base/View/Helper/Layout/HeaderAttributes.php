@@ -15,7 +15,7 @@ class HeaderAttributes extends AbstractHelper
 
         if (is_array($misc)) {
             if (isset($misc['header'])) {
-                if ($misc['header'] == false) {
+                if (! $misc['header']) {
                     return 'style="display: none;"';
                 }
             }

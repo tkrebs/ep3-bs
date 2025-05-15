@@ -167,11 +167,10 @@ class Bcrypt implements PasswordInterface
     /**
      * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
      *
-     * @deprecated since zf 2.3 requires PHP >= 5.3.23
-     * @param bool $value
      * @return Bcrypt
+     *@deprecated since zf 2.3 requires PHP >= 5.3.23
      */
-    public function setBackwardCompatibility($value)
+    public function setBackwardCompatibility()
     {
         return $this;
     }

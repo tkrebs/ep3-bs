@@ -19,10 +19,9 @@ class Snappy implements CompressionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param null|array|\Traversable $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if snappy extension not loaded
      */
-    public function __construct($options = null)
+    public function __construct()
     {
         if (! extension_loaded('snappy')) {
             throw new Exception\ExtensionNotLoadedException('This filter needs the snappy extension');

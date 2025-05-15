@@ -293,9 +293,7 @@ class Form extends Fieldset implements FormInterface
             ));
         }
 
-        if ($this->baseFieldset !== null) {
-            $this->baseFieldset->setObject($object);
-        }
+        $this->baseFieldset?->setObject($object);
 
         $this->bindAs = $flags;
         $this->setObject($object);
@@ -315,9 +313,7 @@ class Form extends Fieldset implements FormInterface
      */
     public function setHydrator(HydratorInterface $hydrator)
     {
-        if ($this->baseFieldset !== null) {
-            $this->baseFieldset->setHydrator($hydrator);
-        }
+        $this->baseFieldset?->setHydrator($hydrator);
 
         return parent::setHydrator($hydrator);
     }
@@ -328,10 +324,10 @@ class Form extends Fieldset implements FormInterface
      * @param array $values
      * @return mixed
      */
-    public function bindValues(array $values = [], array $validationGroup = null)
+    public function bindValues(array $values = [], ?array $validationGroup = null)
     {
         if (! is_object($this->object)) {
-            if ($this->baseFieldset === null || $this->baseFieldset->allowValueBinding() == false) {
+            if ($this->baseFieldset === null || ! $this->baseFieldset->allowValueBinding()) {
                 return;
             }
         }

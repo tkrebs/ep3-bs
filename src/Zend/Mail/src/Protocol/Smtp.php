@@ -82,10 +82,10 @@ class Smtp extends AbstractProtocol
      *
      * @param  string|array $host
      * @param  null|int $port
-     * @param  null|array   $config
+     * @param array|null $config
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($host = '127.0.0.1', $port = null, array $config = null)
+    public function __construct($host = '127.0.0.1', $port = null, ?array $config = null)
     {
         // Did we receive a configuration array?
         if (is_array($host)) {
@@ -97,18 +97,10 @@ class Smtp extends AbstractProtocol
             }
 
             // Look for a host key; if none found, use default value
-            if (isset($config['host'])) {
-                $host = $config['host'];
-            } else {
-                $host = '127.0.0.1';
-            }
+            $host = $config['host'] ?? '127.0.0.1';
 
             // Look for a port key; if none found, use default value
-            if (isset($config['port'])) {
-                $port = $config['port'];
-            } else {
-                $port = null;
-            }
+            $port = $config['port'] ?? null;
         }
 
         // If we don't have a config array, initialize it
@@ -244,7 +236,7 @@ class Smtp extends AbstractProtocol
         try {
             $this->_send('EHLO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (Exception\ExceptionInterface) {
             $this->_send('HELO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
         }

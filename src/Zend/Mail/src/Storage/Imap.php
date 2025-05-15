@@ -120,7 +120,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
 
         $flags = [];
         foreach ($data['FLAGS'] as $flag) {
-            $flags[] = isset(static::$knownFlags[$flag]) ? static::$knownFlags[$flag] : $flag;
+            $flags[] = static::$knownFlags[$flag] ?? $flag;
         }
 
         return new $this->messageClass(['handler' => $this, 'id' => $id, 'headers' => $header, 'flags' => $flags]);
@@ -206,17 +206,17 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             throw new Exception\InvalidArgumentException('need at least user in params');
         }
 
-        $host     = isset($params->host) ? $params->host : 'localhost';
-        $password = isset($params->password) ? $params->password : '';
-        $port     = isset($params->port) ? $params->port : null;
-        $ssl      = isset($params->ssl) ? $params->ssl : false;
+        $host     = $params->host ?? 'localhost';
+        $password = $params->password ?? '';
+        $port     = $params->port ?? null;
+        $ssl      = $params->ssl ?? false;
 
         $this->protocol = new Protocol\Imap();
         $this->protocol->connect($host, $port, $ssl);
         if (! $this->protocol->login($params->user, $password)) {
             throw new Exception\RuntimeException('cannot login, user or password wrong');
         }
-        $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
+        $this->selectFolder($params->folder ?? 'INBOX');
     }
 
     /**
@@ -331,7 +331,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
 
         foreach ($folders as $globalName => $data) {
             do {
-                if (! $parent || strpos($globalName, $parent) === 0) {
+                if (! $parent || str_starts_with($globalName, $parent)) {
                     $pos = strrpos($globalName, $data['delim']);
                     if ($pos === false) {
                         $localName = $globalName;
@@ -340,11 +340,11 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
                     }
                     $selectable = ! $data['flags'] || ! in_array('\\Noselect', $data['flags']);
 
-                    array_push($stack, $parent);
+                    $stack[] = $parent;
                     $parent = $globalName . $data['delim'];
                     $folder = new Folder($localName, $globalName, $selectable);
                     $parentFolder->$localName = $folder;
-                    array_push($folderStack, $parentFolder);
+                    $folderStack[] = $parentFolder;
                     $parentFolder = $folder;
                     $this->delimiter = $data['delim'];
                     break;

@@ -21,10 +21,10 @@ class ConsoleExceptionStrategyFactory implements FactoryInterface
     /**
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return ExceptionStrategy
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $strategy = new ExceptionStrategy();
         $config   = $this->getConfig($container);

@@ -10,6 +10,7 @@
 namespace Zend\Db\ResultSet;
 
 use ArrayObject;
+use ReturnTypeWillChange;
 
 class ResultSet extends AbstractResultSet
 {
@@ -102,6 +103,7 @@ class ResultSet extends AbstractResultSet
     /**
      * @return array|\ArrayObject|null
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         $data = parent::current();

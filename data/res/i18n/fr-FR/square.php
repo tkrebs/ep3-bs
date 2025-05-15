@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'This %s is already occupied' => 'Ce %s est dèjà occupé',
     '%sNote:%s Please read and accept the "%s".' => '%sAttention:%s Lire et accepter "%s".',
@@ -109,4 +109,4 @@ return array(
     'and email address' => 'et Adresse: E-Mail',
     'and phone number' => ' - tel:',
 
-);
+];

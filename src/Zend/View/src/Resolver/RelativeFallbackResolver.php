@@ -42,7 +42,7 @@ class RelativeFallbackResolver implements ResolverInterface
     /**
      * {@inheritDoc}
      */
-    public function resolve($name, RendererInterface $renderer = null)
+    public function resolve($name, ?RendererInterface $renderer = null)
     {
         $plugin = [$renderer, 'plugin'];
 

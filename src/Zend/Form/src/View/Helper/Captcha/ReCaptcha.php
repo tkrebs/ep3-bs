@@ -21,10 +21,10 @@ class ReCaptcha extends FormInput
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface $element
+     * @param ElementInterface|null $element
      * @return string
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(?ElementInterface $element = null)
     {
         if (! $element) {
             return $this;
@@ -42,7 +42,7 @@ class ReCaptcha extends FormInput
      */
     public function render(ElementInterface $element)
     {
-        $attributes = $element->getAttributes();
+        $element->getAttributes();
         $captcha = $element->getCaptcha();
 
         if ($captcha === null || ! $captcha instanceof CaptchaAdapter) {
@@ -69,12 +69,9 @@ class ReCaptcha extends FormInput
      * are deprecated.
      *
      * @param  string $name
-     * @param  string $challengeId @deprecated
-     * @param  string $responseName @deprecated
-     * @param  string $responseId @deprecated
      * @return string
      */
-    protected function renderHiddenInput($name, $challengeId = '', $responseName = '', $responseId = '')
+    protected function renderHiddenInput($name)
     {
         if ($name === 'g-recaptcha-response') {
             return '';
@@ -94,13 +91,11 @@ class ReCaptcha extends FormInput
     /**
      * No longer used with v2 of Recaptcha API
      *
+     * @return string
      * @deprecated
      *
-     * @param  string $challengeId
-     * @param  string $responseId
-     * @return string
      */
-    protected function renderJsEvents($challengeId, $responseId)
+    protected function renderJsEvents()
     {
         return '';
     }

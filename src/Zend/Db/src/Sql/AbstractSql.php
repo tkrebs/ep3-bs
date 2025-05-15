@@ -37,7 +37,7 @@ abstract class AbstractSql implements SqlInterface
     /**
      * {@inheritDoc}
      */
-    public function getSqlString(PlatformInterface $adapterPlatform = null)
+    public function getSqlString(?PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new DefaultAdapterPlatform;
         return $this->buildSqlString($adapterPlatform);
@@ -45,14 +45,14 @@ abstract class AbstractSql implements SqlInterface
 
     /**
      * @param PlatformInterface $platform
-     * @param null|DriverInterface $driver
-     * @param null|ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @return string
      */
     protected function buildSqlString(
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         $this->localizeVariables();
 
@@ -99,8 +99,8 @@ abstract class AbstractSql implements SqlInterface
      * @staticvar int $runtimeExpressionPrefix
      * @param ExpressionInterface $expression
      * @param PlatformInterface $platform
-     * @param null|DriverInterface $driver
-     * @param null|ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @param null|string $namedParameterPrefix
      * @return string
      * @throws Exception\RuntimeException
@@ -108,8 +108,8 @@ abstract class AbstractSql implements SqlInterface
     protected function processExpression(
         ExpressionInterface $expression,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null,
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null,
         $namedParameterPrefix = null
     ) {
         $namedParameterPrefix = ! $namedParameterPrefix
@@ -159,7 +159,7 @@ abstract class AbstractSql implements SqlInterface
             // Process values and types (the middle and last position of the
             // expression data)
             $values = $part[1];
-            $types = isset($part[2]) ? $part[2] : [];
+            $types = $part[2] ?? [];
             foreach ($values as $vIndex => $value) {
                 if (! isset($types[$vIndex])) {
                     continue;
@@ -275,15 +275,15 @@ abstract class AbstractSql implements SqlInterface
     /**
      * @param Select $subselect
      * @param PlatformInterface $platform
-     * @param null|DriverInterface $driver
-     * @param null|ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @return string
      */
     protected function processSubSelect(
         Select $subselect,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if ($this instanceof PlatformDecoratorInterface) {
             $decorator = clone $this;
@@ -313,8 +313,8 @@ abstract class AbstractSql implements SqlInterface
     /**
      * @param Join[] $joins
      * @param PlatformInterface $platform
-     * @param null|DriverInterface $driver
-     * @param null|ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @return null|string[] Null if no joins present, array of JOIN statements
      *     otherwise
      * @throws Exception\InvalidArgumentException for invalid JOIN table names.
@@ -322,8 +322,8 @@ abstract class AbstractSql implements SqlInterface
     protected function processJoin(
         Join $joins,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         if (! $joins->count()) {
             return;
@@ -392,16 +392,16 @@ abstract class AbstractSql implements SqlInterface
     /**
      * @param null|array|ExpressionInterface|Select $column
      * @param PlatformInterface $platform
-     * @param null|DriverInterface $driver
+     * @param DriverInterface|null $driver
      * @param null|string $namedParameterPrefix
-     * @param null|ParameterContainer $parameterContainer
+     * @param ParameterContainer|null $parameterContainer
      * @return string
      */
     protected function resolveColumnValue(
         $column,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null,
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null,
         $namedParameterPrefix = null
     ) {
         $namedParameterPrefix = ! $namedParameterPrefix
@@ -436,19 +436,19 @@ abstract class AbstractSql implements SqlInterface
     /**
      * @param string|TableIdentifier|Select $table
      * @param PlatformInterface $platform
-     * @param DriverInterface $driver
-     * @param ParameterContainer $parameterContainer
+     * @param DriverInterface|null $driver
+     * @param ParameterContainer|null $parameterContainer
      * @return string
      */
     protected function resolveTable(
         $table,
         PlatformInterface $platform,
-        DriverInterface $driver = null,
-        ParameterContainer $parameterContainer = null
+        ?DriverInterface $driver = null,
+        ?ParameterContainer $parameterContainer = null
     ) {
         $schema = null;
         if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
+            [$table, $schema] = $table->getTableAndSchema();
         }
 
         if ($table instanceof Select) {

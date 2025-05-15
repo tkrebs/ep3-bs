@@ -50,17 +50,13 @@ class Simple implements RouteInterface
      * @param  array                                    $constraints
      * @param  array                                    $defaults
      * @param  array                                    $aliases
-     * @param  null|array|Traversable|FilterChain       $filters
-     * @param  null|array|Traversable|ValidatorChain    $validators
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
         $routeOrRouteMatcher,
         array $constraints = [],
         array $defaults = [],
-        array $aliases = [],
-        $filters = null,
-        $validators = null
+        array $aliases = []
     ) {
         if (is_string($routeOrRouteMatcher)) {
             $this->matcher = new DefaultRouteMatcher($routeOrRouteMatcher, $constraints, $defaults, $aliases);
@@ -116,9 +112,7 @@ class Simple implements RouteInterface
             $options['route'],
             $options['constraints'],
             $options['defaults'],
-            $options['aliases'],
-            $options['filters'],
-            $options['validators']
+            $options['aliases']
         );
     }
 

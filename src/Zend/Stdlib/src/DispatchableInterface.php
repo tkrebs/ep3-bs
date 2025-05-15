@@ -15,8 +15,8 @@ interface DispatchableInterface
      * Dispatch a request
      *
      * @param RequestInterface $request
-     * @param null|ResponseInterface $response
+     * @param ResponseInterface|null $response
      * @return Response|mixed
      */
-    public function dispatch(RequestInterface $request, ResponseInterface $response = null);
+    public function dispatch(RequestInterface $request, ?ResponseInterface $response = null);
 }

@@ -25,10 +25,10 @@ class RouterFactory implements FactoryInterface
      *
      * @param  ContainerInterface $container
      * @param  string $name
-     * @param  null|array $options
+     * @param array|null $options
      * @return RouteStackInterface
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         // Console environment?
         if ($name === 'ConsoleRouter'                                   // force console router

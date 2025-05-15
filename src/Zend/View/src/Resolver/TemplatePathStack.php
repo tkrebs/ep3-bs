@@ -278,11 +278,11 @@ class TemplatePathStack implements ResolverInterface
      * Retrieve the filesystem path to a view script
      *
      * @param  string $name
-     * @param  null|Renderer $renderer
+     * @param Renderer|null $renderer
      * @return string
      * @throws Exception\DomainException
      */
-    public function resolve($name, Renderer $renderer = null)
+    public function resolve($name, ?Renderer $renderer = null)
     {
         $this->lastLookupFailure = false;
 
@@ -307,7 +307,7 @@ class TemplatePathStack implements ResolverInterface
             $file = new SplFileInfo($path . $name);
             if ($file->isReadable()) {
                 // Found! Return it.
-                if (($filePath = $file->getRealPath()) === false && 0 === strpos($path, 'phar://')) {
+                if (($filePath = $file->getRealPath()) === false && str_starts_with($path, 'phar://')) {
                     // Do not try to expand phar paths (realpath + phars == fail)
                     $filePath = $path . $name;
                     if (! file_exists($filePath)) {

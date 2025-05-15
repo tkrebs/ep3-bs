@@ -15,7 +15,6 @@ use Zend\Filter\FilterChain;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\Exception;
 use Zend\View\HelperPluginManager;
-use Zend\View\Helper\AbstractHelper;
 use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Resolver\ResolverInterface as Resolver;
@@ -75,22 +74,11 @@ use Zend\View\Variables;
  */
 class PhpRenderer implements Renderer, TreeRendererInterface
 {
-    /**
-     * @var string Rendered content
-     */
-    private $__content = '';
 
     /**
      * @var bool Whether or not to render trees of view models
      */
     private $__renderTrees = false;
-
-    /**
-     * Template being rendered
-     *
-     * @var null|string
-     */
-    private $__template = null;
 
     /**
      * Queue of templates to render
@@ -104,13 +92,6 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      * @var Resolver
      */
     private $__templateResolver;
-
-    /**
-     * Script file name to execute
-     *
-     * @var string
-     */
-    private $__file = null;
 
     /**
      * Helper plugin manager
@@ -143,9 +124,8 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      * @todo handle passing filter chain, options
      * @todo handle passing variables object, options
      * @todo handle passing resolver object, options
-     * @param array $config Configuration key-value pairs.
      */
-    public function __construct($config = [])
+    public function __construct()
     {
         $this->init();
     }
@@ -368,11 +348,11 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      * Get plugin instance
      *
      * @param  string     $name Name of plugin to return
-     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @param array|null $options Options to pass to plugin constructor (if not already instantiated)
      *
      * @return object
      */
-    public function plugin($name, array $options = null)
+    public function plugin($name, ?array $options = null)
     {
         return $this->getHelperPluginManager()->get($name, $options);
     }
@@ -492,32 +472,32 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
 
-        $this->__content = '';
-        while ($this->__template = array_pop($this->__templates)) {
-            $this->__file = $this->resolver($this->__template);
-            if (! $this->__file) {
+        $__content = '';
+        $__content = '';
+        $__template = null;
+        while ($__template = array_pop($this->__templates)) {
+            $__file = null;
+            $__file = $this->resolver($__template);
+            if (! $__file) {
                 throw new Exception\RuntimeException(sprintf(
                     '%s: Unable to render template "%s"; resolver could not resolve to a file',
                     __METHOD__,
-                    $this->__template
+                    $__template
                 ));
             }
             try {
                 ob_start();
-                $includeReturn = include $this->__file;
-                $this->__content = ob_get_clean();
+                $includeReturn = include $__file;
+                $__content = ob_get_clean();
             } catch (\Throwable $ex) {
                 ob_end_clean();
                 throw $ex;
-            } catch (\Exception $ex) { // @TODO clean up once PHP 7 requirement is enforced
-                ob_end_clean();
-                throw $ex;
             }
-            if ($includeReturn === false && empty($this->__content)) {
+            if ($includeReturn === false && empty($__content)) {
                 throw new Exception\UnexpectedValueException(sprintf(
                     '%s: Unable to render template "%s"; file include failed',
                     __METHOD__,
-                    $this->__file
+                    $__file
                 ));
             }
         }
@@ -525,10 +505,10 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         $this->setVars(array_pop($this->__varsCache));
 
         if ($this->__filterChain instanceof FilterChain) {
-            return $this->__filterChain->filter($this->__content); // filter output
+            return $this->__filterChain->filter($__content); // filter output
         }
 
-        return $this->__content;
+        return $__content;
     }
 
     /**

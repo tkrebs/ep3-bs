@@ -85,7 +85,7 @@ class Connection extends AbstractConnection
 
         if ($invalidConectionType) {
             throw new Exception\InvalidArgumentException(
-                'Connection type is not valid. (See: http://php.net/manual/en/function.pg-connect.php)'
+                'Connection type is not valid. (See: https://php.net/manual/en/function.pg-connect.php)'
             );
         }
         $this->type = $type;
@@ -104,7 +104,7 @@ class Connection extends AbstractConnection
         }
 
         $result = pg_query($this->resource, 'SELECT CURRENT_SCHEMA AS "currentschema"');
-        if ($result == false) {
+        if (! $result) {
             return;
         }
 
@@ -241,15 +241,11 @@ class Connection extends AbstractConnection
             $this->connect();
         }
 
-        if ($this->profiler) {
-            $this->profiler->profilerStart($sql);
-        }
+        $this->profiler?->profilerStart($sql);
 
         $resultResource = pg_query($this->resource, $sql);
 
-        if ($this->profiler) {
-            $this->profiler->profilerFinish($sql);
-        }
+        $this->profiler?->profilerFinish($sql);
 
         // if the returnValue is something other than a pg result resource, bypass wrapping it
         if ($resultResource === false) {
@@ -305,7 +301,7 @@ class Connection extends AbstractConnection
             'password' => $findParameterValue(['password', 'passwd', 'pw']),
             'dbname'   => $findParameterValue(['database', 'dbname', 'db', 'schema']),
             'port'     => isset($p['port']) ? (int) $p['port'] : null,
-            'socket'   => isset($p['socket']) ? $p['socket'] : null,
+            'socket'   => $p['socket'] ?? null,
         ];
 
         return urldecode(http_build_query(array_filter($connectionParameters), null, ' '));

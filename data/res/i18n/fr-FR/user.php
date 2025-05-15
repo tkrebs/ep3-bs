@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'You are not logged in (anymore)' => 'Désolé vous n\'êtes plus connecté',
     'You have no permission for this' => 'Désolé vous n\'avez pas la permission pour cela',
@@ -257,4 +257,4 @@ return array(
     'Sincerely' => 'Meilleures',
     'Your' => 'salutations',
 
-);
+];

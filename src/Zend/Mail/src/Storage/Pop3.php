@@ -31,7 +31,7 @@ class Pop3 extends AbstractStorage
         $count  = 0; // "Declare" variable before first usage.
         $octets = 0; // "Declare" variable since it's passed by reference
         $this->protocol->status($count, $octets);
-        return (int) $count;
+        return $count;
     }
 
     /**
@@ -139,10 +139,10 @@ class Pop3 extends AbstractStorage
             throw new Exception\InvalidArgumentException('need at least user in params');
         }
 
-        $host     = isset($params->host) ? $params->host : 'localhost';
-        $password = isset($params->password) ? $params->password : '';
-        $port     = isset($params->port) ? $params->port : null;
-        $ssl      = isset($params->ssl) ? $params->ssl : false;
+        $host     = $params->host ?? 'localhost';
+        $password = $params->password ?? '';
+        $port     = $params->port ?? null;
+        $ssl      = $params->ssl ?? false;
 
         $this->protocol = new Protocol\Pop3();
         $this->protocol->connect($host, $port, $ssl);
@@ -253,7 +253,7 @@ class Pop3 extends AbstractStorage
                 // need to make a real call, because not all server are honest in their capas
                 try {
                     $this->protocol->top(1, 0, false);
-                } catch (MailException\ExceptionInterface $e) {
+                } catch (MailException\ExceptionInterface) {
                     // ignoring error
                 }
             }
@@ -265,7 +265,7 @@ class Pop3 extends AbstractStorage
             $id = null;
             try {
                 $id = $this->protocol->uniqueid(1);
-            } catch (MailException\ExceptionInterface $e) {
+            } catch (MailException\ExceptionInterface) {
                 // ignoring error
             }
             $this->has['uniqueid'] = (bool) $id;

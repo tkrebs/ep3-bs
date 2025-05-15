@@ -85,10 +85,10 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
      * Resolve a template/pattern name to a resource the renderer can consume
      *
      * @param  string $name
-     * @param  null|Renderer $renderer
+     * @param Renderer|null $renderer
      * @return false|string
      */
-    public function resolve($name, Renderer $renderer = null)
+    public function resolve($name, ?Renderer $renderer = null)
     {
         $this->lastLookupFailure      = false;
         $this->lastSuccessfulResolver = null;

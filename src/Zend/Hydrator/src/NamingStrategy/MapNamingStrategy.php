@@ -31,9 +31,9 @@ class MapNamingStrategy implements NamingStrategyInterface
      * Initialize.
      *
      * @param array $mapping Map for name conversion on hydration
-     * @param array $reverse Reverse map for name conversion on extraction
+     * @param array|null $reverse Reverse map for name conversion on extraction
      */
-    public function __construct(array $mapping, array $reverse = null)
+    public function __construct(array $mapping, ?array $reverse = null)
     {
         $this->mapping = $mapping;
         $this->reverse = $reverse ?: $this->flipMapping($mapping);

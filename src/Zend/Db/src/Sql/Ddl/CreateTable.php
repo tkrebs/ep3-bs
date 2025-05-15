@@ -132,11 +132,11 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param PlatformInterface|null $adapterPlatform
      *
      * @return string[]
      */
-    protected function processTable(PlatformInterface $adapterPlatform = null)
+    protected function processTable(?PlatformInterface $adapterPlatform = null)
     {
         return [
             $this->isTemporary ? 'TEMPORARY ' : '',
@@ -145,11 +145,11 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param PlatformInterface|null $adapterPlatform
      *
      * @return string[][]|null
      */
-    protected function processColumns(PlatformInterface $adapterPlatform = null)
+    protected function processColumns(?PlatformInterface $adapterPlatform = null)
     {
         if (! $this->columns) {
             return;
@@ -165,11 +165,10 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
      *
      * @return array|string
      */
-    protected function processCombinedby(PlatformInterface $adapterPlatform = null)
+    protected function processCombinedby()
     {
         if ($this->constraints && $this->columns) {
             return $this->specifications['combinedBy'];
@@ -177,11 +176,11 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param PlatformInterface|null $adapterPlatform
      *
      * @return string[][]|null
      */
-    protected function processConstraints(PlatformInterface $adapterPlatform = null)
+    protected function processConstraints(?PlatformInterface $adapterPlatform = null)
     {
         if (! $this->constraints) {
             return;
@@ -197,11 +196,10 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
      *
      * @return string[]
      */
-    protected function processStatementEnd(PlatformInterface $adapterPlatform = null)
+    protected function processStatementEnd()
     {
         return ["\n)"];
     }

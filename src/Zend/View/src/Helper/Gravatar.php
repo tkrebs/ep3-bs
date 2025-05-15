@@ -19,7 +19,7 @@ class Gravatar extends AbstractHtmlElement
     /**
      * URL to gravatar service
      */
-    const GRAVATAR_URL = 'http://www.gravatar.com/avatar';
+    const GRAVATAR_URL = 'https://www.gravatar.com/avatar';
     /**
      * Secure URL to gravatar service
      */

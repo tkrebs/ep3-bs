@@ -9,6 +9,7 @@
 
 namespace Zend\View\Helper;
 
+use ReturnTypeWillChange;
 use stdClass;
 use Zend\View;
 use Zend\View\Exception;
@@ -386,6 +387,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string     $value
      * @throws Exception\InvalidArgumentException
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($index, $value)
     {
         if (! $this->isValid($value)) {
@@ -403,6 +405,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string|int $index
      * @throws Exception\InvalidArgumentException
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset($index)
     {
         if (! in_array($index, $this->getContainer()->getKeys())) {

@@ -41,14 +41,14 @@ class FormDateTimeSelect extends FormDateSelectHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param ElementInterface $element
+     * @param ElementInterface|null $element
      * @param int              $dateType
      * @param int|null|string  $timeType
      * @param null|string      $locale
      * @return string
      */
     public function __invoke(
-        ElementInterface $element = null,
+        ?ElementInterface $element = null,
         $dateType = IntlDateFormatter::LONG,
         $timeType = IntlDateFormatter::LONG,
         $locale = null
@@ -209,7 +209,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
         foreach ($pregResult as $value) {
             if (stripos($value, "'") === false && stripos($value, 'd') !== false) {
                 $result['day'] = $value;
-            } elseif (stripos($value, "'") === false && strpos($value, 'M') !== false) {
+            } elseif (stripos($value, "'") === false && str_contains($value, 'M')) {
                 $result['month'] = $value;
             } elseif (stripos($value, "'") === false && stripos($value, 'y') !== false) {
                 $result['year'] = $value;
@@ -217,7 +217,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
                 $result['hour'] = $value;
             } elseif (stripos($value, "'") === false && stripos($value, 'm') !== false) {
                 $result['minute'] = $value;
-            } elseif (stripos($value, "'") === false && strpos($value, 's') !== false) {
+            } elseif (stripos($value, "'") === false && str_contains($value, 's')) {
                 $result['second'] = $value;
             } elseif (stripos($value, "'") === false && stripos($value, 'a') !== false) {
                 // ignore ante/post meridiem marker

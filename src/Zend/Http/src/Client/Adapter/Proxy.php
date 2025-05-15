@@ -236,7 +236,7 @@ class Proxy extends Socket
         $gotStatus = false;
         ErrorHandler::start();
         while ($line = fgets($this->socket)) {
-            $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
+            $gotStatus = $gotStatus || (str_contains($line, 'HTTP'));
             if ($gotStatus) {
                 $response .= $line;
                 if (! rtrim($line)) {
@@ -263,7 +263,6 @@ class Proxy extends Socket
             STREAM_CRYPTO_METHOD_SSLv2_CLIENT,
         ];
 
-        $success = false;
         foreach ($modes as $mode) {
             $success = stream_socket_enable_crypto($this->socket, true, $mode);
             if ($success) {

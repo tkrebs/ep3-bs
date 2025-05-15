@@ -66,7 +66,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         $cipherType = $cipherPluginManager->has('openssl') ? 'openssl' : 'mcrypt';
         try {
             $this->blockCipher = CryptBlockCipher::factory($cipherType, $this->encryption);
-        } catch (SymmetricException\RuntimeException $e) {
+        } catch (SymmetricException\RuntimeException) {
             throw new Exception\RuntimeException(sprintf(
                 'The BlockCipher cannot be used without the %s extension',
                 $cipherType
@@ -127,7 +127,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         if (isset($options['algorithm'])) {
             try {
                 $this->blockCipher->setCipherAlgorithm($options['algorithm']);
-            } catch (CryptException\InvalidArgumentException $e) {
+            } catch (CryptException\InvalidArgumentException) {
                 throw new Exception\InvalidArgumentException(
                     "The algorithm '{$options['algorithm']}' is not supported"
                 );
@@ -137,7 +137,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         if (isset($options['hash'])) {
             try {
                 $this->blockCipher->setHashAlgorithm($options['hash']);
-            } catch (CryptException\InvalidArgumentException $e) {
+            } catch (CryptException\InvalidArgumentException) {
                 throw new Exception\InvalidArgumentException("The algorithm '{$options['hash']}' is not supported");
             }
         }
