@@ -30,7 +30,7 @@ data/docs/
 The system is based on the well-known LAMP stack (Linux, Apache 2, MySQL 5+, PHP 8.1+) and the powerful
 [Zend Framework 2](http://framework.zend.com/) (2.5).
 
-Since version 1.8.0, it is compatible with (and requires) PHP version 8.1 or higher.
+As of version 1.9.0, it requires at least PHP 8.1 and is compatible and tested with up to PHP 8.4. 
 
 Dependencies are managed with [Composer](https://getcomposer.org/).
 
@@ -46,7 +46,9 @@ where you can find stable and (latest) development releases.
 
 ## Versions
 
-The current version is 1.8.1 from November 2022.
+The current version is 1.9.0 from May 2025.
+
+Version 1.9.0 applied IDE inspections for PHP 8.4 compatibility.
 
 Version 1.8.1 fixes an email sending related bug.
 
