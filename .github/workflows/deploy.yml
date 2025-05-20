@@ -17,6 +17,7 @@ jobs:
 
       - name: Install Composer Dependencies
         run: |
+          php -r "copy('https://getcomposer.org/composer.phar', 'composer.phar');"
           php composer.phar install --ignore-platform-reqs
 
       - name: Deploy via FTP
