@@ -1,10 +1,6 @@
 name: Deploy ep3-bs application
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   deploy:
