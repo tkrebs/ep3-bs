@@ -31,9 +31,20 @@ jobs:
         with:
           server: ${{ secrets.FTP_SERVER }}
           port: ${{ secrets.FTP_PORT }}
-          protocol: ftp
+          protocol: sftp
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
           dry-run: ${{ github.event.inputs.dry_run }}
           timeout: 3600000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/config/**
+            **/data/**
+            **/module/**
+            **/modulex/**
+            **/nginx/**
+            **/public/**
+            **/src/**
+            **/vendor/**
