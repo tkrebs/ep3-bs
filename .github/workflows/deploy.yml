@@ -40,8 +40,6 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
-            **/module/**
-            **/modulex/**
             **/nginx/**
             **/public/**
             **/src/**
