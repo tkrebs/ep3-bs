@@ -40,8 +40,5 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
-            **/nginx/**
-            **/public/**
-            **/src/**
             **/vendor/**
             **/composer.phar
