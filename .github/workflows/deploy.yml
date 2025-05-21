@@ -39,9 +39,6 @@ jobs:
           timeout: 3600000
           exclude: |
             **/.git*
-            **/.git*/**
-            **/module/**/src            
-            **/nginx/**
-            **/public/**
+            **/.git*/**        
             **/vendor/**
             **/composer.phar
