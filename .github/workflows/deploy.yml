@@ -40,6 +40,5 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**        
-            **/vendor/**
             **/composer.phar
             public/imgs-client/layout/logo.png
