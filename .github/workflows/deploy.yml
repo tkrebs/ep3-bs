@@ -36,4 +36,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
           dry-run: ${{ github.event.inputs.dry_run }}
-          timeout: 60000
+          timeout: 600000
