@@ -48,3 +48,4 @@ jobs:
             **/public/**
             **/src/**
             **/vendor/**
+            **/composer.phar/**
