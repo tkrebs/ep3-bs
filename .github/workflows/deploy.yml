@@ -1,6 +1,12 @@
 name: Deploy ep3-bs application
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Set to true for dry run, false for actual deployment'
+        required: false
+        default: 'true'
 
 jobs:
   deploy:
@@ -29,4 +35,4 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          dry-run: true
+          dry-run: ${{ github.event.inputs.dry_run }}
