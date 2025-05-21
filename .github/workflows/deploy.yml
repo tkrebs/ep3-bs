@@ -42,5 +42,3 @@ jobs:
             **/.git*/**        
             **/vendor/**
             **/composer.phar
-            **/public/imgs-client/**
-            **/public/imgs/**
