@@ -41,4 +41,3 @@ jobs:
             **/.git*
             **/.git*/**        
             **/composer.phar
-            public/imgs-client/layout/logo.png
