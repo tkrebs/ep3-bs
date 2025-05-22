@@ -26,6 +26,9 @@ return [
     'Weekly' => 'Wöchentlich',
     'Every 2 weeks' => 'Alle 2 Wochen',
     'Monthly' => 'Monatlich',
+    'until' => 'bis zum',
+    'This booking repeats:' => 'Dies ist eine wiederkehrende Buchung:',
+    'This booking was a repeat booking: ' => 'Dies war eine wiederkehrende Buchung: ',
 
     'Ambiguous user name "%s" passed (multiple users under this name)'
         => 'Es gibt mehrere Benutzer mit dem Namen "%s"',
