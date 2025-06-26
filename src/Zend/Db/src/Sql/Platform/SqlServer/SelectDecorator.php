@@ -52,8 +52,8 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         PlatformInterface $platform,
         ?DriverInterface $driver = null,
         ?ParameterContainer $parameterContainer = null,
-        &$sqls,
-        &$parameters
+        &$sqls = [],
+        &$parameters = [],
     ) {
         if ($this->limit === null && $this->offset === null) {
             return;
