@@ -20,6 +20,7 @@ use Zend\Stdlib\RequestInterface as Request;
 /**
  * Part route.
  */
+#[\AllowDynamicProperties]
 class Part extends TreeRouteStack implements RouteInterface
 {
     /**
