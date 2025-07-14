@@ -122,7 +122,7 @@ class BookingService extends AbstractService
                 $transaction = false;
             }
 
-            $this->getEventManager()->trigger('create.single', $booking);
+            $this->getEventManager()->trigger('create.booking', $booking);
 
             return $booking;
 
@@ -141,7 +141,7 @@ class BookingService extends AbstractService
 
         $this->bookingManager->save($booking);
 
-        $this->getEventManager()->trigger('cancel.single', $booking);
+        $this->getEventManager()->trigger('cancel.booking', $booking);
 
         return $booking;
     }
