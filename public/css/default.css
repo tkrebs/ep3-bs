@@ -173,7 +173,7 @@ a#logo:active { top: 1px; }
 
 @media (max-width: 512px) {
     #topbar {
-        margin-top: 0;
+        margin-top: 90px;
         text-align: center;
     }
 
