@@ -209,15 +209,22 @@ class TimeBlockChoice extends AbstractHelper
         $html .= '<select id="' . $id . '" style="margin-left: 8px;">';
 
         for ($walkingTime = $timeStart; $walkingTime < $timeEnd; $walkingTime += $timeBlockBookable) {
-            $walkingTimeFormat = gmdate('H:i', $walkingTime);
 
-            if ($walkingTimeFormat == $timeNow->format('H:i')) {
+            $timeToDisplay = $walkingTime;
+
+            if ($id == 'sb-time-end-choice') {
+                $timeToDisplay = $walkingTime + $timeBlockBookable;
+            }
+
+            $timeFormat = gmdate('H:i', $walkingTime);
+
+            if ($timeFormat == $timeNow->format('H:i')) {
                 $attr = 'selected="selected"';
             } else {
                 $attr = null;
             }
 
-            $html .= '<option value="' . $walkingTimeFormat . '" ' . $attr . '>' . $view->timeFormat($walkingTime, true, 'UTC') . '</option>';
+            $html .= '<option value="' . $timeFormat . '" ' . $attr . '>' . $view->timeFormat($timeToDisplay, true, 'UTC') . '</option>';
         }
 
         $html .= '</select>';
