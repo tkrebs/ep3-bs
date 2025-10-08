@@ -8,6 +8,7 @@ use Base\View\Helper\DateRange;
 use Booking\Manager\ReservationManager;
 use Square\Manager\SquareManager;
 use User\Manager\UserManager;
+use User\Entity\User;
 use User\Service\MailService as UserMailService;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\Event;
@@ -46,19 +47,39 @@ class NotificationListener extends AbstractListenerAggregate
 
     public function attach(EventManagerInterface $events)
     {
-        $events->attach('create.single', array($this, 'onCreateSingle'));
-        $events->attach('cancel.single', array($this, 'onCancelSingle'));
+        $events->attach('create.booking', array($this, 'onCreate'));
+        $events->attach('cancel.booking', array($this, 'onCancel'));
     }
 
-    public function onCreateSingle(Event $event)
+    public function validateUser(User $user)
+    {
+        if($user->get('email', null) == null)
+            return false;
+
+        //need to check if we are admins or assists and want to receive notifications
+        if($user->getStatus() == 'Admin' || $user->getStatus() == 'Assist')
+            if(!$this->optionManager->get('client.contact.email.admin-notifications'))
+                return false;
+
+        return true;
+    }
+
+    public function onCreate(Event $event)
     {
         $booking = $event->getTarget();
-        $reservation = current($booking->getExtra('reservations'));
         $square = $this->squareManager->get($booking->need('sid'));
         $user = $this->userManager->get($booking->need('uid'));
-
+ 
         $dateFormatHelper = $this->dateFormatHelper;
         $dateRangerHelper = $this->dateRangeHelper;
+
+        if(!$this->validateUser($user))
+            return;
+
+        $reservationArray = $this->reservationManager->getBy(['bid' => $booking->need('bid')], 'date ASC');
+ 
+        //for single bookins we only have one reservation, so array will have one element, need to get the first
+        $reservation = reset($reservationArray);
 
 	    $reservationTimeStart = explode(':', $reservation->need('time_start'));
         $reservationTimeEnd = explode(':', $reservation->need('time_end'));
@@ -78,6 +99,15 @@ class NotificationListener extends AbstractListenerAggregate
             $square->need('name'),
             $dateRangerHelper($reservationStart, $reservationEnd));
 
+        if($booking->getMeta('repeat')) {
+            $lastReservation = end($reservationArray);
+            $reservationEnd = new \DateTime($lastReservation->need('date'));
+
+            $message .= "\n".$this->t("This booking repeats:")."\n";
+            $message .= $this->t($booking->getRepeat())." ".$this->t("until")." ";
+            $message .= $dateFormatHelper($reservationEnd, \IntlDateFormatter::MEDIUM, \IntlDateFormatter::NONE).".";
+        }
+        
         $playerNames = $booking->getMeta('player-names');
 
         if ($playerNames) {
@@ -115,13 +145,17 @@ class NotificationListener extends AbstractListenerAggregate
         }
     }
 
-    public function onCancelSingle(Event $event)
+    public function onCancel(Event $event)
     {
         $booking = $event->getTarget();
-        $reservations = $this->reservationManager->getBy(['bid' => $booking->need('bid')], 'date ASC', 1);
+        $reservations = $this->reservationManager->getBy(['bid' => $booking->need('bid')], 'date ASC');
         $reservation = current($reservations);
+        $lastReservation = end($reservations);
         $square = $this->squareManager->get($booking->need('sid'));
         $user = $this->userManager->get($booking->need('uid'));
+
+        if(!$this->validateUser($user))
+            return;
 
         $dateRangerHelper = $this->dateRangeHelper;
 
@@ -131,7 +165,13 @@ class NotificationListener extends AbstractListenerAggregate
         $reservationStart = new \DateTime($reservation->need('date'));
         $reservationStart->setTime($reservationTimeStart[0], $reservationTimeStart[1]);
 
-        $reservationEnd = new \DateTime($reservation->need('date'));
+        if($booking->getMeta('repeat')) {
+            $reservationEnd = new \DateTime($lastReservation->need('date'));
+        }
+        else {
+            $reservationEnd = new \DateTime($reservation->need('date'));
+        }
+
         $reservationEnd->setTime($reservationTimeEnd[0], $reservationTimeEnd[1]);
 
         $subject = sprintf($this->t('Your %s-booking has been cancelled'),
@@ -141,6 +181,11 @@ class NotificationListener extends AbstractListenerAggregate
             $this->optionManager->get('subject.square.type'),
             $square->need('name'),
             $dateRangerHelper($reservationStart, $reservationEnd));
+
+        if($booking->getMeta('repeat')) {
+                $message .= "\n".$this->t("This booking was a repeat booking: ");
+                $message .= $this->t($booking->getRepeat());
+        }
 
         if ($user->getMeta('notification.bookings', 'true') == 'true') {
             $this->userMailService->send($user, $subject, $message);

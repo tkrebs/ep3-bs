@@ -125,6 +125,7 @@ class BookingController extends AbstractActionController
 
         $serviceManager = @$this->getServiceLocator();
         $formElementManager = $serviceManager->get('FormElementManager');
+        $bookingService = $serviceManager->get('Booking\Service\BookingService');
 
         $editForm = $formElementManager->get('Backend\Form\Booking\EditForm');
 
@@ -152,6 +153,8 @@ class BookingController extends AbstractActionController
                 }
 
                 $this->flashMessenger()->addSuccessMessage('Booking has been saved');
+
+                $bookingService->getEventManager()->trigger('create.booking', $savedBooking);
 
                 if ($this->params()->fromPost('bf-edit-user')) {
                     return $this->redirect()->toRoute('backend/user/edit', ['uid' => $savedBooking->get('uid')]);
@@ -261,6 +264,7 @@ class BookingController extends AbstractActionController
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $reservationManager = $serviceManager->get('Booking\Manager\ReservationManager');
         $formElementManager = $serviceManager->get('FormElementManager');
+        $bookingService = $serviceManager->get('Booking\Service\BookingService');
 
         $bid = $this->params()->fromRoute('bid');
 
@@ -297,6 +301,8 @@ class BookingController extends AbstractActionController
                         $bookingManager->save($booking);
                     }
 
+                    $bookingService->getEventManager()->trigger('create.booking', $booking);
+
                     $this->flashMessenger()->addSuccessMessage('Booking has been saved');
 
                     return $this->redirect()->toRoute('frontend');
@@ -326,6 +332,8 @@ class BookingController extends AbstractActionController
 
                         $bookingManager->save($booking);
                     }
+
+                    $bookingService->getEventManager()->trigger('create.booking', $booking);
 
                     $this->flashMessenger()->addSuccessMessage('Booking has been saved');
 
@@ -363,6 +371,7 @@ class BookingController extends AbstractActionController
         $serviceManager = @$this->getServiceLocator();
         $bookingManager = $serviceManager->get('Booking\Manager\BookingManager');
         $reservationManager = $serviceManager->get('Booking\Manager\ReservationManager');
+        $bookingService = $serviceManager->get('Booking\Service\BookingService');
 
         $rid = $this->params()->fromRoute('rid');
         $editMode = $this->params()->fromQuery('edit-mode');
@@ -384,6 +393,8 @@ class BookingController extends AbstractActionController
             if ($editMode == 'reservation') {
                 $this->authorize(['calendar.delete-single-bookings', 'calendar.delete-subscription-bookings']);
 
+                $bookingService->getEventManager()->trigger('cancel.booking', $booking);
+
                 $reservationManager->delete($reservation);
 
                 $this->flashMessenger()->addSuccessMessage('Reservation has been deleted');
@@ -391,6 +402,8 @@ class BookingController extends AbstractActionController
 
                 if ($this->params()->fromQuery('cancel') == 'true') {
                     $this->authorize(['calendar.cancel-single-bookings', 'calendar.cancel-subscription-bookings']);
+
+                    $bookingService->getEventManager()->trigger('cancel.booking', $booking);
 
                     $booking->set('status', 'cancelled');
                     $booking->setMeta('cancellor', $sessionUser->get('alias'));
@@ -400,6 +413,8 @@ class BookingController extends AbstractActionController
                     $this->flashMessenger()->addSuccessMessage('Booking has been cancelled');
                 } else {
                     $this->authorize(['calendar.delete-single-bookings', 'calendar.delete-subscription-bookings']);
+
+                    $bookingService->getEventManager()->trigger('cancel.booking', $booking);
 
                     $bookingManager->delete($booking);
 
