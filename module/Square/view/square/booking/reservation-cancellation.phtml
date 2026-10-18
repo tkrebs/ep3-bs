@@ -9,16 +9,41 @@ $this->setup([
 ?>
 
 <div class="padded centered-text">
-    <p><span class="symbolic symbolic-warning"><?= $this->t('Are you sure you want to cancel this reservation?') ?></span></p>
+    <p><span class="symbolic symbolic-warning"><?= $this->t($this->partial
+        ? 'Do you want to cancel the whole reservation or only the selected block?'
+        : 'Are you sure you want to cancel this reservation?') ?></span></p>
 
-    <p class="no-wrap">
+    <p>
         <a
             href="<?= $this->url(
                 'square/booking/reservation-cancellation',
                 [],
                 [ 'query' => [ 'rid' => $this->rid, 'confirmed' => 'true' ] ],
             ) ?>" class="default-button"
-        > <span class="symbolic symbolic-cross"><?= $this->t('Yes, cancel this reservation') ?></span> </a>
+        > <span class="symbolic symbolic-cross"><?= $this->partial
+            ? sprintf($this->t('Cancel whole reservation (%s–%s)'), $this->reservationStart, $this->reservationEnd)
+            : $this->t('Yes, cancel this reservation') ?></span> </a>
+
+        <?php if ($this->partial): ?>
+            &nbsp;
+
+            <a
+                href="<?= $this->url(
+                    'square/booking/reservation-cancellation',
+                    [],
+                    ['query' => [
+                        'rid' => $this->rid,
+                        'confirmed' => 'true',
+                        'scope' => 'selected',
+                        'start' => $this->selectedStart->format('Y-m-d H:i:s'),
+                        'end' => $this->selectedEnd->format('Y-m-d H:i:s'),
+                    ]],
+                ) ?>" class="default-button"
+            > <span class="symbolic symbolic-cross"><?= sprintf($this->t('Cancel selected block (%s–%s)'),
+                $this->selectedStart->format('H:i'),
+                $this->selectedEnd->format('Y-m-d') == $this->selectedStart->format('Y-m-d')
+                    ? $this->selectedEnd->format('H:i') : '24:00') ?></span> </a>
+        <?php endif; ?>
 
         &nbsp;
 
@@ -26,6 +51,8 @@ $this->setup([
     </p>
 
     <p class="small-text gray">
-        <?= $this->t('The booking itself will not be changed. Only the reservation at this date will be cancelled.') ?>
+        <?= $this->t($this->partial
+            ? 'The booking itself will not be changed. Only the selected time range will be cancelled.'
+            : 'The booking itself will not be changed. Only the reservation at this date will be cancelled.') ?>
     </p>
 </div>

@@ -3,6 +3,7 @@
 namespace Square\Controller;
 
 use Booking\Entity\Booking\Bill;
+use DateTime;
 use RuntimeException;
 use Zend\Json\Json;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -283,10 +284,50 @@ class BookingController extends AbstractActionController
             throw new RuntimeException('This reservation cannot be cancelled.');
         }
 
+        $date = $reservation->need('date');
+        $reservationStart = new DateTime($date . ' ' . $reservation->need('time_start'));
+        $timeEnd = $reservation->need('time_end');
+        $reservationEnd = new DateTime($date . ' ' . ($timeEnd == '00:00:00' || $timeEnd == '00:00' ? '24:00:00' : $timeEnd));
+
+        $selectedStart = null;
+        $selectedEnd = null;
+        $startParam = $this->params()->fromQuery('start');
+        $endParam = $this->params()->fromQuery('end');
+
+        if ($startParam !== null || $endParam !== null) {
+            foreach ([$startParam, $endParam] as $param) {
+                if (! is_string($param)) {
+                    throw new RuntimeException('The passed time range is invalid');
+                }
+
+                $parsed = DateTime::createFromFormat('!Y-m-d H:i:s', $param);
+
+                if (! $parsed || $parsed->format('Y-m-d H:i:s') !== $param) {
+                    throw new RuntimeException('The passed time range is invalid');
+                }
+            }
+
+            $selectedStart = max($reservationStart, new DateTime($startParam));
+            $selectedEnd = min($reservationEnd, new DateTime($endParam));
+
+            if ($selectedStart >= $selectedEnd) {
+                throw new RuntimeException('The passed time range is invalid');
+            }
+        }
+
+        $partial = $selectedStart && ($selectedStart > $reservationStart || $selectedEnd < $reservationEnd);
         $origin = $this->redirectBack()->getOriginAsUrl();
 
         if ($this->params()->fromQuery('confirmed') == 'true') {
-            $reservationManager->delete($reservation);
+            if ($this->params()->fromQuery('scope') == 'selected') {
+                if (! $selectedStart) {
+                    throw new RuntimeException('The passed time range is invalid');
+                }
+
+                $reservationManager->cancelInRange($reservation, $selectedStart, $selectedEnd);
+            } else {
+                $reservationManager->delete($reservation);
+            }
 
             $this->flashMessenger()->addSuccessMessage(sprintf($this->t('Your reservation has been %scancelled%s.'),
                 '<b>', '</b>'));
@@ -297,6 +338,11 @@ class BookingController extends AbstractActionController
         return $this->ajaxViewModel(array(
             'rid' => $rid,
             'origin' => $origin,
+            'reservationStart' => substr($reservation->need('time_start'), 0, 5),
+            'reservationEnd' => $reservationEnd->format('Y-m-d') == $date ? $reservationEnd->format('H:i') : '24:00',
+            'selectedStart' => $selectedStart,
+            'selectedEnd' => $selectedEnd,
+            'partial' => $partial,
         ));
     }
 

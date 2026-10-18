@@ -73,9 +73,15 @@ return [
     'Cancel this reservation' => 'Reservierung stornieren',
     'Are you sure you want to cancel this reservation?' => 'Sind Sie sicher, dass Sie diese Reservierung stornieren möchten?',
     'Yes, cancel this reservation' => 'Ja, Reservierung stornieren',
+    'Do you want to cancel the whole reservation or only the selected block?'
+        => 'Möchten Sie die gesamte Reservierung oder nur den ausgewählten Zeitblock stornieren?',
+    'Cancel whole reservation (%s–%s)' => 'Gesamte Reservierung stornieren (%s–%s)',
+    'Cancel selected block (%s–%s)' => 'Ausgewählten Zeitblock stornieren (%s–%s)',
     'No, go back' => 'Nein, zurück',
     'The booking itself will not be changed. Only the reservation at this date will be cancelled.'
         => 'Die Buchung bleibt unverändert. Nur die Reservierung an diesem Termin wird storniert.',
+    'The booking itself will not be changed. Only the selected time range will be cancelled.'
+        => 'Die Buchung bleibt unverändert. Nur der ausgewählte Zeitraum wird storniert.',
 
     'This %s is still free.' => 'Dieser %s ist noch frei.',
     'This %s is still free for %s %s.' => 'Dieser %s ist noch frei für %s %s.',

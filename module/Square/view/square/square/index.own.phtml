@@ -10,7 +10,11 @@ foreach ($this->bookingsFromUser as $bid => $booking) {
         foreach ($this->reservations as $rid => $reservation) {
             if ($reservation->need('bid') == $bid) {
                 echo sprintf('<p><a href="%s" class="default-button squarebox-internal-link"><span class="symbolic symbolic-cross">%s</span></a></p>',
-                    $this->url('square/booking/reservation-cancellation', [], ['query' => ['rid' => $rid]]), $this->t('Cancel this reservation'));
+                    $this->url('square/booking/reservation-cancellation', [], ['query' => [
+                        'rid' => $rid,
+                        'start' => $this->dateStart->format('Y-m-d H:i:s'),
+                        'end' => $this->dateEnd->format('Y-m-d H:i:s'),
+                    ]]), $this->t('Cancel this reservation'));
             }
         }
     }

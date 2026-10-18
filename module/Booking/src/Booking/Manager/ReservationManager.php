@@ -672,6 +672,65 @@ class ReservationManager extends AbstractManager
     }
 
     /**
+     * Cancels a time interval, preserving any remaining portions of the reservation.
+     *
+     * @param Reservation $reservation
+     * @param DateTime $dateTimeStart
+     * @param DateTime $dateTimeEnd
+     * @throws InvalidArgumentException
+     */
+    public function cancelInRange(Reservation $reservation, DateTime $dateTimeStart, DateTime $dateTimeEnd)
+    {
+        $date = $reservation->need('date');
+        $reservationStart = new DateTime($date . ' ' . $reservation->need('time_start'));
+        $timeEnd = $reservation->need('time_end');
+        $reservationEnd = new DateTime($date . ' ' . ($timeEnd == '00:00:00' || $timeEnd == '00:00' ? '24:00:00' : $timeEnd));
+
+        if ($dateTimeStart < $reservationStart || $dateTimeEnd > $reservationEnd || $dateTimeStart >= $dateTimeEnd) {
+            throw new InvalidArgumentException('The passed time range is invalid');
+        }
+
+        if ($dateTimeStart == $reservationStart && $dateTimeEnd == $reservationEnd) {
+            $this->delete($reservation);
+            return;
+        }
+
+        $connection = $this->reservationTable->getAdapter()->getDriver()->getConnection();
+        $transaction = ! $connection->inTransaction();
+
+        if ($transaction) {
+            $connection->beginTransaction();
+        }
+
+        try {
+            $remainder = clone $reservation;
+
+            if ($dateTimeStart > $reservationStart) {
+                $remainder->set('time_end', $dateTimeStart->format('H:i:s'));
+            } else {
+                $remainder->set('time_start', $dateTimeEnd->format('H:i:s'));
+            }
+
+            $this->save($remainder);
+
+            if ($dateTimeStart > $reservationStart && $dateTimeEnd < $reservationEnd) {
+                $this->create($reservation->need('bid'), $date, $dateTimeEnd->format('H:i:s'),
+                    $reservation->need('time_end'), $reservation->need('meta'));
+            }
+
+            if ($transaction) {
+                $connection->commit();
+            }
+        } catch (\Throwable $e) {
+            if ($transaction) {
+                $connection->rollback();
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Deletes one reservation and all respective meta properties (through database foreign keys).
      *
      * @param int|Reservation $reservation
