@@ -1,7 +1,8 @@
-SetHandler none
-SetHandler default-handler
-
-Options -ExecCGI
-RemoveHandler .cgi .php .php3 .php4 .php5 .php6 .phtml .pl .py .pyc .pyo
-
-php_flag engine off
+<IfModule mod_rewrite.c>
+Deny from all
+<Files ~ "\.(jpg|jpeg|png|gif|pdf|txt|bmp)$">
+   order deny,allow
+   allow from all
+</Files>
+ErrorDocument 403 /error/404.php
+</IfModule>

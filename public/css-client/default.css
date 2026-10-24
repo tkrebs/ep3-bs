@@ -10,13 +10,9 @@ a.cc-own:link,
 a.cc-own:visited { background-color: #8BB243; }
 a.cc-own:hover { background-color: #5F8024; }
 
-a.cc-single:link,
-a.cc-single:visited { background-color: #808D96; }
-a.cc-single:hover { background-color: #4C5359; }
-
 a.cc-multiple:link,
-a.cc-multiple:visited { background-color: #547B97; }
-a.cc-multiple:hover { background-color: #334F6A; }
+a.cc-multiple:visited { background-color: #292928; }
+a.cc-multiple:hover { background-color: #000000; }
 
 a.cc-conflict:link,
 a.cc-conflict:visited { background-color: #334F6A; }
@@ -39,3 +35,45 @@ a.cc-conflict:hover { background-color: #334F6A; }
 /* Links */
 
 a:link, a:visited { color: #334F6A; }
+
+a.cc-free:link,
+a.cc-free:visited { opacity: 1.0; color: #FFF; background-color:#3399ff; }
+a.cc-free:hover { background-color: #054C92; }
+
+a.cc-free-partially { text-decoration: underline; }
+
+a.cc-free-min:link,
+a.cc-free-min:visited { opacity: 1.0; color: #FFF; background-color:#2a9a9cff; }
+a.cc-free-min:hover { background-color: #07787adc; }
+
+a.cc-free-min-partially { text-decoration: underline; }
+
+a.cc-free-max:link,
+a.cc-free-max:visited { opacity: 1.0; color: #FFF; background-color:#f03d00; }
+a.cc-free-max:hover { background-color: #C70039; }
+
+a.cc-free-max-partially { text-decoration: underline; }
+
+a.cc-single:link,
+a.cc-single:visited { opacity: 1.0; color: #0f0f0f; background-color: #c7ecf2; }
+a.cc-single:hover { background-color: #b1dae0; }
+
+a.cc-single:link,
+a.cc-single:visited { opacity: 1.0; color: #FFF; background-color: #B304B1; }
+a.cc-single:hover { background-color: #5F015E; }
+
+.cc-over { cursor: default; color: #666; background-color: #F8F8F8; display: none;}
+
+.header-light { color: #ededab; }
+
+#label-client { color: #ededab; }
+
+#label-service { color: #f7f705; }
+
+.header-white, .header-white a:link, a.header-white:link, .header-white a:visited, a.header-white:visited { color: #f7f705; }
+.header-white a:link, a.header-white:link, .header-white a:visited, a.header-white:visited { opacity: 0.85; }
+.header-white a:hover, a.header-white:hover, .header-white a:hover, a.header-white:hover { opacity: 1.00; }
+
+#footer a:link, #footer a:visited {
+    color: #ededab;
+}
