@@ -225,7 +225,7 @@ class BookingController extends AbstractActionController
                 if ($playerNamesUnserialized && is_array($playerNamesUnserialized)) {
                     foreach ($playerNamesUnserialized as $i => $playerName) {
                         $playerNameNotes .= sprintf('<div>%s. %s</div>',
-                            $i + 1, $playerName['value']);
+                            $i + 1, htmlspecialchars((string) $playerName['value'], ENT_QUOTES, 'UTF-8'));
                     }
                 }
             }
