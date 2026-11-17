@@ -16,7 +16,7 @@ $this->setup(array(
     <p><span class="symbolic symbolic-warning"><?= $this->t('Are you sure you want to delete this user?') ?></span></p>
 
     <p class="no-wrap">
-        <a href="<?= $this->url('backend/user/delete', ['uid' => $this->uid], ['query' => ['search' => $this->search, 'confirmed' => 'true']]) ?>" class="default-button">
+        <a href="<?= $this->url('backend/user/delete', ['uid' => $this->uid], ['query' => ['search' => $this->search, 'confirmed' => 'true', 'token' => $this->token]]) ?>" class="default-button">
             <span class="symbolic symbolic-cross"><?= $this->t('Yes, delete this user') ?></span>
         </a>
 

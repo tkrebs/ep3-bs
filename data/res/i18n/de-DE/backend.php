@@ -181,6 +181,7 @@ return [
     'Booking cancelled:<br>%s by %s' => 'Buchung storniert:<br>%s von %s',
 
     'Admin users can only be edited by admins' => 'Verwaltungskonten können nur von anderen Verwaltungskonten bearbeitet werden',
+    'Admin users can only be deleted by admins' => 'Verwaltungskonten können nur von anderen Verwaltungskonten gelöscht werden',
     'Admin status can only be given by admins' => 'Verwaltungsstatus kann nur von anderen Verwaltungskonten gegeben werden',
     'Privileges can only be edited by admins' => 'Berechtigungen können nur von Verwaltungskonten bearbeitet werden',
 

@@ -8,6 +8,7 @@ use User\Table\UserTable;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Db\Adapter\Adapter;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 
 class UserController extends AbstractActionController
 {
@@ -210,7 +211,7 @@ class UserController extends AbstractActionController
 
     public function deleteAction()
     {
-        $this->authorize('admin.user');
+        $sessionUser = $this->authorize('admin.user');
 
         $uid = $this->params()->fromRoute('uid');
         $search = $this->params()->fromQuery('search');
@@ -220,9 +221,30 @@ class UserController extends AbstractActionController
         $userManager = $serviceManager->get('User\Manager\UserManager');
 
         $user = $userManager->get($uid);
+
+        if ($user->get('status') == 'admin') {
+            if (! $sessionUser->can('admin')) {
+                $this->flashMessenger()->addInfoMessage('Admin users can only be deleted by admins');
+
+                return $this->redirect()->toRoute('backend/user/edit', ['uid' => $uid], ['query' => ['search' => $search]]);
+            }
+        }
+
         $bookings = $bookingManager->getBy(['uid' => $uid]);
 
-        if ($this->params()->fromQuery('confirmed') == 'true') {
+        $deleteContainer = new Container('BackendUserDelete');
+
+        if (! (is_string($deleteContainer->token) && strlen($deleteContainer->token) == 64)) {
+            $deleteContainer->token = bin2hex(random_bytes(32));
+        }
+
+        $token = $deleteContainer->token;
+        $requestToken = $this->params()->fromQuery('token');
+
+        if ($this->params()->fromQuery('confirmed') == 'true'
+            && is_string($requestToken) && hash_equals($token, $requestToken)) {
+
+            $deleteContainer->token = bin2hex(random_bytes(32));
 
             if ($bookings) {
 
@@ -251,6 +273,7 @@ class UserController extends AbstractActionController
             'search' => $search,
             'user' => $user,
             'bookings' => $bookings,
+            'token' => $token,
         );
     }
 

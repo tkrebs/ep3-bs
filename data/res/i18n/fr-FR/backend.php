@@ -176,6 +176,7 @@ return [
     'Booking cancelled:<br>%s by %s' => 'Réservation annulée:<br>%s par %s',
 
     'Admin users can only be edited by admins' => 'Les comptes administrateurs ne peuvent être éditer que par des administrateurs',
+    'Admin users can only be deleted by admins' => 'Les comptes administrateurs ne peuvent être supprimés que par des administrateurs',
     'Admin status can only be given by admins' => 'Le status administrateur ne peut être attribué que par un administrateur',
     'Privileges can only be edited by admins' => 'Les privilèges ne peuvent être édités que par des administrateurs',
 

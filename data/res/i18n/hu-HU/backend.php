@@ -180,6 +180,7 @@ return [
     'Booking cancelled:<br>%s by %s' => 'Foglalás lemondva:<br>%s a következő által %s',
 
     'Admin users can only be edited by admins' => 'Admin felhasználók csak másik admin felhasználó által szerkeszthetőek',
+    'Admin users can only be deleted by admins' => 'Admin felhasználók csak másik admin felhasználó által törölhetőek',
     'Admin status can only be given by admins' => 'Admin státusz csak adminok által adhatóak',
     'Privileges can only be edited by admins' => 'Jogosultságokat csak adminok szerkeszthetik',
 
