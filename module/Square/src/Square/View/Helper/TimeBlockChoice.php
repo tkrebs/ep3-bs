@@ -216,7 +216,7 @@ class TimeBlockChoice extends AbstractHelper
                 $timeToDisplay = $walkingTime + $timeBlockBookable;
             }
 
-            $timeFormat = gmdate('H:i', $walkingTime);
+            $timeFormat = gmdate('H:i', $timeToDisplay);
 
             if ($timeFormat == $timeNow->format('H:i')) {
                 $attr = 'selected="selected"';
