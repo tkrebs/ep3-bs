@@ -81,11 +81,13 @@ class BookingFormat extends AbstractHelper
         $notes = $booking->getMeta('notes');
 
         if ($notes) {
-            if (strlen($notes) > 48) {
-                $notes = substr($notes, 0, 48) . '&hellip;';
+            $truncated = strlen($notes) > 48;
+
+            if ($truncated) {
+                $notes = substr($notes, 0, 48);
             }
 
-            $notes = '<span class="small-text">' . $notes . '</span>';
+            $notes = '<span class="small-text">' . $view->escapeHtml($notes) . ($truncated ? '&hellip;' : '') . '</span>';
         } else {
             $notes = '-';
         }
